@@ -1,0 +1,10 @@
+User-agent: Google-adstxt
+Disallow:
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+Sitemap: https://www.talento.dev.br/sitemap.xml

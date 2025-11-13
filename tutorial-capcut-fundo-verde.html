@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+    
+    <title>Talento Dev | Tutorial: Chroma Key no CapCut - Remover Fundo Verde</title>
+    
+    <meta name="description" content="Aprenda a usar o efeito Chroma Key no CapCut para remover fundo verde e substituir por qualquer imagem ou vídeo. Tutorial completo passo a passo.">
+    
+    <!-- Favicons -->
+    <link href="assets/img/favicon.ico" rel="icon">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="canonical" href="https://www.talento.dev.br/tutorial-capcut-fundo-verde.html" />
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #1abc9c;
+            --dark-color: #34495e;
+            --light-color: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 56px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        
+        .tutorial-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .tutorial-content {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .meta-badge {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .chroma-demo {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border-radius: 8px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .before-chroma {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://dummyimage.com/600x400/00ff00/000000.png') center/cover no-repeat;
+            transition: opacity 0.5s;
+        }
+        
+        .after-chroma {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                url('assets/img/logo.png') center/contain no-repeat,  
+                url('https://dummyimage.com/600x400/ffffff/00000000.png') center/cover no-repeat;
+            background-size: 100px auto, cover;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        
+        .chroma-demo:hover .before-chroma {
+            opacity: 0;
+        }
+        
+        .chroma-demo:hover .after-chroma {
+            opacity: 1;
+        }
+        
+        .chroma-demo-label {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .step-image {
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .tutorial-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo.png" alt="Talento Dev">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="menu_tutoriais.html">Tutoriais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#apps">Aplicativos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.html">Sobre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tutorial Header -->
+    <div class="tutorial-header">
+        <div class="container text-center py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-4">Efeito Chroma Key no CapCut</h1>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <span class="meta-badge"><i class="bi bi-calendar me-2"></i>Atualizado em: 19/03/2025</span>
+                        <span class="meta-badge"><i class="bi bi-clock me-2"></i>Tempo de leitura: 8 minutos</span>
+                        <span class="meta-badge"><i class="bi bi-tags me-2"></i>CapCut, Chroma Key, Fundo Verde</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Tutorial Content -->
+                <article class="tutorial-content">
+                    <div class="intro mb-5">
+                        <p class="lead">Domine o efeito Chroma Key no CapCut e aprenda a remover fundos verdes (ou de outras cores) para substituí-los por qualquer imagem ou vídeo que você desejar, criando cenas profissionais como em filmes e programas de TV.</p>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        <strong>Dica:</strong> Assista ao vídeo tutorial abaixo para ver o efeito em ação antes de começar.
+                    </div>
+                    
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/1QCp2p9pjEw" allowfullscreen></iframe>
+                    </div>
+                    
+                    <!-- Demonstração do Chroma Key -->
+                    <div class="chroma-demo">
+                        <div class="before-chroma">
+                            <div class="chroma-demo-label">Antes: Com fundo verde</div>
+                        </div>
+                        <div class="after-chroma">
+                            <div class="chroma-demo-label">Depois: Com novo fundo</div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="mt-5 mb-4"><i class="bi bi-list-check me-2"></i>Pré-requisitos</h2>
+                    <ul class="list-group mb-5">
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            CapCut versão mais recente instalada
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            Vídeo gravado com fundo verde (ou outra cor sólida)
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            Imagem ou vídeo para usar como novo fundo
+                        </li>
+                    </ul>
+                    
+                    <h2 class="mt-5 mb-4"><i class="bi bi-1-circle-fill me-2"></i>Passo 1: Preparação do Vídeo</h2>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <ol>
+                                <li>Grave com fundo verde uniforme e bem iluminado</li>
+                                <li>Evite roupas ou objetos com cores próximas ao verde</li>
+                                <li>Mantenha boa distância entre pessoa/objeto e o fundo</li>
+                                <li>Use iluminação difusa para evitar sombras</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 text-center step-image">
+                                <i class="bi bi-camera-reels" style="font-size: 3rem;"></i>
+                                <p class="mt-2">Configuração ideal para gravação</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="mt-5 mb-4"><i class="bi bi-2-circle-fill me-2"></i>Passo 2: Aplicando o Chroma Key</h2>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <ol>
+                                <li>Importe o vídeo com fundo verde para o CapCut</li>
+                                <li>Selecione o clipe na linha do tempo</li>
+                                <li>Toque em "Efeitos" > "Chroma Key"</li>
+                                <li>Use o conta-gotas para selecionar a cor do fundo</li>
+                                <li>Ajuste a intensidade e tolerância</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 text-center step-image">
+                                <i class="bi bi-eyedropper" style="font-size: 3rem;"></i>
+                                <p class="mt-2">Ferramenta Chroma Key no CapCut</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="mt-5 mb-4"><i class="bi bi-3-circle-fill me-2"></i>Passo 3: Refinando o Efeito</h2>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <ol>
+                                <li>Ajuste o "Limiar" para remover todo o fundo</li>
+                                <li>Use "Suavização" para bordas mais naturais</li>
+                                <li>Compense sombras com "Compensação de Cor"</li>
+                                <li>Verifique frame a frame para ajustes precisos</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 text-center step-image">
+                                <i class="bi bi-sliders" style="font-size: 3rem;"></i>
+                                <p class="mt-2">Ajustes avançados do Chroma Key</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="mt-5 mb-4"><i class="bi bi-4-circle-fill me-2"></i>Passo 4: Adicionando Novo Fundo</h2>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <ol>
+                                <li>Importe a imagem ou vídeo para o novo fundo</li>
+                                <li>Arraste para a linha do tempo ABAIXO do vídeo principal</li>
+                                <li>Ajuste duração e posicionamento</li>
+                                <li>Use "Modo de Mesclagem" se necessário</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 text-center step-image">
+                                <i class="bi bi-image" style="font-size: 3rem;"></i>
+                                <p class="mt-2">Adicionando novo plano de fundo</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="mt-5 mb-4"><i class="bi bi-stars me-2"></i>Dicas Avançadas</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="text-center p-3">
+                                <i class="bi bi-brightness-high feature-icon"></i>
+                                <h5>Iluminação</h5>
+                                <p class="text-muted">Grave com iluminação uniforme no fundo verde para melhores resultados.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-3">
+                                <i class="bi bi-palette feature-icon"></i>
+                                <h5>Cores Alternativas</h5>
+                                <p class="text-muted">O CapCut permite usar outras cores além do verde para o chroma key.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-3">
+                                <i class="bi bi-magic feature-icon"></i>
+                                <h5>Correção de Cor</h5>
+                                <p class="text-muted">Use a correção de cor para harmonizar o objeto com o novo fundo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Seção de Solução de Problemas -->
+                    <div class="mt-5">
+                        <h3 class="mb-4"><i class="bi bi-tools me-2"></i>Solução de Problemas Comuns</h3>
+                        <div class="accordion" id="chromaProblems">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#problemOne">
+                                        Parte do fundo não está sendo removida
+                                    </button>
+                                </h2>
+                                <div id="problemOne" class="accordion-collapse collapse" data-bs-parent="#chromaProblems">
+                                    <div class="accordion-body">
+                                        Ajuste o limiar e use o conta-gotas novamente em áreas problemáticas. Verifique se a iluminação do fundo estava uniforme na gravação.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#problemTwo">
+                                        Bordas do objeto estão serrilhadas
+                                    </button>
+                                </h2>
+                                <div id="problemTwo" class="accordion-collapse collapse" data-bs-parent="#chromaProblems">
+                                    <div class="accordion-body">
+                                        Aumente a suavização e reduza levemente o limiar. Gravar em resolução mais alta também ajuda.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#problemThree">
+                                        Objeto está ficando transparente
+                                    </button>
+                                </h2>
+                                <div id="problemThree" class="accordion-collapse collapse" data-bs-parent="#chromaProblems">
+                                    <div class="accordion-body">
+                                        Diminua o limiar e verifique se não há cores similares ao fundo no objeto. Use a compensação de cor se necessário.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Seção de Downloads -->
+                    <div class="row mt-5">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 download-card">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-file-earmark-play display-4 text-primary mb-3"></i>
+                                    <h3>Projeto de Exemplo</h3>
+                                    <p class="text-muted">Baixe o projeto completo com chroma key aplicado para estudar.</p>
+                                    <a href="#" class="btn btn-primary mt-2">
+                                        <i class="bi bi-download me-2"></i>Baixar Projeto
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 download-card">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-collection-play display-4 text-danger mb-3"></i>
+                                    <h3>Mais Tutoriais</h3>
+                                    <p class="text-muted">Acesse nossa playlist completa de tutoriais de edição no CapCut.</p>
+                                    <a href="https://www.youtube.com/playlist?list=PLZQAp5kybL6mT5WqPhwjINXs7IPI1oqAz" target="_blank" rel="noopener noreferrer" class="btn btn-danger mt-2">
+                                        <i class="bi bi-youtube me-2"></i>Ver Playlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comments-section">
+                        <h3 class="mb-4"><i class="bi bi-envelope me-2"></i>Dúvidas ou Comentários?</h3>
+                        <form id="emailForm" onsubmit="sendEmail(this); return false;">
+                            <div class="mb-3">
+                                <label for="commentName" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="commentName" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="commentEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="commentEmail" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="commentText" class="form-label">Mensagem</label>
+                                <textarea class="form-control" id="commentText" name="message" rows="3" required></textarea>
+                            </div>
+                            <input type="hidden" name="subject" value="Contato via Talento Dev - Tutorial Chroma Key">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-send me-2"></i>Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </article>
+                
+                <!-- Tutoriais Relacionados -->
+                <div class="mt-5">
+                    <h3 class="mb-4"><i class="bi bi-collection me-2"></i>Tutoriais Relacionados</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-bounding-box display-4 text-warning mb-3"></i>
+                                    <h5 class="card-title">Tracking no CapCut</h5>
+                                    <p class="card-text text-muted">Rastreamento de objetos em movimento</p>
+                                    <a href="tutorial-capcut-trakking.html" class="btn btn-sm btn-outline-warning">
+                                        <i class="bi bi-book me-1"></i> Ler Tutorial
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-phone display-4 text-info mb-3"></i>
+                                    <h5 class="card-title">Celular Transparente</h5>
+                                    <p class="card-text text-muted">Efeito de tela transparente</p>
+                                    <a href="tutorial-capcut-celular-transparente.html" class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-book me-1"></i> Ler Tutorial
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-sliders display-4 text-success mb-3"></i>
+                                    <h5 class="card-title">ZOOM IN , ZOOM OUT</h5>
+                                    <p class="card-text text-muted">Efeitos de ZOOM no capcut</p>
+                                    <a href="tutorial-capcut-zoom.html" class="btn btn-sm btn-outline-success">
+                                        <i class="bi bi-book me-1"></i> Ler Tutorial
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Coluna 1: Sobre -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pe-lg-5">
+                        <h5 class="mb-3">
+                            <i class="bi bi-code-square me-2"></i>Talento Dev
+                        </h5>
+                        <p class="small">
+                            Tutoriais profissionais de edição de vídeo para criadores de conteúdo. Domine o CapCut com nossas técnicas.
+                        </p>
+                        <div class="mt-3">
+                            <!-- Contador de Visitas -->
+                            <div class="visitor-counter mb-2">
+                                <small>
+                                    <span class="me-2">Visitas:</span>
+                                    <a href="https://megacontador.com.br" title="Contador de Visitas" target="_blank" rel="noopener noreferrer">
+                                        <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
+                                    </a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      
+                <!-- Coluna 2: Redes Sociais -->
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="mb-3">
+                        <i class="bi bi-people me-2"></i>Conecte-se
+                    </h5>
+                    <div class="social-links d-flex justify-content-center justify-content-md-start">
+                        <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="me-2"
+                           title="YouTube">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                        <a href="https://github.com/erwinvaz" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="me-2"
+                           title="GitHub">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/talento.dev.br" 
+                           target="_blank" rel="noopener noreferrer"
+                           title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Newsletter -->
+                    <div class="mt-4">
+                        <h6 class="mb-2">Receba atualizações</h6>
+                        <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                            <input 
+                                type="email" 
+                                id="newsletterEmail" 
+                                class="form-control form-control-sm me-2" 
+                                placeholder="Seu e-mail" 
+                                required
+                            >
+                            <button type="submit" class="btn btn-sm btn-success">
+                                <i class="bi bi-envelope"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+      
+                <!-- Coluna 3: Apoio -->
+                <div class="col-lg-4 col-md-12 text-center text-lg-end">
+                    <h5 class="mb-3">
+                        <i class="bi bi-heart me-2"></i>Apoie o Projeto
+                    </h5>
+                    <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                        <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                        <button type="submit" class="btn btn-outline-light btn-sm">
+                            <i class="bi bi-paypal me-1"></i>Doar via PayPal
+                        </button>
+                    </form>
+                    
+                    <!-- Créditos -->
+                    <div class="mt-4">
+                        <p class="small mb-1">&copy; 2025 Talento Dev</p>
+                        <p class="small mb-0">Todos os direitos reservados</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divisor -->
+            <hr class="mt-4 mb-3 bg-light">
+            
+            <!-- Links Rápidos -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="d-flex flex-wrap justify-content-center">
+                        <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                        <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
+                        <a href="contato.html" class="text-white small me-3 mb-2">Contato</a>
+                        <a href="sobre.html" class="text-white small mb-2">Sobre</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+      
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+      
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      
+    <!-- Custom JS -->
+    <script>
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            const subject = "Assinar newsletter - Talento Dev";
+            const body = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
+            
+            window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
+            document.getElementById('newsletterEmail').value = "";
+        }
+        
+        function sendEmail(form) {
+            const name = encodeURIComponent(form.name.value);
+            const email = encodeURIComponent(form.email.value);
+            const message = encodeURIComponent(form.message.value);
+            const subject = encodeURIComponent(form.subject.value);
+            
+            const mailtoLink = `mailto:seuemail@talento.dev.br?subject=${subject}&body=Nome:%20${name}%0AEmail:%20${email}%0A%0AMensagem:%0A${message}`;
+            
+            window.location.href = mailtoLink;
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Mensagem Pronta!';
+            submitBtn.classList.remove('btn-primary');
+            submitBtn.classList.add('btn-success');
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="bi bi-send me-2"></i>Enviar Mensagem';
+                submitBtn.classList.remove('btn-success');
+                submitBtn.classList.add('btn-primary');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

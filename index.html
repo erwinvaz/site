@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+    
+    <title>Talento Dev | Tutoriais de Android e Desenvolvimento de Apps</title>
+    
+    <meta name="description" content="Aprenda desenvolvimento Android com tutoriais passo a passo, dicas de monetização de apps e acompanhe meus projetos na Play Store. Desenvolvedor e criador de conteúdo para programadores.">
+    
+    <meta name="keywords" content="desenvolvimento android, tutorial kotlin, monetização de apps, youtube para devs, talento dev, erwin vaz">
+    
+    <meta name="author" content="Erwin Vaz">
+    <meta property="og:title" content="Talento Dev | Tutoriais para Desenvolvedores Android">
+    <meta property="og:description" content="Aprenda desenvolvimento Android com tutoriais práticos e dicas de monetização.">
+    <meta property="og:url" content="https://www.talento.dev.br">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.talento.dev.br/assets/imagens/logo.png">
+    <!-- Favicon -->
+    <link href="assets/img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <link rel="canonical" href="https://www.talento.dev.br/" />
+
+    <!-- Custom CSS -->
+    <style>
+        /* Reset para garantir que nenhum estilo esteja sobrescrevendo */
+        .category-filter .nav-link,
+        .category-filter .nav-link:focus,
+        .category-filter .nav-link:active,
+        .category-filter .nav-link:visited {
+            color: var(--primary-color) !important;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #1abc9c;
+            --dark-color: #34495e;
+            --light-color: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 72px;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            color: white !important;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 6rem 0 5rem;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .typed-cursor {
+            color: var(--secondary-color);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn-hero {
+            background-color: var(--secondary-color);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background-color: #16a085;
+        }
+        
+        /* Apps Section */
+        .section-title {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .section-subtitle {
+            color: #6c757d;
+            margin-top: 1rem;
+        }
+        
+        /* App Cards */
+        .app-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            height: 100%;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .app-img-container {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        
+        .app-img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        
+        .app-card:hover .app-img {
+            transform: scale(1.05);
+        }
+        
+        .app-body {
+            padding: 1.5rem;
+        }
+        
+        .app-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .app-description {
+            color: #6c757d;
+            margin-bottom: 1.25rem;
+        }
+        
+        .app-badge {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Features Section */
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+        }
+        /* Estilos para o sistema de filtro */
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .search-box .bi-search {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .search-box .form-control {
+            padding-left: 2.5rem;
+            border-radius: 50px;
+            height: 45px;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s;
+        }
+
+        .search-box .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.25rem rgba(26, 188, 156, 0.25);
+        }
+
+        .category-filter {
+            margin-bottom: 2rem;
+        }
+
+        /* Estilos para os botões de filtro */
+      
+        .category-filter .nav {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .category-filter .nav-link {
+            color: var(--primary-color) !important; /* Força cor do texto */
+            background-color: white;
+            border-radius: 50px;
+            padding: 0.5rem 1.25rem;
+            font-weight: 500;
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .category-filter .nav-link:hover {
+            background-color: #f0f0f0;
+            color: var(--primary-color) !important;
+        }
+
+        .category-filter .nav-link.active {
+            background-color: var(--primary-color);
+            color: white !important;
+            border-color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .category-filter .nav-link.active:hover {
+            background-color: #1a5276;
+            color: white !important;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="assets/img/logo.png" alt="Talento Dev">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu_tutoriais.html">Tutoriais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#apps">Aplicativos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.html">Sobre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">
+                        Desenvolvimento Android <span class="typed" data-typed-items="Simplificado,Acessível,Prático,Moderno"></span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Tutoriais passo a passo, dicas de monetização e análise dos meus apps na Play Store
+                    </p>
+                    <a href="menu_tutoriais.html" class="btn btn-hero">
+                        <i class="bi bi-journal-code me-2"></i>Explorar Tutoriais
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Substitua a Features Section por esta seção do E-book -->
+
+<!-- Ebook Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-5 text-center mb-4 mb-md-0">
+                <img src="https://www.talento.dev.br/images/safe_pocket.jpg" alt="E-book Safe Pocket" class="img-fluid rounded shadow" style="max-width: 280px;">
+                <div class="mt-3">
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" class="text-decoration-none">
+                        <span class="badge bg-success text-white">Download Gratuito</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <h2 class="mb-3">Aprenda a usar o aplicativo Safe Pocket com nosso e-book</h2>
+                <p class="mb-4">Descubra como aproveitar ao máximo todas as funcionalidades do aplicativo Safe Pocket com nosso guia completo e ilustrado. Esse é o <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank">link</a> para o aplicativo Safe Pocket na Google Play !</p>
+                
+                <div class="mb-4">
+                    <h5 class="mb-3">O que você vai encontrar:</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Guia passo a passo de todas as funcionalidades</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Dicas de segurança e proteção de dados</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Como organizar suas informações com eficiência</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Gráficos e Relatórios avançadas</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Solução de problemas e perguntas frequentes</li>
+                    </ul>
+                </div>
+                
+                <a href="https://www.talento.dev.br/safe_pocket.pdf" target="_blank" class="btn btn-primary btn-lg">
+                    <i class="bi bi-download me-2"></i>Baixar E-book Gratuitamente
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Apps Section -->
+<section id="apps" class="py-5">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Meus Apps na Play Store</h2>
+            <p class="section-subtitle">Aplicativos gratuitos com código-fonte disponível</p>
+        </div>
+
+        <!-- Sistema de Filtro -->
+        <div class="row mb-4">
+            <div class="col-md-8 mx-auto">
+                <div class="search-box mb-3">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="appSearch" class="form-control" placeholder="Buscar aplicativos por nome...">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="category-filter text-center">
+                    <nav class="nav justify-content-center flex-wrap">
+                        <a class="nav-link filter-btn active" href="#" data-filter="all">Todos</a>
+                        <a class="nav-link filter-btn" href="#" data-filter="flutter">Flutter</a>
+                        <a class="nav-link filter-btn" href="#" data-filter="kotlin">Kotlin</a>
+                        <a class="nav-link filter-btn" href="#" data-filter="java">Java</a>
+                        <a class="nav-link filter-btn" href="#" data-filter="php">PHP</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="appsContainer">
+
+
+            <!-- App 0 -->
+                <div class="col-lg-4 col-md-6" data-tech="kotlin">
+                    <div class="app-card">
+                        <div class="app-img-container">
+                            <img src="assets/img/portfolio/talk_pt.png" alt="Talk to Me" class="app-img">
+                        </div>
+                        <div class="app-body">
+                            <h5 class="app-title">Talk to Me</h5>
+                            <p class="app-description">Aprenda idiomas conversando! Com o Talk to Me, você pratica conversação em outro idioma, com um tutor artificial poliglota</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="app-badge">Kotlin</span>
+                                <a href="https://play.google.com/store/apps/details?id=com.talentodev.talktome" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+                                    Ver na Play Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App 5 -->
+                <div class="col-lg-4 col-md-6" data-tech="java">
+                <div class="app-card">
+                    <div class="app-img-container">
+                        <img src="assets/img/portfolio/PhoneDefense.png" alt="Phone Defense" class="app-img">
+                    </div>
+                    <div class="app-body">
+                        <h5 class="app-title">Phone Defense</h5>
+                        <p class="app-description">Phone Defense, Encontre o seu celular assobiando ou apitando! Fotos de bisbilhoteiros! Alarme contra PikPockets e  bisbilhoteiros de plantão! Alarme de carga de bateria cheia! Alarme de retirada de cabo de carregamento! </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="app-badge">Java</span>
+                            <a href="https://play.google.com/store/apps/details?id=com.talentodev.telefone" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
+                                Ver na Play Store
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+                 <!-- App 6 -->
+                <div class="col-lg-4 col-md-6" data-tech="java">
+                    <div class="app-card">
+                        <div class="app-img-container">
+                            <img src="assets/img/portfolio/SafePocket.png" alt="Safe Pocket" class="app-img">
+                        </div>
+                        <div class="app-body">
+                            <h5 class="app-title">Safe Pocket</h5>
+                            <p class="app-description">Suas finanças pessoais na palma de sua mão! </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="app-badge">Java</span>
+                                <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
+                                    Ver na Play Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- App 0 -->
+                <div class="col-lg-4 col-md-6" data-tech="flutter">
+                    <div class="app-card">
+                        <div class="app-img-container">
+                            <img src="assets/img/portfolio/wordhunt_pt.png" alt="Word Hunt" class="app-img">
+                        </div>
+                        <div class="app-body">
+                            <h5 class="app-title">Caça Palavras</h5>
+                            <p class="app-description">Caça Palavras - Exercite sua mente e fortaleça sua fé! Nosso caça-palavras bíblico é a forma perfeita de relaxar enquanto aprende e relembra versículos, personagens e histórias inspiradoras da Palavra!</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="app-badge">Flutter</span>
+                                <a href="https://play.google.com/store/apps/details?id=com.talentodev.wordhunt" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+                                    Ver na Play Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App 1 -->
+                <div class="col-lg-4 col-md-6" data-tech="kotlin">
+                    <div class="app-card">
+                        <div class="app-img-container">
+                            <img src="assets/img/portfolio/translator.png" alt="Translator App" class="app-img">
+                        </div>
+                        <div class="app-body">
+                            <h5 class="app-title">Translator</h5>
+                            <p class="app-description">Tradução em tempo real de conversação entre pessoas de dois idiomas diferentes, usando API do Google Translate</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="app-badge">Kotlin</span>
+                                <a href="https://play.google.com/store/apps/details?id=com.talentodev.translator" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+                                    Ver na Play Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- App 3 -->
+                <div class="col-lg-4 col-md-6" data-tech="java">
+                    <div class="app-card">
+                        <div class="app-img-container">
+                            <img src="assets/img/portfolio/KingQuiz.png" alt="King Quiz" class="app-img">
+                        </div>
+                        <div class="app-body">
+                            <h5 class="app-title">King Quiz</h5>
+                            <p class="app-description">King Quiz, Um jogo de perguntas e respostas em varias áreas do conhecimento, onde voçê participa de um campeonato Mundial!</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="app-badge">Java</span>
+                                <a href="https://play.google.com/store/apps/details?id=com.talentodev.kingquiz" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
+                                    Ver na Play Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- App 4 -->
+                <div class="col-lg-4 col-md-6" data-tech="java">
+                <div class="app-card">
+                    <div class="app-img-container">
+                        <img src="assets/img/portfolio/quebracabeca.png" alt="Photo Puzzle" class="app-img">
+                    </div>
+                    <div class="app-body">
+                        <h5 class="app-title">Photo Puzzle</h5>
+                        <p class="app-description">Quebra-Cabeça, Transforme suas fotos em Quebra-Cabeças! Diversos níveis e dificuldades, com score mundial!</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="app-badge">Java</span>
+                            <a href="https://play.google.com/store/apps/details?id=com.talentodev.photopuzzle" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
+                                Ver na Play Store
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+                <!-- App 0 -->
+                <div class="col-lg-4 col-md-6" data-tech="flutter">
+                    <div class="app-card">
+                        <div class="app-img-container">
+                            <img src="assets/img/portfolio/crossword_pt.png" alt="Cross Word" class="app-img">
+                        </div>
+                        <div class="app-body">
+                            <h5 class="app-title">Palavra Cruzadas</h5>
+                            <p class="app-description">Palavra Cruzadas - Exercite sua mente com nossa cruzadinha! Nosso app é a forma perfeita de relaxar enquanto aprende! </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="app-badge">Flutter</span>
+                                <a href="https://play.google.com/store/apps/details?id=com.talentodev.crossword" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+                                    Ver na Play Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                 <!-- App 0 -->
+                <div class="col-lg-4 col-md-6" data-tech="flutter">
+                    <div class="app-card">
+                        <div class="app-img-container">
+                            <img src="assets/img/portfolio/flutter_pt.png" alt="Geotrack Find" class="app-img">
+                        </div>
+                        <div class="app-body">
+                            <h5 class="app-title">Geotrack Find</h5>
+                            <p class="app-description">GEOTRACK - Salve lugares, compartilhe com amigos e nunca esqueça onde estacionou!</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="app-badge">Flutter</span>
+                                <a href="https://play.google.com/store/apps/details?id=com.talentodev.geotrack" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+                                    Ver na Play Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- App 2 -->
+                <div class="col-lg-4 col-md-6" data-tech="kotlin">
+                  <div class="app-card">
+                      <div class="app-img-container">
+                          <img src="assets/img/portfolio/birthday.png" alt="Birthday App" class="app-img">
+                      </div>
+                      <div class="app-body">
+                          <h5 class="app-title">Birthday Calculator</h5>
+                          <p class="app-description">Birthday Calculator, um aplicativo de idades divertido!!</p>
+                          <div class="d-flex justify-content-between align-items-center">
+                              <span class="app-badge">Kotlin</span>
+                              <a href="https://play.google.com/store/apps/details?id=com.talentodev.howoldareyou" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
+                                  Ver na Play Store
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+            <!-- App 6 -->
+            <div class="col-lg-4 col-md-6" data-tech="php">
+                <div class="app-card">
+                    <div class="app-img-container">
+                        <img src="assets/img/portfolio/TrevoME.png" alt="Safe Pocket WEB" class="app-img">
+                    </div>
+                    <div class="app-body">
+                        <h5 class="app-title">Safe Pocket</h5>
+                        <p class="app-description">IOS Web Version - Suas finanças pessoais na palma de sua mão! </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="app-badge">PHP</span>
+                            <a href="https://www.talento.dev.br/trevoME.php?language=pt" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+                                Ver no navegador
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- End Journal Section -->
+  
+    
+</main><!-- End #main -->
+<!-- Footer -->
+<footer id="footer" class="footer py-5 bg-dark text-white">
+  <div class="container">
+      <div class="row gy-4">
+          <!-- Coluna 1: Sobre -->
+          <div class="col-lg-4 col-md-6">
+              <div class="pe-lg-5">
+                  <h5 class="mb-3">
+                      <i class="bi bi-code-square me-2"></i>Talento Dev
+                  </h5>
+                  <p class="small">
+                      Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
+                  </p>
+                  <div class="mt-3">
+                      <!-- Contador de Visitas -->
+                      <div class="visitor-counter mb-2">
+                          <small>
+                              <span class="me-2">Visitas:</span>
+                              <a href="https://megacontador.com.br" title="Contador de Visitas" target="_blank" rel="noopener noreferrer">
+                                  <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
+                              </a>
+                          </small>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Coluna 2: Redes Sociais -->
+          <div class="col-lg-4 col-md-6 text-center text-md-start">
+              <h5 class="mb-3">
+                  <i class="bi bi-people me-2"></i>Conecte-se
+              </h5>
+              <div class="social-links d-flex justify-content-center justify-content-md-start">
+                  <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" 
+                     target="_blank" rel="noopener noreferrer"
+                     class="me-2"
+                     title="YouTube">
+                      <i class="bi bi-youtube"></i>
+                  </a>
+                  <a href="https://github.com/erwinvaz" 
+                     target="_blank" rel="noopener noreferrer"
+                     class="me-2"
+                     title="GitHub">
+                      <i class="bi bi-github"></i>
+                  </a>
+                  <a href="https://www.instagram.com/talento.dev.br" 
+                     target="_blank" rel="noopener noreferrer"
+                     title="Instagram">
+                      <i class="bi bi-instagram"></i>
+                  </a>
+              </div>
+              
+              <!-- Newsletter (opcional) -->
+              <div class="mt-4">
+                <h6 class="mb-2">Receba atualizações</h6>
+                <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                    <input 
+                        type="email" 
+                        id="newsletterEmail" 
+                        class="form-control form-control-sm me-2" 
+                        placeholder="Seu e-mail" 
+                        required
+                    >
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <i class="bi bi-envelope"></i>
+                    </button>
+                </form>
+            </div>
+          </div>
+
+          <!-- Coluna 3: Apoio -->
+          <div class="col-lg-4 col-md-12 text-center text-lg-end">
+              <h5 class="mb-3">
+                  <i class="bi bi-heart me-2"></i>Apoie o Projeto
+              </h5>
+              <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                  <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                  <button type="submit" class="btn btn-outline-light btn-sm">
+                      <i class="bi bi-paypal me-1"></i>Doar via PayPal
+                  </button>
+              </form>
+              
+              <!-- Créditos -->
+              <div class="mt-4">
+                  <p class="small mb-1">&copy; 2025 Talento Dev</p>
+                  <p class="small mb-0">Todos os direitos reservados</p>
+              </div>
+          </div>
+      </div>
+      
+      <!-- Divisor -->
+      <hr class="mt-4 mb-3 bg-light">
+      
+      <!-- Links Rápidos -->
+      <div class="row">
+          <div class="col-12 text-center">
+              <div class="d-flex flex-wrap justify-content-center">
+                  <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                  <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
+                  <a href="contato.html" class="text-white small me-3 mb-2">Contato</a>
+                  <a href="sobre.html" class="text-white small mb-2">Sobre</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<a href="#" class="back-to-top">
+  <i class="bi bi-arrow-up"></i>
+</a>
+
+<!-- Bootstrap 5 JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script>
+  // Back to top button
+  window.addEventListener('scroll', function() {
+      var backToTop = document.querySelector('.back-to-top');
+      if (window.pageYOffset > 300) {
+          backToTop.classList.add('active');
+      } else {
+          backToTop.classList.remove('active');
+      }
+  });
+  
+</script>
+<script>
+    function subscribeNewsletter(event) {
+        event.preventDefault();
+        const email = document.getElementById('newsletterEmail').value;
+        const subject = "Assinar newsletter - Talento Dev";
+        const body = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
+        
+        window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        // Opcional: Feedback visual
+        alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
+        document.getElementById('newsletterEmail').value = ""; // Limpa o campo
+    }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('appSearch');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const appItems = document.querySelectorAll('#appsContainer > div[data-tech]');
+    
+    function filterApps() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        
+        appItems.forEach(item => {
+            const appName = item.querySelector('.app-title').textContent.toLowerCase();
+            const appTech = item.dataset.tech;
+            const matchesSearch = appName.includes(searchTerm);
+            const matchesFilter = activeFilter === 'all' || appTech === activeFilter;
+            
+            item.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+        });
+    }
+    
+    // Evento de busca
+    searchInput.addEventListener('input', filterApps);
+    
+    // Evento de filtro
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove classe active de todos os botões
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Adiciona classe active no botão clicado
+            this.classList.add('active');
+            
+            // Aplica o filtro
+            filterApps();
+        });
+    });
+    
+    // Filtro inicial
+    filterApps();
+});
+        
+        </script>
+        
+</body>
+</html>

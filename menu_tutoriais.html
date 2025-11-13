@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+    <title>Tutoriais | Talento Dev</title>
+    <meta name="description" content="Aprenda desenvolvimento Android com tutoriais passo a passo sobre Kotlin, Java, Jetpack Compose e mais.">
+    
+    <!-- Favicon -->
+    <link href="assets/img/favicon.ico" rel="icon">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="canonical" href="https://www.talento.dev.br/menu_tutoriais.html" />
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #1abc9c;
+            --dark-color: #34495e;
+            --light-color: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 56px;
+        }
+        
+        .tutorials-hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .tutorial-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .tutorial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .tutorial-card .card-img-top {
+            height: 160px;
+            object-fit: cover;
+        }
+        
+        .tutorial-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .tutorial-card .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .badge-beginner {
+            background-color: #2ecc71;
+        }
+        
+        .badge-intermediate {
+            background-color: #f39c12;
+        }
+        
+        .badge-advanced {
+            background-color: #e74c3c;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box .form-control {
+            padding-left: 2.5rem;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+        }
+        
+        .search-box .bi-search {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        .category-filter .nav-link {
+            color: var(--dark-color);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            border: 1px solid #ddd;
+        }
+        
+        .category-filter .nav-link.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: var(--primary-color);">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo.png" alt="Talento Dev" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="menu_tutoriais.html">Tutoriais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#apps">Aplicativos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.html">Sobre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="tutorials-hero">
+        <div class="container">
+            <h1><i class="bi bi-journal-bookmark-fill me-2"></i> Tutoriais Android</h1>
+            <p class="lead">Aprenda desenvolvimento mobile com guias passo a passo</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mb-5">
+        <!-- Search & Filters -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" class="form-control" placeholder="Buscar tutoriais...">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="category-filter">
+                    <nav class="nav">
+                        <a class="nav-link active" href="#" data-filter="all">Todos</a>
+                        <a class="nav-link" href="#" data-filter="androidstudio">Android Studio</a>
+                        <a class="nav-link" href="#" data-filter="flutter">Flutter</a>
+                        <a class="nav-link" href="#" data-filter="kotlin">Kotlin</a>
+                        <a class="nav-link" href="#" data-filter="java">Java</a>
+                        <a class="nav-link" href="#" data-filter="capcut">CapCut</a>
+                        <a class="nav-link" href="#" data-filter="compose">Jetpack Compose</a>
+                        <a class="nav-link" href="#" data-filter="ui">UI/UX</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutorials Grid -->
+<div class="row g-4">
+
+     <!-- Tutorial 0 -->
+    <div class="col-lg-4 col-md-6" data-categories="Java beginner">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-lightning-charge text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-beginner">Intermediário</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 50 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-file-code me-2"></i>Classe Billing em Java e Kotlin!</h5>
+                <p class="card-text">Neste vídeo, você vai aprender passo a passo como atualizar sua classe Billing par a API 36 do Android 16.</p>
+                <a href="resenha-billing.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Resenha
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial 0 -->
+    <div class="col-lg-4 col-md-6" data-categories="androidstudio beginner">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-lightning-charge text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-beginner">Iniciante</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 50 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-file-code me-2"></i>Aprenda a atualizar suas APIs & SDKs na Loja do Google!</h5>
+                <p class="card-text">Neste vídeo, você vai aprender o passo a passo para atualizar suas APIs e SDKs nos aplicativos Android, mantendo seus apps sempre atualizados e compatíveis com as últimas versões das plataformas. Manter seus apps atualizados é essencial para aumentar a monetização, melhorar a performance e garantir a segurança dos seus usuários.</p>
+                <a href="resenha-androidstudio.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Resenha
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Tutorial 0 -->
+    <div class="col-lg-4 col-md-6" data-categories="flutter beginner">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-lightning-charge text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-beginner">Iniciante</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 50 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-file-code me-2"></i>Aprenda a criar aplicativos flutter com IA!</h5>
+                <p class="card-text">Crie aplicativos em flutter utilizando ChatGPT e DeeepSeek e ganhe dollares dormindo!</p>
+                <a href="resenha-flutter.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Resenha
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial 0 -->
+    <div class="col-lg-4 col-md-6" data-categories="kotlin beginner">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-lightning-charge text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-beginner">Iniciante</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 15 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-file-code me-2"></i>Aprenda idiomas conversando!</h5>
+                <p class="card-text">Com o Talk to Me, você treina com um tutor artificial poliglota..</p>
+                <a href="resenha-talk-to-me.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Resenha
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Tutorial 1 -->
+    <div class="col-lg-4 col-md-6" data-categories="kotlin beginner">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-lightning-charge text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-beginner">Iniciante</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 15 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-file-code me-2"></i>Tradutor com Kotlin e JetPack Compose</h5>
+                <p class="card-text">Aprenda a criar um app tradutor utilizando Kotlin com JetPack Compose.</p>
+                <a href="tutorial-android-kotlin.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial 2 -->
+    <div class="col-lg-4 col-md-6" data-categories="java beginner">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-filetype-java text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-beginner">Iniciante</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 20 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-file-code me-2"></i>Criando um Quiz com Java</h5>
+                <p class="card-text">Guia completo para criar seu primeiro aplicativo Android usando Java e Android Studio.</p>
+                <a href="tutorial-quiz-java.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+     <!-- Tutorial 3 -->
+     <div class="col-lg-4 col-md-6" data-categories="capcut facil">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-fire text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-intermediate">Fácil</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 30 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-shield-lock me-2"></i>ZOOM IN e ZOON OUT no CAPCUT</h5>
+                <p class="card-text">Aprenda a fazer o efeito ZOOM IN e ZOON OUT no CapCut</p>
+                <a href="tutorial-capcut-zoom.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial 4 -->
+    <div class="col-lg-4 col-md-6" data-categories="capcut facil">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-fire text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-intermediate">Fácil</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 30 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-shield-lock me-2"></i>Trakking no CAPCUT</h5>
+                <p class="card-text">Aprenda a fazer o efeito de arrastar objetos no CapCut</p>
+                <a href="tutorial-capcut-trakking.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial 5 -->
+    <div class="col-lg-4 col-md-6" data-categories="capcut facil">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-fire text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-intermediate">Fácil</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 30 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-shield-lock me-2"></i>Croma Key ou Fundo Verde no CAPCUT</h5>
+                <p class="card-text">Aprenda a fazer o efeito de fundo verde no CapCut</p>
+                <a href="tutorial-capcut-fundo-verde.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+     <!-- Tutorial 6 -->
+     <div class="col-lg-4 col-md-6" data-categories="capcut facil">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-fire text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-intermediate">Fácil</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 30 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-shield-lock me-2"></i>Desfocar objetos no CAPCUT</h5>
+                <p class="card-text">Aprenda a fazer o efeito de borrão no CapCut</p>
+                <a href="tutorial-capcut-desfocar.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial 7 -->
+    <div class="col-lg-4 col-md-6" data-categories="capcut facil">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-fire text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-intermediate">Fácil</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 30 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-shield-lock me-2"></i>Vertical Blur no CAPCUT</h5>
+                <p class="card-text">Aprenda a fazer background vertical blur no CapCut</p>
+                <a href="tutorial-capcut-background-blur.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+<!-- Tutorial 4 -->
+<div class="col-lg-4 col-md-6" data-categories="capcut facil">
+    <div class="tutorial-card">
+        <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+            <i class="bi bi-fire text-primary" style="font-size: 3rem;"></i>
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+                <span class="badge badge-intermediate">Fácil</span>
+                <small class="text-muted"><i class="bi bi-clock me-1"></i> 30 min</small>
+            </div>
+            <h5 class="card-title"><i class="bi bi-shield-lock me-2"></i>Efeito Celuar Transparente</h5>
+            <p class="card-text">Aprenda a fazer o efeito Celular Transparente no CapCut</p>
+            <a href="tutorial-capcut-celular-transparente.html" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-book me-1"></i> Ler Tutorial
+            </a>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Tutorial 4 -->
+    <div class="col-lg-4 col-md-6" data-categories="compose intermediate">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-layout-wtf text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-intermediate">Intermediário</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 25 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-layout-sidebar me-2"></i>UI Moderna com Jetpack Compose</h5>
+                <p class="card-text">Domine a criação de interfaces declarativas com o moderno toolkit Jetpack Compose.</p>
+                <a href="tutorial-ui-material-design.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial 5 -->
+    <div class="col-lg-4 col-md-6" data-categories="kotlin advanced">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-lightning-charge text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-advanced">Avançado</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 40 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-arrow-repeat me-2"></i>Programação Assíncrona com Coroutines</h5>
+                <p class="card-text">Domine o uso de Coroutines para operações assíncronas e chamadas de rede.</p>
+                <a href="tutorial-coroutines-kotlin.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial 6 -->
+    <div class="col-lg-4 col-md-6" data-categories="ui intermediate">
+        <div class="tutorial-card">
+            <div class="card-img-top bg-primary bg-opacity-10 text-center py-4">
+                <i class="bi bi-lightning-charge text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-intermediate">Intermediário</span>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i> 22 min</small>
+                </div>
+                <h5 class="card-title"><i class="bi bi-arrow-repeat me-2"></i>Programando com a API Retrofit</h5>
+                <p class="card-text">Domine o consumo e chamadas de API retrofit.</p>
+                <a href="tutorial-consumindo-api-retrofit.html" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-book me-1"></i> Ler Tutorial
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Pagination -->
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Próximo</a>
+                </li>
+            </ul>
+        </nav>
+</main>
+
+    <!-- Footer -->
+<footer id="footer" class="footer py-5 bg-dark text-white">
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Coluna 1: Sobre -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pe-lg-5">
+                    <h5 class="mb-3">
+                        <i class="bi bi-code-square me-2"></i>Talento Dev
+                    </h5>
+                    <p class="small">
+                        Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
+                    </p>
+                    <div class="mt-3">
+                        <!-- Contador de Visitas -->
+                        <div class="visitor-counter mb-2">
+                            <small>
+                                <span class="me-2">Visitas:</span>
+                                <a href="https://megacontador.com.br" title="Contador de Visitas" target="_blank" rel="noopener">
+                                    <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+            <!-- Coluna 2: Redes Sociais -->
+            <div class="col-lg-4 col-md-6 text-center text-md-start">
+                <h5 class="mb-3">
+                    <i class="bi bi-people me-2"></i>Conecte-se
+                </h5>
+                <div class="social-links d-flex justify-content-center justify-content-md-start">
+                    <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" 
+                       target="_blank" rel="noopener noreferrer"
+                       class="me-2"
+                       title="YouTube">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                    <a href="https://github.com/erwinvaz" 
+                       target="_blank" rel="noopener noreferrer"
+                       class="me-2"
+                       title="GitHub">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <a href="https://www.instagram.com/talento.dev.br" 
+                       target="_blank" rel="noopener noreferrer"
+                       title="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+                
+                <!-- Newsletter (opcional) -->
+                <div class="mt-4">
+                    <h6 class="mb-2">Receba atualizações</h6>
+                    <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                        <input 
+                            type="email" 
+                            id="newsletterEmail" 
+                            class="form-control form-control-sm me-2" 
+                            placeholder="Seu e-mail" 
+                            required
+                        >
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="bi bi-envelope"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+  
+            <!-- Coluna 3: Apoio -->
+            <div class="col-lg-4 col-md-12 text-center text-lg-end">
+                <h5 class="mb-3">
+                    <i class="bi bi-heart me-2"></i>Apoie o Projeto
+                </h5>
+                <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                    <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-paypal me-1"></i>Doar via PayPal
+                    </button>
+                </form>
+                
+                <!-- Créditos -->
+                <div class="mt-4">
+                    <p class="small mb-1">&copy; 2025 Talento Dev</p>
+                    <p class="small mb-0">Todos os direitos reservados</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Divisor -->
+        <hr class="mt-4 mb-3 bg-light">
+        
+        <!-- Links Rápidos -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="d-flex flex-wrap justify-content-center">
+                    <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                    <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
+                    <a href="contato.html" class="text-white small me-3 mb-2">Contato</a>
+                    <a href="sobre.html" class="text-white small mb-2">Sobre</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+  
+  <!-- Bootstrap 5 JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JS -->
+  <script>
+    // Back to top button
+    window.addEventListener('scroll', function() {
+        var backToTop = document.querySelector('.back-to-top');
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('active');
+        } else {
+            backToTop.classList.remove('active');
+        }
+    });
+    
+  </script>
+  
+    <!-- Custom JS -->
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.category-filter .nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active state
+                document.querySelector('.category-filter .nav-link.active').classList.remove('active');
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const tutorials = document.querySelectorAll('.col-lg-4.col-md-6');
+                
+                tutorials.forEach(tutorial => {
+                    if (filter === 'all' || tutorial.getAttribute('data-categories').includes(filter)) {
+                        tutorial.style.display = 'block';
+                    } else {
+                        tutorial.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-box input');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const tutorials = document.querySelectorAll('.tutorial-card');
+            
+            tutorials.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const description = card.querySelector('.card-text').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.closest('.col-lg-4.col-md-6').style.display = 'block';
+                } else {
+                    card.closest('.col-lg-4.col-md-6').style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script>
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            const subject = "Assinar newsletter - Talento Dev";
+            const body = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
+            
+            window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Opcional: Feedback visual
+            alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
+            document.getElementById('newsletterEmail').value = ""; // Limpa o campo
+        }
+    </script>
+</body>
+</html>
