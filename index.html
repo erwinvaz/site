@@ -4,6 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+
+    <!-- ✅ ADICIONE O GOOGLE ANALYTICS 4 AQUI -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ98GYTZJF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GZ98GYTZJF');
+    </script>
     
     <title>Talento Dev | Tutoriais de Android e Desenvolvimento de Apps</title>
     
@@ -865,6 +875,38 @@
 });
         
         </script>
-        
+    
+    <script>
+    // Tracking de cliques nos apps
+    document.querySelectorAll('a[href*="play.google.com"]').forEach(link => {
+        link.addEventListener('click', function() {
+            const appName = this.closest('.app-card').querySelector('.app-title').textContent;
+            gtag('event', 'app_click', {
+                'app_name': appName,
+                'event_category': 'Apps',
+                'event_label': 'Play Store Click'
+            });
+        });
+    });
+
+    // Tracking de downloads do ebook
+    document.querySelector('a[href*="safe_pocket.pdf"]').addEventListener('click', function() {
+        gtag('event', 'ebook_download', {
+            'event_category': 'Downloads',
+            'event_label': 'Safe Pocket Ebook'
+        });
+    });
+
+    // Tracking de filtros
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+            gtag('event', 'filter_used', {
+                'event_category': 'Navigation',
+                'event_label': filter
+            });
+        });
+    });
+</script>
 </body>
 </html>
