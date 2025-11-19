@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apps TalentoDev - Descubra nossos aplicativos incríveis</title>
+    <meta name="description" content="Descubra aplicativos incríveis da TalentoDev para Android: aprendizado de idiomas, jogos, produtividade e muito mais!" />
+    
+    <!-- Open Graph para redes sociais -->
+    <meta property="og:title" content="Apps TalentoDev - Aplicativos Incríveis para Android" />
+    <meta property="og:description" content="Descubra aplicativos incríveis da TalentoDev para Android: aprendizado de idiomas, jogos, produtividade e muito mais!" />
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=TalentoDev+Apps" />
+    <meta property="og:url" content="https://seusite.com/apps.html" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ98GYTZJF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-GZ98GYTZJF');
+    </script>
+
+    <style>
+        :root {
+            --primary: #a855ff;
+            --primary-dark: #8b3ce6;
+            --secondary: #ff6b6b;
+            --dark: #0a0014;
+            --darker: #1b0033;
+            --light: #ffffff;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark), var(--darker));
+            min-height: 100vh;
+            color: var(--light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, rgba(168, 85, 255, 0.15), rgba(255, 107, 107, 0.1));
+            padding: 60px 0;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23a855ff" opacity="0.05"><polygon points="1000,0 1000,100 0,100"></polygon></svg>');
+            background-size: cover;
+        }
+        
+        .app-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(168, 85, 255, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(168, 85, 255, 0.4);
+            border-color: rgba(168, 85, 255, 0.5);
+        }
+        
+        .app-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .app-img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            margin: 0 auto 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .app-card:hover .app-img {
+            transform: scale(1.05);
+        }
+        
+        .app-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+        
+        .app-description {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .app-rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(168, 85, 255, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(168, 85, 255, 0.6);
+            color: white;
+        }
+        
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .social-btn.tiktok {
+            background: linear-gradient(135deg, #000000, #25f4ee, #fe2c55);
+        }
+        
+        .social-btn.instagram {
+            background: linear-gradient(135deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        }
+        
+        .social-btn.whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .floating-download {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(168, 85, 255, 0.5);
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(168, 85, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(168, 85, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(168, 85, 255, 0);
+            }
+        }
+        
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-color: var(--primary);
+        }
+        
+        .app-count {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .feature-highlight {
+            background: rgba(168, 85, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(168, 85, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .visitor-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="py-3" style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(168, 85, 255, 0.3); box-shadow: 0 0 12px rgba(168, 85, 255, 0.3); position: sticky; top: 0; z-index: 1000;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h3 style="color:#a855ff; margin:0; font-weight: 700;">TalentoDev</h3>
+            <nav>
+                <a href="#apps" class="me-3 text-white text-decoration-none fw-bold">Apps</a>
+                <a href="#testimonials" class="me-3 text-white text-decoration-none fw-bold">Avaliações</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">Descubra Nossos <span style="color: #a855ff;">Aplicativos Incríveis</span></h1>
+            <p class="lead mb-4">Aplicativos inovadores para Android que vão transformar sua experiência digital</p>
+            
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="feature-highlight">
+                                <div class="feature-icon">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">+500K Downloads</h5>
+                                    <small>Comunidade em crescimento</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="feature-highlight">
+                                <div class="feature-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">4.5+ Avaliação</h5>
+                                    <small>Nota média na Play Store</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="feature-highlight">
+                                <div class="feature-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Multi-Idioma</h5>
+                                    <small>Apps disponíveis em vários idiomas</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container py-5">
+
+        <!-- CATEGORY FILTER -->
+        <div class="category-filter">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="education">Educação</button>
+            <button class="filter-btn" data-filter="games">Jogos</button>
+            <button class="filter-btn" data-filter="productivity">Produtividade</button>
+            <button class="filter-btn" data-filter="tools">Ferramentas</button>
+        </div>
+        
+        <div class="app-count" id="appCount">Mostrando todos os 10 aplicativos</div>
+
+        <h2 class="section-title text-center mb-4" id="apps">Nossos Aplicativos</h2>
+
+        <div class="row g-4" id="appsContainer">
+
+            <!-- Talk To Me -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="education">
+                <div class="app-card">
+                    <span class="category-badge">Educação</span>
+                    <img src="TalkToMe/ico.jpg" class="app-img" alt="Talk to Me - Aprenda idiomas" />
+                    <h5 class="app-title">Talk to Me</h5>
+                    <p class="app-description">Aprenda idiomas conversando com tutor artificial poliglota. Pronúncia perfeita em 30+ idiomas.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ms-1">4.7</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.talktome" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Phone Defense -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="tools">
+                <div class="app-card">
+                    <span class="category-badge">Ferramentas</span>
+                    <img src="PhoneDefense/ico.jpg" class="app-img" alt="Phone Defense - Encontre seu celular" />
+                    <h5 class="app-title">Phone Defense</h5>
+                    <p class="app-description">Encontre seu celular assobiando + alarmes inteligentes. Nunca mais perca seu dispositivo.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="ms-1">4.2</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.telefone" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Safe Pocket -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="productivity">
+                <div class="app-card">
+                    <span class="category-badge">Produtividade</span>
+                    <img src="SafePocket/ico.jpg" class="app-img" alt="Safe Pocket - Controle financeiro" />
+                    <h5 class="app-title">Safe Pocket</h5>
+                    <p class="app-description">Controle financeiro direto no seu bolso. Organize suas finanças de forma simples e eficiente.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ms-1">4.6</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Caça Palavras Bíblico -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="games">
+                <div class="app-card">
+                    <span class="category-badge">Jogos</span>
+                    <img src="wordhunt/ico.jpg" class="app-img" alt="Caça Palavras Bíblico - Jogo de palavras" />
+                    <h5 class="app-title">Caça Palavras Bíblico</h5>
+                    <p class="app-description">Relaxe e fortaleça sua fé com palavras bíblicas. Diversão e espiritualidade em um só lugar.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="ms-1">5.0</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.wordhunt" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Translator -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="tools">
+                <div class="app-card">
+                    <span class="category-badge">Ferramentas</span>
+                    <img src="translate/ico.jpg" class="app-img" alt="Translator - Tradução em tempo real" />
+                    <h5 class="app-title">Translator</h5>
+                    <p class="app-description">Tradução em tempo real entre duas pessoas. Converse com qualquer pessoa no mundo.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="ms-1">4.3</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.translator" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- King Quiz -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="games">
+                <div class="app-card">
+                    <span class="category-badge">Jogos</span>
+                    <img src="KingQuiz/ico.jpg" class="app-img" alt="King Quiz - Desafie seu conhecimento" />
+                    <h5 class="app-title">King Quiz</h5>
+                    <p class="app-description">Desafie-se em várias áreas em um campeonato global. Prove que você é o rei do conhecimento.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ms-1">4.5</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.kingquiz" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Photo Puzzle -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="games">
+                <div class="app-card">
+                    <span class="category-badge">Jogos</span>
+                    <img src="PhotoPuzzle/ico.jpg" class="app-img" alt="Photo Puzzle - Quebra-cabeças personalizado" />
+                    <h5 class="app-title">Photo Puzzle</h5>
+                    <p class="app-description">Transforme suas fotos em quebra-cabeças! Diversão personalizada com suas próprias imagens.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="ms-1">4.1</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.photopuzzle" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Palavras Cruzadas -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="games">
+                <div class="app-card">
+                    <span class="category-badge">Jogos</span>
+                    <img src="crossword/ico.jpg" class="app-img" alt="Palavras Cruzadas - Cruzadinhas divertidas" />
+                    <h5 class="app-title">Palavras Cruzadas</h5>
+                    <p class="app-description">Cruzadinhas divertidas e relaxantes. Exercite seu cérebro de forma descontraída.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ms-1">4.4</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.crossword" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Geotrack -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="tools">
+                <div class="app-card">
+                    <span class="category-badge">Ferramentas</span>
+                    <img src="geotrack/ico.jpg" class="app-img" alt="Geotrack Find - Localize seus lugares" />
+                    <h5 class="app-title">Geotrack Find</h5>
+                    <p class="app-description">Salve lugares e nunca esqueça onde estacionou. Seu assistente de localização pessoal.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="ms-1">4.2</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.geotrack" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Birthday Calculator -->
+            <div class="col-lg-4 col-md-6 app-item" data-category="tools">
+                <div class="app-card">
+                    <span class="category-badge">Ferramentas</span>
+                    <img src="howoldareyou/ico.jpg" class="app-img" alt="Birthday Calculator - Calcule idades" />
+                    <h5 class="app-title">Birthday Calculator</h5>
+                    <p class="app-description">Descubra idades de forma divertida. Calcule anos, meses e dias com precisão.</p>
+                    <div class="app-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ms-1">4.6</span>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.howoldareyou" target="_blank" class="btn btn-download play-link">
+                        <i class="fab fa-google-play"></i> Baixar Agora
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- SOCIAL SHARE -->
+        <div class="social-share">
+            <a href="#" class="social-btn tiktok" title="Compartilhar no TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="#" class="social-btn instagram" title="Compartilhar no Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-btn whatsapp" title="Compartilhar no WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+        
+        <!-- TESTIMONIALS -->
+        <h2 class="section-title text-center mb-4 mt-5" id="testimonials">O Que Nossos Usuários Dizem</h2>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"O Talk to Me mudou completamente minha forma de aprender idiomas. Em 3 meses já consigo manter conversas básicas em espanhol!"</p>
+                    <div class="testimonial-author">- Maria Silva</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Phone Defense salvou meu celular várias vezes! Agora nunca mais perco tempo procurando pelo aparelho pela casa."</p>
+                    <div class="testimonial-author">- João Santos</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Safe Pocket me ajudou a organizar minhas finanças como nunca. Finalmente consigo controlar meus gastos mensais!"</p>
+                    <div class="testimonial-author">- Ana Oliveira</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Adoro os jogos da TalentoDev, especialmente o Caça Palavras Bíblico. É divertido e ao mesmo tempo fortalece minha fé."</p>
+                    <div class="testimonial-author">- Carlos Mendes</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FLOATING DOWNLOAD BUTTON -->
+    <div class="floating-download" title="Baixar nossos aplicativos">
+        <i class="fas fa-download"></i>
+    </div>
+
+    <!-- Evento de clique para GA4 -->
+    <script>
+        document.querySelectorAll('.play-link').forEach(link => {
+            link.addEventListener('click', function(){
+                const appId = this.href.split("id=")[1];
+                gtag('event', 'app_click', {
+                    app_id: appId,
+                    event_category: 'Apps',
+                    event_label: appId
+                });
+            });
+        });
+        
+        // Filtro de categorias
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class de todos os botões
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Adiciona active class ao botão clicado
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const appItems = document.querySelectorAll('.app-item');
+                let visibleCount = 0;
+                
+                appItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Atualiza contador
+                document.getElementById('appCount').textContent = `Mostrando ${visibleCount} de ${appItems.length} aplicativos`;
+            });
+        });
+        
+        // Botão flutuante
+        document.querySelector('.floating-download').addEventListener('click', function() {
+            window.scrollTo({
+                top: document.getElementById('apps').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+        
+       // Compartilhamento social - COM SEUS LINKS REAIS
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (this.classList.contains('tiktok')) {
+                    // SEU perfil do TikTok
+                    window.open('https://www.tiktok.com/@talentodev', '_blank');
+                } else if (this.classList.contains('instagram')) {
+                    // SEU perfil do Instagram
+                    window.open('https://www.instagram.com/talento.dev.br', '_blank');
+                } else if (this.classList.contains('whatsapp')) {
+                    // WhatsApp com mensagem personalizada
+                    const message = encodeURIComponent('Olá! Acabei de ver os apps incríveis da TalentoDev! 🚀');
+                    window.open(`https://wa.me/5585998200392?text=${message}`, '_blank');
+                }
+            });
+        });
+    </script>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-4 mt-5" style="background: rgba(255,255,255,0.05); border-top: 1px solid rgba(168,85,255,0.3); box-shadow: 0 0 12px rgba(168,85,255,0.3);">
+        <p class="mb-2" style="color:#a855ff; font-weight: 600;">© 2025 TalentoDev — Todos os direitos reservados</p>
+
+        <div class="mt-3">
+            <!-- Contador de Visitas -->
+            <div class="visitor-counter mb-2">
+                <small>
+                    <span class="me-2">Visitas:</span>
+                    <a href="https://megacontador.com.br" title="Contador de Visitas" target="_blank" rel="noopener noreferrer">
+                        <img src="https://megacontador.com.br/img-v53MEbX63Zu3JnG2-65.gif" border="0" alt="Contador de visitas" class="img-fluid">
+                    </a>
+                </small>
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+</html>
