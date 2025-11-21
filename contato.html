@@ -5,248 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-9521177044478820">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ98GYTZJF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GZ98GYTZJF');
+    </script>
     
-    <title>Contato | Talento Dev</title>
-    <meta name="description" content="Entre em contato com o Talento Dev. Tire suas dúvidas sobre desenvolvimento Android e nossos tutoriais.">
+    <title>Talento Dev | Tutoriais de Android e Desenvolvimento de Apps</title>
     
-    <!-- Favicons -->
+    <meta name="description" content="Aprenda desenvolvimento Android com tutoriais passo a passo, dicas de monetização de apps e acompanhe meus projetos na Play Store. Desenvolvedor e criador de conteúdo para programadores.">
+    
+    <meta name="keywords" content="desenvolvimento android, tutorial kotlin, monetização de apps, youtube para devs, talento dev, erwin vaz">
+    
+    <meta name="author" content="Erwin Vaz">
+    <meta property="og:title" content="Talento Dev | Tutoriais para Desenvolvedores Android">
+    <meta property="og:description" content="Aprenda desenvolvimento Android com tutoriais práticos e dicas de monetização.">
+    <meta property="og:url" content="https://www.talento.dev.br">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.talento.dev.br/assets/imagens/logo.png">
+    <!-- Favicon -->
     <link href="assets/img/favicon.ico" rel="icon">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="canonical" href="https://www.talento.dev.br/contato.html" />
+    <link rel="canonical" href="https://www.talento.dev.br/" />
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #1abc9c;
-            --dark-color: #34495e;
-            --light-color: #ecf0f1;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #333;
-            line-height: 1.6;
-            padding-top: 56px;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-        }
-        
-        .navbar {
-            background-color: var(--primary-color) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .navbar-brand img {
-            height: 40px;
-        }
-        
-        .nav-link {
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-        }
-        
-        .tutorial-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
-            color: white;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-            border-radius: 0 0 10px 10px;
-        }
-        
-        .tutorial-content {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .meta-badge {
-            background-color: var(--light-color);
-            color: var(--dark-color);
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            margin-right: 0.5rem;
-            font-size: 0.9rem;
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin: 2rem 0;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        pre {
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            border-left: 4px solid var(--secondary-color);
-        }
-        
-        code {
-            color: #d63384;
-            font-size: 0.9rem;
-        }
-        
-        .download-card {
-            border-left: 4px solid var(--secondary-color);
-            transition: transform 0.3s ease;
-        }
-        
-        .download-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .btn-download {
-            background-color: var(--secondary-color);
-            color: white;
-            font-weight: 500;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            margin-top: 0.5rem;
-            display: inline-block;
-        }
-        
-        .btn-download:hover {
-            background-color: #16a085;
-            color: white;
-        }
-        
-        .comments-section {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-top: 3rem;
-        }
-        
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 2rem 0;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 0.5rem;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: var(--secondary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .back-to-top.active {
-            opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .tutorial-content {
-                padding: 1.5rem;
-            }
-        }
-
-        
-        /* Estilos específicos para página de contato */
-        .contact-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .contact-info {
-            margin-bottom: 2rem;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-        
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-right: 1rem;
-            margin-top: 0.25rem;
-        }
-        
-        .contact-form .form-control {
-            margin-bottom: 1.25rem;
-        }
-        
-        .map-container {
-            height: 300px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 2rem;
-        }
-        
-        @media (max-width: 768px) {
-            .contact-card {
-                padding: 1.5rem;
-            }
-        }
-    </style>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
 </head>
-
-
 <body>
-    <!-- Navbar (igual ao template principal) -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: var(--primary-color);">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="assets/img/logo.png" alt="Talento Dev" height="40">
+            <a class="navbar-brand" href="/">
+                <img loading="lazy" src="assets/img/logo.png" alt="Talento Dev">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -260,20 +68,17 @@
                         <a class="nav-link" href="menu_tutoriais.html">Tutoriais</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html#apps">Aplicativos</a>
+                        <a class="nav-link" href="app.html">Aplicativos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="sobre.html">Sobre</a>
+                        <a class="nav-link active" href="sobre.html">Sobre</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-
-    <!-- Conteúdo Principal -->
-    <main class="container my-5">
-        <!-- Hero Section -->
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -288,9 +93,11 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- Conteúdo Principal -->
+    <main class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <div class="contact-card">
                     <div class="row">
                         <div class="col-md-5">
@@ -372,37 +179,10 @@
                                 </button>
                             </form>
                         </div>
-                        
-                        <script>
-                        function sendEmail(event) {
-                            event.preventDefault();
-                            
-                            // Obter os valores do formulário
-                            const name = document.getElementById('name').value;
-                            const email = document.getElementById('email').value;
-                            const subject = document.getElementById('subject').value;
-                            const message = document.getElementById('message').value;
-                            
-                            // Criar o corpo do e-mail formatado
-                            const body = `Olá,\n\n${message}\n\nAtenciosamente,\n${name}\n${email}`;
-                            
-                            // Codificar os parâmetros para URL
-                            const encodedSubject = encodeURIComponent(subject);
-                            const encodedBody = encodeURIComponent(body);
-                            
-                            // Abrir o cliente de e-mail padrão
-                            window.location.href = `mailto:seuemail@talento.dev?subject=${encodedSubject}&body=${encodedBody}`;
-                            
-                            // Opcional: Resetar o formulário após o envio
-                            document.getElementById('contactForm').reset();
-                            
-                            // Opcional: Mostrar mensagem de confirmação
-                            //alert('Seu cliente de e-mail será aberto para completar o envio.');
-                        }
-                        </script>
+                    </div>
                     
-                   <!-- Mapa - Shenzhen, China (Vale do Silício Chinês) -->
-                    <div class="map-container rounded-3 overflow-hidden shadow-sm" style="height: 300px;">
+                    <!-- Mapa -->
+                    <div class="map-container">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.724071145567!2d113.9383693154434!3d22.5398379852918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f408d0e6e7a7%3A0x5e5f9af7a826a9a7!2sTencent%20Seafront%20Towers!5e0!3m2!1sen!2sbr!4v1623258136923!5m2!1sen!2sbr" 
                                 width="100%" 
                                 height="100%" 
@@ -416,148 +196,330 @@
         </div>
     </main>
 
-     <!-- Footer -->
-<footer id="footer" class="footer py-5 bg-dark text-white">
-    <div class="container">
-        <div class="row gy-4">
-            <!-- Coluna 1: Sobre -->
-            <div class="col-lg-4 col-md-6">
-                <div class="pe-lg-5">
-                    <h5 class="mb-3">
-                        <i class="bi bi-code-square me-2"></i>Talento Dev
-                    </h5>
-                    <p class="small">
-                        Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
-                    </p>
-                    <div class="mt-3">
-                        <!-- Contador de Visitas -->
-                        <div class="visitor-counter mb-2">
-                            <small>
-                                <span class="me-2">Visitas:</span>
-                                <a href="https://megacontador.com.br" title="Contador de Visitas" target="_blank" rel="noopener noreferrer">
-                                    <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
-                                </a>
-                            </small>
+    <!-- Footer -->
+    <footer id="footer" class="footer py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Coluna 1: Sobre -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pe-lg-5">
+                        <h5 class="mb-3">
+                            <i class="bi bi-code-square me-2"></i>Talento Dev
+                        </h5>
+                        <p class="small">
+                            Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
+                        </p>
+                        <div class="mt-3">
+                            <!-- Contador de Visitas -->
+                            <div class="visitor-counter mb-2">
+                                <small>
+                                    <span class="me-2">Visitas:</span>
+                                    <a href="https://megacontador.com.br" title="Contador de Visitas" target="_blank" rel="noopener noreferrer">
+                                        <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
+                                    </a>
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-  
-            <!-- Coluna 2: Redes Sociais -->
-            <div class="col-lg-4 col-md-6 text-center text-md-start">
-                <h5 class="mb-3">
-                    <i class="bi bi-people me-2"></i>Conecte-se
-                </h5>
-                <div class="social-links d-flex justify-content-center justify-content-md-start">
-                    <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" 
-                       target="_blank" rel="noopener noreferrer"
-                       class="me-2"
-                       title="YouTube">
-                        <i class="bi bi-youtube"></i>
-                    </a>
-                    <a href="https://github.com/erwinvaz" 
-                       target="_blank" rel="noopener noreferrer"
-                       class="me-2"
-                       title="GitHub">
-                        <i class="bi bi-github"></i>
-                    </a>
-                    <a href="https://www.instagram.com/talento.dev.br" 
-                       target="_blank" rel="noopener noreferrer"
-                       title="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>
+      
+                <!-- Coluna 2: Redes Sociais UNIFICADAS -->
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="mb-3">
+                        <i class="bi bi-people me-2"></i>Conecte-se
+                    </h5>
+                    <div class="social-share">
+                        <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="social-btn youtube"
+                           title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://github.com/erwinvaz" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="social-btn github"
+                           title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/talento.dev.br" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="social-btn instagram"
+                           title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@talentodev" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="social-btn tiktok"
+                           title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://wa.me/5585998200392" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="social-btn whatsapp"
+                           title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Newsletter -->
+                    <div class="mt-4">
+                        <h6 class="mb-2">Receba atualizações</h6>
+                        <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                            <input 
+                                type="email" 
+                                id="newsletterEmail" 
+                                class="form-control form-control-sm me-2" 
+                                placeholder="Seu e-mail" 
+                                required
+                            >
+                            <button type="submit" class="btn btn-sm btn-success">
+                                <i class="bi bi-envelope"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                
-                <!-- Newsletter (opcional) -->
-                <div class="mt-4">
-                    <h6 class="mb-2">Receba atualizações</h6>
-                    <form class="d-flex" onsubmit="subscribeNewsletter(event)">
-                        <input 
-                            type="email" 
-                            id="newsletterEmail" 
-                            class="form-control form-control-sm me-2" 
-                            placeholder="Seu e-mail" 
-                            required
-                        >
-                        <button type="submit" class="btn btn-sm btn-success">
-                            <i class="bi bi-envelope"></i>
+      
+                <!-- Coluna 3: Apoio -->
+                <div class="col-lg-4 col-md-12 text-center text-lg-end">
+                    <h5 class="mb-3">
+                        <i class="bi bi-heart me-2"></i>Apoie o Projeto
+                    </h5>
+                    <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                        <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                        <button type="submit" class="btn btn-outline-light btn-sm">
+                            <i class="bi bi-paypal me-1"></i>Doar via PayPal
                         </button>
                     </form>
+                    
+                    <!-- Créditos -->
+                    <div class="mt-4">
+                        <p class="small mb-1">&copy; 2025 Talento Dev</p>
+                        <p class="small mb-0">Todos os direitos reservados</p>
+                    </div>
                 </div>
             </div>
-  
-            <!-- Coluna 3: Apoio -->
-            <div class="col-lg-4 col-md-12 text-center text-lg-end">
-                <h5 class="mb-3">
-                    <i class="bi bi-heart me-2"></i>Apoie o Projeto
-                </h5>
-                <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
-                    <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
-                    <button type="submit" class="btn btn-outline-light btn-sm">
-                        <i class="bi bi-paypal me-1"></i>Doar via PayPal
-                    </button>
-                </form>
-                
-                <!-- Créditos -->
-                <div class="mt-4">
-                    <p class="small mb-1">&copy; 2025 Talento Dev</p>
-                    <p class="small mb-0">Todos os direitos reservados</p>
+            
+            <!-- Divisor -->
+            <hr class="mt-4 mb-3 bg-light">
+            
+            <!-- Links Rápidos -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="d-flex flex-wrap justify-content-center">
+                        <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                        <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
+                        <a href="contato.html" class="text-white small me-3 mb-2">Contato</a>
+                        <a href="sobre.html" class="text-white small mb-2">Sobre</a>
+                    </div>
                 </div>
             </div>
         </div>
+    </footer>
+  
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+  
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+    <!-- Custom JS -->
+    <script>
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
         
-        <!-- Divisor -->
-        <hr class="mt-4 mb-3 bg-light">
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
         
-        <!-- Links Rápidos -->
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="d-flex flex-wrap justify-content-center">
-                    <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
-                    <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
-                    <a href="contato.html" class="text-white small me-3 mb-2">Contato</a>
-                    <a href="sobre.html" class="text-white small mb-2">Sobre</a>
-                </div>
-            </div>
+        // Contact form function
+        function sendEmail(event) {
+            event.preventDefault();
+            
+            // Obter os valores do formulário
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Criar o corpo do e-mail formatado
+            const body = `Olá,\n\n${message}\n\nAtenciosamente,\n${name}\n${email}`;
+            
+            // Codificar os parâmetros para URL
+            const encodedSubject = encodeURIComponent(subject);
+            const encodedBody = encodeURIComponent(body);
+            
+            // Abrir o cliente de e-mail padrão
+            window.location.href = `mailto:admin@talento.dev.br?subject=${encodedSubject}&body=${encodedBody}`;
+            
+            // Opcional: Resetar o formulário após o envio
+            document.getElementById('contactForm').reset();
+            
+            // Opcional: Mostrar mensagem de confirmação
+            alert('Seu cliente de e-mail será aberto para completar o envio.');
+        }
+    </script>
+    
+    <script>
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            const subject = "Assinar newsletter - Talento Dev";
+            const body = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
+            
+            window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Opcional: Feedback visual
+            alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
+            document.getElementById('newsletterEmail').value = ""; // Limpa o campo
+        }
+    </script>
+
+
+ <!-- HTML - Adicione antes do </body> -->
+    <div class="language-selector">
+        <button class="language-btn" onclick="toggleLanguageDropdown()">
+            <i class="bi bi-translate me-1"></i>
+            <span>Idioma</span>
+            <i class="bi bi-chevron-down ms-1"></i>
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <a href="#" class="language-option" onclick="translatePage('pt', 'Português')">
+                <img src="https://flagcdn.com/w20/br.png" class="language-flag" alt="Português">
+                Português
+            </a>
+            <a href="#" class="language-option" onclick="translatePage('en', 'English')">
+                <img src="https://flagcdn.com/w20/us.png" class="language-flag" alt="English">
+                English
+            </a>
+            <a href="#" class="language-option" onclick="translatePage('es', 'Español')">
+                <img src="https://flagcdn.com/w20/es.png" class="language-flag" alt="Español">
+                Español
+            </a>
+            <a href="#" class="language-option" onclick="translatePage('fr', 'Français')">
+                <img src="https://flagcdn.com/w20/fr.png" class="language-flag" alt="Français">
+                Français
+            </a>
+            <a href="#" class="language-option" onclick="translatePage('de', 'Deutsch')">
+                <img src="https://flagcdn.com/w20/de.png" class="language-flag" alt="Deutsch">
+                Deutsch
+            </a>
         </div>
     </div>
-  </footer>
-  
-  <!-- Back to Top Button -->
-  <a href="#" class="back-to-top">
-    <i class="bi bi-arrow-up"></i>
-  </a>
-  
-  <!-- Bootstrap 5 JS Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Custom JS -->
-  <script>
-    // Back to top button
-    window.addEventListener('scroll', function() {
-        var backToTop = document.querySelector('.back-to-top');
-        if (window.pageYOffset > 300) {
-            backToTop.classList.add('active');
-        } else {
-            backToTop.classList.remove('active');
+
+    <script>
+    // Configuração de idiomas suportados
+    const supportedLanguages = {
+        'pt': { name: 'Português', flag: 'br' },
+        'en': { name: 'English', flag: 'us' },
+        'es': { name: 'Español', flag: 'es' },
+        'fr': { name: 'Français', flag: 'fr' },
+        'de': { name: 'Deutsch', flag: 'de' }
+    };
+
+    // Detectar idioma do usuário
+    function detectUserLanguage() {
+        // Verificar se já escolheu não traduzir
+        if (localStorage.getItem('disableAutoTranslate') === 'true') {
+            return;
+        }
+        
+        const userLang = navigator.language || navigator.userLanguage;
+        const mainLang = userLang.split('-')[0];
+        
+        // Se não for português e for um idioma suportado
+        if (mainLang !== 'pt' && supportedLanguages[mainLang]) {
+            showTranslationBanner(mainLang);
+        }
+    }
+
+    // Mostrar banner de tradução
+    function showTranslationBanner(lang) {
+        const banner = document.createElement('div');
+        banner.className = 'translation-banner';
+        banner.innerHTML = `
+            <p>🌍 <strong>Detectamos que você fala ${supportedLanguages[lang].name}</strong></p>
+            <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;">Deseja traduzir esta página?</p>
+            <div>
+                <button class="translate-btn" onclick="translatePage('${lang}', '${supportedLanguages[lang].name}')">
+                    Sim, traduzir
+                </button>
+                <button class="cancel-btn" onclick="closeBanner()">
+                    Manter em Português
+                </button>
+            </div>
+            <div style="margin-top: 10px;">
+                <label style="font-size: 0.8em;">
+                    <input type="checkbox" id="disableFuturePrompt"> Não mostrar novamente
+                </label>
+            </div>
+        `;
+        
+        document.body.appendChild(banner);
+    }
+
+    function closeBanner() {
+        const banner = document.querySelector('.translation-banner');
+        if (banner) {
+            const disableFuture = document.getElementById('disableFuturePrompt').checked;
+            if (disableFuture) {
+                localStorage.setItem('disableAutoTranslate', 'true');
+            }
+            banner.remove();
+        }
+    }
+
+    function toggleLanguageDropdown() {
+        const dropdown = document.getElementById('languageDropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function translatePage(lang, langName) {
+        // Fecha banners/dropdowns
+        const banner = document.querySelector('.translation-banner');
+        if (banner) banner.remove();
+        document.getElementById('languageDropdown').style.display = 'none';
+        
+        // Redireciona para Google Translate
+        const currentUrl = window.location.href;
+        const translateUrl = `https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(currentUrl)}`;
+        
+        // Abre em nova aba
+        window.open(translateUrl, '_blank');
+        
+        // Opcional: Mostrar mensagem
+        alert(`A página será traduzida para ${langName} em uma nova aba.`);
+    }
+
+    // Fecha dropdown ao clicar fora
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('languageDropdown');
+        const button = document.querySelector('.language-btn');
+        if (dropdown && button && !button.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
         }
     });
-    
-    
-  </script>
-  <script>
-    function subscribeNewsletter(event) {
-        event.preventDefault();
-        const email = document.getElementById('newsletterEmail').value;
-        const subject = "Assinar newsletter - Talento Dev";
-        const body = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
-        
-        window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
-        // Opcional: Feedback visual
-        alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
-        document.getElementById('newsletterEmail').value = ""; // Limpa o campo
-    }
+
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(detectUserLanguage, 2000); // Aguarda 2 segundos
+    });
     </script>
-  </body>
-  </html>
+
+
+</body>
+</html>

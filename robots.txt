@@ -1,10 +1,21 @@
-User-agent: Google-adstxt
-Disallow:
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
 
-User-agent: Googlebot
+# Google Ads
+User-agent: Google-adstxt
 Allow: /
 
+# Google Bot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Google Ads Bot
 User-agent: Mediapartners-Google
 Allow: /
 
+# Sitemap
 Sitemap: https://www.talento.dev.br/sitemap.xml
