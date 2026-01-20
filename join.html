@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Up - Convite de Partida</title>
+    <meta name="description" content="Você foi convidado para uma partida de xadrez!">
+    
+    <!-- Open Graph para preview bonito no WhatsApp -->
+    <meta property="og:title" content="Chess Up - Convite de Partida">
+    <meta property="og:description" content="Aceite o desafio e jogue xadrez online!">
+    <meta property="og:type" content="website">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(105, 240, 174, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        h1 {
+            color: #69F0AE;
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            margin-bottom: 30px;
+            opacity: 0.8;
+            font-size: 16px;
+        }
+        
+        .code-container {
+            margin: 25px 0;
+        }
+        
+        .code-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .code {
+            background: rgba(105, 240, 174, 0.15);
+            color: #69F0AE;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 6px;
+            border: 2px solid #69F0AE;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(105, 240, 174, 0.2);
+        }
+        
+        .buttons {
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn {
+            display: block;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #69F0AE 0%, #4CAF50 100%);
+            color: #0F0F1E;
+            box-shadow: 0 4px 15px rgba(105, 240, 174, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(105, 240, 174, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #69F0AE;
+            color: #69F0AE;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(105, 240, 174, 0.1);
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.8;
+            text-align: left;
+        }
+        
+        .instructions strong {
+            color: #69F0AE;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+        }
+        
+        .instructions li {
+            margin: 8px 0;
+        }
+        
+        #status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background: rgba(105, 240, 174, 0.2);
+            color: #69F0AE;
+        }
+        
+        .status-info {
+            background: rgba(100, 181, 246, 0.2);
+            color: #64B5F6;
+        }
+        
+        .status-warning {
+            background: rgba(255, 167, 38, 0.2);
+            color: #FFA726;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #69F0AE;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">♟️</div>
+        <h1>Você foi desafiado!</h1>
+        <p class="subtitle">Uma partida de xadrez te espera</p>
+        
+        <div class="code-container">
+            <div class="code-label">Código da Partida</div>
+            <div class="code" id="matchCode">------</div>
+        </div>
+        
+        <div class="buttons">
+            <a href="#" id="openApp" class="btn btn-primary">
+                🚀 Abrir Chess Up
+            </a>
+            <button id="copyCode" class="btn btn-secondary">
+                📋 Copiar Código
+            </button>
+        </div>
+        
+        <div id="status"></div>
+        
+        <div class="instructions">
+            <strong>📱 Como entrar na partida:</strong>
+            <ol>
+                <li>Clique no botão "Abrir Chess Up"</li>
+                <li>Se o app não abrir automaticamente, copie o código</li>
+                <li>Abra o Chess Up manualmente</li>
+                <li>Toque em "Desafiar Amigo" → "Entrar com Código"</li>
+                <li>Cole o código e jogue!</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Pega o código da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const statusDiv = document.getElementById('status');
+        
+        function showStatus(message, type = 'info') {
+            statusDiv.innerHTML = message;
+            statusDiv.className = `status-${type}`;
+            statusDiv.style.display = 'block';
+        }
+        
+        function hideStatus() {
+            statusDiv.style.display = 'none';
+        }
+        
+        if (code) {
+            // Mostra o código
+            document.getElementById('matchCode').textContent = code;
+            
+            // Link para abrir o app
+            const deepLink = `chessup://join?code=${code}`;
+            document.getElementById('openApp').href = deepLink;
+            
+            // Função de copiar código
+            document.getElementById('copyCode').addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(code).then(() => {
+                        showStatus('✅ Código copiado com sucesso!', 'success');
+                        setTimeout(hideStatus, 3000);
+                    }).catch(() => {
+                        fallbackCopyTextToClipboard(code);
+                    });
+                } else {
+                    fallbackCopyTextToClipboard(code);
+                }
+            });
+            
+            // Fallback para copiar em navegadores antigos
+            function fallbackCopyTextToClipboard(text) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showStatus('✅ Código copiado!', 'success');
+                    setTimeout(hideStatus, 3000);
+                } catch (err) {
+                    showStatus('❌ Erro ao copiar. Digite manualmente: ' + text, 'warning');
+                }
+                
+                document.body.removeChild(textArea);
+            }
+            
+            // Tenta abrir o app automaticamente após 1.5 segundos
+            setTimeout(() => {
+                showStatus('<span class="spinner"></span>Abrindo o Chess Up...', 'info');
+                window.location.href = deepLink;
+                
+                // Se após 3 segundos ainda estiver na página
+                setTimeout(() => {
+                    showStatus('⚠️ App não instalado? Baixe na loja ou use o código manualmente!', 'warning');
+                }, 3000);
+            }, 1500);
+            
+        } else {
+            // Código não encontrado
+            document.getElementById('matchCode').textContent = 'ERRO';
+            document.querySelector('.code').style.borderColor = '#FF5252';
+            document.querySelector('.code').style.color = '#FF5252';
+            showStatus('❌ Código não encontrado na URL. Verifique o link!', 'warning');
+            document.getElementById('openApp').style.display = 'none';
+            document.getElementById('copyCode').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
