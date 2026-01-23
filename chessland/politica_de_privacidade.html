@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Chess Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><defs><pattern id="wood" x="0" y="0" width="400" height="400" patternUnits="userSpaceOnUse"><rect fill="%23654321" width="400" height="400"/><path d="M0 0 Q100 50 200 0 T400 0" fill="%23543210" opacity="0.3"/><path d="M0 100 Q100 150 200 100 T400 100" fill="%23765432" opacity="0.2"/><path d="M0 200 Q100 250 200 200 T400 200" fill="%23543210" opacity="0.3"/><path d="M0 300 Q100 350 200 300 T400 300" fill="%23765432" opacity="0.2"/></pattern></defs><rect width="400" height="400" fill="url(%23wood)"/></svg>');
+            background-color: #654321;
+            background-blend-mode: multiply;
+            color: #f5e6d3;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.75);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(139, 90, 43, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(245, 230, 211, 0.2);
+        }
+
+        .chess-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #ffd700;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .last-updated {
+            color: #d4af37;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .summary {
+            background: rgba(212, 175, 55, 0.15);
+            border-left: 4px solid #d4af37;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .summary strong {
+            color: #ffd700;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        h2 {
+            color: #ffd700;
+            font-size: 22px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(245, 230, 211, 0.2);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #f5e6d3;
+            text-align: justify;
+        }
+
+        ul {
+            margin: 15px 0 15px 30px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #f5e6d3;
+        }
+
+        strong {
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .contact-link {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #ffed4e;
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(245, 230, 211, 0.2);
+            text-align: center;
+            color: #d4af37;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="chess-icon">♔</div>
+            <h1>Política de Privacidade</h1>
+            <p class="last-updated">Última atualização: 20 de Janeiro de 2026</p>
+        </div>
+
+        <div class="summary">
+            <strong>Resumo:</strong>
+            Este aplicativo de xadrez não exige cadastro, não realiza login e não coleta dados pessoais dos usuários.
+        </div>
+
+        <h2>1. Informações Coletadas</h2>
+        <p>
+            Nosso aplicativo <strong>não coleta informações pessoais</strong> como nome, e-mail, telefone ou dados de
+            identificação.
+        </p>
+        <p>
+            Todas as partidas são registradas de forma <strong>anônima</strong>, sem qualquer vínculo com a identidade do
+            usuário.
+        </p>
+
+        <h2>2. Dados de Jogo (Anônimos)</h2>
+        <p>
+            Para funcionamento do ranking e estatísticas, o aplicativo pode armazenar dados relacionados às partidas,
+            como:
+        </p>
+        <ul>
+            <li>Resultado da partida</li>
+            <li>Movimentos do jogo</li>
+            <li>Data e duração da partida</li>
+        </ul>
+        <p>
+            Esses dados são armazenados de forma <strong>anônima</strong> utilizando a plataforma Supabase e não permitem a
+            identificação do jogador.
+        </p>
+
+        <h2>3. Uso da Internet</h2>
+        <p>
+            O aplicativo requer acesso à internet para:
+        </p>
+        <ul>
+            <li>Salvar partidas anônimas</li>
+            <li>Carregar rankings globais</li>
+            <li>Sincronizar dados de jogo</li>
+        </ul>
+
+        <h2>4. Compartilhamento de Dados</h2>
+        <p>
+            Nenhuma informação é compartilhada com terceiros para fins comerciais, publicitários ou de rastreamento.
+        </p>
+
+        <h2>5. Cookies</h2>
+        <p>
+            Este aplicativo <strong>não utiliza cookies</strong> nem tecnologias semelhantes de rastreamento.
+        </p>
+
+        <h2>6. Crianças</h2>
+        <p>
+            O aplicativo não é direcionado especificamente a crianças e não coleta intencionalmente dados pessoais de
+            menores.
+        </p>
+
+        <h2>7. Segurança</h2>
+        <p>
+            Utilizamos boas práticas de segurança para proteger os dados anônimos armazenados, incluindo conexões seguras e
+            infraestrutura confiável.
+        </p>
+
+        <h2>8. Custos</h2>
+        <p>
+            O aplicativo é disponibilizado gratuitamente, sem compras obrigatórias.
+        </p>
+
+        <h2>9. Alterações nesta Política</h2>
+        <p>
+            Caso esta Política de Privacidade seja alterada, a versão atualizada será publicada nesta página.
+        </p>
+
+        <h2>10. Contato</h2>
+        <p>
+            Caso tenha dúvidas sobre esta Política de Privacidade, entre em contato através do site:
+            <br><br>
+            <a href="https://www.talento.dev.br" class="contact-link" target="_blank">https://www.talento.dev.br</a>
+        </p>
+
+        <div class="footer">
+            Esta Política de Privacidade foi atualizada pela última vez em 20 de Janeiro de 2026.
+        </div>
+    </div>
+</body>
+</html>
