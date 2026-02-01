@@ -208,7 +208,7 @@
         
         <div class="buttons">
             <a href="#" id="openApp" class="btn btn-primary">
-                🚀 Abrir Chess Up
+                🚀 Abrir Chess Land
             </a>
             <button id="copyCode" class="btn btn-secondary">
                 📋 Copiar Código
@@ -220,9 +220,9 @@
         <div class="instructions">
             <strong>📱 Como entrar na partida:</strong>
             <ol>
-                <li>Clique no botão "Abrir Chess Up"</li>
+                <li>Clique no botão "Abrir Chess Land"</li>
                 <li>Se o app não abrir automaticamente, copie o código</li>
-                <li>Abra o Chess Up manualmente</li>
+                <li>Abra o Chess Land manualmente</li>
                 <li>Toque em "Desafiar Amigo" → "Entrar com Código"</li>
                 <li>Cole o código e jogue!</li>
             </ol>
@@ -250,7 +250,7 @@
             document.getElementById('matchCode').textContent = code;
             
             // Link para abrir o app
-            const deepLink = `chessup://join?code=${code}`;
+            const deepLink = `chess://join?code=${code}`;
             document.getElementById('openApp').href = deepLink;
             
             // Função de copiar código
@@ -292,7 +292,7 @@
             
             // Tenta abrir o app automaticamente após 1.5 segundos
             setTimeout(() => {
-                showStatus('<span class="spinner"></span>Abrindo o Chess Up...', 'info');
+                showStatus('<span class="spinner"></span>Abrindo o Chess Land...', 'info');
                 window.location.href = deepLink;
                 
                 // Se após 3 segundos ainda estiver na página
