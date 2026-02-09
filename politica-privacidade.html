@@ -14,23 +14,25 @@
       gtag('config', 'G-GZ98GYTZJF');
     </script>
     
-    <title>Talento Dev | Tutoriais de Android e Desenvolvimento de Apps</title>
+    <title>Política de Privacidade | Talento Dev</title>
     
-    <meta name="description" content="Aprenda desenvolvimento Android com tutoriais passo a passo, dicas de monetização de apps e acompanhe meus projetos na Play Store. Desenvolvedor e criador de conteúdo para programadores.">
+    <meta name="description" content="Política de Privacidade do Talento Dev - Como coletamos, usamos e protegemos suas informações.">
     
-    <meta name="keywords" content="desenvolvimento android, tutorial kotlin, monetização de apps, youtube para devs, talento dev, erwin vaz">
+    <meta name="keywords" content="política privacidade, proteção dados, talento dev">
     
     <meta name="author" content="Erwin Vaz">
-    <meta property="og:title" content="Talento Dev | Tutoriais para Desenvolvedores Android">
-    <meta property="og:description" content="Aprenda desenvolvimento Android com tutoriais práticos e dicas de monetização.">
-    <meta property="og:url" content="https://www.talento.dev.br">
+    <meta property="og:title" content="Política de Privacidade | Talento Dev">
+    <meta property="og:description" content="Como protegemos suas informações e respeitamos sua privacidade.">
+    <meta property="og:url" content="https://www.talento.dev.br/politica-privacidade.html">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://www.talento.dev.br/assets/imagens/logo.png">
+    
     <!-- Favicon -->
     <link href="assets/img/favicon.ico" rel="icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,65 +43,454 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="canonical" href="https://www.talento.dev.br/" />
-    
+    <link rel="canonical" href="https://www.talento.dev.br/politica-privacidade.html" />
+
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+   
     
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <style>
+        :root {
+            /* Paleta Mágica */
+            --magic-sky: #4A90E2;
+            --deep-blue: #2C5AA0;
+            --golden-sun: #FFD700;
+            --rainbow-pink: #FF6B9D;
+            --rainbow-purple: #9B59B6;
+            --grass-green: #27AE60;
+            --cloud-white: #F8F9FA;
+            --shadow-dark: #1A1A2E;
+            
+            /* Gradientes */
+            --gradient-sky: linear-gradient(135deg, #4A90E2 0%, #2C5AA0 50%, #9B59B6 100%);
+            --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            --gradient-dark: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+        }
+
+        body {
+            background: var(--gradient-sky);
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background Mágico */
+        .magic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .floating-code {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.08;
+            animation: float 25s infinite ease-in-out;
+            color: var(--cloud-white);
+            pointer-events: none;
+        }
+
+        .floating-code:nth-child(1) { left: 5%; top: 15%; animation-delay: 0s; }
+        .floating-code:nth-child(2) { left: 85%; top: 25%; animation-delay: -5s; }
+        .floating-code:nth-child(3) { left: 15%; top: 65%; animation-delay: -10s; }
+        .floating-code:nth-child(4) { left: 75%; top: 75%; animation-delay: -15s; }
+        .floating-code:nth-child(5) { left: 50%; top: 45%; animation-delay: -7s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.12; }
+        }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, #1A1A2E 0%, #2C5AA0 50%, #9B59B6 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            border-bottom: 4px solid var(--golden-sun);
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 70%);
+            animation: rotate 15s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--cloud-white);
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-title .highlight {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            color: var(--cloud-white);
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            opacity: 0.95;
+        }
+
+        /* Content Section */
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .privacy-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .privacy-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .privacy-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .privacy-section p {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .privacy-section ul li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .privacy-section ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--golden-sun);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .privacy-section a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .privacy-section a:hover {
+            color: var(--golden-sun);
+        }
+
+        /* Navbar Simples */
+        .simple-navbar {
+            background: var(--gradient-dark);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .simple-navbar a {
+            color: var(--cloud-white);
+            text-decoration: none;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .simple-navbar a:hover {
+            color: var(--golden-sun);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gradient-dark);
+            border-top: 3px solid var(--golden-sun);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Social Media Icons */
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            color: var(--cloud-white);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+        }
+
+        .social-btn.youtube:hover {
+            color: #FF0000;
+            border-color: #FF0000;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .social-btn.github:hover {
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .social-btn.instagram:hover {
+            color: #E4405F;
+            border-color: #E4405F;
+            box-shadow: 0 5px 20px rgba(228, 64, 95, 0.5);
+        }
+
+        .social-btn.tiktok:hover {
+            color: #00f2ea;
+            border-color: #00f2ea;
+            box-shadow: 0 5px 20px rgba(0, 242, 234, 0.5);
+        }
+
+        .social-btn.whatsapp:hover {
+            color: #25D366;
+            border-color: #25D366;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+            width: 50px;
+            height: 50px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top.active {
+            display: flex;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
+            color: var(--shadow-dark);
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: fixed !important;
+            top: 20px !important;
+            right: 20px !important;
+            z-index: 10000 !important;
+        }
+
+        .language-btn {
+            background: linear-gradient(135deg, #1A1A2E 0%, #2C5AA0 100%);
+            backdrop-filter: blur(10px);
+            color: var(--cloud-white);
+            border: 3px solid var(--golden-sun);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-btn:hover {
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--golden-sun);
+            border-radius: 15px;
+            padding: 0.5rem;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            color: var(--cloud-white);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .language-option:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--golden-sun);
+            transform: translateX(5px);
+        }
+
+        .language-flag {
+            width: 24px;
+            height: auto;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 6rem 0 3rem;
+            }
+
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .language-selector {
+                top: 15px !important;
+                right: 15px !important;
+            }
+            
+            .language-btn span {
+                display: none;
+            }
+            
+            .language-dropdown {
+                min-width: 180px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    
+    <!-- Background Mágico -->
+    <div class="magic-background">
+        <div class="floating-code">🔒</div>
+        <div class="floating-code">🛡️</div>
+        <div class="floating-code">📜</div>
+        <div class="floating-code">✓</div>
+        <div class="floating-code">⚖️</div>
+    </div>
+
+    <!-- Navbar Simples -->
+    <nav class="simple-navbar">
         <div class="container">
-            <a class="navbar-brand" href="/">
-                <img loading="lazy" src="assets/img/logo.png" alt="Talento Dev">
+            <a href="index.html">
+                <i class="bi bi-arrow-left me-2"></i>Voltar ao Início
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="menu_tutoriais.html">Tutoriais</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="app.html">Aplicativos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="sobre.html">Sobre</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
+    <!-- Header -->
+    <header class="page-header">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h1 class="hero-title">
-                        <i class="bi bi-shield-lock me-2"></i>Política de Privacidade
-                    </h1>
-                    <p class="hero-subtitle">
-                        Última atualização: 01 de Janeiro de 2025
-                    </p>
-                </div>
+            <div class="page-header-content">
+                <h1 class="page-title">
+                    <i class="bi bi-shield-lock me-2"></i><span class="highlight">Política de Privacidade</span>
+                </h1>
+                <p class="page-subtitle">
+                    Última atualização: 01 de Janeiro de 2025
+                </p>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- Conteúdo Principal -->
     <main class="container my-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="privacy-content">
+                <div class="content-section">
                     <div class="privacy-section">
                         <h3><i class="bi bi-info-circle me-2"></i>Introdução</h3>
                         <p>O Talento Dev ("nós", "nosso" ou "nos") está comprometido em proteger a privacidade de seus usuários ("você" ou "seu"). Esta Política de Privacidade explica como coletamos, usamos, divulgamos e protegemos suas informações quando você visita nosso site.</p>
@@ -146,7 +537,7 @@
                     
                     <div class="privacy-section">
                         <h3><i class="bi bi-envelope me-2"></i>Contato</h3>
-                        <p>Se tiver dúvidas sobre esta Política de Privacidade, entre em contato conosco através da nossa <a href="contato.html">página de contato</a>.</p>
+                        <p>Se tiver dúvidas sobre esta Política de Privacidade, entre em contato conosco através de nossos canais abaixo!</a>.</p>
                     </div>
                 </div>
             </div>
@@ -160,16 +551,15 @@
                 <!-- Coluna 1: Sobre -->
                 <div class="col-lg-4 col-md-6">
                     <div class="pe-lg-5">
-                        <h5 class="mb-3">
+                        <h5 class="mb-3" style="color: var(--golden-sun);">
                             <i class="bi bi-code-square me-2"></i>Talento Dev
                         </h5>
-                        <p class="small">
+                        <p class="small" style="color: var(--cloud-white);">
                             Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
                         </p>
                         <div class="mt-3">
-                            <!-- Contador de Visitas -->
                             <div class="visitor-counter mb-2">
-                                <small>
+                                <small style="color: var(--cloud-white);">
                                     <span class="me-2">Visitas:</span>
                                     <a href="https://megacontador.com.br" title="Contador de Visitas" target="_blank" rel="noopener noreferrer">
                                         <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
@@ -179,10 +569,10 @@
                         </div>
                     </div>
                 </div>
-      
-                <!-- Coluna 2: Redes Sociais UNIFICADAS -->
+
+                <!-- Coluna 2: Redes Sociais -->
                 <div class="col-lg-4 col-md-6 text-center text-md-start">
-                    <h5 class="mb-3">
+                    <h5 class="mb-3" style="color: var(--golden-sun);">
                         <i class="bi bi-people me-2"></i>Conecte-se
                     </h5>
                     <div class="social-share">
@@ -217,114 +607,51 @@
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
-
-                    <!-- Newsletter -->
-                    <div class="mt-4">
-                        <h6 class="mb-2">Receba atualizações</h6>
-                        <form class="d-flex" onsubmit="subscribeNewsletter(event)">
-                            <input 
-                                type="email" 
-                                id="newsletterEmail" 
-                                class="form-control form-control-sm me-2" 
-                                placeholder="Seu e-mail" 
-                                required
-                            >
-                            <button type="submit" class="btn btn-sm btn-success">
-                                <i class="bi bi-envelope"></i>
-                            </button>
-                        </form>
-                    </div>
                 </div>
-      
+
                 <!-- Coluna 3: Apoio -->
                 <div class="col-lg-4 col-md-12 text-center text-lg-end">
-                    <h5 class="mb-3">
+                    <h5 class="mb-3" style="color: var(--golden-sun);">
                         <i class="bi bi-heart me-2"></i>Apoie o Projeto
                     </h5>
                     <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
                         <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
-                        <button type="submit" class="btn btn-outline-light btn-sm">
+                        <button type="submit" class="btn btn-outline-light btn-sm" style="border: 2px solid var(--golden-sun); color: var(--golden-sun); font-weight: 700;">
                             <i class="bi bi-paypal me-1"></i>Doar via PayPal
                         </button>
                     </form>
                     
-                    <!-- Créditos -->
                     <div class="mt-4">
-                        <p class="small mb-1">&copy; 2025 Talento Dev</p>
-                        <p class="small mb-0">Todos os direitos reservados</p>
+                        <p class="small mb-1" style="color: var(--cloud-white);">&copy; 2026 Talento Dev</p>
+                        <p class="small mb-0" style="color: var(--cloud-white); opacity: 0.8;">Todos os direitos reservados</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Divisor -->
-            <hr class="mt-4 mb-3 bg-light">
+            <hr class="mt-4 mb-3" style="background: var(--golden-sun); height: 2px;">
             
-            <!-- Links Rápidos -->
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="d-flex flex-wrap justify-content-center">
-                        <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
-                        <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
-                        <a href="contato.html" class="text-white small me-3 mb-2">Contato</a>
-                        <a href="sobre.html" class="text-white small mb-2">Sobre</a>
+                        <a href="politica-privacidade.html" class="text-white small me-3 mb-2" style="color: var(--cloud-white);">Política de Privacidade</a>
+                        <a href="termos-uso.html" class="text-white small me-3 mb-2" style="color: var(--cloud-white);">Termos de Uso</a>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-  
+
     <!-- Back to Top Button -->
     <a href="#" class="back-to-top">
         <i class="bi bi-arrow-up"></i>
     </a>
-  
-    <!-- Bootstrap 5 JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
-    <!-- Custom JS -->
-    <script>
-        // Back to top button
-        window.addEventListener('scroll', function() {
-            var backToTop = document.querySelector('.back-to-top');
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('active');
-            } else {
-                backToTop.classList.remove('active');
-            }
-        });
-        
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
-            }
-        });
-    </script>
-    
-    <script>
-        function subscribeNewsletter(event) {
-            event.preventDefault();
-            const email = document.getElementById('newsletterEmail').value;
-            const subject = "Assinar newsletter - Talento Dev";
-            const body = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
-            
-            window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            // Opcional: Feedback visual
-            alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
-            document.getElementById('newsletterEmail').value = ""; // Limpa o campo
-        }
-    </script>
 
-     <!-- HTML - Adicione antes do </body> -->
+    <!-- Language Selector -->
     <div class="language-selector">
         <button class="language-btn" onclick="toggleLanguageDropdown()">
-            <i class="bi bi-translate me-1"></i>
+            <i class="bi bi-translate"></i>
             <span>Idioma</span>
-            <i class="bi bi-chevron-down ms-1"></i>
+            <i class="bi bi-chevron-down"></i>
         </button>
         <div class="language-dropdown" id="languageDropdown">
             <a href="#" class="language-option" onclick="translatePage('pt', 'Português')">
@@ -350,105 +677,64 @@
         </div>
     </div>
 
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-    // Configuração de idiomas suportados
-    const supportedLanguages = {
-        'pt': { name: 'Português', flag: 'br' },
-        'en': { name: 'English', flag: 'us' },
-        'es': { name: 'Español', flag: 'es' },
-        'fr': { name: 'Français', flag: 'fr' },
-        'de': { name: 'Deutsch', flag: 'de' }
-    };
-
-    // Detectar idioma do usuário
-    function detectUserLanguage() {
-        // Verificar se já escolheu não traduzir
-        if (localStorage.getItem('disableAutoTranslate') === 'true') {
-            return;
-        }
-        
-        const userLang = navigator.language || navigator.userLanguage;
-        const mainLang = userLang.split('-')[0];
-        
-        // Se não for português e for um idioma suportado
-        if (mainLang !== 'pt' && supportedLanguages[mainLang]) {
-            showTranslationBanner(mainLang);
-        }
-    }
-
-    // Mostrar banner de tradução
-    function showTranslationBanner(lang) {
-        const banner = document.createElement('div');
-        banner.className = 'translation-banner';
-        banner.innerHTML = `
-            <p>🌍 <strong>Detectamos que você fala ${supportedLanguages[lang].name}</strong></p>
-            <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;">Deseja traduzir esta página?</p>
-            <div>
-                <button class="translate-btn" onclick="translatePage('${lang}', '${supportedLanguages[lang].name}')">
-                    Sim, traduzir
-                </button>
-                <button class="cancel-btn" onclick="closeBanner()">
-                    Manter em Português
-                </button>
-            </div>
-            <div style="margin-top: 10px;">
-                <label style="font-size: 0.8em;">
-                    <input type="checkbox" id="disableFuturePrompt"> Não mostrar novamente
-                </label>
-            </div>
-        `;
-        
-        document.body.appendChild(banner);
-    }
-
-    function closeBanner() {
-        const banner = document.querySelector('.translation-banner');
-        if (banner) {
-            const disableFuture = document.getElementById('disableFuturePrompt').checked;
-            if (disableFuture) {
-                localStorage.setItem('disableAutoTranslate', 'true');
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
             }
-            banner.remove();
+        });
+
+        // Language functions
+        const supportedLanguages = {
+            'pt': { name: 'Português', flag: 'br' },
+            'en': { name: 'English', flag: 'us' },
+            'es': { name: 'Español', flag: 'es' },
+            'fr': { name: 'Français', flag: 'fr' },
+            'de': { name: 'Deutsch', flag: 'de' }
+        };
+
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
-    }
 
-    function toggleLanguageDropdown() {
-        const dropdown = document.getElementById('languageDropdown');
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function translatePage(lang, langName) {
-        // Fecha banners/dropdowns
-        const banner = document.querySelector('.translation-banner');
-        if (banner) banner.remove();
-        document.getElementById('languageDropdown').style.display = 'none';
-        
-        // Redireciona para Google Translate
-        const currentUrl = window.location.href;
-        const translateUrl = `https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(currentUrl)}`;
-        
-        // Abre em nova aba
-        window.open(translateUrl, '_blank');
-        
-        // Opcional: Mostrar mensagem
-        alert(`A página será traduzida para ${langName} em uma nova aba.`);
-    }
-
-    // Fecha dropdown ao clicar fora
-    document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('languageDropdown');
-        const button = document.querySelector('.language-btn');
-        if (dropdown && button && !button.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.style.display = 'none';
+        function translatePage(lang, langName) {
+            document.getElementById('languageDropdown').style.display = 'none';
+            
+            const currentUrl = window.location.href;
+            const translateUrl = `https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(currentUrl)}`;
+            
+            window.open(translateUrl, '_blank');
+            alert(`A página será traduzida para ${langName} em uma nova aba.`);
         }
-    });
 
-    // Inicializar quando a página carregar
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(detectUserLanguage, 2000); // Aguarda 2 segundos
-    });
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('languageDropdown');
+            const button = document.querySelector('.language-btn');
+            if (dropdown && button && !button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        /* Social links hover effect */
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.color = 'var(--golden-sun)';
+                this.style.transform = 'translateY(-5px)';
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.style.color = 'var(--cloud-white)';
+                this.style.transform = 'translateY(0)';
+            });
+        });
     </script>
-
 
 </body>
 </html>
