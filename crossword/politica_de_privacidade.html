@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Privacidade | Privacy Policy — Talento DEV</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+    :root {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --ink: #1a1815;
+        --muted: #6b6460;
+        --accent: #c0392b;
+        --accent-light: #fdf1f0;
+        --border: #e2ddd8;
+        --radius: 12px;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+        background: var(--ink);
+        color: #fff;
+        padding: 28px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .brand {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.6rem;
+        letter-spacing: -0.5px;
+    }
+
+    .brand span {
+        color: var(--accent);
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+        display: flex;
+        gap: 6px;
+    }
+
+    .lang-btn {
+        background: transparent;
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 99px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .lang-btn:hover,
+    .lang-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+    }
+
+    /* ── HERO STRIP ── */
+    .hero {
+        background: var(--accent);
+        color: #fff;
+        padding: 56px 40px 48px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.75;
+        margin-bottom: 12px;
+    }
+
+    .hero h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 16px;
+    }
+
+    .hero-date {
+        font-size: 0.85rem;
+        opacity: 0.8;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 56px 24px 80px;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 36px 40px;
+        margin-bottom: 24px;
+        transition: box-shadow 0.2s;
+    }
+
+    .section:hover {
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    }
+
+    .section-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-size: 1.2rem;
+    }
+
+    .section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.35rem;
+        margin-bottom: 14px;
+        color: var(--ink);
+    }
+
+    .section p {
+        color: var(--muted);
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+    }
+
+    .section p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+        background: var(--accent-light);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        color: var(--ink);
+    }
+
+    /* ── BADGES ── */
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .badge {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 99px;
+        padding: 5px 14px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--ink);
+    }
+
+    /* ── CONTACT ── */
+    .contact-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+    }
+
+    .contact-link:hover {
+        border-color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+        text-align: center;
+        padding: 32px 24px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+    }
+
+    /* ── LANGUAGE SWITCHING ── */
+    [data-lang] {
+        display: none;
+    }
+
+    .lang-pt [data-lang="pt"] {
+        display: block;
+    }
+
+    .lang-en [data-lang="en"] {
+        display: block;
+    }
+
+    /* inline spans for mixed content */
+    span[data-lang] {
+        display: none;
+    }
+
+    .lang-pt span[data-lang="pt"] {
+        display: inline;
+    }
+
+    .lang-en span[data-lang="en"] {
+        display: inline;
+    }
+
+    @media (max-width: 600px) {
+        header {
+            padding: 20px 20px;
+        }
+
+        .hero {
+            padding: 40px 20px 36px;
+        }
+
+        .section {
+            padding: 24px 20px;
+        }
+    }
+    </style>
+</head>
+
+<body class="lang-pt">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand"><span>Talento</span> DEV</div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+            <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-eyebrow" data-lang="pt">Talento DEV</div>
+        <div class="hero-eyebrow" data-lang="en">Talento DEV</div>
+
+        <h1 data-lang="pt">Política de<br>Privacidade</h1>
+        <h1 data-lang="en">Privacy<br>Policy</h1>
+
+        <div class="hero-date" data-lang="pt">Última atualização: 17 de Fevereiro de 2026</div>
+        <div class="hero-date" data-lang="en">Last updated: February 17, 2026</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="container">
+
+        <!-- HIGHLIGHT -->
+        <div class="highlight">
+            <span data-lang="pt">✅ Não coletamos nenhuma informação pessoal dos usuários.</span>
+            <span data-lang="en">✅ We do not collect any personal information from users.</span>
+        </div>
+
+        <!-- 1. USO DE INFORMAÇÕES -->
+        <div class="section">
+            <div class="section-icon">📡</div>
+            <h2 data-lang="pt">Informações de Uso</h2>
+            <h2 data-lang="en">Usage Information</h2>
+
+            <p data-lang="pt">Nosso aplicativo pode solicitar acesso à internet para baixar arquivos de tradução e fala.
+            </p>
+            <p data-lang="en">Our application may request internet access to download translation and speech files.</p>
+
+            <p data-lang="pt">As informações capturadas não são compartilhadas com terceiros. Garantimos que qualquer
+                dado seja tratado com segurança e conforme as melhores práticas de proteção de dados.</p>
+            <p data-lang="en">Captured information is not shared with third parties. We ensure that any data is handled
+                securely and in accordance with best data protection practices.</p>
+
+            <p data-lang="pt">Você pode controlar o acesso através das configurações do seu dispositivo. Se optar por
+                desativar o acesso, alguns recursos do aplicativo poderão não funcionar corretamente.</p>
+            <p data-lang="en">You can control access through your device settings. If you choose to disable access, some
+                app features may not work correctly.</p>
+        </div>
+
+        <!-- 2. GRAVAÇÃO DE ÁUDIO -->
+        <div class="section">
+            <div class="section-icon">🎙️</div>
+            <h2 data-lang="pt">Gravação de Áudio</h2>
+            <h2 data-lang="en">Audio Recording</h2>
+
+            <p data-lang="pt">O aplicativo solicita permissão para acessar o microfone do dispositivo a fim de gravar
+                áudio. As gravações são processadas localmente no dispositivo e não são compartilhadas com terceiros, a
+                menos que você opte por fazê-lo explicitamente.</p>
+            <p data-lang="en">The application requests permission to access the device's microphone to record audio.
+                Recordings are processed locally on the device and are not shared with third parties unless you
+                explicitly choose to do so.</p>
+        </div>
+
+        <!-- 3. USO DA INTERNET -->
+        <div class="section">
+            <div class="section-icon">🌐</div>
+            <h2 data-lang="pt">Uso da Internet</h2>
+            <h2 data-lang="en">Internet Usage</h2>
+
+            <p data-lang="pt">O aplicativo requer acesso à internet para fornecer funcionalidades como traduções e
+                conversação.</p>
+            <p data-lang="en">The application requires internet access to provide features such as translations and
+                conversation.</p>
+        </div>
+
+        <!-- 4. PERMISSÕES -->
+        <div class="section">
+            <div class="section-icon">🔐</div>
+            <h2 data-lang="pt">Permissões do Aplicativo</h2>
+            <h2 data-lang="en">App Permissions</h2>
+
+            <p data-lang="pt">O CrossWord solicita as seguintes permissões:</p>
+            <p data-lang="en">CrossWord requests the following permissions:</p>
+
+            <div class="badges">
+                <span class="badge">🎤 <span data-lang="pt">Microfone</span><span
+                        data-lang="en">Microphone</span></span>
+                <span class="badge">🌐 <span data-lang="pt">Internet</span><span data-lang="en">Internet</span></span>
+            </div>
+
+            <p data-lang="pt" style="margin-top:16px"><strong>Microfone:</strong> Para gravar áudio e fornecer
+                funcionalidades como tradução ou reconhecimento de fala.</p>
+            <p data-lang="en" style="margin-top:16px"><strong>Microphone:</strong> To record audio and provide features
+                such as translation or speech recognition.</p>
+
+            <p data-lang="pt"><strong>Internet:</strong> Para acessar serviços online como traduções e conversação.</p>
+            <p data-lang="en"><strong>Internet:</strong> To access online services such as translations and
+                conversation.</p>
+
+            <p data-lang="pt">Essas permissões são essenciais para o funcionamento do aplicativo e não serão usadas para
+                outros fins sem o seu consentimento.</p>
+            <p data-lang="en">These permissions are essential for the application to function and will not be used for
+                any other purpose without your consent.</p>
+        </div>
+
+        <!-- 5. COOKIES -->
+        <div class="section">
+            <div class="section-icon">🍪</div>
+            <h2 data-lang="pt">Cookies</h2>
+            <h2 data-lang="en">Cookies</h2>
+
+            <p data-lang="pt">Não coletamos cookies. Eles podem ser desativados sem nenhum prejuízo para o funcionamento
+                do sistema.</p>
+            <p data-lang="en">We do not collect cookies. They can be disabled without any impact on the system's
+                functionality.</p>
+        </div>
+
+        <!-- 6. CRIANÇAS -->
+        <div class="section">
+            <div class="section-icon">👶</div>
+            <h2 data-lang="pt">Crianças</h2>
+            <h2 data-lang="en">Children</h2>
+
+            <p data-lang="pt">Este site não se destina a crianças e dados relativos a elas não são por nós
+                intencionalmente coletados.</p>
+            <p data-lang="en">This site is not intended for children and we do not intentionally collect data relating
+                to them.</p>
+        </div>
+
+        <!-- 7. CUSTOS -->
+        <div class="section">
+            <div class="section-icon">💸</div>
+            <h2 data-lang="pt">Custos</h2>
+            <h2 data-lang="en">Costs</h2>
+
+            <p data-lang="pt">O sistema está acessível gratuitamente.</p>
+            <p data-lang="en">The system is available free of charge.</p>
+        </div>
+
+        <!-- 8. ALTERAÇÕES -->
+        <div class="section">
+            <div class="section-icon">📝</div>
+            <h2 data-lang="pt">Alterações a este Aviso</h2>
+            <h2 data-lang="en">Changes to This Notice</h2>
+
+            <p data-lang="pt">Caso venhamos a alterar este Aviso de Privacidade, publicaremos aqui qualquer atualização
+                para sua revisão.</p>
+            <p data-lang="en">Should we modify this Privacy Notice, we will publish any updates here for your review.
+            </p>
+
+            <p data-lang="pt">Você pode imprimir uma cópia pressionando <strong>Ctrl + P</strong> no teclado, ou
+                acessando o recurso Imprimir Página no seu navegador.</p>
+            <p data-lang="en">You can print a copy by pressing <strong>Ctrl + P</strong> on your keyboard, or by using
+                the Print Page feature in your browser.</p>
+        </div>
+
+        <!-- 9. CONTATO -->
+        <div class="section">
+            <div class="section-icon">✉️</div>
+            <h2 data-lang="pt">Informações de Contato</h2>
+            <h2 data-lang="en">Contact Information</h2>
+
+            <p data-lang="pt">Caso ainda tenha alguma dúvida sobre como utilizamos suas informações pessoais, entre em
+                contato conosco através do nosso site:</p>
+            <p data-lang="en">If you still have questions about how we use your personal information, please contact us
+                through our website:</p>
+
+            <p><a href="https://www.talento.dev.br" target="_blank" rel="noopener"
+                    class="contact-link">www.talento.dev.br</a></p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+
+    <footer>
+        <span data-lang="pt">© 2025 Talento DEV · Última atualização: 17 de Fevereiro de 2026</span>
+        <span data-lang="en">© 2025 Talento DEV · Last updated: February 17, 2026</span>
+    </footer>
+
+    <script>
+    function setLang(lang, btn) {
+        document.body.className = 'lang-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.documentElement.lang = lang;
+    }
+    </script>
+</body>
+
+</html>
