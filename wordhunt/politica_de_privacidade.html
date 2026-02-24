@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Privacidade | Privacy Policy — WordHunt</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+    :root {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --ink: #1a1815;
+        --muted: #6b6460;
+        --accent: #c0392b;
+        --accent-light: #fdf1f0;
+        --border: #e2ddd8;
+        --radius: 12px;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        min-height: 100vh;
+    }
+
+    header {
+        background: var(--ink);
+        color: #fff;
+        padding: 28px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .brand {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.6rem;
+        letter-spacing: -0.5px;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .lang-toggle { display: flex; gap: 6px; }
+
+    .lang-btn {
+        background: transparent;
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 99px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .lang-btn:hover,
+    .lang-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+    }
+
+    .hero {
+        background: var(--accent);
+        color: #fff;
+        padding: 56px 40px 48px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.75;
+        margin-bottom: 12px;
+    }
+
+    .hero h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 16px;
+    }
+
+    .hero-date {
+        font-size: 0.85rem;
+        opacity: 0.8;
+    }
+
+    .container {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 56px 24px 80px;
+    }
+
+    .section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 36px 40px;
+        margin-bottom: 24px;
+        transition: box-shadow 0.2s;
+    }
+
+    .section:hover {
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    }
+
+    .section-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-size: 1.2rem;
+    }
+
+    .section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.35rem;
+        margin-bottom: 14px;
+        color: var(--ink);
+    }
+
+    .section p {
+        color: var(--muted);
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .highlight {
+        background: var(--accent-light);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        color: var(--ink);
+    }
+
+    .info-list {
+        list-style: none;
+        margin-top: 10px;
+    }
+
+    .info-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.95rem;
+        color: var(--muted);
+    }
+
+    .info-list li:last-child { border-bottom: none; }
+
+    .info-list li .item-icon { font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+
+    .info-list li div strong {
+        display: block;
+        color: var(--ink);
+        margin-bottom: 2px;
+    }
+
+    .contact-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); }
+
+    footer {
+        text-align: center;
+        padding: 32px 24px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+    }
+
+    [data-lang] { display: none; }
+    .lang-pt [data-lang="pt"] { display: block; }
+    .lang-en [data-lang="en"] { display: block; }
+
+    span[data-lang] { display: none; }
+    .lang-pt span[data-lang="pt"] { display: inline; }
+    .lang-en span[data-lang="en"] { display: inline; }
+
+    @media (max-width: 600px) {
+        header { padding: 20px; }
+        .hero { padding: 40px 20px 36px; }
+        .section { padding: 24px 20px; }
+    }
+    </style>
+</head>
+
+<body class="lang-pt">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand"><span>Word</span>Hunt</div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+            <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-eyebrow" data-lang="pt">Talento DEV</div>
+        <div class="hero-eyebrow" data-lang="en">Talento DEV</div>
+
+        <h1 data-lang="pt">Declaração de<br>Privacidade</h1>
+        <h1 data-lang="en">Privacy<br>Statement</h1>
+
+        <div class="hero-date" data-lang="pt">Última atualização: 24 de Fevereiro de 2026</div>
+        <div class="hero-date" data-lang="en">Last updated: February 24, 2026</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="container">
+
+        <!-- HIGHLIGHT -->
+        <div class="highlight">
+            <span data-lang="pt">ℹ️ Não coletamos diretamente informações pessoais dos usuários. Serviços de terceiros integrados ao app (Google AdMob e Firebase Analytics) podem coletar dados conforme suas próprias políticas de privacidade.</span>
+            <span data-lang="en">ℹ️ We do not directly collect personal information from users. Third-party services integrated into the app (Google AdMob and Firebase Analytics) may collect data according to their own privacy policies.</span>
+        </div>
+
+        <!-- 1. INFORMAÇÕES DE USO -->
+        <div class="section">
+            <div class="section-icon">📡</div>
+            <h2 data-lang="pt">Informações de Uso</h2>
+            <h2 data-lang="en">Usage Information</h2>
+
+            <p data-lang="pt">Nosso aplicativo utiliza acesso à internet para fornecer suas funcionalidades, exibir anúncios em banner e coletar dados de uso através de serviços do Google (AdMob e Firebase Analytics).</p>
+            <p data-lang="en">Our application uses internet access to provide its features, display banner ads, and collect usage data through Google services (AdMob and Firebase Analytics).</p>
+
+            <p data-lang="pt">As informações coletadas pelos serviços de terceiros não são compartilhadas por nós com outros terceiros. Garantimos que qualquer dado seja tratado com segurança e conforme as melhores práticas de proteção de dados.</p>
+            <p data-lang="en">Information collected by third-party services is not shared by us with other third parties. We ensure that any data is handled securely and in accordance with best data protection practices.</p>
+
+            <p data-lang="pt">Você pode controlar o acesso à internet através das configurações do seu dispositivo. Se optar por desativar o acesso, alguns recursos do aplicativo poderão não funcionar corretamente.</p>
+            <p data-lang="en">You can control internet access through your device settings. If you choose to disable access, some app features may not work correctly.</p>
+        </div>
+
+        <!-- 2. USO DA INTERNET -->
+        <div class="section">
+            <div class="section-icon">🌐</div>
+            <h2 data-lang="pt">Uso da Internet</h2>
+            <h2 data-lang="en">Internet Usage</h2>
+
+            <p data-lang="pt">O aplicativo requer acesso à internet para as seguintes finalidades:</p>
+            <p data-lang="en">The application requires internet access for the following purposes:</p>
+
+            <ul class="info-list" data-lang="pt">
+                <li><span class="item-icon">🎮</span><div><strong>Funcionalidades do jogo</strong>Carregamento de conteúdo e recursos do WordHunt.</div></li>
+                <li><span class="item-icon">📢</span><div><strong>Exibição de anúncios</strong>Carregamento de banners publicitários via Google AdMob.</div></li>
+                <li><span class="item-icon">📊</span><div><strong>Analytics</strong>Envio de dados de uso anônimos para o Firebase Analytics.</div></li>
+            </ul>
+            <ul class="info-list" data-lang="en">
+                <li><span class="item-icon">🎮</span><div><strong>Game features</strong>Loading WordHunt content and resources.</div></li>
+                <li><span class="item-icon">📢</span><div><strong>Ad display</strong>Loading banner ads via Google AdMob.</div></li>
+                <li><span class="item-icon">📊</span><div><strong>Analytics</strong>Sending anonymous usage data to Firebase Analytics.</div></li>
+            </ul>
+        </div>
+
+        <!-- 3. ADMOB -->
+        <div class="section">
+            <div class="section-icon">📢</div>
+            <h2 data-lang="pt">Anúncios — Google AdMob</h2>
+            <h2 data-lang="en">Advertisements — Google AdMob</h2>
+
+            <p data-lang="pt">O WordHunt exibe anúncios em formato banner através do <strong>Google AdMob</strong>. Para exibir anúncios relevantes, o AdMob pode coletar e utilizar as seguintes informações do seu dispositivo:</p>
+            <p data-lang="en">WordHunt displays banner ads through <strong>Google AdMob</strong>. To show relevant ads, AdMob may collect and use the following information from your device:</p>
+
+            <ul class="info-list" data-lang="pt">
+                <li><span class="item-icon">📱</span><div><strong>ID do dispositivo (Advertising ID)</strong>Identificador anônimo usado para personalização e mensuração de anúncios.</div></li>
+                <li><span class="item-icon">📍</span><div><strong>Localização aproximada</strong>Usada para exibir anúncios regionais relevantes.</div></li>
+                <li><span class="item-icon">🔎</span><div><strong>Dados de interação com anúncios</strong>Cliques e visualizações para mensuração de desempenho das campanhas.</div></li>
+            </ul>
+            <ul class="info-list" data-lang="en">
+                <li><span class="item-icon">📱</span><div><strong>Device ID (Advertising ID)</strong>Anonymous identifier used for ad personalization and measurement.</div></li>
+                <li><span class="item-icon">📍</span><div><strong>Approximate location</strong>Used to display relevant regional ads.</div></li>
+                <li><span class="item-icon">🔎</span><div><strong>Ad interaction data</strong>Clicks and impressions for campaign performance measurement.</div></li>
+            </ul>
+
+            <p data-lang="pt" style="margin-top:16px">Esses dados são coletados e processados diretamente pelo Google, conforme a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="contact-link">Política de Privacidade do Google</a>. Você pode desativar a personalização de anúncios em <strong>Configurações → Google → Anúncios → Desativar personalização</strong>.</p>
+            <p data-lang="en" style="margin-top:16px">This data is collected and processed directly by Google, in accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="contact-link">Google's Privacy Policy</a>. You can opt out of ad personalization under <strong>Settings → Google → Ads → Opt out of Ads Personalization</strong>.</p>
+        </div>
+
+        <!-- 4. FIREBASE ANALYTICS -->
+        <div class="section">
+            <div class="section-icon">📊</div>
+            <h2 data-lang="pt">Firebase Analytics</h2>
+            <h2 data-lang="en">Firebase Analytics</h2>
+
+            <p data-lang="pt">O WordHunt utiliza o <strong>Firebase Analytics</strong> do Google para entender como os usuários interagem com o aplicativo e melhorar continuamente a experiência de jogo. O Firebase Analytics pode coletar:</p>
+            <p data-lang="en">WordHunt uses Google's <strong>Firebase Analytics</strong> to understand how users interact with the app and continuously improve the gaming experience. Firebase Analytics may collect:</p>
+
+            <ul class="info-list" data-lang="pt">
+                <li><span class="item-icon">📲</span><div><strong>Eventos de uso</strong>Telas visitadas, tempo de sessão e ações realizadas no app.</div></li>
+                <li><span class="item-icon">🌍</span><div><strong>Dados demográficos</strong>País/região e idioma do dispositivo (de forma agregada e anônima).</div></li>
+                <li><span class="item-icon">📱</span><div><strong>Informações do dispositivo</strong>Modelo do aparelho, sistema operacional e versão do app.</div></li>
+            </ul>
+            <ul class="info-list" data-lang="en">
+                <li><span class="item-icon">📲</span><div><strong>Usage events</strong>Screens visited, session time, and actions taken in the app.</div></li>
+                <li><span class="item-icon">🌍</span><div><strong>Demographic data</strong>Country/region and device language (aggregated and anonymous).</div></li>
+                <li><span class="item-icon">📱</span><div><strong>Device information</strong>Device model, operating system, and app version.</div></li>
+            </ul>
+
+            <p data-lang="pt" style="margin-top:16px">Esses dados são utilizados exclusivamente para fins analíticos e de melhoria do app, processados pelo Google conforme a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="contact-link">Política de Privacidade do Google</a>. Você pode desativar a coleta do Firebase Analytics nas configurações do dispositivo.</p>
+            <p data-lang="en" style="margin-top:16px">This data is used solely for analytics and app improvement, processed by Google in accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="contact-link">Google's Privacy Policy</a>. You can disable Firebase Analytics data collection in your device settings.</p>
+        </div>
+
+        <!-- 5. PERMISSÕES -->
+        <div class="section">
+            <div class="section-icon">🔐</div>
+            <h2 data-lang="pt">Permissões do Aplicativo</h2>
+            <h2 data-lang="en">App Permissions</h2>
+
+            <p data-lang="pt">O WordHunt solicita a seguinte permissão:</p>
+            <p data-lang="en">WordHunt requests the following permission:</p>
+
+            <ul class="info-list" data-lang="pt">
+                <li><span class="item-icon">🌐</span><div><strong>Internet</strong>Para acessar serviços online: funcionalidades do jogo, exibição de anúncios via Google AdMob e envio de dados de uso ao Firebase Analytics.</div></li>
+            </ul>
+            <ul class="info-list" data-lang="en">
+                <li><span class="item-icon">🌐</span><div><strong>Internet</strong>To access online services: game features, displaying ads via Google AdMob, and sending usage data to Firebase Analytics.</div></li>
+            </ul>
+
+            <p data-lang="pt" style="margin-top:16px">Essa permissão é essencial para o funcionamento do aplicativo e não será usada para outros fins sem o seu consentimento.</p>
+            <p data-lang="en" style="margin-top:16px">This permission is essential for the application to function and will not be used for any other purpose without your consent.</p>
+        </div>
+
+        <!-- 6. COOKIES -->
+        <div class="section">
+            <div class="section-icon">🍪</div>
+            <h2 data-lang="pt">Cookies</h2>
+            <h2 data-lang="en">Cookies</h2>
+
+            <p data-lang="pt">Não coletamos cookies diretamente. Serviços de terceiros integrados ao app, como Google AdMob e Firebase Analytics, podem utilizar identificadores similares para fins de análise e personalização de anúncios, conforme suas próprias políticas.</p>
+            <p data-lang="en">We do not directly collect cookies. Third-party services integrated into the app, such as Google AdMob and Firebase Analytics, may use similar identifiers for analytics and ad personalization purposes, in accordance with their own policies.</p>
+        </div>
+
+        <!-- 7. CRIANÇAS -->
+        <div class="section">
+            <div class="section-icon">👶</div>
+            <h2 data-lang="pt">Crianças</h2>
+            <h2 data-lang="en">Children</h2>
+
+            <p data-lang="pt">Este aplicativo não se destina a crianças e dados relativos a elas não são por nós intencionalmente coletados. O Google AdMob está configurado para não exibir anúncios personalizados para menores de idade.</p>
+            <p data-lang="en">This application is not intended for children and we do not intentionally collect data relating to them. Google AdMob is configured not to display personalized ads to minors.</p>
+        </div>
+
+        <!-- 8. CUSTOS -->
+        <div class="section">
+            <div class="section-icon">💸</div>
+            <h2 data-lang="pt">Custos</h2>
+            <h2 data-lang="en">Costs</h2>
+
+            <p data-lang="pt">O aplicativo está acessível gratuitamente. Os anúncios exibidos pelo Google AdMob permitem que o app seja mantido sem custo para o usuário.</p>
+            <p data-lang="en">The application is available free of charge. Ads displayed by Google AdMob allow the app to be maintained at no cost to the user.</p>
+        </div>
+
+        <!-- 9. ALTERAÇÕES -->
+        <div class="section">
+            <div class="section-icon">📝</div>
+            <h2 data-lang="pt">Alterações a este Aviso de Privacidade</h2>
+            <h2 data-lang="en">Changes to This Privacy Notice</h2>
+
+            <p data-lang="pt">Caso venhamos a alterar este Aviso de Privacidade, publicaremos aqui qualquer atualização para sua revisão.</p>
+            <p data-lang="en">Should we modify this Privacy Notice, we will publish any updates here for your review.</p>
+
+            <p data-lang="pt">Você pode imprimir uma cópia pressionando <strong>Ctrl + P</strong> no teclado, ou acessando o recurso Imprimir Página no seu navegador.</p>
+            <p data-lang="en">You can print a copy by pressing <strong>Ctrl + P</strong> on your keyboard, or by using the Print Page feature in your browser.</p>
+        </div>
+
+        <!-- 10. CONTATO -->
+        <div class="section">
+            <div class="section-icon">✉️</div>
+            <h2 data-lang="pt">Informações de Contato</h2>
+            <h2 data-lang="en">Contact Information</h2>
+
+            <p data-lang="pt">Caso ainda tenha alguma dúvida sobre como utilizamos suas informações pessoais, entre em contato conosco através do nosso site:</p>
+            <p data-lang="en">If you still have questions about how we use your personal information, please contact us through our website:</p>
+
+            <p><a href="https://www.talento.dev.br" target="_blank" rel="noopener" class="contact-link">www.talento.dev.br</a></p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <span data-lang="pt">© 2026 Talento DEV · WordHunt · Última atualização: 24 de Fevereiro de 2026</span>
+        <span data-lang="en">© 2026 Talento DEV · WordHunt · Last updated: February 24, 2026</span>
+    </footer>
+
+    <script>
+    function setLang(lang, btn) {
+        document.body.className = 'lang-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.documentElement.lang = lang;
+    }
+    </script>
+</body>
+
+</html>
