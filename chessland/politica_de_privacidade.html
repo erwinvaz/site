@@ -1,239 +1,535 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidade - Chess Land</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Privacidade | Privacy Policy — Chess Land</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    :root {
+        --bg: #f7f4ef;
+        --surface: #ffffff;
+        --ink: #1a1815;
+        --muted: #6b6460;
+        --accent: #b8860b;
+        --accent-light: #fdf8e1;
+        --border: #e2ddd8;
+        --radius: 12px;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><defs><pattern id="wood" x="0" y="0" width="400" height="400" patternUnits="userSpaceOnUse"><rect fill="%23654321" width="400" height="400"/><path d="M0 0 Q100 50 200 0 T400 0" fill="%23543210" opacity="0.3"/><path d="M0 100 Q100 150 200 100 T400 100" fill="%23765432" opacity="0.2"/><path d="M0 200 Q100 250 200 200 T400 200" fill="%23543210" opacity="0.3"/><path d="M0 300 Q100 350 200 300 T400 300" fill="%23765432" opacity="0.2"/></pattern></defs><rect width="400" height="400" fill="url(%23wood)"/></svg>');
-            background-color: #654321;
-            background-blend-mode: multiply;
-            color: #f5e6d3;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.75);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(139, 90, 43, 0.3);
-        }
+    body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        min-height: 100vh;
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid rgba(245, 230, 211, 0.2);
-        }
+    /* ── HEADER ── */
+    header {
+        background: var(--ink);
+        color: #fff;
+        padding: 28px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
 
-        .chess-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
+    .brand {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.6rem;
+        letter-spacing: -0.5px;
+    }
 
-        h1 {
-            color: #ffd700;
-            font-size: 28px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+    .brand span { color: var(--accent); }
 
-        .last-updated {
-            color: #d4af37;
-            font-size: 14px;
-            font-style: italic;
-        }
+    /* ── LANG TOGGLE ── */
+    .lang-toggle { display: flex; gap: 6px; }
 
-        .summary {
-            background: rgba(212, 175, 55, 0.15);
-            border-left: 4px solid #d4af37;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
+    .lang-btn {
+        background: transparent;
+        border: 1.5px solid rgba(255,255,255,0.35);
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 99px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
 
-        .summary strong {
-            color: #ffd700;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
+    .lang-btn:hover, .lang-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+    }
 
-        h2 {
-            color: #ffd700;
-            font-size: 22px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(245, 230, 211, 0.2);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
+    /* ── HERO ── */
+    .hero {
+        background: var(--accent);
+        color: #fff;
+        padding: 56px 40px 48px;
+        position: relative;
+        overflow: hidden;
+    }
 
-        p {
-            line-height: 1.8;
-            margin-bottom: 15px;
-            color: #f5e6d3;
-            text-align: justify;
-        }
+    .hero::after {
+        content: '';
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.06);
+    }
 
-        ul {
-            margin: 15px 0 15px 30px;
-            line-height: 1.8;
-        }
+    .hero-eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.75;
+        margin-bottom: 12px;
+    }
 
-        li {
-            margin-bottom: 8px;
-            color: #f5e6d3;
-        }
+    .hero h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 16px;
+    }
 
-        strong {
-            color: #d4af37;
-            font-weight: 600;
-        }
+    .hero-date { font-size: 0.85rem; opacity: 0.8; }
 
-        .contact-link {
-            color: #ffd700;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
+    /* ── LAYOUT ── */
+    .container {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 56px 24px 80px;
+    }
 
-        .contact-link:hover {
-            color: #ffed4e;
-            text-decoration: underline;
-        }
+    /* ── SECTIONS ── */
+    .section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 36px 40px;
+        margin-bottom: 24px;
+        transition: box-shadow 0.2s;
+    }
 
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid rgba(245, 230, 211, 0.2);
-            text-align: center;
-            color: #d4af37;
-            font-style: italic;
-        }
+    .section:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
+    .section-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-size: 1.2rem;
+    }
 
-            h1 {
-                font-size: 24px;
-            }
+    .section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.35rem;
+        margin-bottom: 14px;
+        color: var(--ink);
+    }
 
-            h2 {
-                font-size: 20px;
-            }
+    .section p {
+        color: var(--muted);
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+    }
 
-            body {
-                padding: 10px;
-            }
-        }
+    .section p:last-child { margin-bottom: 0; }
+
+    .section ul {
+        margin: 8px 0 12px 20px;
+        color: var(--muted);
+        font-size: 0.95rem;
+    }
+
+    .section ul li { margin-bottom: 6px; }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+        background: var(--accent-light);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        color: var(--ink);
+    }
+
+    /* ── BADGES ── */
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .badge {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 99px;
+        padding: 5px 14px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--ink);
+    }
+
+    /* ── CONTACT ── */
+    .contact-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+        text-align: center;
+        padding: 32px 24px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+    }
+
+    /* ── LANGUAGE SWITCHING ── */
+    [data-lang] { display: none; }
+    .lang-pt [data-lang="pt"] { display: block; }
+    .lang-en [data-lang="en"] { display: block; }
+
+    span[data-lang] { display: none; }
+    .lang-pt span[data-lang="pt"] { display: inline; }
+    .lang-en span[data-lang="en"] { display: inline; }
+
+    @media (max-width: 600px) {
+        header { padding: 20px; }
+        .hero { padding: 40px 20px 36px; }
+        .section { padding: 24px 20px; }
+    }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="chess-icon">♔</div>
-            <h1>Política de Privacidade</h1>
-            <p class="last-updated">Última atualização: 20 de Janeiro de 2026</p>
+
+<body class="lang-pt">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">♟️ <span>Chess</span> Land</div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+            <button class="lang-btn" onclick="setLang('en', this)">EN</button>
         </div>
+    </header>
 
-        <div class="summary">
-            <strong>Resumo:</strong>
-            Este aplicativo de xadrez não exige cadastro, não realiza login e não coleta dados pessoais dos usuários.
-        </div>
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-eyebrow" data-lang="pt">Chess Land</div>
+        <div class="hero-eyebrow" data-lang="en">Chess Land</div>
 
-        <h2>1. Informações Coletadas</h2>
-        <p>
-            Nosso aplicativo <strong>não coleta informações pessoais</strong> como nome, e-mail, telefone ou dados de
-            identificação.
-        </p>
-        <p>
-            Todas as partidas são registradas de forma <strong>anônima</strong>, sem qualquer vínculo com a identidade do
-            usuário.
-        </p>
+        <h1 data-lang="pt">Política de<br>Privacidade</h1>
+        <h1 data-lang="en">Privacy<br>Policy</h1>
 
-        <h2>2. Dados de Jogo (Anônimos)</h2>
-        <p>
-            Para funcionamento do ranking e estatísticas, o aplicativo pode armazenar dados relacionados às partidas,
-            como:
-        </p>
-        <ul>
-            <li>Resultado da partida</li>
-            <li>Movimentos do jogo</li>
-            <li>Data e duração da partida</li>
-        </ul>
-        <p>
-            Esses dados são armazenados de forma <strong>anônima</strong> utilizando a plataforma Supabase e não permitem a
-            identificação do jogador.
-        </p>
-
-        <h2>3. Uso da Internet</h2>
-        <p>
-            O aplicativo requer acesso à internet para:
-        </p>
-        <ul>
-            <li>Salvar partidas anônimas</li>
-            <li>Carregar rankings globais</li>
-            <li>Sincronizar dados de jogo</li>
-        </ul>
-
-        <h2>4. Compartilhamento de Dados</h2>
-        <p>
-            Nenhuma informação é compartilhada com terceiros para fins comerciais, publicitários ou de rastreamento.
-        </p>
-
-        <h2>5. Cookies</h2>
-        <p>
-            Este aplicativo <strong>não utiliza cookies</strong> nem tecnologias semelhantes de rastreamento.
-        </p>
-
-        <h2>6. Crianças</h2>
-        <p>
-            O aplicativo não é direcionado especificamente a crianças e não coleta intencionalmente dados pessoais de
-            menores.
-        </p>
-
-        <h2>7. Segurança</h2>
-        <p>
-            Utilizamos boas práticas de segurança para proteger os dados anônimos armazenados, incluindo conexões seguras e
-            infraestrutura confiável.
-        </p>
-
-        <h2>8. Custos</h2>
-        <p>
-            O aplicativo é disponibilizado gratuitamente, sem compras obrigatórias.
-        </p>
-
-        <h2>9. Alterações nesta Política</h2>
-        <p>
-            Caso esta Política de Privacidade seja alterada, a versão atualizada será publicada nesta página.
-        </p>
-
-        <h2>10. Contato</h2>
-        <p>
-            Caso tenha dúvidas sobre esta Política de Privacidade, entre em contato através do site:
-            <br><br>
-            <a href="https://www.talento.dev.br" class="contact-link" target="_blank">https://www.talento.dev.br</a>
-        </p>
-
-        <div class="footer">
-            Esta Política de Privacidade foi atualizada pela última vez em 20 de Janeiro de 2026.
-        </div>
+        <div class="hero-date" data-lang="pt">Última atualização: 01 de Março de 2026</div>
+        <div class="hero-date" data-lang="en">Last updated: March 01, 2026</div>
     </div>
+
+    <!-- MAIN -->
+    <div class="container">
+
+        <!-- HIGHLIGHT -->
+        <div class="highlight">
+            <span data-lang="pt">♟️ O Chess Land respeita a sua privacidade. Coletamos apenas o mínimo necessário para o funcionamento do jogo online e suporte ao usuário.</span>
+            <span data-lang="en">♟️ Chess Land respects your privacy. We collect only the minimum necessary for online gameplay and user support.</span>
+        </div>
+
+        <!-- 1. INFORMAÇÕES COLETADAS -->
+        <div class="section">
+            <div class="section-icon">📋</div>
+            <h2 data-lang="pt">1. Informações Coletadas</h2>
+            <h2 data-lang="en">1. Information Collected</h2>
+
+            <p data-lang="pt">O Chess Land oferece duas formas de uso: <strong>anônimo</strong> (sem cadastro) e <strong>autenticado</strong> (via login com Google). As informações coletadas variam conforme a opção escolhida.</p>
+            <p data-lang="en">Chess Land offers two modes of use: <strong>anonymous</strong> (no registration) and <strong>authenticated</strong> (via Google login). The information collected varies depending on the chosen option.</p>
+
+            <p data-lang="pt"><strong>Modo anônimo:</strong> Nenhuma informação pessoal é coletada. As partidas são registradas de forma anônima, sem vínculo com sua identidade.</p>
+            <p data-lang="en"><strong>Anonymous mode:</strong> No personal information is collected. Matches are recorded anonymously, with no link to your identity.</p>
+
+            <p data-lang="pt"><strong>Login com Google:</strong> Ao optar pelo login com Google, coletamos as seguintes informações fornecidas pelo Google:</p>
+            <p data-lang="en"><strong>Google login:</strong> When you choose to sign in with Google, we collect the following information provided by Google:</p>
+
+            <ul data-lang="pt">
+                <li>Nome de exibição</li>
+                <li>Endereço de e-mail</li>
+                <li>Foto de perfil (avatar)</li>
+                <li>Identificador único do Google (para autenticação)</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Display name</li>
+                <li>Email address</li>
+                <li>Profile photo (avatar)</li>
+                <li>Google unique identifier (for authentication)</li>
+            </ul>
+
+            <p data-lang="pt">Essas informações são utilizadas exclusivamente para criar e identificar seu perfil dentro do app.</p>
+            <p data-lang="en">This information is used exclusively to create and identify your profile within the app.</p>
+        </div>
+
+        <!-- 2. DADOS DE JOGO -->
+        <div class="section">
+            <div class="section-icon">♟️</div>
+            <h2 data-lang="pt">2. Dados de Jogo</h2>
+            <h2 data-lang="en">2. Game Data</h2>
+
+            <p data-lang="pt">Para o funcionamento do ranking, histórico e estatísticas, o aplicativo armazena dados relacionados às partidas, como:</p>
+            <p data-lang="en">To support rankings, history, and statistics, the app stores match-related data, such as:</p>
+
+            <ul data-lang="pt">
+                <li>Resultado da partida (vitória, derrota, empate)</li>
+                <li>Movimentos registrados em notação PGN</li>
+                <li>Tipo e tempo de controle da partida</li>
+                <li>Data e duração da partida</li>
+                <li>Pontuação ELO atualizada após cada partida</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Match result (win, loss, draw)</li>
+                <li>Moves recorded in PGN notation</li>
+                <li>Game type and time control</li>
+                <li>Date and duration of the match</li>
+                <li>ELO rating updated after each match</li>
+            </ul>
+
+            <p data-lang="pt">Partidas disputadas por usuários anônimos são armazenadas sem qualquer identificação pessoal e não afetam rankings oficiais.</p>
+            <p data-lang="en">Matches played by anonymous users are stored without any personal identification and do not affect official rankings.</p>
+        </div>
+
+        <!-- 3. MÓDULO ONLINE E PRESENÇA -->
+        <div class="section">
+            <div class="section-icon">🌐</div>
+            <h2 data-lang="pt">3. Módulo Online e Presença</h2>
+            <h2 data-lang="en">3. Online Module and Presence</h2>
+
+            <p data-lang="pt">O Chess Land possui um módulo de jogo online em tempo real. Para viabilizar o matchmaking e a lista de jogadores disponíveis, o aplicativo mantém temporariamente as seguintes informações enquanto você está com o app aberto:</p>
+            <p data-lang="en">Chess Land features a real-time online game module. To enable matchmaking and the list of available players, the app temporarily maintains the following information while the app is open:</p>
+
+            <ul data-lang="pt">
+                <li>Status de presença (online / jogando)</li>
+                <li>Nome de usuário e avatar (exibidos para outros jogadores)</li>
+                <li>Preferências de jogo selecionadas (tipo e tempo)</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Presence status (online / playing)</li>
+                <li>Username and avatar (displayed to other players)</li>
+                <li>Selected game preferences (type and time)</li>
+            </ul>
+
+            <p data-lang="pt">Esses dados de presença são <strong>temporários</strong> e removidos automaticamente assim que você fecha o aplicativo. Eles não são armazenados permanentemente em nosso banco de dados.</p>
+            <p data-lang="en">This presence data is <strong>temporary</strong> and automatically removed when you close the app. It is not permanently stored in our database.</p>
+        </div>
+
+        <!-- 4. SUPORTE -->
+        <div class="section">
+            <div class="section-icon">🎧</div>
+            <h2 data-lang="pt">4. Suporte ao Usuário</h2>
+            <h2 data-lang="en">4. User Support</h2>
+
+            <p data-lang="pt">O Chess Land oferece um canal de suporte dentro do próprio app. Ao abrir um ticket de suporte, as seguintes informações são coletadas:</p>
+            <p data-lang="en">Chess Land offers a support channel within the app itself. When you open a support ticket, the following information is collected:</p>
+
+            <ul data-lang="pt">
+                <li>Mensagem descrevendo o problema ou dúvida</li>
+                <li>Identificador do usuário (anônimo ou autenticado)</li>
+                <li>Data e hora do envio</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Message describing the issue or question</li>
+                <li>User identifier (anonymous or authenticated)</li>
+                <li>Date and time of submission</li>
+            </ul>
+
+            <p data-lang="pt">Essas informações são utilizadas <strong>exclusivamente</strong> para responder ao seu chamado e melhorar a qualidade do serviço. Não são compartilhadas com terceiros.</p>
+            <p data-lang="en">This information is used <strong>exclusively</strong> to respond to your request and improve service quality. It is not shared with third parties.</p>
+        </div>
+
+        <!-- 5. USO DA INTERNET -->
+        <div class="section">
+            <div class="section-icon">📡</div>
+            <h2 data-lang="pt">5. Uso da Internet</h2>
+            <h2 data-lang="en">5. Internet Usage</h2>
+
+            <p data-lang="pt">O aplicativo requer acesso à internet para:</p>
+            <p data-lang="en">The application requires internet access to:</p>
+
+            <ul data-lang="pt">
+                <li>Autenticação via Google</li>
+                <li>Partidas online em tempo real</li>
+                <li>Carregar e atualizar rankings globais</li>
+                <li>Sincronizar histórico e estatísticas</li>
+                <li>Enviar e receber tickets de suporte</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Google authentication</li>
+                <li>Real-time online matches</li>
+                <li>Loading and updating global rankings</li>
+                <li>Syncing history and statistics</li>
+                <li>Sending and receiving support tickets</li>
+            </ul>
+        </div>
+
+        <!-- 6. PERMISSÕES -->
+        <div class="section">
+            <div class="section-icon">🔐</div>
+            <h2 data-lang="pt">6. Permissões do Aplicativo</h2>
+            <h2 data-lang="en">6. App Permissions</h2>
+
+            <p data-lang="pt">O Chess Land solicita apenas as seguintes permissões:</p>
+            <p data-lang="en">Chess Land requests only the following permissions:</p>
+
+            <div class="badges">
+                <span class="badge">🌐 Internet</span>
+                <span class="badge">🔑 <span data-lang="pt">Login Google</span><span data-lang="en">Google Login</span></span>
+            </div>
+
+            <p data-lang="pt" style="margin-top:16px"><strong>Internet:</strong> Necessária para todas as funcionalidades online, incluindo partidas, rankings e suporte.</p>
+            <p data-lang="en" style="margin-top:16px"><strong>Internet:</strong> Required for all online features, including matches, rankings, and support.</p>
+
+            <p data-lang="pt"><strong>Login com Google:</strong> Opcional. Utilizado para criar um perfil persistente com histórico, ranking e personalização. Pode ser ignorado — o app funciona anonimamente sem esta permissão.</p>
+            <p data-lang="en"><strong>Google Login:</strong> Optional. Used to create a persistent profile with history, rankings, and customization. It can be skipped — the app works anonymously without this permission.</p>
+        </div>
+
+        <!-- 7. COMPARTILHAMENTO -->
+        <div class="section">
+            <div class="section-icon">🤝</div>
+            <h2 data-lang="pt">7. Compartilhamento de Dados</h2>
+            <h2 data-lang="en">7. Data Sharing</h2>
+
+            <p data-lang="pt">O Chess Land utiliza a plataforma <strong>Supabase</strong> para armazenamento seguro de dados e autenticação. O Supabase atua como processador de dados e está sujeito à sua própria política de privacidade.</p>
+            <p data-lang="en">Chess Land uses the <strong>Supabase</strong> platform for secure data storage and authentication. Supabase acts as a data processor and is subject to its own privacy policy.</p>
+
+            <p data-lang="pt">A autenticação com Google é realizada via <strong>Google OAuth</strong>. Ao utilizar este recurso, você também está sujeito à Política de Privacidade do Google.</p>
+            <p data-lang="en">Google authentication is handled via <strong>Google OAuth</strong>. By using this feature, you are also subject to Google's Privacy Policy.</p>
+
+            <p data-lang="pt">Nenhuma informação é vendida, alugada ou compartilhada com terceiros para fins comerciais ou publicitários.</p>
+            <p data-lang="en">No information is sold, rented, or shared with third parties for commercial or advertising purposes.</p>
+        </div>
+
+        <!-- 8. COOKIES -->
+        <div class="section">
+            <div class="section-icon">🍪</div>
+            <h2 data-lang="pt">8. Cookies</h2>
+            <h2 data-lang="en">8. Cookies</h2>
+
+            <p data-lang="pt">O aplicativo não utiliza cookies nem tecnologias semelhantes de rastreamento.</p>
+            <p data-lang="en">The application does not use cookies or similar tracking technologies.</p>
+        </div>
+
+        <!-- 9. CRIANÇAS -->
+        <div class="section">
+            <div class="section-icon">👶</div>
+            <h2 data-lang="pt">9. Crianças</h2>
+            <h2 data-lang="en">9. Children</h2>
+
+            <p data-lang="pt">O Chess Land não é direcionado especificamente a crianças menores de 13 anos. Não coletamos intencionalmente informações pessoais de menores. Caso identifique que uma criança forneceu dados pessoais sem consentimento dos responsáveis, entre em contato para que possamos removê-los.</p>
+            <p data-lang="en">Chess Land is not specifically directed at children under 13. We do not intentionally collect personal information from minors. If you believe a child has provided personal data without parental consent, please contact us so we can remove it.</p>
+        </div>
+
+        <!-- 10. SEGURANÇA -->
+        <div class="section">
+            <div class="section-icon">🛡️</div>
+            <h2 data-lang="pt">10. Segurança</h2>
+            <h2 data-lang="en">10. Security</h2>
+
+            <p data-lang="pt">Adotamos boas práticas de segurança para proteger os dados armazenados, incluindo conexões criptografadas (HTTPS/TLS), autenticação segura via OAuth e infraestrutura confiável fornecida pelo Supabase.</p>
+            <p data-lang="en">We adopt best security practices to protect stored data, including encrypted connections (HTTPS/TLS), secure authentication via OAuth, and reliable infrastructure provided by Supabase.</p>
+        </div>
+
+        <!-- 11. SEUS DIREITOS -->
+        <div class="section">
+            <div class="section-icon">⚖️</div>
+            <h2 data-lang="pt">11. Seus Direitos</h2>
+            <h2 data-lang="en">11. Your Rights</h2>
+
+            <p data-lang="pt">Se você utiliza o app com login Google, você tem o direito de:</p>
+            <p data-lang="en">If you use the app with Google login, you have the right to:</p>
+
+            <ul data-lang="pt">
+                <li>Solicitar a exclusão da sua conta e dados associados</li>
+                <li>Solicitar acesso às informações armazenadas sobre você</li>
+                <li>Revogar o acesso do app à sua conta Google a qualquer momento</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Request deletion of your account and associated data</li>
+                <li>Request access to the information stored about you</li>
+                <li>Revoke the app's access to your Google account at any time</li>
+            </ul>
+
+            <p data-lang="pt">Para exercer esses direitos, entre em contato através do suporte no app ou pelo site abaixo.</p>
+            <p data-lang="en">To exercise these rights, contact us through the in-app support or via the website below.</p>
+        </div>
+
+        <!-- 12. ALTERAÇÕES -->
+        <div class="section">
+            <div class="section-icon">📝</div>
+            <h2 data-lang="pt">12. Alterações a esta Política</h2>
+            <h2 data-lang="en">12. Changes to This Policy</h2>
+
+            <p data-lang="pt">Caso esta Política de Privacidade seja alterada, a versão atualizada será publicada nesta página com a nova data de vigência.</p>
+            <p data-lang="en">Should this Privacy Policy be modified, the updated version will be published on this page with the new effective date.</p>
+
+            <p data-lang="pt">Você pode imprimir uma cópia pressionando <strong>Ctrl + P</strong> no teclado.</p>
+            <p data-lang="en">You can print a copy by pressing <strong>Ctrl + P</strong> on your keyboard.</p>
+        </div>
+
+        <!-- 13. CONTATO -->
+        <div class="section">
+            <div class="section-icon">✉️</div>
+            <h2 data-lang="pt">13. Contato</h2>
+            <h2 data-lang="en">13. Contact</h2>
+
+            <p data-lang="pt">Caso tenha dúvidas sobre esta Política de Privacidade ou queira exercer seus direitos, entre em contato:</p>
+            <p data-lang="en">If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:</p>
+
+            <p><a href="https://www.talento.dev.br" target="_blank" rel="noopener" class="contact-link">www.talento.dev.br</a></p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <span data-lang="pt">© 2026 Chess Land · Última atualização: 01 de Março de 2026</span>
+        <span data-lang="en">© 2026 Chess Land · Last updated: March 01, 2026</span>
+    </footer>
+
+    <script>
+    function setLang(lang, btn) {
+        document.body.className = 'lang-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.documentElement.lang = lang;
+    }
+    </script>
 </body>
 </html>
