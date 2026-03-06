@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkPin – Política de Privacidade</title>
+    <meta name="description" content="Política de Privacidade do ParkPin – Nunca mais perca seu carro no estacionamento.">
+    <meta name="author" content="Talento Dev">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&family=Exo+2:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --purple-dark:  #1A0533;
+            --purple:       #7B2FBE;
+            --purple-light: #9B59B6;
+            --accent:       #E056FD;
+            --gold:         #FFD700;
+            --white:        #F0E6FF;
+            --white60:      rgba(240,230,255,0.6);
+            --white24:      rgba(240,230,255,0.24);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: linear-gradient(135deg, #1A0533 0%, #2D1B69 60%, #7B2FBE 100%);
+            font-family: 'Raleway', sans-serif;
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Animated grid bg ── */
+        .grid-bg {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(224,86,253,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(224,86,253,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridPan 40s linear infinite;
+        }
+        @keyframes gridPan {
+            0%   { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        /* ── Floating pins bg ── */
+        .pin { position: fixed; font-size: 2.5rem; opacity: 0.04;
+               animation: floatPin 20s ease-in-out infinite; pointer-events: none; z-index: 0; }
+        .pin:nth-child(1) { left: 5%;  top: 15%; animation-delay: 0s; }
+        .pin:nth-child(2) { left: 85%; top: 25%; animation-delay: -5s; }
+        .pin:nth-child(3) { left: 20%; top: 70%; animation-delay: -10s; }
+        .pin:nth-child(4) { left: 70%; top: 60%; animation-delay: -15s; }
+        .pin:nth-child(5) { left: 45%; top: 40%; animation-delay: -8s; }
+        @keyframes floatPin {
+            0%,100% { transform: translateY(0) rotate(-5deg); opacity: 0.04; }
+            50%     { transform: translateY(-40px) rotate(5deg); opacity: 0.08; }
+        }
+
+        /* ── Header ── */
+        header {
+            position: relative; z-index: 10;
+            background: linear-gradient(180deg, rgba(10,2,20,0.97) 0%, rgba(26,5,51,0.93) 100%);
+            border-bottom: 2px solid var(--accent);
+            box-shadow: 0 4px 30px rgba(224,86,253,0.2);
+            padding: 1.4rem 1.5rem;
+        }
+        .header-inner {
+            max-width: 860px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-icon { font-size: 1.8rem; color: var(--accent); }
+        .brand-name {
+            font-family: 'Exo 2', sans-serif; font-weight: 800;
+            font-size: 1.5rem; color: var(--white);
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Language toggle ── */
+        .lang-toggle {
+            display: flex; gap: 6px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid var(--white24);
+            border-radius: 50px; padding: 4px;
+        }
+        .lang-btn {
+            padding: 6px 18px; border: none; border-radius: 50px;
+            font-family: 'Exo 2', sans-serif; font-weight: 700;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.25s;
+            background: transparent; color: var(--white60);
+        }
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--purple), var(--accent));
+            color: #fff; box-shadow: 0 2px 12px rgba(224,86,253,0.4);
+        }
+        .lang-btn:not(.active):hover { background: rgba(255,255,255,0.1); color: var(--white); }
+
+        /* ── Main ── */
+        main {
+            position: relative; z-index: 5;
+            max-width: 860px; margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        /* ── Hero ── */
+        .hero { text-align: center; margin-bottom: 3rem; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(224,86,253,0.12); border: 1px solid rgba(224,86,253,0.3);
+            border-radius: 50px; padding: 6px 18px; margin-bottom: 1.2rem;
+            font-size: 0.85rem; color: var(--accent); font-weight: 600;
+        }
+        .hero h1 {
+            font-family: 'Exo 2', sans-serif; font-weight: 900;
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            background: linear-gradient(135deg, #fff 30%, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; line-height: 1.2; margin-bottom: 0.8rem;
+        }
+        .hero-sub { color: var(--white60); font-size: 1rem; line-height: 1.6; }
+        .hero-date {
+            display: inline-block; margin-top: 0.8rem;
+            font-size: 0.82rem; color: var(--white24);
+        }
+
+        /* ── Cards ── */
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(224,86,253,0.18);
+            border-radius: 20px; padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            border-color: rgba(224,86,253,0.4);
+            box-shadow: 0 4px 30px rgba(224,86,253,0.1);
+        }
+        .card-title {
+            display: flex; align-items: center; gap: 12px;
+            font-family: 'Exo 2', sans-serif; font-weight: 700;
+            font-size: 1.1rem; color: var(--accent); margin-bottom: 1rem;
+        }
+        .card-title i { font-size: 1.2rem; }
+        .card p { color: var(--white60); line-height: 1.75; margin-bottom: 0.8rem; font-size: 0.97rem; }
+        .card p:last-child { margin-bottom: 0; }
+        .card ul { padding-left: 1.4rem; }
+        .card ul li {
+            color: var(--white60); line-height: 1.75; margin-bottom: 0.5rem;
+            font-size: 0.97rem; list-style: none; position: relative; padding-left: 1rem;
+        }
+        .card ul li::before {
+            content: '›'; position: absolute; left: 0;
+            color: var(--accent); font-weight: 700;
+        }
+
+        /* ── Permission chips ── */
+        .perm-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem; }
+        .perm-chip {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(123,47,190,0.2); border: 1px solid rgba(123,47,190,0.4);
+            border-radius: 50px; padding: 6px 14px;
+            font-size: 0.85rem; color: var(--white);
+        }
+        .perm-chip i { color: var(--accent); font-size: 0.9rem; }
+
+        /* ── Contact box ── */
+        .contact-box {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(123,47,190,0.2), rgba(224,86,253,0.1));
+            border: 1px solid rgba(224,86,253,0.3);
+            border-radius: 20px; padding: 2rem;
+            margin-top: 2rem;
+        }
+        .contact-box h3 { font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--white); }
+        .contact-box p { color: var(--white60); font-size: 0.95rem; margin-bottom: 1rem; }
+        .contact-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, var(--purple), var(--accent));
+            color: #fff; text-decoration: none; font-weight: 700;
+            padding: 10px 24px; border-radius: 50px; font-size: 0.95rem;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .contact-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* ── Footer ── */
+        footer {
+            position: relative; z-index: 5;
+            text-align: center; padding: 1.5rem;
+            border-top: 1px solid var(--white24);
+            color: var(--white24); font-size: 0.82rem;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+
+        /* ── Lang sections ── */
+        [data-lang] { display: none; }
+        [data-lang].active { display: block; }
+
+        @media (max-width: 600px) {
+            main { padding: 2rem 1rem 4rem; }
+            .card { padding: 1.4rem; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="grid-bg"></div>
+<div class="pin">📍</div>
+<div class="pin">🚗</div>
+<div class="pin">📍</div>
+<div class="pin">🚗</div>
+<div class="pin">📍</div>
+
+<!-- Header -->
+<header>
+    <div class="header-inner">
+        <a class="brand" href="https://www.talento.dev.br">
+            <span class="brand-icon"><i class="fas fa-parking"></i></span>
+            <span class="brand-name">ParkPin</span>
+        </a>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('pt')">🇧🇷 PT</button>
+            <button class="lang-btn" onclick="setLang('en')">🇺🇸 EN</button>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════ PORTUGUÊS -->
+<div data-lang="pt" class="active">
+<main>
+    <div class="hero">
+        <div class="hero-badge"><i class="fas fa-shield-halved"></i> Privacidade & Segurança</div>
+        <h1>Política de Privacidade</h1>
+        <p class="hero-sub">Saiba como o ParkPin coleta, usa e protege suas informações.</p>
+        <span class="hero-date">Última atualização: junho de 2025</span>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-circle-info"></i> Sobre este documento</div>
+        <p>Esta Política de Privacidade descreve as práticas do aplicativo <strong>ParkPin</strong> ("nós", "nosso"), desenvolvido por <strong>Talento Dev</strong>, com relação à coleta e uso de informações dos usuários.</p>
+        <p>Ao utilizar o ParkPin, você concorda com as práticas descritas aqui. Se tiver dúvidas, entre em contato pelo e-mail abaixo.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-database"></i> Informações que coletamos</div>
+        <p>O ParkPin <strong>não coleta nem armazena dados pessoais</strong> em servidores próprios. Todas as informações salvas (locais, coordenadas) ficam armazenadas <strong>exclusivamente no dispositivo do usuário</strong>.</p>
+        <p>As seguintes informações podem ser processadas por serviços de terceiros integrados ao app:</p>
+        <ul>
+            <li><strong>Localização (GPS):</strong> usada para exibir sua posição no mapa, salvar o local do carro e guiar você de volta até ele. Os dados de localização <strong>não são enviados a nossos servidores</strong>.</li>
+            <li><strong>Dados de anúncios:</strong> o Google AdMob pode coletar informações anônimas para exibir anúncios relevantes (somente para usuários não-premium).</li>
+            <li><strong>Dados de compra:</strong> o Google Play Billing processa pagamentos de assinatura. Não temos acesso a dados financeiros.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-lock"></i> Permissões utilizadas</div>
+        <p>O ParkPin solicita as seguintes permissões do dispositivo:</p>
+        <div class="perm-grid">
+            <div class="perm-chip"><i class="fas fa-location-dot"></i> Localização precisa</div>
+            <div class="perm-chip"><i class="fas fa-location-crosshairs"></i> Localização aproximada</div>
+            <div class="perm-chip"><i class="fas fa-wifi"></i> Acesso à internet</div>
+            <div class="perm-chip"><i class="fas fa-network-wired"></i> Estado da rede</div>
+            <div class="perm-chip"><i class="fas fa-rectangle-ad"></i> ID de publicidade</div>
+        </div>
+        <p style="margin-top:1rem;">As permissões de localização são necessárias para o funcionamento principal do app. A permissão de ID de publicidade é usada pelo Google AdMob.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-handshake"></i> Serviços de terceiros</div>
+        <p>O ParkPin utiliza os seguintes serviços de terceiros, cada um com sua própria política de privacidade:</p>
+        <ul>
+            <li><strong>Google AdMob</strong> – exibição de anúncios. <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--accent)">Ver política</a></li>
+            <li><strong>Google Play Billing</strong> – processamento de assinaturas. <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--accent)">Ver política</a></li>
+            <li><strong>OpenStreetMap</strong> – tiles de mapa. <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" style="color:var(--accent)">Ver política</a></li>
+            <li><strong>Geolocator (device GPS)</strong> – acesso ao GPS do dispositivo via API do sistema.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-child"></i> Crianças</div>
+        <p>O ParkPin não é destinado a crianças menores de idade e não coleta intencionalmente informações de menores. Caso identifique uso por menor de idade, entre em contato conosco.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-rotate"></i> Alterações nesta política</div>
+        <p>Podemos atualizar esta Política de Privacidade periodicamente. Notificaremos sobre mudanças significativas por meio de atualização na Play Store. Recomendamos revisar esta página periodicamente.</p>
+    </div>
+
+    <div class="contact-box">
+        <h3>Dúvidas ou solicitações?</h3>
+        <p>Entre em contato com nossa equipe — respondemos em até 48 horas.</p>
+        <a class="contact-btn" href="mailto:talento.dev.br@gmail.com">
+            <i class="fas fa-envelope"></i> talento.dev.br@gmail.com
+        </a>
+    </div>
+</main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ ENGLISH -->
+<div data-lang="en">
+<main>
+    <div class="hero">
+        <div class="hero-badge"><i class="fas fa-shield-halved"></i> Privacy & Security</div>
+        <h1>Privacy Policy</h1>
+        <p class="hero-sub">Learn how ParkPin collects, uses, and protects your information.</p>
+        <span class="hero-date">Last updated: June 2025</span>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-circle-info"></i> About this document</div>
+        <p>This Privacy Policy describes the practices of the <strong>ParkPin</strong> app ("we", "our"), developed by <strong>Talento Dev</strong>, regarding the collection and use of user information.</p>
+        <p>By using ParkPin, you agree to the practices described here. If you have questions, please contact us at the email below.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-database"></i> Information we collect</div>
+        <p>ParkPin <strong>does not collect or store personal data</strong> on our own servers. All saved information (locations, coordinates) is stored <strong>exclusively on the user's device</strong>.</p>
+        <p>The following information may be processed by third-party services integrated into the app:</p>
+        <ul>
+            <li><strong>Location (GPS):</strong> used to display your position on the map, save your car's location, and guide you back to it. Location data is <strong>not sent to our servers</strong>.</li>
+            <li><strong>Ad data:</strong> Google AdMob may collect anonymous information to display relevant ads (non-premium users only).</li>
+            <li><strong>Purchase data:</strong> Google Play Billing processes subscription payments. We have no access to financial data.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-lock"></i> Permissions used</div>
+        <p>ParkPin requests the following device permissions:</p>
+        <div class="perm-grid">
+            <div class="perm-chip"><i class="fas fa-location-dot"></i> Fine location</div>
+            <div class="perm-chip"><i class="fas fa-location-crosshairs"></i> Coarse location</div>
+            <div class="perm-chip"><i class="fas fa-wifi"></i> Internet access</div>
+            <div class="perm-chip"><i class="fas fa-network-wired"></i> Network state</div>
+            <div class="perm-chip"><i class="fas fa-rectangle-ad"></i> Advertising ID</div>
+        </div>
+        <p style="margin-top:1rem;">Location permissions are required for the app's core functionality. The Advertising ID permission is used by Google AdMob.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-handshake"></i> Third-party services</div>
+        <p>ParkPin uses the following third-party services, each with their own privacy policy:</p>
+        <ul>
+            <li><strong>Google AdMob</strong> – ad display. <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--accent)">View policy</a></li>
+            <li><strong>Google Play Billing</strong> – subscription processing. <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--accent)">View policy</a></li>
+            <li><strong>OpenStreetMap</strong> – map tiles. <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" style="color:var(--accent)">View policy</a></li>
+            <li><strong>Geolocator (device GPS)</strong> – device GPS access via system API.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-child"></i> Children</div>
+        <p>ParkPin is not directed at children under 13 years of age and does not knowingly collect information from minors. If you become aware of any such use, please contact us.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-rotate"></i> Changes to this policy</div>
+        <p>We may update this Privacy Policy from time to time. We will notify you of significant changes through Play Store update notes. We recommend reviewing this page periodically.</p>
+    </div>
+
+    <div class="contact-box">
+        <h3>Questions or requests?</h3>
+        <p>Contact our team — we respond within 48 hours.</p>
+        <a class="contact-btn" href="mailto:talento.dev.br@gmail.com">
+            <i class="fas fa-envelope"></i> talento.dev.br@gmail.com
+        </a>
+    </div>
+</main>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>© 2025 <a href="https://www.talento.dev.br">Talento Dev</a> · ParkPin · <a href="https://play.google.com/store/apps/details?id=com.talentodev.geotrack">Google Play</a></p>
+</footer>
+
+<script>
+    function setLang(lang) {
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            el.classList.toggle('active', el.dataset.lang === lang);
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent.toLowerCase().includes(lang));
+        });
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    }
+
+    // Auto-detecta idioma do navegador
+    const browserLang = navigator.language || navigator.userLanguage;
+    if (!browserLang.startsWith('pt')) setLang('en');
+</script>
+</body>
+</html>
