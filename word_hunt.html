@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ98GYTZJF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GZ98GYTZJF');
+    </script>
+    
+    <title>Word Hunt - Caça Palavras | Talento Dev</title>
+    
+    <meta name="description" content="Word Hunt - Caça Palavras com UI/UX revolucionária. Encontre palavras escondidas, desafie-se e expanda seu vocabulário!">
+    <meta name="keywords" content="word hunt, caça palavras, app palavras, vocabulário, talento dev, word search">
+    <meta name="author" content="Erwin Vaz">
+    <meta property="og:title" content="Word Hunt - Caça Palavras">
+    <meta property="og:description" content="Expanda seu vocabulário com UI/UX revolucionária!">
+    <meta property="og:url" content="https://www.talento.dev.br/word_hunt.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.talento.dev.br/site/ico.png">
+    
+    <link href="assets/img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Raleway:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="canonical" href="https://www.talento.dev.br/word_hunt.html" />
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        :root {
+            --ocean-deep:   #0A1628;
+            --ocean-mid:    #0D2545;
+            --ocean-blue:   #1565C0;
+            --sky-blue:     #2196F3;
+            --electric:     #00B4D8;
+            --golden:       #FFD60A;
+            --golden-warm:  #FFA500;
+            --cloud:        #F0F8FF;
+            --shadow:       #050D1A;
+
+            --grad-ocean:   linear-gradient(135deg, #0A1628 0%, #0D2545 50%, #1565C0 100%);
+            --grad-gold:    linear-gradient(135deg, #FFD60A 0%, #FFA500 100%);
+            --grad-electric:linear-gradient(135deg, #00B4D8 0%, #2196F3 100%);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background: var(--grad-ocean);
+            font-family: 'Raleway', sans-serif;
+            overflow-x: hidden;
+            color: var(--cloud);
+        }
+
+        /* ─── Floating Letters Background ─── */
+        .magic-bg {
+            position: fixed; inset: 0;
+            z-index: -1; pointer-events: none;
+            overflow: hidden;
+        }
+        .fl {
+            position: absolute;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 3rem;
+            color: var(--sky-blue);
+            opacity: 0.04;
+            animation: floatUp 25s ease-in-out infinite;
+            pointer-events: none;
+            user-select: none;
+        }
+        .fl:nth-child(1)  { left:5%;   top:10%; font-size:4rem;   animation-delay:0s;   }
+        .fl:nth-child(2)  { left:80%;  top:20%; font-size:3rem;   animation-delay:-4s;  }
+        .fl:nth-child(3)  { left:20%;  top:60%; font-size:5rem;   animation-delay:-9s;  }
+        .fl:nth-child(4)  { left:60%;  top:70%; font-size:3.5rem; animation-delay:-14s; }
+        .fl:nth-child(5)  { left:42%;  top:30%; font-size:4.5rem; animation-delay:-6s;  }
+        .fl:nth-child(6)  { left:90%;  top:50%; font-size:3rem;   animation-delay:-11s; }
+        .fl:nth-child(7)  { left:28%;  top:85%; font-size:4rem;   animation-delay:-2s;  }
+        .fl:nth-child(8)  { left:55%;  top:5%;  font-size:3.5rem; animation-delay:-17s; }
+        @keyframes floatUp {
+            0%,100% { transform: translateY(0)   rotate(-4deg); opacity: 0.04; }
+            50%      { transform: translateY(-50px) rotate(4deg); opacity: 0.08; }
+        }
+
+        /* ─── Animated Grid Background ─── */
+        .grid-bg {
+            position: fixed; inset: 0; z-index: -1;
+            background-image:
+                linear-gradient(rgba(33,150,243,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(33,150,243,0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridPan 40s linear infinite;
+        }
+        @keyframes gridPan {
+            0%   { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        /* ─── Header ─── */
+        .site-header {
+            background: linear-gradient(180deg, rgba(5,13,26,0.98) 0%, rgba(10,22,40,0.95) 100%);
+            border-bottom: 3px solid var(--golden);
+            box-shadow: 0 8px 40px rgba(0,180,216,0.25);
+            padding: 1.5rem 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .site-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(33,150,243,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ─── Navbar ─── */
+        .nav-bar {
+            display: flex; justify-content: center;
+            gap: 3rem; list-style: none;
+            margin: 0; padding: 0.5rem 0 1rem;
+            border-bottom: 1px solid rgba(255,214,10,0.2);
+            position: relative; z-index: 3;
+        }
+        .nav-bar a {
+            color: var(--cloud); text-decoration: none;
+            font-family: 'Exo 2', sans-serif; font-weight: 600;
+            font-size: 1rem; letter-spacing: 0.05em;
+            padding: 0.4rem 0; position: relative; transition: color 0.3s;
+        }
+        .nav-bar a::after {
+            content: ''; position: absolute;
+            bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--grad-gold); transition: width 0.3s;
+        }
+        .nav-bar a:hover { color: var(--golden); }
+        .nav-bar a:hover::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid var(--golden);
+            color: var(--golden);
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px; font-size: 1.3rem;
+            cursor: pointer; transition: all 0.3s;
+            position: absolute; top: 1rem; right: 1rem; z-index: 10;
+        }
+        .nav-toggle:hover { background: var(--grad-gold); color: var(--shadow); }
+
+        /* ─── Hero ─── */
+        .hero {
+            position: relative; z-index: 2;
+            text-align: center; padding: 2.5rem 1rem 3rem;
+        }
+
+        /* Interactive word grid demo */
+        .word-grid-demo {
+            display: inline-grid;
+            grid-template-columns: repeat(8, 48px);
+            gap: 3px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 24px rgba(0,180,216,0.4));
+        }
+        .wc {
+            width: 48px; height: 48px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(33,150,243,0.25);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700; font-size: 1.15rem;
+            color: rgba(240,248,255,0.45);
+            transition: all 0.3s;
+        }
+        .wc.hi {
+            background: rgba(0,180,216,0.22);
+            border-color: var(--electric);
+            color: var(--golden);
+            box-shadow: 0 0 12px rgba(0,180,216,0.35);
+            animation: cellBeat 2.2s ease-in-out infinite;
+        }
+        .wc.hi2 {
+            background: rgba(255,214,10,0.15);
+            border-color: var(--golden);
+            color: var(--electric);
+            box-shadow: 0 0 12px rgba(255,214,10,0.3);
+            animation: cellBeat 2.2s ease-in-out infinite reverse;
+        }
+        @keyframes cellBeat {
+            0%,100% { transform: scale(1); }
+            50%      { transform: scale(1.1); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0,180,216,0.15);
+            border: 1px solid rgba(0,180,216,0.4);
+            color: var(--electric);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem; letter-spacing: 0.15em;
+            padding: 0.3rem 1rem; border-radius: 20px;
+            margin-bottom: 1rem; text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 900; line-height: 1.1;
+            color: var(--cloud);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 40px rgba(33,150,243,0.5);
+        }
+        .hero-title .hunt {
+            background: var(--grad-gold);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-title .word {
+            background: var(--grad-electric);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            opacity: 0.85; margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .btn-dl {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--grad-gold);
+            color: var(--shadow);
+            font-family: 'Exo 2', sans-serif; font-weight: 700;
+            font-size: 1.15rem; border: none; border-radius: 40px;
+            text-decoration: none; transition: all 0.35s;
+            box-shadow: 0 8px 30px rgba(255,214,10,0.45);
+        }
+        .btn-dl:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 45px rgba(255,214,10,0.65);
+            color: var(--shadow);
+        }
+
+        /* ─── Section Card ─── */
+        .card-section {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(33,150,243,0.25);
+            border-radius: 24px; padding: 3rem;
+            margin: 2.5rem 0; position: relative; z-index: 2;
+            transition: border-color 0.3s;
+        }
+        .card-section:hover { border-color: rgba(255,214,10,0.4); }
+
+        .sec-title {
+            font-family: 'Exo 2', sans-serif; font-weight: 900;
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            background: var(--grad-gold);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center; margin-bottom: 0.75rem;
+        }
+        .sec-sub {
+            text-align: center; opacity: 0.85;
+            font-size: 1.05rem; margin-bottom: 2rem;
+        }
+
+        /* ─── Video ─── */
+        .video-wrap {
+            position: relative; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 18px;
+            border: 2px solid var(--golden);
+            box-shadow: 0 12px 50px rgba(0,180,216,0.3);
+        }
+        .video-wrap iframe {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            border: none; border-radius: 16px;
+        }
+
+        /* ─── Stats ─── */
+        .stats-wrap {
+            display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 2.5rem;
+        }
+        .stat { text-align: center; }
+        .stat-num {
+            font-family: 'Exo 2', sans-serif; font-weight: 900;
+            font-size: 2.8rem;
+            background: var(--grad-gold);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; line-height: 1;
+        }
+        .stat-lbl { font-size: 0.9rem; opacity: 0.75; margin-top: 0.3rem; }
+
+        /* ─── Features ─── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem; margin-top: 1.5rem;
+        }
+        .feat {
+            background: rgba(33,150,243,0.06);
+            border: 1px solid rgba(33,150,243,0.2);
+            border-radius: 18px; padding: 2rem;
+            text-align: center; transition: all 0.35s;
+            cursor: default;
+        }
+        .feat:hover {
+            background: rgba(0,180,216,0.1);
+            border-color: var(--golden);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0,180,216,0.2);
+        }
+        .feat-icon { font-size: 2.8rem; margin-bottom: 0.8rem; }
+        .feat-name {
+            font-family: 'Exo 2', sans-serif; font-weight: 700;
+            font-size: 1.15rem; color: var(--golden); margin-bottom: 0.6rem;
+        }
+        .feat-desc { font-size: 0.95rem; opacity: 0.85; line-height: 1.6; }
+
+        /* ─── Gallery ─── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem; margin-top: 1.5rem;
+        }
+        .gal-item {
+            position: relative; overflow: hidden;
+            border-radius: 18px; border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            cursor: pointer;
+        }
+        .gal-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--golden);
+            box-shadow: 0 18px 50px rgba(0,180,216,0.35);
+        }
+        .gal-item img { width: 100%; height: auto; display: block; transition: transform 0.5s; }
+        .gal-item:hover img { transform: scale(1.08); }
+
+        .gal-placeholder {
+            width: 100%; aspect-ratio: 9/16;
+            background: linear-gradient(135deg, rgba(33,150,243,0.1), rgba(0,180,216,0.08));
+            border-radius: 16px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            opacity: 0.7; gap: 0.6rem;
+        }
+        .gal-placeholder i { font-size: 2.5rem; color: var(--golden); }
+        .gal-placeholder span { font-family: 'Exo 2', sans-serif; font-weight: 600; }
+
+        .gal-cap {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(5,13,26,0.95), transparent);
+            color: var(--cloud); padding: 1.5rem 1rem 1rem;
+            font-family: 'Exo 2', sans-serif; font-weight: 700;
+            font-size: 1rem; opacity: 0; transition: opacity 0.3s;
+        }
+        .gal-item:hover .gal-cap { opacity: 1; }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(21,101,192,0.2), rgba(0,180,216,0.1));
+            border: 1px solid rgba(0,180,216,0.3);
+        }
+        .cta-section .sec-sub { font-size: 1.2rem; margin-bottom: 2rem; }
+
+        /* ─── Footer ─── */
+        .site-footer {
+            background: linear-gradient(180deg, #050D1A 0%, #0A1628 100%);
+            border-top: 3px solid var(--golden);
+            position: relative; z-index: 2;
+        }
+
+        /* ─── Back to top ─── */
+        .btt {
+            position: fixed; bottom: 28px; right: 28px;
+            background: var(--grad-gold); color: var(--shadow);
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; text-decoration: none;
+            box-shadow: 0 5px 18px rgba(255,214,10,0.4);
+            transition: all 0.3s; z-index: 1000; opacity: 0;
+        }
+        .btt.visible { opacity: 1; }
+        .btt:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(255,214,10,0.6); color: var(--shadow); }
+
+        /* ─── Language Selector ─── */
+        .lang-sel {
+            position: fixed !important; top: 18px !important;
+            right: 18px !important; z-index: 10000 !important;
+        }
+        .lang-btn {
+            background: linear-gradient(135deg, #050D1A, #0D2545);
+            border: 2px solid var(--golden);
+            color: var(--cloud); padding: 0.55rem 1.1rem;
+            border-radius: 22px; cursor: pointer; transition: all 0.3s;
+            font-family: 'Exo 2', sans-serif; font-weight: 600;
+            font-size: 0.85rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 14px rgba(255,214,10,0.3);
+        }
+        .lang-btn:hover { background: var(--grad-gold); color: var(--shadow); transform: translateY(-2px); }
+        .lang-drop {
+            display: none; position: absolute;
+            top: 52px; right: 0;
+            background: rgba(5,13,26,0.97); backdrop-filter: blur(10px);
+            border: 2px solid var(--golden); border-radius: 14px;
+            padding: 0.4rem; min-width: 190px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .lang-opt {
+            display: flex; align-items: center; gap: 0.7rem;
+            padding: 0.7rem 0.9rem; color: var(--cloud);
+            text-decoration: none; border-radius: 8px;
+            transition: all 0.3s; font-size: 0.9rem;
+        }
+        .lang-opt:hover { background: rgba(33,150,243,0.18); color: var(--golden); transform: translateX(4px); }
+        .lang-flag { width: 22px; border-radius: 3px; }
+
+        /* ─── Scroll reveal ─── */
+        .sr { opacity: 0; transform: translateY(28px); transition: all 0.75s ease; }
+        .sr.in { opacity: 1; transform: translateY(0); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-bar {
+                display: none; flex-direction: column;
+                gap: 0.5rem; padding: 1rem;
+                margin-top: 3rem;
+            }
+            .nav-bar.open { display: flex; }
+            .nav-bar a {
+                padding: 0.7rem 1rem;
+                background: rgba(33,150,243,0.08);
+                border-radius: 8px; text-align: center;
+            }
+            .word-grid-demo { grid-template-columns: repeat(8, 36px); }
+            .wc { width: 36px; height: 36px; font-size: 0.9rem; }
+            .card-section { padding: 2rem 1.2rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .lang-btn span { display: none; }
+            .lang-drop { min-width: 175px; }
+            .stats-wrap { gap: 1.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animated backgrounds -->
+    <div class="grid-bg"></div>
+    <div class="magic-bg">
+        <div class="fl">W</div>
+        <div class="fl">H</div>
+        <div class="fl">U</div>
+        <div class="fl">N</div>
+        <div class="fl">T</div>
+        <div class="fl">!</div>
+        <div class="fl">?</div>
+        <div class="fl">#</div>
+    </div>
+
+    <!-- ─── Header ─── -->
+    <header class="site-header">
+        <div class="container position-relative">
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul class="nav-bar" id="navBar">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#footer">Sobre</a></li>
+                </ul>
+            </nav>
+
+            <!-- Hero -->
+            <div class="hero">
+                <!-- Live word grid -->
+                <div class="word-grid-demo" id="wordGrid">
+                    <!-- generated by JS -->
+                </div>
+
+                <div class="hero-badge">🔍 Word Search · Caça Palavras</div>
+                <h1 class="hero-title">
+                    <span class="word">Word</span> <span class="hunt">Hunt</span>
+                </h1>
+                <p class="hero-sub">Encontre palavras ocultas. Treine seu raciocínio.</p>
+                <!-- ⬇️ Substitua o id pelo link real do app na Play Store -->
+                <a href="https://play.google.com/store/apps/details?id=com.talentodev.wordhunt" target="_blank" class="btn-dl">
+                    <i class="fab fa-google-play"></i>
+                    <span>Baixar Agora — Grátis</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ─── Video ─── -->
+    <section id="como-funciona" class="container py-5">
+        <div class="card-section sr">
+            <h2 class="sec-title">🎥 Veja Como Funciona</h2>
+            <p class="sec-sub">Conheça o Word Hunt e descubra como ele vai expandir seu vocabulário de forma divertida</p>
+            <!-- ⬇️ Substitua o ID do YouTube pelo real -->
+            <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/JeQCnY_OuCU" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Stats ─── -->
+    <section class="container py-2">
+        <div class="card-section sr">
+            <div class="stats-wrap">
+                <div class="stat">
+                    <div class="stat-num">1000+</div>
+                    <div class="stat-lbl">Palavras no Banco</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">3</div>
+                    <div class="stat-lbl">Níveis de Dificuldade</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">100%</div>
+                    <div class="stat-lbl">Gratuito</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">📶</div>
+                    <div class="stat-lbl">Modo Offline</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Features ─── -->
+    <section class="container py-5">
+        <div class="card-section sr">
+            <h2 class="sec-title">✨ Funcionalidades</h2>
+            <p class="sec-sub">Tudo que você precisa para treinar seu vocabulário em um só lugar</p>
+            <div class="features-grid">
+                <div class="feat">
+                    <div class="feat-icon">🇧🇷</div>
+                    <h3 class="feat-name">Português & Inglês</h3>
+                    <p class="feat-desc">Temas diversos em dois idiomas para você aprender jogando</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">🔍</div>
+                    <h3 class="feat-name">Grade Interativa</h3>
+                    <p class="feat-desc">Encontre palavras em todas as direções — horizontal, vertical e diagonal</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">📶</div>
+                    <h3 class="feat-name">Modo Offline</h3>
+                    <p class="feat-desc">Jogue onde quiser, sem precisar de internet. Perfeito para qualquer momento</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">⚡</div>
+                    <h3 class="feat-name">Vários Níveis</h3>
+                    <p class="feat-desc">Do iniciante ao avançado, há desafios para todos os perfis</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">🏆</div>
+                    <h3 class="feat-name">Sistema de Pontuação</h3>
+                    <p class="feat-desc">Acompanhe seu progresso e bata seus próprios recordes a cada partida</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">🆓</div>
+                    <h3 class="feat-name">100% Gratuito</h3>
+                    <p class="feat-desc">Todo o conteúdo disponível sem nenhum custo. Baixe e jogue agora!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CTA ─── -->
+    <section class="container py-5">
+        <div class="card-section cta-section sr">
+            <h2 class="sec-title">🎮 Pronto para Caçar?</h2>
+            <p class="sec-sub">Encontre palavras, expanda seu vocabulário e vire um mestre do Word Hunt!</p>
+            <a href="https://play.google.com/store/apps/details?id=com.talentodev.wordhunt" target="_blank" class="btn-dl">
+                <i class="fab fa-google-play"></i>
+                <span>Baixar Word Hunt Grátis</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ─── Footer ─── -->
+    <footer id="footer" class="site-footer py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="mb-3" style="color:var(--golden)">
+                        <i class="bi bi-code-square me-2"></i>Talento Dev
+                    </h5>
+                    <p class="small" style="color:var(--cloud)">
+                        Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
+                    </p>
+                    <div class="mt-3">
+                        <small style="color:var(--cloud)">
+                            <span class="me-2">Visitas:</span>
+                            <a href="https://megacontador.com.br" target="_blank" rel="noopener noreferrer">
+                                <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
+                            </a>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="mb-3" style="color:var(--golden)">
+                        <i class="bi bi-people me-2"></i>Conecte-se
+                    </h5>
+                    <div>
+                        <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" target="_blank" rel="noopener noreferrer" style="color:var(--cloud);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/erwinvaz" target="_blank" rel="noopener noreferrer" style="color:var(--cloud);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/talento.dev.br" target="_blank" rel="noopener noreferrer" style="color:var(--cloud);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@talentodev" target="_blank" rel="noopener noreferrer" style="color:var(--cloud);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/5585998200392" target="_blank" rel="noopener noreferrer" style="color:var(--cloud);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <h6 class="mb-2" style="color:var(--cloud)">Receba atualizações</h6>
+                        <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                            <input type="email" id="nlEmail" class="form-control form-control-sm me-2"
+                                placeholder="Seu e-mail" required
+                                style="background:rgba(255,255,255,0.08);border:1px solid rgba(33,150,243,0.4);color:var(--cloud)">
+                            <button type="submit" class="btn btn-sm" style="background:var(--grad-gold);color:var(--shadow)">
+                                <i class="bi bi-envelope"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12 text-center text-lg-end">
+                    <h5 class="mb-3" style="color:var(--golden)">
+                        <i class="bi bi-heart me-2"></i>Apoie o Projeto
+                    </h5>
+                    <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                        <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                        <button type="submit" class="btn btn-outline-light btn-sm" style="border:2px solid var(--golden);color:var(--golden);font-weight:700">
+                            <i class="bi bi-paypal me-1"></i>Doar via PayPal
+                        </button>
+                    </form>
+                    <div class="mt-4">
+                        <p class="small mb-1" style="color:var(--cloud)">&copy; 2026 Talento Dev</p>
+                        <p class="small mb-0" style="color:var(--cloud);opacity:.8">Todos os direitos reservados</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-3" style="background:var(--golden);height:2px">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                    <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="btt" id="btt"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Language Selector -->
+    <div class="lang-sel">
+        <button class="lang-btn" onclick="toggleLangDrop()">
+            <i class="bi bi-translate"></i>
+            <span>Idioma</span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
+        <div class="lang-drop" id="langDrop">
+            <a href="#" class="lang-opt" onclick="translatePage('pt','Português')">
+                <img src="https://flagcdn.com/w20/br.png" class="lang-flag" alt="PT"> Português</a>
+            <a href="#" class="lang-opt" onclick="translatePage('en','English')">
+                <img src="https://flagcdn.com/w20/us.png" class="lang-flag" alt="EN"> English</a>
+            <a href="#" class="lang-opt" onclick="translatePage('es','Español')">
+                <img src="https://flagcdn.com/w20/es.png" class="lang-flag" alt="ES"> Español</a>
+            <a href="#" class="lang-opt" onclick="translatePage('fr','Français')">
+                <img src="https://flagcdn.com/w20/fr.png" class="lang-flag" alt="FR"> Français</a>
+            <a href="#" class="lang-opt" onclick="translatePage('de','Deutsch')">
+                <img src="https://flagcdn.com/w20/de.png" class="lang-flag" alt="DE"> Deutsch</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    // ── Generate live word grid ──────────────────────────────────────
+    (function() {
+        const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const WORDS = ['HUNT','WORD','FIND','PLAY','GAME'];
+        const SIZE = 8;
+        let grid = Array.from({length:SIZE}, () => Array(SIZE).fill(''));
+        const highlighted = new Set();
+
+        function rnd(n) { return Math.floor(Math.random()*n); }
+
+        // Place each word horizontally at random position
+        WORDS.forEach(w => {
+            const row = rnd(SIZE);
+            const col = rnd(SIZE - w.length);
+            for (let i=0; i<w.length; i++) {
+                grid[row][col+i] = w[i];
+                highlighted.add(`${row},${col+i}`);
+            }
+        });
+
+        // Fill blanks
+        for (let r=0; r<SIZE; r++)
+            for (let c=0; c<SIZE; c++)
+                if (!grid[r][c]) grid[r][c] = LETTERS[rnd(26)];
+
+        const container = document.getElementById('wordGrid');
+        for (let r=0; r<SIZE; r++) {
+            for (let c=0; c<SIZE; c++) {
+                const cell = document.createElement('div');
+                cell.className = 'wc' + (highlighted.has(`${r},${c}`) ? (r%2===0?' hi':' hi2') : '');
+                cell.textContent = grid[r][c];
+                cell.style.animationDelay = `${(r*SIZE+c)*0.05}s`;
+                container.appendChild(cell);
+            }
+        }
+    })();
+
+    // ── Back to top ──────────────────────────────────────────────────
+    window.addEventListener('scroll', () => {
+        document.getElementById('btt').classList.toggle('visible', window.pageYOffset > 300);
+    });
+
+    // ── Nav toggle ───────────────────────────────────────────────────
+    function toggleNav() {
+        document.getElementById('navBar').classList.toggle('open');
+    }
+    document.querySelectorAll('.nav-bar a').forEach(a => {
+        a.addEventListener('click', () => document.getElementById('navBar').classList.remove('open'));
+    });
+
+    // ── Smooth scroll ────────────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            const t = this.getAttribute('href');
+            if (t !== '#' && document.querySelector(t)) {
+                e.preventDefault();
+                document.querySelector(t).scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        });
+    });
+
+    // ── Language ─────────────────────────────────────────────────────
+    function toggleLangDrop() {
+        const d = document.getElementById('langDrop');
+        d.style.display = d.style.display === 'block' ? 'none' : 'block';
+    }
+    function translatePage(lang, name) {
+        document.getElementById('langDrop').style.display = 'none';
+        const url = `https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(location.href)}`;
+        window.open(url, '_blank');
+        alert(`A página será traduzida para ${name} em uma nova aba.`);
+    }
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('langDrop');
+        const b = document.querySelector('.lang-btn');
+        if (d && b && !b.contains(e.target) && !d.contains(e.target)) d.style.display = 'none';
+    });
+
+    // ── Newsletter ───────────────────────────────────────────────────
+    function subscribeNewsletter(e) {
+        e.preventDefault();
+        const email = document.getElementById('nlEmail').value;
+        const subj  = "Assinar newsletter - Talento Dev";
+        const body  = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
+        location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+        alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar!");
+        document.getElementById('nlEmail').value = '';
+    }
+
+    // ── Scroll reveal ────────────────────────────────────────────────
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+    document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+
+    // ── GA tracking ──────────────────────────────────────────────────
+    document.querySelectorAll('.btn-dl').forEach(btn => {
+        btn.addEventListener('click', () => {
+            gtag('event','download_click',{event_category:'Word Hunt',event_label:'Download Button'});
+        });
+    });
+    </script>
+</body>
+</html>
