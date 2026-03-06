@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParkPin — Salve seu carro. Descubra lugares. | Talento Dev</title>
+
+    <meta name="description" content="ParkPin — Salve onde você estacionou e descubra lugares incríveis com bússola e GPS. Nunca mais perca seu carro!">
+    <meta name="keywords" content="parkpin, estacionamento, salvar local, bússola, gps, google maps, flutter, talento dev">
+    <meta name="author" content="Erwin Vaz">
+    <meta property="og:title" content="ParkPin — Salve seu carro. Descubra lugares.">
+    <meta property="og:description" content="Salve onde você estacionou e descubra lugares incríveis com bússola e GPS.">
+    <meta property="og:url" content="https://www.talento.dev.br/park_pin.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.talento.dev.br/site/ico.png">
+
+    <link href="assets/img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="canonical" href="https://www.talento.dev.br/park_pin.html" />
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --night:        #080F1A;
+            --night-mid:    #0E1D30;
+            --asphalt:      #142540;
+            --teal:         #00C9A7;
+            --teal-glow:    #00E5C0;
+            --amber:        #FF9F1C;
+            --amber-warm:   #FFBF69;
+            --slate:        #E8F4F8;
+            --shadow:       #020810;
+            --pin-red:      #FF4757;
+
+            --grad-night:   linear-gradient(145deg, #080F1A 0%, #0E1D30 55%, #142540 100%);
+            --grad-teal:    linear-gradient(135deg, #00C9A7 0%, #0096C7 100%);
+            --grad-amber:   linear-gradient(135deg, #FF9F1C 0%, #FF6B35 100%);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background: var(--grad-night);
+            font-family: 'Barlow', sans-serif;
+            overflow-x: hidden;
+            color: var(--slate);
+        }
+
+        /* ─── Animated map-dot background ─── */
+        .map-bg {
+            position: fixed; inset: 0; z-index: -1;
+            background-image:
+                radial-gradient(circle, rgba(0,201,167,0.07) 1px, transparent 1px);
+            background-size: 38px 38px;
+            animation: mapDrift 60s linear infinite;
+        }
+        @keyframes mapDrift {
+            0%   { background-position: 0 0; }
+            100% { background-position: 38px 38px; }
+        }
+
+        /* ─── Road lines background ─── */
+        .road-bg {
+            position: fixed; inset: 0; z-index: -1;
+            background-image:
+                linear-gradient(rgba(0,201,167,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,201,167,0.04) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        /* ─── Floating pins ─── */
+        .pin-bg {
+            position: fixed; inset: 0; z-index: -1;
+            pointer-events: none; overflow: hidden;
+        }
+        .fp {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.04;
+            animation: floatPin 20s ease-in-out infinite;
+            filter: drop-shadow(0 0 6px rgba(0,201,167,0.3));
+        }
+        .fp:nth-child(1) { left: 8%;  top: 15%; animation-delay: 0s;   font-size: 3rem; }
+        .fp:nth-child(2) { left: 75%; top: 10%; animation-delay: -5s;  font-size: 2rem; }
+        .fp:nth-child(3) { left: 25%; top: 65%; animation-delay: -10s; font-size: 3.5rem; }
+        .fp:nth-child(4) { left: 60%; top: 75%; animation-delay: -15s; font-size: 2.5rem; }
+        .fp:nth-child(5) { left: 45%; top: 35%; animation-delay: -7s;  font-size: 4rem; }
+        .fp:nth-child(6) { left: 88%; top: 55%; animation-delay: -12s; font-size: 2rem; }
+        @keyframes floatPin {
+            0%,100% { transform: translateY(0) scale(1); opacity: 0.04; }
+            50%      { transform: translateY(-40px) scale(1.1); opacity: 0.09; }
+        }
+
+        /* ─── Glow blobs ─── */
+        .glow-teal {
+            position: fixed; width: 700px; height: 700px;
+            border-radius: 50%; z-index: -1; pointer-events: none;
+            background: radial-gradient(circle, rgba(0,201,167,0.07) 0%, transparent 65%);
+            top: -200px; left: -200px;
+        }
+        .glow-amber {
+            position: fixed; width: 600px; height: 600px;
+            border-radius: 50%; z-index: -1; pointer-events: none;
+            background: radial-gradient(circle, rgba(255,159,28,0.06) 0%, transparent 65%);
+            bottom: -150px; right: -150px;
+        }
+
+        /* ─── Header ─── */
+        .site-header {
+            background: linear-gradient(180deg, rgba(2,8,16,0.98) 0%, rgba(8,15,26,0.95) 100%);
+            border-bottom: 3px solid var(--teal);
+            box-shadow: 0 8px 40px rgba(0,201,167,0.2);
+            padding: 1.5rem 0 0;
+            position: relative; overflow: hidden;
+        }
+        .site-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0,201,167,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ─── Navbar ─── */
+        .nav-bar {
+            display: flex; justify-content: center;
+            gap: 3rem; list-style: none;
+            margin: 0; padding: 0.5rem 0 1rem;
+            border-bottom: 1px solid rgba(0,201,167,0.2);
+            position: relative; z-index: 3;
+        }
+        .nav-bar a {
+            color: var(--slate); text-decoration: none;
+            font-family: 'Nunito', sans-serif; font-weight: 700;
+            font-size: 1rem; letter-spacing: 0.04em;
+            padding: 0.4rem 0; position: relative; transition: color 0.3s;
+        }
+        .nav-bar a::after {
+            content: ''; position: absolute;
+            bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--grad-teal); transition: width 0.3s;
+        }
+        .nav-bar a:hover { color: var(--teal-glow); }
+        .nav-bar a:hover::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid var(--teal);
+            color: var(--teal);
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px; font-size: 1.3rem;
+            cursor: pointer; transition: all 0.3s;
+            position: absolute; top: 1rem; right: 1rem; z-index: 10;
+        }
+        .nav-toggle:hover { background: var(--grad-teal); color: var(--shadow); }
+
+        /* ─── Hero ─── */
+        .hero {
+            position: relative; z-index: 2;
+            text-align: center; padding: 2.5rem 1rem 3.5rem;
+        }
+
+        /* ─── Animated compass / map demo ─── */
+        .map-demo {
+            position: relative;
+            display: inline-block;
+            width: 260px; height: 260px;
+            margin-bottom: 2rem;
+        }
+        .map-circle {
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(0,201,167,0.12), rgba(8,15,26,0.9) 70%);
+            border: 2px solid rgba(0,201,167,0.25);
+            box-shadow:
+                0 0 0 12px rgba(0,201,167,0.04),
+                0 0 0 24px rgba(0,201,167,0.02),
+                0 20px 60px rgba(0,201,167,0.2);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        /* Concentric rings */
+        .map-circle::before, .map-circle::after {
+            content: ''; position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(0,201,167,0.12);
+        }
+        .map-circle::before { width: 170px; height: 170px; }
+        .map-circle::after  { width: 90px;  height: 90px; }
+
+        /* Crosshair lines */
+        .crosshair {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ch-h, .ch-v {
+            position: absolute;
+            background: rgba(0,201,167,0.12);
+        }
+        .ch-h { width: 100%; height: 1px; }
+        .ch-v { width: 1px; height: 100%; }
+
+        /* Compass needle */
+        .compass {
+            position: absolute;
+            width: 60px; height: 60px;
+            animation: compassSpin 8s ease-in-out infinite;
+        }
+        .needle {
+            position: absolute; left: 50%; top: 50%;
+            width: 4px; height: 50px;
+            margin-left: -2px;
+            transform-origin: 50% 100%;
+        }
+        .needle-n {
+            background: linear-gradient(to top, transparent, var(--pin-red));
+            border-radius: 2px 2px 0 0;
+            margin-top: -50px;
+        }
+        .needle-s {
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+            border-radius: 0 0 2px 2px;
+        }
+        .compass-center {
+            position: absolute; left: 50%; top: 50%;
+            width: 10px; height: 10px;
+            background: var(--teal);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px var(--teal);
+        }
+
+        @keyframes compassSpin {
+            0%   { transform: rotate(0deg); }
+            20%  { transform: rotate(22deg); }
+            40%  { transform: rotate(-15deg); }
+            60%  { transform: rotate(35deg); }
+            80%  { transform: rotate(-8deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* Map dots (locations) */
+        .map-dot {
+            position: absolute;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 8px var(--teal-glow);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        .map-dot::after {
+            content: '📍';
+            position: absolute;
+            font-size: 1rem;
+            bottom: 10px; left: 50%;
+            transform: translateX(-50%);
+        }
+        .map-dot.d1 { top: 30%; left: 25%; animation-delay: 0s; }
+        .map-dot.d2 { top: 55%; left: 65%; animation-delay: -0.8s; background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+        .map-dot.d3 { top: 20%; left: 60%; animation-delay: -1.5s; background: var(--pin-red); box-shadow: 0 0 8px var(--pin-red); }
+
+        @keyframes dotPulse {
+            0%,100% { transform: scale(1); opacity: 1; }
+            50%      { transform: scale(1.5); opacity: 0.7; }
+        }
+
+        /* Pulsing ring on main dot */
+        .map-dot.d1::before {
+            content: '';
+            position: absolute; inset: -8px;
+            border-radius: 50%;
+            border: 2px solid var(--teal);
+            opacity: 0.4;
+            animation: ringPulse 2s ease-out infinite;
+        }
+        @keyframes ringPulse {
+            0%   { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0,201,167,0.12);
+            border: 1px solid rgba(0,201,167,0.35);
+            color: var(--teal-glow);
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.75rem; letter-spacing: 0.18em;
+            padding: 0.3rem 1rem; border-radius: 20px;
+            margin-bottom: 1rem; text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+            font-weight: 900; line-height: 1.05;
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 40px rgba(0,201,167,0.3);
+        }
+        .hero-title .park {
+            background: var(--grad-teal);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-title .pin {
+            background: var(--grad-amber);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            opacity: 0.85; margin-bottom: 2.2rem;
+            font-weight: 400; max-width: 480px;
+            margin-left: auto; margin-right: auto;
+        }
+
+        .btn-dl {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--grad-teal);
+            color: var(--shadow);
+            font-family: 'Nunito', sans-serif; font-weight: 900;
+            font-size: 1.1rem; border: none; border-radius: 40px;
+            text-decoration: none; transition: all 0.35s;
+            box-shadow: 0 8px 30px rgba(0,201,167,0.4);
+        }
+        .btn-dl:hover {
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 16px 48px rgba(0,201,167,0.6);
+            color: var(--shadow);
+        }
+
+        /* ─── Section Card ─── */
+        .card-section {
+            background: rgba(255,255,255,0.035);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(0,201,167,0.2);
+            border-radius: 24px; padding: 3rem;
+            margin: 2.5rem 0; position: relative; z-index: 2;
+            transition: border-color 0.3s;
+        }
+        .card-section:hover { border-color: rgba(255,159,28,0.35); }
+        .card-section::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 2px; border-radius: 24px 24px 0 0;
+            background: linear-gradient(90deg, transparent, var(--teal) 40%, var(--amber) 60%, transparent);
+            opacity: 0.6;
+        }
+
+        .sec-title {
+            font-family: 'Nunito', sans-serif; font-weight: 900;
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            background: var(--grad-amber);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center; margin-bottom: 0.75rem;
+        }
+        .sec-sub {
+            text-align: center; opacity: 0.8;
+            font-size: 1.05rem; margin-bottom: 2rem;
+        }
+
+        /* ─── Video ─── */
+        .video-wrap {
+            position: relative; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 18px;
+            border: 2px solid var(--teal);
+            box-shadow: 0 12px 50px rgba(0,201,167,0.25);
+        }
+        .video-wrap iframe {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            border: none; border-radius: 16px;
+        }
+
+        /* ─── Stats ─── */
+        .stats-wrap {
+            display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 2.5rem;
+        }
+        .stat { text-align: center; }
+        .stat-num {
+            font-family: 'Nunito', sans-serif; font-weight: 900;
+            font-size: 2.8rem;
+            background: var(--grad-teal);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; line-height: 1;
+        }
+        .stat-lbl { font-size: 0.9rem; opacity: 0.7; margin-top: 0.3rem; }
+
+        /* ─── Features ─── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem; margin-top: 1.5rem;
+        }
+        .feat {
+            background: rgba(0,201,167,0.04);
+            border: 1px solid rgba(0,201,167,0.18);
+            border-radius: 18px; padding: 2rem;
+            text-align: center; transition: all 0.35s;
+            cursor: default; position: relative; overflow: hidden;
+        }
+        .feat::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--grad-teal);
+            transform: scaleX(0); transition: transform 0.35s;
+        }
+        .feat:hover {
+            background: rgba(0,201,167,0.08);
+            border-color: var(--amber);
+            transform: translateY(-6px);
+            box-shadow: 0 14px 40px rgba(0,201,167,0.15);
+        }
+        .feat:hover::after { transform: scaleX(1); }
+        .feat-icon { font-size: 2.8rem; margin-bottom: 0.8rem; display: block; }
+        .feat-name {
+            font-family: 'Nunito', sans-serif; font-weight: 800;
+            font-size: 1.1rem; color: var(--amber-warm); margin-bottom: 0.6rem;
+        }
+        .feat-desc { font-size: 0.92rem; opacity: 0.8; line-height: 1.6; }
+
+        /* ─── How it works ─── */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem; position: relative;
+        }
+        .steps::before {
+            content: '';
+            position: absolute; top: 36px; left: 15%; right: 15%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--teal), var(--amber));
+            opacity: 0.3;
+        }
+        .step { text-align: center; padding: 1.5rem; }
+        .step-num {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0,201,167,0.15), rgba(0,150,199,0.1));
+            border: 2px solid var(--teal);
+            font-family: 'Nunito', sans-serif; font-weight: 900;
+            font-size: 1.5rem; color: var(--teal);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 0 20px rgba(0,201,167,0.2);
+        }
+        .step-icon { font-size: 1.6rem; margin-bottom: 0.7rem; display: block; }
+        .step-title {
+            font-family: 'Nunito', sans-serif; font-weight: 800;
+            color: var(--slate); margin-bottom: 0.4rem;
+        }
+        .step-desc { font-size: 0.88rem; opacity: 0.75; line-height: 1.5; }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0,201,167,0.1), rgba(255,159,28,0.07));
+            border: 1px solid rgba(0,201,167,0.25);
+        }
+        .cta-section .sec-sub { font-size: 1.2rem; margin-bottom: 2rem; }
+
+        /* ─── Footer ─── */
+        .site-footer {
+            background: linear-gradient(180deg, #02080F 0%, #080F1A 100%);
+            border-top: 3px solid var(--teal);
+            position: relative; z-index: 2;
+        }
+
+        /* ─── Back to top ─── */
+        .btt {
+            position: fixed; bottom: 28px; right: 28px;
+            background: var(--grad-teal); color: var(--shadow);
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; text-decoration: none;
+            box-shadow: 0 5px 18px rgba(0,201,167,0.4);
+            transition: all 0.3s; z-index: 1000; opacity: 0;
+        }
+        .btt.visible { opacity: 1; }
+        .btt:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,201,167,0.6); color: var(--shadow); }
+
+        /* ─── Language Selector ─── */
+        .lang-sel {
+            position: fixed !important; top: 18px !important;
+            right: 18px !important; z-index: 10000 !important;
+        }
+        .lang-btn {
+            background: linear-gradient(135deg, #02080F, #0E1D30);
+            border: 2px solid var(--teal);
+            color: var(--slate); padding: 0.55rem 1.1rem;
+            border-radius: 22px; cursor: pointer; transition: all 0.3s;
+            font-family: 'Nunito', sans-serif; font-weight: 700;
+            font-size: 0.85rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 14px rgba(0,201,167,0.25);
+        }
+        .lang-btn:hover { background: var(--grad-teal); color: var(--shadow); transform: translateY(-2px); }
+        .lang-drop {
+            display: none; position: absolute;
+            top: 52px; right: 0;
+            background: rgba(2,8,16,0.97); backdrop-filter: blur(10px);
+            border: 2px solid var(--teal); border-radius: 14px;
+            padding: 0.4rem; min-width: 190px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .lang-opt {
+            display: flex; align-items: center; gap: 0.7rem;
+            padding: 0.7rem 0.9rem; color: var(--slate);
+            text-decoration: none; border-radius: 8px;
+            transition: all 0.3s; font-size: 0.9rem;
+        }
+        .lang-opt:hover { background: rgba(0,201,167,0.15); color: var(--teal-glow); transform: translateX(4px); }
+        .lang-flag { width: 22px; border-radius: 3px; }
+
+        /* ─── Scroll reveal ─── */
+        .sr { opacity: 0; transform: translateY(28px); transition: all 0.75s ease; }
+        .sr.in { opacity: 1; transform: translateY(0); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-bar { display: none; flex-direction: column; gap: 0.5rem; padding: 1rem; margin-top: 3rem; }
+            .nav-bar.open { display: flex; }
+            .nav-bar a { padding: 0.7rem 1rem; background: rgba(0,201,167,0.06); border-radius: 8px; text-align: center; }
+            .card-section { padding: 2rem 1.2rem; }
+            .features-grid, .steps { grid-template-columns: 1fr; }
+            .steps::before { display: none; }
+            .lang-btn span { display: none; }
+            .lang-drop { min-width: 175px; }
+            .stats-wrap { gap: 1.5rem; }
+            .map-demo, .map-circle { width: 200px; height: 200px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animated backgrounds -->
+    <div class="road-bg"></div>
+    <div class="map-bg"></div>
+    <div class="pin-bg">
+        <div class="fp">📍</div>
+        <div class="fp">🚗</div>
+        <div class="fp">🧭</div>
+        <div class="fp">📍</div>
+        <div class="fp">🗺️</div>
+        <div class="fp">📌</div>
+    </div>
+    <div class="glow-teal"></div>
+    <div class="glow-amber"></div>
+
+    <!-- ─── Header ─── -->
+    <header class="site-header">
+        <div class="container position-relative">
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul class="nav-bar" id="navBar">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#funcionalidades">Funcionalidades</a></li>
+                    <li><a href="#footer">Sobre</a></li>
+                </ul>
+            </nav>
+
+            <!-- Hero -->
+            <div class="hero">
+                <!-- Animated map/compass demo -->
+                <div class="map-demo">
+                    <div class="map-circle">
+                        <div class="crosshair">
+                            <div class="ch-h"></div>
+                            <div class="ch-v"></div>
+                        </div>
+                        <div class="map-dot d1"></div>
+                        <div class="map-dot d2"></div>
+                        <div class="map-dot d3"></div>
+                        <div class="compass">
+                            <div class="needle needle-n"></div>
+                            <div class="needle needle-s"></div>
+                            <div class="compass-center"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-badge">📍 Save · Navigate · Explore</div>
+                <h1 class="hero-title">
+                    <span class="park">Park</span><span class="pin">Pin</span>
+                </h1>
+                <p class="hero-sub">Salve onde você estacionou e descubra lugares incríveis com bússola e GPS.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.talentodev.geotrack" target="_blank" class="btn-dl">
+                    <i class="fab fa-google-play"></i>
+                    <span>Baixar Agora — Grátis</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ─── Video ─── -->
+    <section id="como-funciona" class="container py-5">
+        <div class="card-section sr">
+            <h2 class="sec-title">🎥 Veja Como Funciona</h2>
+            <p class="sec-sub">Conheça o ParkPin e nunca mais perca seu carro — ou seus lugares favoritos</p>
+            <div class="video-wrap">
+                <!-- ⬇️ Substitua o ID do YouTube pelo real -->
+                <iframe src="https://www.youtube.com/embed/FdKE0Vuv9rQ" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Stats ─── -->
+    <section class="container py-2">
+        <div class="card-section sr">
+            <div class="stats-wrap">
+                <div class="stat">
+                    <div class="stat-num">1 toque</div>
+                    <div class="stat-lbl">Para salvar qualquer lugar</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">🧭</div>
+                    <div class="stat-lbl">Bússola em tempo real</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">100%</div>
+                    <div class="stat-lbl">Gratuito</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">📶</div>
+                    <div class="stat-lbl">Funciona Offline</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── How it works ─── -->
+    <section class="container py-5">
+        <div class="card-section sr">
+            <h2 class="sec-title">🗺️ Como Usar</h2>
+            <p class="sec-sub">Simples, rápido e pensado para o seu dia a dia</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <span class="step-icon">🚗</span>
+                    <div class="step-title">Estacionou?</div>
+                    <p class="step-desc">Abra o ParkPin e salve sua localização com um único toque</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <span class="step-icon">🧭</span>
+                    <div class="step-title">Ative a Bússola</div>
+                    <p class="step-desc">A bússola aponta o caminho de volta em tempo real, mesmo sem internet</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <span class="step-icon">🗺️</span>
+                    <div class="step-title">Abra no Maps</div>
+                    <p class="step-desc">Prefere rotas? Leve seu destino direto para o Google Maps com 1 clique</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <span class="step-icon">📌</span>
+                    <div class="step-title">Salve Favoritos</div>
+                    <p class="step-desc">Marque restaurantes, mirantes e qualquer lugar que vale a pena revisitar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Features ─── -->
+    <section id="funcionalidades" class="container py-5">
+        <div class="card-section sr">
+            <h2 class="sec-title">✨ Funcionalidades</h2>
+            <p class="sec-sub">Tudo que você precisa para nunca mais se perder</p>
+            <div class="features-grid">
+                <div class="feat">
+                    <span class="feat-icon">📍</span>
+                    <h3 class="feat-name">Salvar com 1 Toque</h3>
+                    <p class="feat-desc">Marque qualquer lugar instantaneamente. Seu carro, pontos de interesse e muito mais</p>
+                </div>
+                <div class="feat">
+                    <span class="feat-icon">🧭</span>
+                    <h3 class="feat-name">Bússola em Tempo Real</h3>
+                    <p class="feat-desc">Navegue em direção ao seu pin com a bússola integrada, sem precisar de Wi-Fi</p>
+                </div>
+                <div class="feat">
+                    <span class="feat-icon">🗺️</span>
+                    <h3 class="feat-name">Google Maps Integrado</h3>
+                    <p class="feat-desc">Abra rotas e direções diretamente no Google Maps com um único clique</p>
+                </div>
+                <div class="feat">
+                    <span class="feat-icon">📝</span>
+                    <h3 class="feat-name">Labels Personalizados</h3>
+                    <p class="feat-desc">Nomeie e categorize seus lugares favoritos para encontrá-los rapidinho</p>
+                </div>
+                <div class="feat">
+                    <span class="feat-icon">📵</span>
+                    <h3 class="feat-name">Funciona Offline</h3>
+                    <p class="feat-desc">Bússola e pins salvos funcionam sem internet. Perfeito para qualquer situação</p>
+                </div>
+                <div class="feat">
+                    <span class="feat-icon">🆓</span>
+                    <h3 class="feat-name">100% Gratuito</h3>
+                    <p class="feat-desc">Todo o conteúdo disponível sem nenhum custo. Baixe e use agora!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CTA ─── -->
+    <section class="container py-5">
+        <div class="card-section cta-section sr">
+            <h2 class="sec-title">🚗 Pronto para Nunca Mais Se Perder?</h2>
+            <p class="sec-sub">Seu carro. Seus lugares favoritos. Sempre ao alcance da mão.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.talentodev.geotrack" target="_blank" class="btn-dl">
+                <i class="fab fa-google-play"></i>
+                <span>Baixar ParkPin Grátis</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ─── Footer ─── -->
+    <footer id="footer" class="site-footer py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="mb-3" style="color:var(--teal)">
+                        <i class="bi bi-code-square me-2"></i>Talento Dev
+                    </h5>
+                    <p class="small" style="color:var(--slate)">
+                        Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
+                    </p>
+                    <div class="mt-3">
+                        <small style="color:var(--slate)">
+                            <span class="me-2">Visitas:</span>
+                            <a href="https://megacontador.com.br" target="_blank" rel="noopener noreferrer">
+                                <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
+                            </a>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="mb-3" style="color:var(--teal)">
+                        <i class="bi bi-people me-2"></i>Conecte-se
+                    </h5>
+                    <div>
+                        <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" target="_blank" rel="noopener noreferrer" style="color:var(--slate);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/erwinvaz" target="_blank" rel="noopener noreferrer" style="color:var(--slate);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/talento.dev.br" target="_blank" rel="noopener noreferrer" style="color:var(--slate);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@talentodev" target="_blank" rel="noopener noreferrer" style="color:var(--slate);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/5585998200392" target="_blank" rel="noopener noreferrer" style="color:var(--slate);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <h6 class="mb-2" style="color:var(--slate)">Receba atualizações</h6>
+                        <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                            <input type="email" id="nlEmail" class="form-control form-control-sm me-2"
+                                placeholder="Seu e-mail" required
+                                style="background:rgba(255,255,255,0.06);border:1px solid rgba(0,201,167,0.35);color:var(--slate)">
+                            <button type="submit" class="btn btn-sm" style="background:var(--grad-teal);color:var(--shadow)">
+                                <i class="bi bi-envelope"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12 text-center text-lg-end">
+                    <h5 class="mb-3" style="color:var(--teal)">
+                        <i class="bi bi-heart me-2"></i>Apoie o Projeto
+                    </h5>
+                    <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                        <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                        <button type="submit" class="btn btn-outline-light btn-sm" style="border:2px solid var(--teal);color:var(--teal);font-weight:700">
+                            <i class="bi bi-paypal me-1"></i>Doar via PayPal
+                        </button>
+                    </form>
+                    <div class="mt-4">
+                        <p class="small mb-1" style="color:var(--slate)">&copy; 2026 Talento Dev</p>
+                        <p class="small mb-0" style="color:var(--slate);opacity:.7">Todos os direitos reservados</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-3" style="background:var(--teal);height:2px">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                    <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="btt" id="btt"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Language Selector -->
+    <div class="lang-sel">
+        <button class="lang-btn" onclick="toggleLangDrop()">
+            <i class="bi bi-translate"></i>
+            <span>Idioma</span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
+        <div class="lang-drop" id="langDrop">
+            <a href="#" class="lang-opt" onclick="translatePage('pt','Português')">
+                <img src="https://flagcdn.com/w20/br.png" class="lang-flag" alt="PT"> Português</a>
+            <a href="#" class="lang-opt" onclick="translatePage('en','English')">
+                <img src="https://flagcdn.com/w20/us.png" class="lang-flag" alt="EN"> English</a>
+            <a href="#" class="lang-opt" onclick="translatePage('es','Español')">
+                <img src="https://flagcdn.com/w20/es.png" class="lang-flag" alt="ES"> Español</a>
+            <a href="#" class="lang-opt" onclick="translatePage('fr','Français')">
+                <img src="https://flagcdn.com/w20/fr.png" class="lang-flag" alt="FR"> Français</a>
+            <a href="#" class="lang-opt" onclick="translatePage('de','Deutsch')">
+                <img src="https://flagcdn.com/w20/de.png" class="lang-flag" alt="DE"> Deutsch</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ── Back to top ──────────────────────────────────────────────
+        window.addEventListener('scroll', () => {
+            document.getElementById('btt').classList.toggle('visible', window.pageYOffset > 300);
+        });
+
+        // ── Nav toggle ───────────────────────────────────────────────
+        function toggleNav() {
+            document.getElementById('navBar').classList.toggle('open');
+        }
+        document.querySelectorAll('.nav-bar a').forEach(a => {
+            a.addEventListener('click', () => document.getElementById('navBar').classList.remove('open'));
+        });
+
+        // ── Smooth scroll ────────────────────────────────────────────
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                const t = this.getAttribute('href');
+                if (t !== '#' && document.querySelector(t)) {
+                    e.preventDefault();
+                    document.querySelector(t).scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        // ── Language ─────────────────────────────────────────────────
+        function toggleLangDrop() {
+            const d = document.getElementById('langDrop');
+            d.style.display = d.style.display === 'block' ? 'none' : 'block';
+        }
+        function translatePage(lang, name) {
+            document.getElementById('langDrop').style.display = 'none';
+            const url = `https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(location.href)}`;
+            window.open(url, '_blank');
+            alert(`A página será traduzida para ${name} em uma nova aba.`);
+        }
+        document.addEventListener('click', function(e) {
+            const d = document.getElementById('langDrop');
+            const b = document.querySelector('.lang-btn');
+            if (d && b && !b.contains(e.target) && !d.contains(e.target)) d.style.display = 'none';
+        });
+
+        // ── Newsletter ───────────────────────────────────────────────
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('nlEmail').value;
+            const subj  = "Assinar newsletter - Talento Dev";
+            const body  = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
+            location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+            alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar!");
+            document.getElementById('nlEmail').value = '';
+        }
+
+        // ── Scroll reveal ────────────────────────────────────────────
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+        }, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+        document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>
