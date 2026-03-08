@@ -17,9 +17,7 @@
     <title>Talento Dev | Tutoriais de Android e Desenvolvimento de Apps</title>
     
     <meta name="description" content="Aprenda desenvolvimento Android com tutoriais passo a passo, dicas de monetização de apps e acompanhe meus projetos na Play Store. Desenvolvedor e criador de conteúdo para programadores.">
-    
     <meta name="keywords" content="desenvolvimento android, tutorial kotlin, monetização de apps, youtube para devs, talento dev, erwin vaz">
-    
     <meta name="author" content="Erwin Vaz">
     <meta property="og:title" content="Talento Dev | Tutoriais para Desenvolvedores Android">
     <meta property="og:description" content="Aprenda desenvolvimento Android com tutoriais práticos e dicas de monetização.">
@@ -27,14 +25,15 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.talento.dev.br/assets/imagens/logo.png">
     
-    <!-- Favicon -->
     <link href="assets/img/favicon.ico" rel="icon">
 
-    <!-- Google Fonts - Mantendo as originais + novas fontes mágicas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
+    <!-- Chessboard CSS - DEVE vir no head -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard.min.css">
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -53,7 +52,6 @@
 
     <style>
         :root {
-            /* Paleta Mágica Chess Land */
             --magic-sky: #4A90E2;
             --deep-blue: #2C5AA0;
             --golden-sun: #FFD700;
@@ -62,8 +60,6 @@
             --grass-green: #27AE60;
             --cloud-white: #F8F9FA;
             --shadow-dark: #1A1A2E;
-            
-            /* Gradientes */
             --gradient-sky: linear-gradient(135deg, #4A90E2 0%, #2C5AA0 50%, #9B59B6 100%);
             --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             --gradient-dark: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
@@ -75,13 +71,10 @@
             overflow-x: hidden;
         }
 
-        /* Background Mágico */
         .magic-background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             pointer-events: none;
         }
@@ -90,62 +83,59 @@
             position: absolute;
             font-size: 2rem;
             opacity: 0.08;
-            animation: float 25s infinite ease-in-out;
+            animation: floatAnim 25s infinite ease-in-out;
             color: var(--cloud-white);
             pointer-events: none;
         }
 
-        .floating-code:nth-child(1) { left: 5%; top: 15%; animation-delay: 0s; }
+        .floating-code:nth-child(1) { left: 5%;  top: 15%; animation-delay: 0s; }
         .floating-code:nth-child(2) { left: 85%; top: 25%; animation-delay: -5s; }
         .floating-code:nth-child(3) { left: 15%; top: 65%; animation-delay: -10s; }
         .floating-code:nth-child(4) { left: 75%; top: 75%; animation-delay: -15s; }
         .floating-code:nth-child(5) { left: 50%; top: 45%; animation-delay: -7s; }
 
-        @keyframes float {
+        @keyframes floatAnim {
             0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
-            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.12; }
+            50%       { transform: translateY(-30px) rotate(180deg); opacity: 0.12; }
         }
 
-        /* Banner de Lançamento ÉPICO com Menu Integrado */
+        /* ===== BANNER ===== */
         .launch-banner {
             background: linear-gradient(135deg, #1A1A2E 0%, #2C5AA0 50%, #9B59B6 100%);
             padding: 2rem 0 3rem;
             text-align: center;
             border-bottom: 4px solid var(--golden-sun);
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(255,215,0,0.3);
             position: relative;
             overflow: hidden;
             animation: bannerPulse 3s infinite;
         }
 
         @keyframes bannerPulse {
-            0%, 100% { box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 10px 60px rgba(255, 215, 0, 0.6); }
+            0%, 100% { box-shadow: 0 10px 40px rgba(255,215,0,0.3); }
+            50%       { box-shadow: 0 10px 60px rgba(255,215,0,0.6); }
         }
 
         .launch-banner::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 70%);
-            animation: rotate 15s linear infinite;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1), transparent 70%);
+            animation: rotateBg 15s linear infinite;
             pointer-events: none;
         }
 
-        @keyframes rotate {
+        @keyframes rotateBg {
             from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            to   { transform: rotate(360deg); }
         }
 
-        /* Menu Integrado no Banner */
         .navbar-integrated {
             position: relative;
             z-index: 3;
             padding-bottom: 1.5rem;
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            border-bottom: 2px solid rgba(255,215,0,0.3);
             margin-bottom: 2rem;
         }
 
@@ -154,8 +144,7 @@
             justify-content: center;
             gap: 3rem;
             list-style: none;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
         }
 
         .nav-links-integrated a {
@@ -172,21 +161,14 @@
         .nav-links-integrated a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
+            bottom: 0; left: 0;
+            width: 0; height: 3px;
             background: var(--gradient-gold);
             transition: width 0.3s;
         }
 
-        .nav-links-integrated a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links-integrated a:hover {
-            color: var(--golden-sun);
-        }
+        .nav-links-integrated a:hover::after { width: 100%; }
+        .nav-links-integrated a:hover { color: var(--golden-sun); }
 
         .navbar-toggler-integrated {
             display: none;
@@ -199,8 +181,7 @@
             cursor: pointer;
             transition: all 0.3s;
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1rem; right: 1rem;
             z-index: 10;
         }
 
@@ -209,10 +190,7 @@
             color: var(--shadow-dark);
         }
 
-        .launch-content {
-            position: relative;
-            z-index: 2;
-        }
+        .launch-content { position: relative; z-index: 2; }
 
         .launch-badge {
             display: inline-block;
@@ -224,12 +202,12 @@
             font-weight: 700;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
-            animation: bounce 2s infinite;
+            animation: bounceAnim 2s infinite;
         }
 
-        @keyframes bounce {
+        @keyframes bounceAnim {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50%       { transform: translateY(-5px); }
         }
 
         .launch-title {
@@ -238,7 +216,7 @@
             font-weight: 900;
             color: var(--cloud-white);
             margin-bottom: 0.5rem;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
         .launch-title .highlight {
@@ -254,20 +232,16 @@
             margin-bottom: 1.5rem;
             opacity: 0.95;
         }
-        /* Ícone do App no Banner */
+
         .app-icon-launch {
             margin: 1.5rem 0;
             animation: iconFloat 3s ease-in-out infinite;
         }
 
         .launch-app-icon {
-            width: 120px;
-            height: 120px;
+            width: 120px; height: 120px;
             border-radius: 25px;
-            box-shadow: 
-                0 15px 40px rgba(255, 215, 0, 0.5),
-                0 0 60px rgba(255, 215, 0, 0.3),
-                inset 0 0 30px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(255,215,0,0.5), 0 0 60px rgba(255,215,0,0.3), inset 0 0 30px rgba(255,255,255,0.2);
             border: 4px solid var(--golden-sun);
             transition: all 0.5s;
             object-fit: cover;
@@ -275,19 +249,12 @@
 
         .launch-app-icon:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 
-                0 20px 60px rgba(255, 215, 0, 0.7),
-                0 0 80px rgba(255, 215, 0, 0.5),
-                inset 0 0 40px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(255,215,0,0.7), 0 0 80px rgba(255,215,0,0.5);
         }
 
         @keyframes iconFloat {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg);
-            }
-            50% { 
-                transform: translateY(-10px) rotate(3deg);
-            }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50%       { transform: translateY(-10px) rotate(3deg); }
         }
 
         .btn-launch {
@@ -304,16 +271,450 @@
             border-radius: 30px;
             text-decoration: none;
             transition: all 0.3s;
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 8px 25px rgba(255,215,0,0.4);
         }
 
         .btn-launch:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 12px 35px rgba(255,215,0,0.6);
             color: var(--shadow-dark);
         }
 
-        /* Section Titles */
+        /* ===== CHESS SECTION ===== */
+        .chess-interactive-section {
+            background: linear-gradient(180deg, #16213E 0%, #1A1A2E 50%, #0f0f1a 100%);
+            padding: 4rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chess-interactive-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+        }
+
+        .stars-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: var(--golden-sun);
+            border-radius: 50%;
+            animation: twinkle var(--d, 3s) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50%       { opacity: var(--op, 0.6); transform: scale(1); }
+        }
+
+        .chess-section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .chess-section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,215,0,0.15);
+            border: 2px solid rgba(255,215,0,0.4);
+            color: var(--golden-sun);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .chess-section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .chess-section-subtitle {
+            color: rgba(248,249,250,0.7);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        .chess-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 2;
+            flex-wrap: wrap;
+        }
+
+        .chess-tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 2rem;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 40px;
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .chess-tab-btn:hover {
+            border-color: var(--golden-sun);
+            color: var(--golden-sun);
+            transform: translateY(-2px);
+            background: rgba(255,215,0,0.1);
+        }
+
+        .chess-tab-btn.active {
+            background: var(--gradient-gold);
+            border-color: transparent;
+            color: var(--shadow-dark);
+            box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+            transform: translateY(-3px);
+        }
+
+        .chess-panel { display: none; animation: fadeInUp 0.4s ease; }
+        .chess-panel.active { display: block; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-layout {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: start;
+            position: relative;
+            z-index: 2;
+        }
+
+        .board-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .board-wrapper { position: relative; }
+
+        .board-glow {
+            position: absolute;
+            inset: -8px;
+            border-radius: 12px;
+            pointer-events: none;
+            animation: boardGlow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes boardGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(255,215,0,0.3), 0 0 60px rgba(255,215,0,0.15); }
+            50%       { box-shadow: 0 0 50px rgba(255,215,0,0.5), 0 0 90px rgba(255,215,0,0.25); }
+        }
+
+        #chessboard-bot,
+        #chessboard-puzzle {
+            width: 400px !important;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Customizar cores do tabuleiro */
+        .white-1e1d7 { background-color: #F0D9B5 !important; }
+        .black-3c85d { background-color: #B58863 !important; }
+
+        .game-status {
+            text-align: center;
+            font-family: 'Philosopher', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.07);
+            border: 2px solid rgba(255,215,0,0.3);
+            color: var(--cloud-white);
+            min-width: 280px;
+            transition: all 0.4s;
+        }
+
+        .game-status.status-check { border-color: #FF6B6B; color: #FF6B6B; background: rgba(255,107,107,0.1); }
+        .game-status.status-win   { border-color: #2ECC71; color: #2ECC71; background: rgba(46,204,113,0.1); }
+        .game-status.status-lose  { border-color: #E74C3C; color: #E74C3C; background: rgba(231,76,60,0.1); }
+        .game-status.status-draw  { border-color: var(--golden-sun); color: var(--golden-sun); background: rgba(255,215,0,0.1); }
+
+        .game-sidebar { display: flex; flex-direction: column; gap: 1rem; }
+
+        .sidebar-card {
+            background: rgba(255,255,255,0.04);
+            border: 2px solid rgba(255,215,0,0.2);
+            border-radius: 16px;
+            padding: 1.2rem;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.3s;
+        }
+
+        .sidebar-card:hover { border-color: rgba(255,215,0,0.4); }
+
+        .sidebar-card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--golden-sun);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .difficulty-selector { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        .diff-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 1rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .diff-btn:hover  { border-color: var(--golden-sun); color: var(--golden-sun); background: rgba(255,215,0,0.05); }
+        .diff-btn.active { border-color: var(--golden-sun); background: rgba(255,215,0,0.15); color: var(--cloud-white); font-weight: 600; }
+        .diff-stars      { color: var(--golden-sun); font-size: 0.75rem; }
+
+        .color-picker { display: flex; gap: 0.5rem; }
+
+        .color-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .color-btn.white-btn { background: rgba(255,255,255,0.08); color: var(--cloud-white); }
+        .color-btn.black-btn { background: rgba(0,0,0,0.3); color: var(--cloud-white); }
+        .color-btn.active    { border-color: var(--golden-sun); box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
+
+        .moves-list {
+            max-height: 160px;
+            overflow-y: auto;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,215,0,0.3) transparent;
+        }
+
+        .move-item {
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.04);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .move-item:hover { background: rgba(255,215,0,0.1); color: var(--golden-sun); }
+        .move-item.last  { background: rgba(255,215,0,0.12); color: var(--golden-sun); }
+        .move-num        { grid-column: 1 / -1; color: rgba(255,215,0,0.5); font-size: 0.72rem; margin-top: 0.2rem; }
+
+        .score-display  { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+        .score-player   { text-align: center; flex: 1; }
+        .score-name     { font-family: 'Cinzel', serif; font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+        .score-value    { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 900; color: var(--golden-sun); line-height: 1; }
+        .score-divider  { font-family: 'Cinzel', serif; font-size: 1.5rem; color: rgba(255,255,255,0.2); }
+
+        .action-buttons { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        .btn-chess {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.2rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-chess-primary   { background: var(--gradient-gold); color: var(--shadow-dark); box-shadow: 0 5px 15px rgba(255,215,0,0.3); }
+        .btn-chess-primary:hover   { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.5); color: var(--shadow-dark); }
+        .btn-chess-secondary { background: rgba(255,255,255,0.07); color: var(--cloud-white); border: 2px solid rgba(255,255,255,0.15); }
+        .btn-chess-secondary:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,215,0,0.3); transform: translateY(-2px); }
+        .btn-chess-danger    { background: rgba(231,76,60,0.15); color: #E74C3C; border: 2px solid rgba(231,76,60,0.3); }
+        .btn-chess-danger:hover    { background: rgba(231,76,60,0.25); transform: translateY(-2px); }
+
+        .thinking-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            color: rgba(255,255,255,0.6);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            padding: 0.5rem;
+        }
+
+        .thinking-indicator.show { display: flex; }
+        .thinking-dots { display: flex; gap: 4px; }
+
+        .thinking-dots span {
+            width: 6px; height: 6px;
+            background: var(--golden-sun);
+            border-radius: 50%;
+            animation: dotPulse 1.2s ease-in-out infinite;
+        }
+
+        .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotPulse {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40%           { transform: scale(1); opacity: 1; }
+        }
+
+        .puzzle-theme {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0.3rem 0;
+        }
+
+        .puzzle-date { font-family: 'Cinzel', serif; font-size: 0.8rem; color: rgba(255,215,0,0.6); letter-spacing: 2px; text-transform: uppercase; }
+        .puzzle-desc { font-family: 'Poppins', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+
+        .puzzle-attempts { display: flex; justify-content: center; gap: 0.4rem; margin: 0.5rem 0; }
+
+        .attempt-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+
+        .attempt-dot.used    { border-color: #E74C3C; background: #E74C3C; }
+        .attempt-dot.success { border-color: var(--grass-green); background: var(--grass-green); }
+
+        .puzzle-feedback {
+            text-align: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            opacity: 0;
+            transition: all 0.4s;
+            margin-top: 0.5rem;
+        }
+
+        .puzzle-feedback.show    { opacity: 1; }
+        .puzzle-feedback.correct { background: rgba(46,204,113,0.15); border: 2px solid #2ECC71; color: #2ECC71; }
+        .puzzle-feedback.wrong   { background: rgba(231,76,60,0.15);  border: 2px solid #E74C3C; color: #E74C3C; }
+
+        /* Highlight de lances */
+        .highlight-white { box-shadow: inset 0 0 0 4px rgba(255,215,0,0.8) !important; }
+        .highlight-black { box-shadow: inset 0 0 0 4px rgba(255,107,107,0.8) !important; }
+
+        .chess-cta { text-align: center; margin-top: 3rem; position: relative; z-index: 2; }
+        .chess-cta-text { font-family: 'Philosopher', sans-serif; color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 1rem; }
+
+        .btn-play-store {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 30px rgba(255,215,0,0.4);
+        }
+
+        .btn-play-store:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(255,215,0,0.6);
+            color: var(--shadow-dark);
+        }
+
+        /* Toast */
+        .chess-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-80px);
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            z-index: 99999;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(255,215,0,0.5);
+            font-size: 1rem;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .chess-toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ===== APPS SECTION ===== */
         .section-title h2 {
             font-family: 'Cinzel', serif;
             font-size: clamp(2rem, 4vw, 3rem);
@@ -325,7 +726,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Cards de Apps com VIDA! */
         .app-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
             border-radius: 25px;
@@ -334,65 +734,43 @@
             border: 3px solid transparent;
             height: 100%;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .app-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at top right, rgba(255, 215, 0, 0.1), transparent 60%);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at top right, rgba(255,215,0,0.1), transparent 60%);
             opacity: 0;
             transition: opacity 0.5s;
             z-index: 0;
             pointer-events: none;
         }
 
-        .app-card:hover::before {
-            opacity: 1;
-        }
+        .app-card:hover::before  { opacity: 1; }
+        .app-card > *            { position: relative; z-index: 1; }
+        .app-card a, .app-card button { position: relative; z-index: 10; pointer-events: auto; }
+        .app-card::before        { pointer-events: none !important; }
 
         .app-card:hover {
             transform: translateY(-15px) scale(1.02);
             border-color: var(--golden-sun);
-            box-shadow: 
-                0 25px 70px rgba(255, 215, 0, 0.4),
-                0 0 40px rgba(255, 215, 0, 0.2),
-                inset 0 0 60px rgba(255, 215, 0, 0.05);
-        }
-
-        .app-card > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .app-card a,
-        .app-card button {
-            position: relative;
-            z-index: 10;
-            pointer-events: auto;
+            box-shadow: 0 25px 70px rgba(255,215,0,0.4), 0 0 40px rgba(255,215,0,0.2), inset 0 0 60px rgba(255,215,0,0.05);
         }
 
         .app-img {
-            width: 100%;
-            height: 200px;
+            width: 100%; height: 200px;
             object-fit: cover;
             transition: all 0.5s;
             filter: brightness(0.95);
         }
 
-        .app-card:hover .app-img {
-            transform: scale(1.1);
-            filter: brightness(1.1) saturate(1.2);
-        }
+        .app-card:hover .app-img { transform: scale(1.1); filter: brightness(1.1) saturate(1.2); }
 
         .category-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 15px; right: 15px;
             background: var(--gradient-gold);
             color: var(--shadow-dark);
             font-family: 'Philosopher', sans-serif;
@@ -401,13 +779,13 @@
             border-radius: 20px;
             font-size: 0.85rem;
             z-index: 2;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+            animation: badgeFloat 3s ease-in-out infinite;
         }
 
-        @keyframes float {
+        @keyframes badgeFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50%       { transform: translateY(-5px); }
         }
 
         .app-title {
@@ -419,10 +797,7 @@
             transition: all 0.3s;
         }
 
-        .app-card:hover .app-title {
-            color: var(--golden-sun);
-            transform: translateX(5px);
-        }
+        .app-card:hover .app-title { color: var(--golden-sun); transform: translateX(5px); }
 
         .app-description {
             padding: 0 1.5rem;
@@ -433,9 +808,7 @@
             transition: all 0.3s;
         }
 
-        .app-card:hover .app-description {
-            color: #333;
-        }
+        .app-card:hover .app-description { color: #333; }
 
         .app-rating {
             padding: 0 1.5rem;
@@ -445,98 +818,57 @@
             gap: 0.3rem;
         }
 
-        .app-rating i {
-            color: var(--golden-sun);
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
+        .app-rating i               { color: var(--golden-sun); font-size: 1.1rem; transition: all 0.3s; }
+        .app-card:hover .app-rating i { transform: scale(1.2) rotate(10deg); }
+        .app-rating span            { font-weight: 700; color: var(--deep-blue); margin-left: 0.5rem; }
 
-        .app-card:hover .app-rating i {
-            transform: scale(1.2) rotate(10deg);
-        }
-
-        .app-card:hover .app-rating i:nth-child(2) { transition-delay: 0.05s; }
-        .app-card:hover .app-rating i:nth-child(3) { transition-delay: 0.1s; }
-        .app-card:hover .app-rating i:nth-child(4) { transition-delay: 0.15s; }
-        .app-card:hover .app-rating i:nth-child(5) { transition-delay: 0.2s; }
-
-        .app-rating span {
-            font-weight: 700;
-            color: var(--deep-blue);
-            margin-left: 0.5rem;
-        }
-
-        /* Filtros Aprimorados */
         .filter-btn {
             font-family: 'Philosopher', sans-serif;
             font-weight: 700;
             color: var(--cloud-white);
             position: relative;
             transition: all 0.3s;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
         }
 
         .filter-btn::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
+            bottom: -5px; left: 0;
+            width: 0; height: 3px;
             background: var(--gradient-gold);
             transition: width 0.3s;
         }
 
-        .filter-btn:hover::after,
-        .filter-btn.active::after {
-            width: 100%;
-        }
+        .filter-btn:hover::after, .filter-btn.active::after { width: 100%; }
+        .filter-btn.active { color: var(--golden-sun); }
 
-        .filter-btn.active {
-            color: var(--golden-sun);
-        }
-
-        /* Search Box */
         .search-box {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,215,0,0.3);
             border-radius: 30px;
             overflow: hidden;
             backdrop-filter: blur(10px);
         }
 
-        .search-box input {
-            background: transparent;
-            border: none;
-            color: var(--cloud-white);
-        }
+        .search-box input       { background: transparent; border: none; color: var(--cloud-white); }
+        .search-box input::placeholder { color: rgba(255,255,255,0.6); }
+        .search-box i           { color: var(--golden-sun); }
 
-        .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .search-box i {
-            color: var(--golden-sun);
-        }
-
-        /* E-book Section */
         .ebook-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255,215,0,0.3);
             border-radius: 20px;
             padding: 3rem;
             margin: 3rem 0;
         }
 
-        .ebook-section h2 {
-            font-family: 'Cinzel', serif;
-            color: var(--cloud-white);
-        }
-
+        .ebook-section h2       { font-family: 'Cinzel', serif; color: var(--cloud-white); }
         .ebook-section p,
-        .ebook-section li {
-            color: var(--cloud-white);
-        }
+        .ebook-section li       { color: var(--cloud-white); }
 
         .btn-hero {
             background: var(--gradient-gold);
@@ -546,15 +878,18 @@
             border-radius: 30px;
             padding: 0.8rem 2rem;
             transition: all 0.3s;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
         }
 
         .btn-hero:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(255,215,0,0.5);
             color: var(--shadow-dark);
         }
 
-        /* Footer */
         .footer {
             background: var(--gradient-dark);
             border-top: 3px solid var(--golden-sun);
@@ -562,7 +897,6 @@
             z-index: 2;
         }
 
-        /* Botões de Download */
         .btn-download {
             background: var(--gradient-gold);
             color: var(--shadow-dark);
@@ -578,83 +912,45 @@
 
         .btn-download:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 8px 25px rgba(255,215,0,0.5);
             color: var(--shadow-dark);
         }
 
-        .btn-hero {
-            background: var(--gradient-gold);
-            color: var(--shadow-dark);
-            font-family: 'Philosopher', sans-serif;
-            font-weight: 700;
-            border-radius: 30px;
-            padding: 0.8rem 2rem;
-            transition: all 0.3s;
-            position: relative;
-            z-index: 10;
-            pointer-events: auto;
-            cursor: pointer;
-        }
-
-        .btn-hero:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
-            color: var(--shadow-dark);
-        }
-
-        /* Garantir que filtros sejam clicáveis */
-        .filter-btn {
-            position: relative;
-            z-index: 10;
-            pointer-events: auto;
-            cursor: pointer;
-        }
-
-        /* Garantir que inputs e forms sejam clicáveis */
-        input, button, a, form, select, textarea {
-            position: relative;
-            z-index: 10;
-            pointer-events: auto;
-        }
-
-       /* Back to Top */
         .back-to-top {
             position: fixed !important;
             bottom: 30px !important;
             right: 30px !important;
-            left: auto !important;  /* ← IMPORTANTE! Garante que não fique à esquerda */
+            left: auto !important;
             background: var(--gradient-gold);
             color: var(--shadow-dark);
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             text-decoration: none;
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 5px 20px rgba(255,215,0,0.4);
             transition: all 0.3s;
             z-index: 1000 !important;
         }
 
         .back-to-top:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(255,215,0,0.6);
             color: var(--shadow-dark);
         }
 
-        /* Language Selector - Canto Superior Direito */
         .language-selector {
-            position: fixed;
+            position: fixed !important;
             top: 20px !important;
             right: 20px !important;
             bottom: auto !important;
             left: auto !important;
-            z-index: 10000;
+            z-index: 10000 !important;
         }
 
         .language-btn {
-            background: rgba(26, 26, 46, 0.9);
+            background: rgba(26,26,46,0.9);
             backdrop-filter: blur(10px);
             color: var(--cloud-white);
             border: 2px solid var(--golden-sun);
@@ -665,7 +961,7 @@
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -675,21 +971,20 @@
             background: var(--gradient-gold);
             color: var(--shadow-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.5);
         }
 
         .language-dropdown {
             display: none;
             position: absolute;
-            top: 55px;
-            right: 0;
-            background: rgba(26, 26, 46, 0.95);
+            top: 55px; right: 0;
+            background: rgba(26,26,46,0.95);
             backdrop-filter: blur(10px);
             border: 2px solid var(--golden-sun);
             border-radius: 15px;
             padding: 0.5rem;
             min-width: 200px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .language-option {
@@ -705,46 +1000,32 @@
         }
 
         .language-option:hover {
-            background: rgba(255, 215, 0, 0.2);
+            background: rgba(255,215,0,0.2);
             color: var(--golden-sun);
             transform: translateX(5px);
         }
 
-        .language-flag {
-            width: 24px;
-            height: auto;
-            border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        .language-option:hover {
-            background: rgba(255, 215, 0, 0.2);
-            color: var(--golden-sun);
-        }
+        .language-flag { width: 24px; height: auto; border-radius: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* Translation Banner */
         .translation-banner {
             position: fixed;
             bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(26, 26, 46, 0.95);
+            background: rgba(26,26,46,0.95);
             backdrop-filter: blur(10px);
             border: 3px solid var(--golden-sun);
             border-radius: 20px;
             padding: 2rem;
             max-width: 500px;
             z-index: 10000;
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 10px 40px rgba(255,215,0,0.4);
             text-align: center;
         }
 
-        .translation-banner p {
-            color: var(--cloud-white);
-            margin-bottom: 1rem;
-        }
+        .translation-banner p { color: var(--cloud-white); margin-bottom: 1rem; }
 
-        .translate-btn,
-        .cancel-btn {
+        .translate-btn, .cancel-btn {
             padding: 0.8rem 1.5rem;
             border: none;
             border-radius: 25px;
@@ -755,157 +1036,51 @@
             transition: all 0.3s;
         }
 
-        .translate-btn {
-            background: var(--gradient-gold);
-            color: var(--shadow-dark);
-        }
+        .translate-btn { background: var(--gradient-gold); color: var(--shadow-dark); }
+        .translate-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,215,0,0.5); }
+        .cancel-btn { background: transparent; color: var(--cloud-white); border: 2px solid var(--cloud-white); }
+        .cancel-btn:hover { background: var(--cloud-white); color: var(--shadow-dark); }
 
-        .translate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
-        }
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s; }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
 
-        .cancel-btn {
-            background: transparent;
-            color: var(--cloud-white);
-            border: 2px solid var(--cloud-white);
-        }
-
-        .cancel-btn:hover {
-            background: var(--cloud-white);
-            color: var(--shadow-dark);
-        }
-
-        /* Scroll Reveal Animation */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s;
-        }
-
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            /* Banner e Launch */
-            .launch-banner {
-                padding: 1rem 0.5rem 2rem;
-            }
-
-            .launch-app-icon {
-                width: 90px;
-                height: 90px;
-                border-radius: 20px;
-            }
-
-            .launch-title {
-                font-size: 1.5rem;
-            }
-
-            .btn-launch {
-                font-size: 1rem;
-                padding: 0.6rem 1.5rem;
-            }
-
-            /* Navbar */
-            .navbar-integrated {
-                padding-bottom: 1rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .navbar-toggler-integrated {
-                display: block;
-                top: 70px; /* Move para baixo do seletor de idioma */
-            }
-
-            .nav-links-integrated {
-                display: none;
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem 0;
-                margin-top: 3rem;
-            }
-
-            .nav-links-integrated.active {
-                display: flex;
-            }
-
-            .nav-links-integrated a {
-                padding: 0.8rem 1.5rem;
-                background: rgba(255, 215, 0, 0.1);
-                border-radius: 10px;
-                text-align: center;
-            }
-
-            .language-selector {
-                top: 15px !important;
-                right: 15px !important;
-            }
-            
-            .language-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
-            }
-            
-            .language-btn span {
-                display: none;
-            }
-            
-            .language-dropdown {
-                top: 50px;
-                right: 0;
-                min-width: 180px;
-            }
-
-            /* Translation Banner */
-            .translation-banner {
-                bottom: 80px;
-                max-width: 90%;
-                padding: 1.5rem;
-            }
-
-            /* App Cards */
-            .app-card:hover {
-                transform: translateY(-8px) scale(1);
-            }
-        }
-
-        /* FIX CRÍTICO - Garantir interatividade */
-        body > *:not(.magic-background) {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Language Selector - DEVE ficar position: fixed */
-        .language-selector {
-            position: fixed !important;
-            top: 20px !important;
-            right: 20px !important;
-            bottom: auto !important;
-            left: auto !important;
-            z-index: 10000 !important;
-        }
-
-
-        /* Força interatividade de todos elementos clicáveis */
-        a, button, input, textarea, select, 
-        .btn, .filter-btn, .social-btn,
-        .app-card, .nav-link {
+        /* Global interactivity */
+        body > *:not(.magic-background) { position: relative; z-index: 1; }
+        a, button, input, textarea, select, .btn, .filter-btn, .social-btn, .app-card, .nav-link {
             pointer-events: auto !important;
             cursor: pointer !important;
             position: relative;
             z-index: 100;
         }
 
-        /* Remove bloqueios do card */
-        .app-card::before {
-            pointer-events: none !important;
+        /* Responsivo */
+        @media (max-width: 992px) {
+            .game-layout { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+        }
+
+        @media (max-width: 768px) {
+            .launch-banner { padding: 1rem 0.5rem 2rem; }
+            .launch-app-icon { width: 90px; height: 90px; border-radius: 20px; }
+            .launch-title { font-size: 1.5rem; }
+            .btn-launch { font-size: 1rem; padding: 0.6rem 1.5rem; }
+            .navbar-integrated { padding-bottom: 1rem; margin-bottom: 1.5rem; }
+            .navbar-toggler-integrated { display: block; top: 70px; }
+            .nav-links-integrated { display: none; flex-direction: column; gap: 1rem; padding: 1rem 0; margin-top: 3rem; }
+            .nav-links-integrated.active { display: flex; }
+            .nav-links-integrated a { padding: 0.8rem 1.5rem; background: rgba(255,215,0,0.1); border-radius: 10px; text-align: center; }
+            .language-selector { top: 15px !important; right: 15px !important; }
+            .language-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+            .language-btn span { display: none; }
+            .language-dropdown { top: 50px; right: 0; min-width: 180px; }
+            .translation-banner { bottom: 80px; max-width: 90%; padding: 1.5rem; }
+            .app-card:hover { transform: translateY(-8px) scale(1); }
+        }
+
+        @media (max-width: 480px) {
+            #chessboard-bot, #chessboard-puzzle { width: 300px !important; }
+            .game-status { min-width: 240px; font-size: 0.9rem; }
         }
     </style>
-    
 </head>
 
 <body>
@@ -919,10 +1094,9 @@
         <div class="floating-code">🚀</div>
     </div>
 
-    <!-- Banner de Lançamento ÉPICO com Menu Integrado -->
+    <!-- Banner -->
     <div class="launch-banner">
         <div class="container">
-            <!-- Navbar Integrada -->
             <nav class="navbar-integrated">
                 <button class="navbar-toggler-integrated" type="button" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars"></i>
@@ -934,13 +1108,11 @@
                 </ul>
             </nav>
 
-            <!-- Conteúdo do Banner -->
             <div class="launch-content">
                 <div class="launch-badge">🎉 NOVO LANÇAMENTO</div>
-                <!-- ÍCONE DO APP -->
-            <div class="app-icon-launch">
-                <img src="chessland/chess_land.png" alt="Chess Land Icon" class="launch-app-icon">
-            </div>
+                <div class="app-icon-launch">
+                    <img src="chessland/chess_land.png" alt="Chess Land Icon" class="launch-app-icon">
+                </div>
                 <h2 class="launch-title">
                     ♟️ <span class="highlight">Chess Land</span> - Seu Campo de Treino no Xadrez
                 </h2>
@@ -955,7 +1127,171 @@
         </div>
     </div>
 
-    
+    <!-- ===== SEÇÃO INTERATIVA XADREZ ===== -->
+    <section class="chess-interactive-section" id="chess-play">
+        <div class="stars-bg" id="starsBg"></div>
+        <div class="container" style="position:relative; z-index:2;">
+
+            <div class="chess-section-header">
+                <div class="chess-section-badge"><i class="fas fa-chess"></i> EXPERIMENTE AGORA — GRÁTIS</div>
+                <h2 class="chess-section-title">♟️ Jogue Xadrez Aqui Mesmo</h2>
+                <p class="chess-section-subtitle">Desafie o bot ou resolva o puzzle do dia — sem baixar nada!</p>
+            </div>
+
+            <div class="chess-tabs">
+                <button class="chess-tab-btn active" onclick="switchTab('bot')"><i class="fas fa-robot"></i> Jogar vs Bot</button>
+                <button class="chess-tab-btn" onclick="switchTab('puzzle')"><i class="fas fa-puzzle-piece"></i> Puzzle do Dia</button>
+            </div>
+
+            <!-- PAINEL BOT -->
+            <div class="chess-panel active" id="panel-bot">
+                <div class="game-layout">
+
+                    <div class="game-sidebar">
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-trophy"></i> Placar</div>
+                            <div class="score-display">
+                                <div class="score-player"><div class="score-name">VOCÊ</div><div class="score-value" id="playerScore">0</div></div>
+                                <div class="score-divider">×</div>
+                                <div class="score-player"><div class="score-name">BOT</div><div class="score-value" id="botScore">0</div></div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-chess-king"></i> Jogar como</div>
+                            <div class="color-picker">
+                                <button class="color-btn white-btn active" id="btnWhite" onclick="setPlayerColor('white')">♔ Brancas</button>
+                                <button class="color-btn black-btn" id="btnBlack" onclick="setPlayerColor('black')">♚ Pretas</button>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-brain"></i> Dificuldade</div>
+                            <div class="difficulty-selector">
+                                <button class="diff-btn active" onclick="setDifficulty(1, this)"><span>Iniciante</span><span class="diff-stars">★☆☆☆</span></button>
+                                <button class="diff-btn" onclick="setDifficulty(2, this)"><span>Amador</span><span class="diff-stars">★★☆☆</span></button>
+                                <button class="diff-btn" onclick="setDifficulty(3, this)"><span>Avançado</span><span class="diff-stars">★★★☆</span></button>
+                                <button class="diff-btn" onclick="setDifficulty(4, this)"><span>Mestre</span><span class="diff-stars">★★★★</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="board-container">
+                        <div class="board-wrapper">
+                            <div class="board-glow"></div>
+                            <div id="chessboard-bot"></div>
+                        </div>
+                        <div class="game-status" id="gameStatus"><i class="fas fa-chess-pawn"></i> Sua vez — Brancas</div>
+                        <div class="thinking-indicator" id="thinkingIndicator">
+                            <span>Bot pensando</span>
+                            <div class="thinking-dots"><span></span><span></span><span></span></div>
+                        </div>
+                    </div>
+
+                    <div class="game-sidebar">
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-gamepad"></i> Controles</div>
+                            <div class="action-buttons">
+                                <button class="btn-chess btn-chess-primary" onclick="newGame()"><i class="fas fa-play"></i> Nova Partida</button>
+                                <button class="btn-chess btn-chess-secondary" onclick="undoMove()"><i class="fas fa-undo"></i> Desfazer</button>
+                                <button class="btn-chess btn-chess-secondary" onclick="showHint()"><i class="fas fa-lightbulb"></i> Dica</button>
+                                <button class="btn-chess btn-chess-danger" onclick="resignGame()"><i class="fas fa-flag"></i> Desistir</button>
+                            </div>
+                        </div>
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-list"></i> Movimentos</div>
+                            <div class="moves-list" id="movesList">
+                                <span style="color:rgba(255,255,255,0.3);font-size:0.8rem;grid-column:1/-1;">Nenhum movimento ainda...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PAINEL PUZZLE -->
+            <div class="chess-panel" id="panel-puzzle">
+                <div class="game-layout">
+
+                    <div class="game-sidebar">
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-calendar-day"></i> Puzzle de Hoje</div>
+                            <div style="text-align:center;">
+                                <div class="puzzle-date" id="puzzleDate"></div>
+                                <div class="puzzle-theme" id="puzzleTheme">Carregando...</div>
+                                <div class="puzzle-desc" id="puzzleDesc"></div>
+                            </div>
+                            <div style="margin-top:1rem;">
+                                <div style="font-family:'Cinzel',serif;font-size:0.75rem;color:rgba(255,215,0,0.5);letter-spacing:1px;margin-bottom:0.5rem;text-align:center;">TENTATIVAS</div>
+                                <div class="puzzle-attempts">
+                                    <div class="attempt-dot" id="dot0"></div>
+                                    <div class="attempt-dot" id="dot1"></div>
+                                    <div class="attempt-dot" id="dot2"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-info-circle"></i> Como jogar</div>
+                            <div style="font-family:'Poppins',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.7;">
+                                <p>🎯 Encontre o <strong style="color:var(--golden-sun);">melhor lance</strong></p>
+                                <p>🏆 Você tem <strong style="color:var(--golden-sun);">3 tentativas</strong></p>
+                                <p>💡 Use a dica se travar</p>
+                                <p>♟️ Novos puzzles todos os dias!</p>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card" id="puzzleStatsCard" style="display:none;">
+                            <div class="sidebar-card-title"><i class="fas fa-chart-bar"></i> Resultado</div>
+                            <div id="puzzleResult" style="text-align:center;font-family:'Philosopher',sans-serif;color:var(--cloud-white);"></div>
+                        </div>
+                    </div>
+
+                    <div class="board-container">
+                        <div class="board-wrapper">
+                            <div class="board-glow"></div>
+                            <div id="chessboard-puzzle"></div>
+                        </div>
+                        <div class="game-status" id="puzzleStatus"><i class="fas fa-chess-knight"></i> Brancas jogam — Encontre o mate!</div>
+                        <div class="puzzle-feedback" id="puzzleFeedback"></div>
+                    </div>
+
+                    <div class="game-sidebar">
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-tools"></i> Opções</div>
+                            <div class="action-buttons">
+                                <button class="btn-chess btn-chess-secondary" onclick="getPuzzleHint()"><i class="fas fa-lightbulb"></i> Mostrar Dica</button>
+                                <button class="btn-chess btn-chess-secondary" onclick="resetPuzzle()"><i class="fas fa-redo"></i> Reiniciar</button>
+                                <button class="btn-chess btn-chess-secondary" onclick="showSolution()"><i class="fas fa-eye"></i> Ver Solução</button>
+                            </div>
+                        </div>
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title"><i class="fas fa-history"></i> Seus lances</div>
+                            <div class="moves-list" id="puzzleMovesList">
+                                <span style="color:rgba(255,255,255,0.3);font-size:0.8rem;grid-column:1/-1;">Nenhum movimento...</span>
+                            </div>
+                        </div>
+                        <div class="sidebar-card" style="background:rgba(255,215,0,0.05);border-color:rgba(255,215,0,0.3);">
+                            <div class="sidebar-card-title"><i class="fas fa-mobile-alt"></i> No App</div>
+                            <p style="font-family:'Poppins',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.6);margin-bottom:0.8rem;">Centenas de puzzles no Chess Land!</p>
+                            <a href="https://play.google.com/store/apps/details?id=com.talentodev.chess" target="_blank" class="btn-chess btn-chess-primary" style="text-decoration:none;display:flex;"><i class="fab fa-google-play"></i> Baixar Grátis</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="chess-cta">
+                <p class="chess-cta-text">Gostou? O app tem muito mais recursos, puzzles e análises avançadas! 🚀</p>
+                <a href="https://play.google.com/store/apps/details?id=com.talentodev.chess" target="_blank" class="btn-play-store">
+                    <i class="fab fa-google-play fa-lg"></i> Baixar Chess Land — Grátis
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="chess-toast" id="chessToast"></div>
+
     <!-- Apps Section -->
     <section id="apps" class="py-5">
         <div class="container">
@@ -964,7 +1300,6 @@
                 <p class="section-subtitle" style="color: var(--cloud-white); font-size: 1.2rem;">📱 Apps em produção • 📂 Código-fonte aberto • 🆓 Totalmente gratuitos</p>
             </div>
 
-            <!-- Sistema de Filtro -->
             <div class="row mb-4">
                 <div class="col-md-8 mx-auto scroll-reveal">
                     <div class="search-box">
@@ -985,19 +1320,12 @@
             </div>
 
             <div class="row" id="appsContainer">
-                
-                <!-- Chess Land - DESTAQUE -->
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="flutter" data-category="games">
-                    <div class="app-card" style="border: 4px solid var(--golden-sun); box-shadow: 0 15px 50px rgba(255, 215, 0, 0.4);">
+                    <div class="app-card" style="border: 4px solid var(--golden-sun); box-shadow: 0 15px 50px rgba(255,215,0,0.4);">
                         <span class="category-badge">Jogos • NOVO! 🔥</span>
-                        <img loading="lazy" src="chessland/chess_land.png" class="app-img" alt="Chess Land - Aprendizado de xadrez" />
-                        <h5 class="app-title" style="font-family: 'Cinzel', serif; color: var(--deep-blue);">♟️ Chess Land</h5>
-                        <p class="app-description">Nada de menus complicados ou recursos escondidos! 
-                            Aqui, você joga, treina e evolui — sem distrações.🚀 
-                            Saia do rating 1000 e leve seu xadrez para outro nível.
-                            Chess Land é mais que um jogo. É seu campo de treino.
-
-                            👉 Comece agora e construa sua jornada no xadrez.</p>
+                        <img loading="lazy" src="chessland/chess_land.png" class="app-img" alt="Chess Land">
+                        <h5 class="app-title">♟️ Chess Land</h5>
+                        <p class="app-description">Nada de menus complicados ou recursos escondidos! Aqui, você joga, treina e evolui — sem distrações.🚀 Saia do rating 1000 e leve seu xadrez para outro nível. Chess Land é mais que um jogo. É seu campo de treino.</p>
                         <div class="app-rating">
                             <i class="fas fa-star" style="color: var(--golden-sun);"></i>
                             <i class="fas fa-star" style="color: var(--golden-sun);"></i>
@@ -1006,231 +1334,121 @@
                             <i class="fas fa-star" style="color: var(--golden-sun);"></i>
                             <span class="ms-1">5.0</span>
                         </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.chess" target="_blank" class="btn btn-download play-link w-100 mb-2">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
-                        <a href="chess_land.html" class="btn btn-outline-primary w-100" style="border: 2px solid var(--deep-blue); color: var(--deep-blue); font-weight: 700; border-radius: 25px;">
-                            <i class="fas fa-info-circle"></i> Saiba Mais
-                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.chess" target="_blank" class="btn btn-download play-link w-100 mb-2"><i class="fab fa-google-play"></i> Google Play Store</a>
+                        <a href="chess_land.html" class="btn btn-outline-primary w-100" style="border: 2px solid var(--deep-blue); color: var(--deep-blue); font-weight: 700; border-radius: 25px;"><i class="fas fa-info-circle"></i> Saiba Mais</a>
                     </div>
                 </div>
 
-                <!-- Caça Palavras Bíblico -->
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="flutter" data-category="games">
                     <div class="app-card">
                         <span class="category-badge">Jogos</span>
-                        <img loading="lazy" src="wordhunt/ico.jpg" class="app-img" alt="Caça palavras moderno com vários níveis. Divirta-se e treine seu cérebro!" />
+                        <img loading="lazy" src="wordhunt/ico.jpg" class="app-img" alt="Caça palavras">
                         <h5 class="app-title">Caça palavras</h5>
-                        <p class="app-description">Caça palavras moderno com vários níveis. Divirta-se e treine seu cérebro! Encontre palavras escondidas em todas as direções: horizontal, vertical e diagonal. Quanto mais você joga, mais seu raciocínio e vocabulário se desenvolvem!</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span class="ms-1">5.0</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.wordhunt" target="_blank" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
-                        <a href="word_hunt.html" class="btn btn-outline-primary w-100" style="border: 2px solid var(--deep-blue); color: var(--deep-blue); font-weight: 700; border-radius: 25px;">
-                            <i class="fas fa-info-circle"></i> Saiba Mais
-                        </a>
+                        <p class="app-description">Caça palavras moderno com vários níveis. Divirta-se e treine seu cérebro! Encontre palavras escondidas em todas as direções.</p>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="ms-1">5.0</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.wordhunt" target="_blank" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
+                        <a href="word_hunt.html" class="btn btn-outline-primary w-100" style="border: 2px solid var(--deep-blue); color: var(--deep-blue); font-weight: 700; border-radius: 25px;"><i class="fas fa-info-circle"></i> Saiba Mais</a>
                     </div>
                 </div>
 
-                <!-- Talk to Me -->
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="kotlin" data-category="education">
                     <div class="app-card">
                         <span class="category-badge">Educação</span>
                         <img loading="lazy" src="TalkToMe/ico.jpg" alt="Talk to Me" class="app-img">
                         <h5 class="app-title">Talk to Me</h5>
                         <p class="app-description">Aprenda idiomas conversando! Com o Talk to Me, você pratica conversação em outro idioma, com um tutor artificial poliglota</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span class="ms-1">4.7</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.talktome" target="_blank" rel="noopener" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span class="ms-1">4.7</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.talktome" target="_blank" rel="noopener" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
                     </div>
                 </div>
 
-                <!-- Phone Defense -->
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="java" data-category="tools">
                     <div class="app-card">
                         <span class="category-badge">Ferramentas</span>
                         <img loading="lazy" src="PhoneDefense/ico.jpg" alt="Phone Defense" class="app-img">
                         <h5 class="app-title">Phone Defense</h5>
-                        <p class="app-description">Phone Defense, Encontre o seu celular assobiando ou apitando! Fotos de bisbilhoteiros! Alarme contra PikPockets e bisbilhoteiros de plantão!</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span class="ms-1">4.2</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.telefone" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
+                        <p class="app-description">Encontre o seu celular assobiando! Fotos de bisbilhoteiros! Alarme contra PikPockets!</p>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="ms-1">4.2</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.telefone" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
                     </div>
                 </div>
 
-                <!-- Safe Pocket -->
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="java" data-category="productivity">
                     <div class="app-card">
                         <span class="category-badge">Produtividade</span>
                         <img loading="lazy" src="SafePocket/ico.jpg" alt="Safe Pocket" class="app-img">
                         <h5 class="app-title">Safe Pocket</h5>
                         <p class="app-description">Suas finanças pessoais na palma de sua mão!</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span class="ms-1">4.6</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span class="ms-1">4.6</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
                     </div>
                 </div>
 
-                <!-- Translator -->
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="kotlin" data-category="tools">
                     <div class="app-card">
                         <span class="category-badge">Ferramentas</span>
                         <img loading="lazy" src="translate/ico.jpg" alt="Translator App" class="app-img">
                         <h5 class="app-title">Translator</h5>
-                        <p class="app-description">Tradução em tempo real de conversação entre pessoas de dois idiomas diferentes, usando API do Google Translate</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span class="ms-1">4.3</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.translator" target="_blank" rel="noopener" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
+                        <p class="app-description">Tradução em tempo real de conversação entre dois idiomas usando API do Google Translate</p>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="ms-1">4.3</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.translator" target="_blank" rel="noopener" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
                     </div>
                 </div>
 
-                <!-- King Quiz -->
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="java" data-category="games">
                     <div class="app-card">
                         <span class="category-badge">Jogos</span>
                         <img loading="lazy" src="KingQuiz/ico.jpg" alt="King Quiz" class="app-img">
                         <h5 class="app-title">King Quiz</h5>
-                        <p class="app-description">King Quiz, Um jogo de perguntas e respostas em varias áreas do conhecimento, onde voçê participa de um campeonato Mundial!</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span class="ms-1">4.5</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.kingquiz" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
+                        <p class="app-description">Um jogo de perguntas e respostas em várias áreas do conhecimento, onde você participa de um campeonato Mundial!</p>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span class="ms-1">4.5</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.kingquiz" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
                     </div>
                 </div>
-                
-                <!-- Photo Puzzle -->
+
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="java" data-category="games">
                     <div class="app-card">
                         <span class="category-badge">Jogos</span>
                         <img loading="lazy" src="PhotoPuzzle/ico.jpg" alt="Photo Puzzle" class="app-img">
                         <h5 class="app-title">Photo Puzzle</h5>
-                        <p class="app-description">Quebra-Cabeça, Transforme suas fotos em Quebra-Cabeças! Diversos níveis e dificuldades, com score mundial!</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span class="ms-1">4.1</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.photopuzzle" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
+                        <p class="app-description">Transforme suas fotos em Quebra-Cabeças! Diversos níveis e dificuldades, com score mundial!</p>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="ms-1">4.1</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.photopuzzle" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
                     </div>
                 </div>
 
-                <!-- Palavras Cruzadas -->
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="flutter" data-category="games">
                     <div class="app-card">
                         <span class="category-badge">Jogos</span>
                         <img loading="lazy" src="crossword/ico.jpg" alt="Cross Word" class="app-img">
                         <h5 class="app-title">Palavras Cruzadas</h5>
-                        <p class="app-description">Palavra Cruzadas - Exercite sua mente com nossa cruzadinha! Nosso app é a forma perfeita de relaxar enquanto aprende!</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span class="ms-1">4.4</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.crossword" target="_blank" rel="noopener" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
-                        <a href="cross_word.html" class="btn btn-outline-primary w-100" style="border: 2px solid var(--deep-blue); color: var(--deep-blue); font-weight: 700; border-radius: 25px;">
-                            <i class="fas fa-info-circle"></i> Saiba Mais
-                        </a>
+                        <p class="app-description">Exercite sua mente com nossa cruzadinha! A forma perfeita de relaxar enquanto aprende!</p>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span class="ms-1">4.4</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.crossword" target="_blank" rel="noopener" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
+                        <a href="cross_word.html" class="btn btn-outline-primary w-100" style="border: 2px solid var(--deep-blue); color: var(--deep-blue); font-weight: 700; border-radius: 25px;"><i class="fas fa-info-circle"></i> Saiba Mais</a>
                     </div>
                 </div>
-               
-                <!-- Geotrack -->
+
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="flutter" data-category="tools">
                     <div class="app-card">
                         <span class="category-badge">Ferramentas</span>
                         <img loading="lazy" src="geotrack/icon.png" alt="Park PIN" class="app-img">
                         <h5 class="app-title">Park PIN</h5>
                         <p class="app-description">Salve onde você estacionou e descubra lugares incríveis com bússola e GPS!</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span class="ms-1">4.2</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.geotrack" target="_blank" rel="noopener" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
-                        <a href="park_pin.html" class="btn btn-outline-primary w-100" style="border: 2px solid var(--deep-blue); color: var(--deep-blue); font-weight: 700; border-radius: 25px;">
-                            <i class="fas fa-info-circle"></i> Saiba Mais
-                        </a>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="ms-1">4.2</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.geotrack" target="_blank" rel="noopener" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
+                        <a href="park_pin.html" class="btn btn-outline-primary w-100" style="border: 2px solid var(--deep-blue); color: var(--deep-blue); font-weight: 700; border-radius: 25px;"><i class="fas fa-info-circle"></i> Saiba Mais</a>
                     </div>
                 </div>
-                
-                <!-- Birthday Calculator -->
+
                 <div class="col-lg-4 col-md-6 mb-4 app-item scroll-reveal" data-tech="kotlin" data-category="tools">
                     <div class="app-card">
                         <span class="category-badge">Ferramentas</span>
                         <img loading="lazy" src="howoldareyou/ico.jpg" alt="Birthday App" class="app-img">
                         <h5 class="app-title">Birthday Calculator</h5>
                         <p class="app-description">Birthday Calculator, um aplicativo de idades divertido!!</p>
-                        <div class="app-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span class="ms-1">4.6</span>
-                        </div>
-                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.howoldareyou" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link">
-                            <i class="fab fa-google-play"></i> Google Play Store
-                        </a>
+                        <div class="app-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span class="ms-1">4.6</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.talentodev.howoldareyou" target="_blank" rel="noopener noreferrer" class="btn btn-download play-link"><i class="fab fa-google-play"></i> Google Play Store</a>
                     </div>
                 </div>
             </div>
@@ -1251,46 +1469,33 @@
                 </div>
                 <div class="col-md-7">
                     <h2 class="mb-3">Aprenda a usar o aplicativo Safe Pocket com nosso e-book</h2>
-                    <p class="mb-4">Descubra como aproveitar ao máximo todas as funcionalidades do aplicativo Safe Pocket com nosso guia completo e ilustrado. Esse é o <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" style="color: var(--golden-sun);">link</a> para o aplicativo Safe Pocket na Google Play !</p>
-                    
+                    <p class="mb-4">Descubra como aproveitar ao máximo todas as funcionalidades do Safe Pocket. <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" style="color: var(--golden-sun);">Link para o app</a> na Google Play!</p>
                     <div class="mb-4">
                         <h5 class="mb-3">O que você vai encontrar:</h5>
                         <ul class="list-unstyled">
                             <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: var(--golden-sun);"></i>Guia passo a passo de todas as funcionalidades</li>
                             <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: var(--golden-sun);"></i>Dicas de segurança e proteção de dados</li>
                             <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: var(--golden-sun);"></i>Como organizar suas informações com eficiência</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: var(--golden-sun);"></i>Gráficos e Relatórios avançadas</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill me-2" style="color: var(--golden-sun);"></i>Gráficos e Relatórios avançados</li>
                             <li><i class="bi bi-check-circle-fill me-2" style="color: var(--golden-sun);"></i>Solução de problemas e perguntas frequentes</li>
                         </ul>
                     </div>
-                    
-                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" class="btn btn-hero">
-                        <i class="bi bi-download me-2"></i>Google Play Store
-                    </a>
-                    <a href="https://www.talento.dev.br/safe_pocket.pdf" target="_blank" class="btn btn-hero">
-                        <i class="bi bi-download me-2"></i>Baixar E-book Gratuitamente
-                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro" target="_blank" class="btn btn-hero"><i class="bi bi-download me-2"></i>Google Play Store</a>
+                    <a href="https://www.talento.dev.br/safe_pocket.pdf" target="_blank" class="btn btn-hero"><i class="bi bi-download me-2"></i>Baixar E-book Gratuitamente</a>
                 </div>
             </div>
         </div>
     </section>
 
-    
     <!-- Footer -->
     <footer id="footer" class="footer py-5">
         <div class="container">
             <div class="row gy-4">
-                <!-- Coluna 1: Sobre -->
                 <div class="col-lg-4 col-md-6">
                     <div class="pe-lg-5">
-                        <h5 class="mb-3" style="color: var(--golden-sun);">
-                            <i class="bi bi-code-square me-2"></i>Talento Dev
-                        </h5>
-                        <p class="small" style="color: var(--cloud-white);">
-                            Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
-                        </p>
+                        <h5 class="mb-3" style="color: var(--golden-sun);"><i class="bi bi-code-square me-2"></i>Talento Dev</h5>
+                        <p class="small" style="color: var(--cloud-white);">Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.</p>
                         <div class="mt-3">
-                            <!-- Contador de Visitas -->
                             <div class="visitor-counter mb-2">
                                 <small style="color: var(--cloud-white);">
                                     <span class="me-2">Visitas:</span>
@@ -1303,81 +1508,30 @@
                     </div>
                 </div>
 
-                <!-- Coluna 2: Redes Sociais -->
                 <div class="col-lg-4 col-md-6 text-center text-md-start">
-                    <h5 class="mb-3" style="color: var(--golden-sun);">
-                        <i class="bi bi-people me-2"></i>Conecte-se
-                    </h5>
+                    <h5 class="mb-3" style="color: var(--golden-sun);"><i class="bi bi-people me-2"></i>Conecte-se</h5>
                     <div class="social-share">
-                        <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" 
-                           target="_blank" rel="noopener noreferrer"
-                           class="social-btn youtube"
-                           title="YouTube"
-                           style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://github.com/erwinvaz" 
-                           target="_blank" rel="noopener noreferrer"
-                           class="social-btn github"
-                           title="GitHub"
-                           style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.instagram.com/talento.dev.br" 
-                           target="_blank" rel="noopener noreferrer"
-                           class="social-btn instagram"
-                           title="Instagram"
-                           style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/@talentodev" 
-                           target="_blank" rel="noopener noreferrer"
-                           class="social-btn tiktok"
-                           title="TikTok"
-                           style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                        <a href="https://wa.me/5585998200392" 
-                           target="_blank" rel="noopener noreferrer"
-                           class="social-btn whatsapp"
-                           title="WhatsApp"
-                           style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+                        <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="social-btn youtube" title="YouTube" style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/erwinvaz" target="_blank" rel="noopener noreferrer" class="social-btn github" title="GitHub" style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/talento.dev.br" target="_blank" rel="noopener noreferrer" class="social-btn instagram" title="Instagram" style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@talentodev" target="_blank" rel="noopener noreferrer" class="social-btn tiktok" title="TikTok" style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/5585998200392" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" title="WhatsApp" style="color: var(--cloud-white); font-size: 1.8rem; margin: 0 0.5rem; transition: all 0.3s;"><i class="fab fa-whatsapp"></i></a>
                     </div>
-                    
-                    <!-- Newsletter -->
                     <div class="mt-4">
                         <h6 class="mb-2" style="color: var(--cloud-white);">Receba atualizações</h6>
                         <form class="d-flex" onsubmit="subscribeNewsletter(event)">
-                            <input 
-                                type="email" 
-                                id="newsletterEmail" 
-                                class="form-control form-control-sm me-2" 
-                                placeholder="Seu e-mail" 
-                                required
-                                style="background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); color: var(--cloud-white);"
-                            >
-                            <button type="submit" class="btn btn-sm" style="background: var(--gradient-gold); color: var(--shadow-dark);">
-                                <i class="bi bi-envelope"></i>
-                            </button>
+                            <input type="email" id="newsletterEmail" class="form-control form-control-sm me-2" placeholder="Seu e-mail" required style="background: rgba(255,255,255,0.1); border: 2px solid rgba(255,215,0,0.3); color: var(--cloud-white);">
+                            <button type="submit" class="btn btn-sm" style="background: var(--gradient-gold); color: var(--shadow-dark);"><i class="bi bi-envelope"></i></button>
                         </form>
                     </div>
                 </div>
 
-                <!-- Coluna 3: Apoio -->
                 <div class="col-lg-4 col-md-12 text-center text-lg-end">
-                    <h5 class="mb-3" style="color: var(--golden-sun);">
-                        <i class="bi bi-heart me-2"></i>Apoie o Projeto
-                    </h5>
+                    <h5 class="mb-3" style="color: var(--golden-sun);"><i class="bi bi-heart me-2"></i>Apoie o Projeto</h5>
                     <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
                         <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
-                        <button type="submit" class="btn btn-outline-light btn-sm" style="border: 2px solid var(--golden-sun); color: var(--golden-sun); font-weight: 700;">
-                            <i class="bi bi-paypal me-1"></i>Doar via PayPal
-                        </button>
+                        <button type="submit" class="btn btn-outline-light btn-sm" style="border: 2px solid var(--golden-sun); color: var(--golden-sun); font-weight: 700;"><i class="bi bi-paypal me-1"></i>Doar via PayPal</button>
                     </form>
-                    
-                    <!-- Créditos -->
                     <div class="mt-4">
                         <p class="small mb-1" style="color: var(--cloud-white);">&copy; 2026 Talento Dev</p>
                         <p class="small mb-0" style="color: var(--cloud-white); opacity: 0.8;">Todos os direitos reservados</p>
@@ -1385,25 +1539,20 @@
                 </div>
             </div>
             
-            <!-- Divisor -->
             <hr class="mt-4 mb-3" style="background: var(--golden-sun); height: 2px;">
             
-            <!-- Links Rápidos -->
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="d-flex flex-wrap justify-content-center">
-                        <a href="politica-privacidade.html" class="text-white small me-3 mb-2" style="color: var(--cloud-white);">Política de Privacidade</a>
-                        <a href="termos-uso.html" class="text-white small me-3 mb-2" style="color: var(--cloud-white);">Termos de Uso</a>
+                        <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                        <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <a href="#" class="back-to-top">
-        <i class="bi bi-arrow-up"></i>
-    </a>
+    <a href="#" class="back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     <!-- Language Selector -->
     <div class="language-selector">
@@ -1413,285 +1562,620 @@
             <i class="bi bi-chevron-down ms-1"></i>
         </button>
         <div class="language-dropdown" id="languageDropdown">
-            <a href="#" class="language-option" onclick="translatePage('pt', 'Português')">
-                <img src="https://flagcdn.com/w20/br.png" class="language-flag" alt="Português" style="width: 20px;">
-                Português
-            </a>
-            <a href="#" class="language-option" onclick="translatePage('en', 'English')">
-                <img src="https://flagcdn.com/w20/us.png" class="language-flag" alt="English" style="width: 20px;">
-                English
-            </a>
-            <a href="#" class="language-option" onclick="translatePage('es', 'Español')">
-                <img src="https://flagcdn.com/w20/es.png" class="language-flag" alt="Español" style="width: 20px;">
-                Español
-            </a>
-            <a href="#" class="language-option" onclick="translatePage('fr', 'Français')">
-                <img src="https://flagcdn.com/w20/fr.png" class="language-flag" alt="Français" style="width: 20px;">
-                Français
-            </a>
-            <a href="#" class="language-option" onclick="translatePage('de', 'Deutsch')">
-                <img src="https://flagcdn.com/w20/de.png" class="language-flag" alt="Deutsch" style="width: 20px;">
-                Deutsch
-            </a>
+            <a href="#" class="language-option" onclick="translatePage('pt', 'Português')"><img src="https://flagcdn.com/w20/br.png" class="language-flag" alt="PT" style="width:20px;"> Português</a>
+            <a href="#" class="language-option" onclick="translatePage('en', 'English')"><img src="https://flagcdn.com/w20/us.png" class="language-flag" alt="EN" style="width:20px;"> English</a>
+            <a href="#" class="language-option" onclick="translatePage('es', 'Español')"><img src="https://flagcdn.com/w20/es.png" class="language-flag" alt="ES" style="width:20px;"> Español</a>
+            <a href="#" class="language-option" onclick="translatePage('fr', 'Français')"><img src="https://flagcdn.com/w20/fr.png" class="language-flag" alt="FR" style="width:20px;"> Français</a>
+            <a href="#" class="language-option" onclick="translatePage('de', 'Deutsch')"><img src="https://flagcdn.com/w20/de.png" class="language-flag" alt="DE" style="width:20px;"> Deutsch</a>
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <!-- ============================================================
+         SCRIPTS - ORDEM CORRETA: jQuery → Chess.js → Chessboard.js → Bootstrap → seus scripts
+    ============================================================ -->
+
+    <!-- 1. jQuery PRIMEIRO e sem defer/async -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- 2. Chess.js - lógica do xadrez -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <!-- 3. Chessboard.js - tabuleiro visual -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard.min.js"></script>
+
+    <!-- 4. Bootstrap DEPOIS dos anteriores -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
+    <!-- 5. Script principal do xadrez -->
     <script>
-       // Back to top button - Scroll suave
-        window.addEventListener('scroll', function() {
-            var backToTop = document.querySelector('.back-to-top');
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('active');
-            } else {
-                backToTop.classList.remove('active');
+    // ============================================================
+    // AGUARDA TODOS OS SCRIPTS (sem depender de $(document).ready)
+    // ============================================================
+    (function waitForChess() {
+        if (typeof Chessboard === 'undefined' || typeof Chess === 'undefined') {
+            setTimeout(waitForChess, 50);
+            return;
+        }
+        initChessSection();
+    })();
+
+    function initChessSection() {
+
+        // ── PEÇAS: usa o mesmo CDN do chessboard.js — sem 403! ──
+        var PIECE_THEME = 'https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/img/chesspieces/wikipedia/{piece}.png';
+
+        // ── ESTRELAS ─────────────────────────────────────────────
+        (function createStars() {
+            var bg = document.getElementById('starsBg');
+            if (!bg) return;
+            for (var i = 0; i < 60; i++) {
+                var s = document.createElement('div');
+                s.className = 'star';
+                var size = Math.random() * 2.5 + 0.5;
+                s.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (Math.random() * 100) + '%;top:' + (Math.random() * 100) + '%;--d:' + (2 + Math.random() * 4) + 's;--op:' + (0.3 + Math.random() * 0.6) + ';animation-delay:' + (Math.random() * 4) + 's;';
+                bg.appendChild(s);
             }
+        })();
+
+        // ── TOAST ─────────────────────────────────────────────────
+        window.showToast = function(msg) {
+            var t = document.getElementById('chessToast');
+            if (!t) return;
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(function() { t.classList.remove('show'); }, 2800);
+        };
+
+        // ── TABS ──────────────────────────────────────────────────
+        window.switchTab = function(tab) {
+            document.querySelectorAll('.chess-tab-btn').forEach(function(b, i) {
+                b.classList.toggle('active', (i === 0 && tab === 'bot') || (i === 1 && tab === 'puzzle'));
+            });
+            document.getElementById('panel-bot').classList.toggle('active', tab === 'bot');
+            document.getElementById('panel-puzzle').classList.toggle('active', tab === 'puzzle');
+        };
+
+        // ── PUZZLES ───────────────────────────────────────────────
+        var PUZZLES = [
+            { fen: '6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1',                        solution: ['e1e8'],      theme: 'Mate em 1',          desc: 'Uma jogada decide a partida!',        hint: 'A torre pode dar mate na 8ª fileira' },
+            { fen: '1k1r4/pp1b1R2/3p4/2pPp3/2P1P3/2K5/PP4B1/8 w - - 0 1',          solution: ['d5c6'],      theme: 'Peão Passado',        desc: 'O peão passado decide o jogo!',       hint: 'Avance o peão passado!' },
+            { fen: 'r1bk3r/p2pBpNp/n4n2/1p1NP2P/6P1/3P4/PPP1K1P1/q1B2R2 w - - 1 0', solution: ['f1f8'],    theme: 'Sacrifício de Torre', desc: 'Sacrifique para vencer!',             hint: 'Jogue a torre para f8' },
+            { fen: '8/8/8/8/8/6k1/6p1/6K1 w - - 0 1',                              solution: ['g1f1'],      theme: 'Final de Reis',       desc: 'Rei branco deve recuar!',             hint: 'O rei precisa recuar para f1' },
+            { fen: 'r2q1rk1/pp2ppbp/2np1np1/8/3NP3/2N1BP2/PPPQ2PP/R3KB1R w KQ - 0 10', solution: ['d4f5'], theme: 'Lance Central',        desc: 'Domínio do centro!',                  hint: 'O cavalo tem um salto poderoso' },
+            { fen: '6k1/pp4pp/2p5/4Pb2/4p3/1P2Q3/P5PP/5RK1 w - - 0 1',            solution: ['e5f7'],       theme: 'Ataque de Bispo',     desc: 'Um sacrifício que decide!',           hint: 'Ataque o rei com o bispo!' },
+            { fen: '5rk1/p4ppp/1p6/3pq3/3B4/1P3Q2/P4PPP/5RK1 w - - 0 1',          solution: ['d4g7'],       theme: 'Combinação',          desc: 'O bispo ataca decisivamente!',        hint: 'O bispo vai para g7!' }
+        ];
+
+        function getTodayPuzzle() {
+            var today = new Date();
+            var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+            return PUZZLES[dayOfYear % PUZZLES.length];
+        }
+
+        // ── ESTADO ────────────────────────────────────────────────
+        var gameBot, boardBot;
+        var gamePuzzle, boardPuzzle;
+        var playerColor = 'white';
+        var difficulty = 1;
+        var playerScoreVal = 0, botScoreVal = 0;
+        var puzzleAttempts = 0, puzzleSolved = false;
+        var currentPuzzle = null, puzzleMoveIndex = 0, puzzleMoves = [];
+
+        // ── BOT GAME ──────────────────────────────────────────────
+        function initBotGame() {
+            gameBot = new Chess();
+            updateMovesList();
+
+            if (boardBot) { boardBot.destroy(); }
+            boardBot = Chessboard('chessboard-bot', {
+                draggable: true,
+                position: 'start',
+                orientation: playerColor,
+                pieceTheme: PIECE_THEME,
+                onDragStart: onDragStart,
+                onDrop: onDrop,
+                onSnapEnd: function() { boardBot.position(gameBot.fen()); }
+            });
+
+            updateStatus();
+            if (playerColor === 'black') { setTimeout(makeBotMove, 600); }
+        }
+
+        function onDragStart(source, piece) {
+            if (gameBot.game_over()) return false;
+            if (document.getElementById('thinkingIndicator').classList.contains('show')) return false;
+            if (gameBot.turn() === 'w' && piece.search(/^b/) !== -1) return false;
+            if (gameBot.turn() === 'b' && piece.search(/^w/) !== -1) return false;
+            var turn = gameBot.turn() === 'w' ? 'white' : 'black';
+            if (turn !== playerColor) return false;
+        }
+
+        function onDrop(source, target) {
+            removeHighlights();
+            var move = gameBot.move({ from: source, to: target, promotion: 'q' });
+            if (move === null) return 'snapback';
+            addHighlight(source, 'white');
+            addHighlight(target, 'white');
+            addMoveToList(move.san, gameBot.history().length);
+            updateStatus();
+            if (!gameBot.game_over()) {
+                document.getElementById('thinkingIndicator').classList.add('show');
+                setTimeout(makeBotMove, 300 + Math.random() * (difficulty * 500));
+            }
+        }
+
+        function makeBotMove() {
+            if (gameBot.game_over()) return;
+            var moves = gameBot.moves({ verbose: true });
+            if (!moves.length) return;
+
+            var move;
+            if (difficulty === 1) {
+                move = moves[Math.floor(Math.random() * moves.length)];
+            } else if (difficulty === 2) {
+                var caps = moves.filter(function(m) { return m.flags.includes('c') || m.flags.includes('e'); });
+                move = (caps.length > 0 && Math.random() > 0.4) ? caps[Math.floor(Math.random() * caps.length)] : moves[Math.floor(Math.random() * moves.length)];
+            } else {
+                move = getBestMove(moves, difficulty === 3 ? 2 : 3);
+            }
+
+            removeHighlights();
+            var result = gameBot.move(move);
+            addHighlight(result.from, 'black');
+            addHighlight(result.to, 'black');
+            boardBot.position(gameBot.fen());
+            addMoveToList(result.san, gameBot.history().length);
+            document.getElementById('thinkingIndicator').classList.remove('show');
+            updateStatus();
+        }
+
+        function getBestMove(moves, depth) {
+            var bestVal = -Infinity, best = moves[0];
+            moves.slice().sort(function() { return Math.random() - 0.5; }).slice(0, 15).forEach(function(m) {
+                gameBot.move(m);
+                var val = -minimax(depth - 1, -Infinity, Infinity);
+                gameBot.undo();
+                if (val > bestVal) { bestVal = val; best = m; }
+            });
+            return best;
+        }
+
+        function minimax(depth, alpha, beta) {
+            if (depth === 0 || gameBot.game_over()) return evalBoard();
+            var moves = gameBot.moves({ verbose: true }).slice(0, 12);
+            var best = -Infinity;
+            for (var i = 0; i < moves.length; i++) {
+                gameBot.move(moves[i]);
+                var val = -minimax(depth - 1, -beta, -alpha);
+                gameBot.undo();
+                if (val > best) best = val;
+                if (val > alpha) alpha = val;
+                if (alpha >= beta) break;
+            }
+            return best;
+        }
+
+        var PV = { p: 100, n: 320, b: 330, r: 500, q: 900, k: 20000 };
+        function evalBoard() {
+            if (gameBot.in_checkmate()) return gameBot.turn() === 'w' ? -9999 : 9999;
+            if (gameBot.in_draw()) return 0;
+            var score = 0;
+            gameBot.board().forEach(function(row) {
+                row.forEach(function(sq) {
+                    if (!sq) return;
+                    score += sq.color === 'w' ? (PV[sq.type] || 0) : -(PV[sq.type] || 0);
+                });
+            });
+            return playerColor === 'white' ? score : -score;
+        }
+
+        function addHighlight(sq, type) { jQuery('#chessboard-bot .square-' + sq).addClass('highlight-' + type); }
+        function removeHighlights()     { jQuery('#chessboard-bot .square-55d63').removeClass('highlight-white highlight-black'); }
+
+        function updateStatus() {
+            var el = document.getElementById('gameStatus');
+            el.className = 'game-status';
+            if (gameBot.in_checkmate()) {
+                var winner = gameBot.turn() === 'w' ? 'Pretas' : 'Brancas';
+                var youWon = (winner === 'Brancas' && playerColor === 'white') || (winner === 'Pretas' && playerColor === 'black');
+                el.textContent = youWon ? '🏆 Você venceu! Parabéns!' : '💀 Bot venceu desta vez!';
+                el.className = 'game-status ' + (youWon ? 'status-win' : 'status-lose');
+                if (youWon) { playerScoreVal++; showToast('🏆 Você venceu! Incrível!'); }
+                else        { botScoreVal++;    showToast('🤖 Bot venceu. Tente novamente!'); }
+                document.getElementById('playerScore').textContent = playerScoreVal;
+                document.getElementById('botScore').textContent    = botScoreVal;
+            } else if (gameBot.in_draw()) {
+                el.textContent = '🤝 Empate!'; el.className = 'game-status status-draw';
+                showToast('🤝 Empate! Boa partida!');
+            } else if (gameBot.in_check()) {
+                el.textContent = '⚠️ ' + (gameBot.turn() === 'w' ? 'Brancas' : 'Pretas') + ' em xeque!';
+                el.className = 'game-status status-check';
+            } else {
+                var turn = gameBot.turn() === 'w' ? 'Brancas' : 'Pretas';
+                var isYou = (turn === 'Brancas' && playerColor === 'white') || (turn === 'Pretas' && playerColor === 'black');
+                el.textContent = isYou ? '♟️ Sua vez — ' + turn : '🤖 Bot pensando...';
+            }
+        }
+
+        function addMoveToList(san, moveNum) {
+            var list = document.getElementById('movesList');
+            if (list.querySelector('span')) list.innerHTML = '';
+            list.querySelectorAll('.move-item.last').forEach(function(el) { el.classList.remove('last'); });
+            if (moveNum % 2 === 1) {
+                var num = document.createElement('div');
+                num.className = 'move-num';
+                num.style.gridColumn = '1 / -1';
+                num.textContent = Math.ceil(moveNum / 2) + '.';
+                list.appendChild(num);
+            }
+            var div = document.createElement('div');
+            div.className = 'move-item last';
+            div.textContent = san;
+            list.appendChild(div);
+            list.scrollTop = list.scrollHeight;
+        }
+
+        function updateMovesList() {
+            document.getElementById('movesList').innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:0.8rem;grid-column:1/-1;">Nenhum movimento ainda...</span>';
+        }
+
+        window.newGame = function() { initBotGame(); showToast('🎮 Nova partida!'); };
+
+        window.undoMove = function() {
+            if (gameBot.history().length < 2) { showToast('⚠️ Nada para desfazer!'); return; }
+            gameBot.undo(); gameBot.undo();
+            boardBot.position(gameBot.fen());
+            var items = document.getElementById('movesList').querySelectorAll('.move-item');
+            if (items.length >= 2) { items[items.length - 1].remove(); items[items.length - 2].remove(); }
+            updateStatus(); showToast('↩️ Lance desfeito!');
+        };
+
+        window.showHint = function() {
+            var moves = gameBot.moves({ verbose: true });
+            if (!moves.length) return;
+            var scored = moves.map(function(m) {
+                var sc = 0;
+                if (m.flags.includes('c')) sc += 3;
+                gameBot.move(m); if (gameBot.in_check()) sc += 5; gameBot.undo();
+                return { m: m, sc: sc };
+            }).sort(function(a, b) { return b.sc - a.sc; });
+            var best = scored[Math.floor(Math.random() * Math.min(3, scored.length))].m;
+            showToast('💡 Dica: ' + best.from + ' → ' + best.to);
+        };
+
+        window.resignGame = function() {
+            if (gameBot.game_over()) return;
+            botScoreVal++; document.getElementById('botScore').textContent = botScoreVal;
+            showToast('🏳️ Você desistiu!');
+            document.getElementById('gameStatus').textContent = '🏳️ Você desistiu';
+            document.getElementById('gameStatus').className = 'game-status status-lose';
+        };
+
+        window.setPlayerColor = function(color) {
+            playerColor = color;
+            document.getElementById('btnWhite').classList.toggle('active', color === 'white');
+            document.getElementById('btnBlack').classList.toggle('active', color === 'black');
+            initBotGame(); showToast('♟️ Jogando com as ' + (color === 'white' ? 'Brancas' : 'Pretas') + '!');
+        };
+
+        window.setDifficulty = function(level, btn) {
+            difficulty = level;
+            document.querySelectorAll('.diff-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            showToast('🧠 Dificuldade: ' + ['', 'Iniciante', 'Amador', 'Avançado', 'Mestre'][level]);
+        };
+
+        // ── PUZZLE ────────────────────────────────────────────────
+        function initPuzzle() {
+            currentPuzzle = getTodayPuzzle();
+            puzzleAttempts = 0; puzzleSolved = false; puzzleMoveIndex = 0; puzzleMoves = [];
+            gamePuzzle = new Chess(currentPuzzle.fen);
+
+            var today = new Date();
+            document.getElementById('puzzleDate').textContent = today.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+            document.getElementById('puzzleTheme').textContent = currentPuzzle.theme;
+            document.getElementById('puzzleDesc').textContent  = currentPuzzle.desc;
+
+            for (var i = 0; i < 3; i++) { document.getElementById('dot' + i).className = 'attempt-dot'; }
+
+            document.getElementById('puzzleMovesList').innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:0.8rem;grid-column:1/-1;">Nenhum movimento...</span>';
+            document.getElementById('puzzleFeedback').className  = 'puzzle-feedback';
+            document.getElementById('puzzleStatus').textContent  = '♞ Brancas jogam — Encontre o mate!';
+            document.getElementById('puzzleStatus').className    = 'game-status';
+            document.getElementById('puzzleStatsCard').style.display = 'none';
+
+            if (boardPuzzle) { boardPuzzle.destroy(); }
+            boardPuzzle = Chessboard('chessboard-puzzle', {
+                draggable: true,
+                position: currentPuzzle.fen,
+                orientation: 'white',
+                pieceTheme: PIECE_THEME,
+                onDragStart: onPuzzleDragStart,
+                onDrop: onPuzzleDrop,
+                onSnapEnd: function() { boardPuzzle.position(gamePuzzle.fen()); }
+            });
+        }
+
+        function onPuzzleDragStart(source, piece) {
+            if (puzzleSolved || puzzleAttempts >= 3 || gamePuzzle.game_over()) return false;
+            if (gamePuzzle.turn() === 'w' && piece.search(/^b/) !== -1) return false;
+            if (gamePuzzle.turn() === 'b' && piece.search(/^w/) !== -1) return false;
+        }
+
+        function onPuzzleDrop(source, target) {
+            var move = gamePuzzle.move({ from: source, to: target, promotion: 'q' });
+            if (move === null) return 'snapback';
+
+            puzzleMoves.push(move.san);
+            updatePuzzleMoves();
+
+            var exp = currentPuzzle.solution[puzzleMoveIndex];
+            if (source === exp.substring(0, 2) && target === exp.substring(2, 4)) {
+                puzzleMoveIndex++;
+                if (puzzleMoveIndex >= currentPuzzle.solution.length) {
+                    puzzleSolved = true;
+                    if (puzzleAttempts < 3) { document.getElementById('dot' + puzzleAttempts).className = 'attempt-dot success'; }
+                    showPuzzleFeedback(true);
+                    document.getElementById('puzzleStatus').textContent = '🏆 Correto! Excelente jogada!';
+                    document.getElementById('puzzleStatus').className   = 'game-status status-win';
+                    showPuzzleStats(true);
+                    showToast('🏆 Puzzle resolvido!');
+                } else {
+                    setTimeout(makePuzzleResponse, 700);
+                }
+            } else {
+                gamePuzzle.undo(); boardPuzzle.position(gamePuzzle.fen());
+                puzzleMoves.pop(); updatePuzzleMoves();
+                if (puzzleAttempts < 3) { document.getElementById('dot' + puzzleAttempts).className = 'attempt-dot used'; puzzleAttempts++; }
+                showPuzzleFeedback(false);
+                if (puzzleAttempts >= 3) {
+                    document.getElementById('puzzleStatus').textContent = '😞 Sem mais tentativas. Veja a solução!';
+                    document.getElementById('puzzleStatus').className   = 'game-status status-lose';
+                    showPuzzleStats(false);
+                } else {
+                    document.getElementById('puzzleStatus').textContent = '⚠️ Lance errado! ' + (3 - puzzleAttempts) + ' tentativa(s) restante(s)';
+                    document.getElementById('puzzleStatus').className   = 'game-status status-check';
+                }
+            }
+        }
+
+        function makePuzzleResponse() {
+            if (puzzleMoveIndex < currentPuzzle.solution.length) {
+                var uci = currentPuzzle.solution[puzzleMoveIndex];
+                gamePuzzle.move({ from: uci.substring(0, 2), to: uci.substring(2, 4), promotion: 'q' });
+                boardPuzzle.position(gamePuzzle.fen());
+                puzzleMoveIndex++;
+            }
+        }
+
+        function updatePuzzleMoves() {
+            var list = document.getElementById('puzzleMovesList');
+            if (!puzzleMoves.length) {
+                list.innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:0.8rem;grid-column:1/-1;">Nenhum movimento...</span>';
+                return;
+            }
+            list.innerHTML = puzzleMoves.map(function(m, i) {
+                return '<div class="move-item ' + (i === puzzleMoves.length - 1 ? 'last' : '') + '">' + (i + 1) + '. ' + m + '</div>';
+            }).join('');
+        }
+
+        function showPuzzleFeedback(correct) {
+            var fb = document.getElementById('puzzleFeedback');
+            fb.textContent = correct ? '✅ Lance correto! Fantástico!' : '❌ Lance errado! Tente novamente.';
+            fb.className = 'puzzle-feedback show ' + (correct ? 'correct' : 'wrong');
+            if (!correct) { setTimeout(function() { if (!puzzleSolved) fb.className = 'puzzle-feedback'; }, 2000); }
+        }
+
+        function showPuzzleStats(success) {
+            var card = document.getElementById('puzzleStatsCard');
+            var result = document.getElementById('puzzleResult');
+            card.style.display = 'block';
+            if (success) {
+                var emoji = puzzleAttempts === 0 ? '🥇' : puzzleAttempts === 1 ? '🥈' : '🥉';
+                result.innerHTML = '<div style="font-size:2rem;margin-bottom:0.5rem;">' + emoji + '</div><div style="font-size:1.1rem;color:var(--golden-sun);">Resolvido!</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:0.3rem;">' + (puzzleAttempts + 1) + ' tentativa(s)</div>';
+            } else {
+                result.innerHTML = '<div style="font-size:2rem;margin-bottom:0.5rem;">😔</div><div style="font-size:1rem;color:#E74C3C;">Não resolvido</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:0.3rem;">Veja a solução!</div>';
+            }
+        }
+
+        window.getPuzzleHint = function() { showToast('💡 Dica: ' + currentPuzzle.hint); };
+        window.resetPuzzle   = function() { initPuzzle(); showToast('🔄 Puzzle reiniciado!'); };
+
+        window.showSolution = function() {
+            if (!currentPuzzle) return;
+            var sol = currentPuzzle.solution;
+            var game = new Chess(currentPuzzle.fen);
+            var str = '';
+            sol.forEach(function(uci, i) {
+                var m = game.move({ from: uci.substring(0, 2), to: uci.substring(2, 4), promotion: 'q' });
+                if (m) str += (i + 1) + '. ' + m.san + ' ';
+            });
+            showToast('🔍 Solução: ' + str.trim());
+            var idx = 0, pg = new Chess(currentPuzzle.fen);
+            boardPuzzle.position(currentPuzzle.fen);
+            (function playNext() {
+                if (idx >= sol.length) return;
+                pg.move({ from: sol[idx].substring(0, 2), to: sol[idx].substring(2, 4), promotion: 'q' });
+                boardPuzzle.position(pg.fen());
+                idx++;
+                setTimeout(playNext, 950);
+            })();
+            puzzleSolved = true;
+        };
+
+        // ── INICIALIZA ─────────────────────────────────────────
+        initBotGame();
+        initPuzzle();
+
+    } // fim initChessSection
+    </script>
+
+    <!-- 6. Demais scripts da página -->
+    <script>
+        // Back to top
+        window.addEventListener('scroll', function() {
+            var btn = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) btn.classList.add('active');
+            else btn.classList.remove('active');
         });
 
-    
         function subscribeNewsletter(event) {
             event.preventDefault();
-            const email = document.getElementById('newsletterEmail').value;
-            const subject = "Assinar newsletter - Talento Dev";
-            const body = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
-            
-            window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
+            var email = document.getElementById('newsletterEmail').value;
+            var subject = encodeURIComponent("Assinar newsletter - Talento Dev");
+            var body = encodeURIComponent("Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: " + email);
+            window.location.href = 'mailto:contato@talentodev.com?subject=' + subject + '&body=' + body;
             alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
             document.getElementById('newsletterEmail').value = "";
         }
     </script>
-    
+
     <script>
+        // Filtro de apps
         document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('appSearch');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const appItems = document.querySelectorAll('#appsContainer > div[data-tech]');
-            
+            var searchInput = document.getElementById('appSearch');
+            var filterButtons = document.querySelectorAll('.filter-btn');
+            var appItems = document.querySelectorAll('#appsContainer > div[data-tech]');
+
             function filterApps() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-                
-                appItems.forEach(item => {
-                    const appName = item.querySelector('.app-title').textContent.toLowerCase();
-                    const appTech = item.dataset.tech;
-                    const matchesSearch = appName.includes(searchTerm);
-                    const matchesFilter = activeFilter === 'all' || appTech === activeFilter;
-                    
+                var searchTerm = searchInput.value.toLowerCase();
+                var activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                appItems.forEach(function(item) {
+                    var appName = item.querySelector('.app-title').textContent.toLowerCase();
+                    var appTech = item.dataset.tech;
+                    var matchesSearch = appName.includes(searchTerm);
+                    var matchesFilter = activeFilter === 'all' || appTech === activeFilter;
                     item.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
                 });
             }
-            
+
             searchInput.addEventListener('input', filterApps);
-            
-            filterButtons.forEach(button => {
+            filterButtons.forEach(function(button) {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    filterButtons.forEach(function(btn) { btn.classList.remove('active'); });
                     this.classList.add('active');
                     filterApps();
                 });
             });
-            
             filterApps();
         });
     </script>
-    
+
     <script>
-        // Tracking Google Analytics
-        document.querySelectorAll('a[href*="play.google.com"]').forEach(link => {
+        // Google Analytics tracking
+        document.querySelectorAll('a[href*="play.google.com"]').forEach(function(link) {
             link.addEventListener('click', function() {
-                const appName = this.closest('.app-card').querySelector('.app-title').textContent;
-                gtag('event', 'app_click', {
-                    'app_name': appName,
-                    'event_category': 'Apps',
-                    'event_label': 'Play Store Click'
-                });
+                var card = this.closest('.app-card');
+                var appName = card ? card.querySelector('.app-title').textContent : 'unknown';
+                gtag('event', 'app_click', { 'app_name': appName, 'event_category': 'Apps', 'event_label': 'Play Store Click' });
             });
         });
 
-        document.querySelector('a[href*="safe_pocket.pdf"]')?.addEventListener('click', function() {
-            gtag('event', 'ebook_download', {
-                'event_category': 'Downloads',
-                'event_label': 'Safe Pocket Ebook'
+        var ebookLink = document.querySelector('a[href*="safe_pocket.pdf"]');
+        if (ebookLink) {
+            ebookLink.addEventListener('click', function() {
+                gtag('event', 'ebook_download', { 'event_category': 'Downloads', 'event_label': 'Safe Pocket Ebook' });
             });
-        });
+        }
 
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const filter = this.dataset.filter;
-                gtag('event', 'filter_used', {
-                    'event_category': 'Navigation',
-                    'event_label': filter
-                });
+        var launchBtn = document.querySelector('.btn-launch');
+        if (launchBtn) {
+            launchBtn.addEventListener('click', function() {
+                gtag('event', 'chess_land_banner_click', { 'event_category': 'Launch', 'event_label': 'Chess Land Banner' });
             });
-        });
-
-        // Track Chess Land banner click
-        document.querySelector('.btn-launch')?.addEventListener('click', function() {
-            gtag('event', 'chess_land_banner_click', {
-                'event_category': 'Launch',
-                'event_label': 'Chess Land Banner'
-            });
-        });
+        }
     </script>
 
     <script>
-        // Language functions
-        const supportedLanguages = {
+        // Idioma / Mobile menu / Scroll Reveal
+        var supportedLanguages = {
             'pt': { name: 'Português', flag: 'br' },
-            'en': { name: 'English', flag: 'us' },
-            'es': { name: 'Español', flag: 'es' },
-            'fr': { name: 'Français', flag: 'fr' },
-            'de': { name: 'Deutsch', flag: 'de' }
+            'en': { name: 'English',   flag: 'us' },
+            'es': { name: 'Español',   flag: 'es' },
+            'fr': { name: 'Français',  flag: 'fr' },
+            'de': { name: 'Deutsch',   flag: 'de' }
         };
 
-        // Toggle Mobile Menu
         function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinksIntegrated');
-            navLinks.classList.toggle('active');
+            document.getElementById('navLinksIntegrated').classList.toggle('active');
         }
 
-        // Fechar menu mobile ao clicar em um link
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-links-integrated a');
-            navLinks.forEach(link => {
+            document.querySelectorAll('.nav-links-integrated a').forEach(function(link) {
                 link.addEventListener('click', function() {
-                    const mobileMenu = document.getElementById('navLinksIntegrated');
-                    if (mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
+                    document.getElementById('navLinksIntegrated').classList.remove('active');
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    var href = this.getAttribute('href');
+                    if (href !== '#' && document.querySelector(href)) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
             });
 
-            // Smooth scroll para âncoras
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#' && document.querySelector(href)) {
-                        e.preventDefault();
-                        document.querySelector(href).scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+            setTimeout(detectUserLanguage, 2000);
+
+            // Scroll Reveal
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) { entry.target.classList.add('active'); }
                 });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.scroll-reveal').forEach(function(el) { observer.observe(el); });
+
+            // Social hover
+            document.querySelectorAll('.social-btn').forEach(function(btn) {
+                btn.addEventListener('mouseenter', function() { this.style.color = 'var(--golden-sun)'; this.style.transform = 'translateY(-5px)'; });
+                btn.addEventListener('mouseleave', function() { this.style.color = 'var(--cloud-white)'; this.style.transform = 'translateY(0)'; });
             });
         });
 
         function detectUserLanguage() {
-            if (localStorage.getItem('disableAutoTranslate') === 'true') {
-                return;
-            }
-            
-            const userLang = navigator.language || navigator.userLanguage;
-            const mainLang = userLang.split('-')[0];
-            
-            if (mainLang !== 'pt' && supportedLanguages[mainLang]) {
-                showTranslationBanner(mainLang);
-            }
+            if (localStorage.getItem('disableAutoTranslate') === 'true') return;
+            var mainLang = (navigator.language || navigator.userLanguage).split('-')[0];
+            if (mainLang !== 'pt' && supportedLanguages[mainLang]) { showTranslationBanner(mainLang); }
         }
 
         function showTranslationBanner(lang) {
-            const banner = document.createElement('div');
+            var banner = document.createElement('div');
             banner.className = 'translation-banner';
-            banner.innerHTML = `
-                <p>🌍 <strong>Detectamos que você fala ${supportedLanguages[lang].name}</strong></p>
-                <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;">Deseja traduzir esta página?</p>
-                <div>
-                    <button class="translate-btn" onclick="translatePage('${lang}', '${supportedLanguages[lang].name}')">
-                        Sim, traduzir
-                    </button>
-                    <button class="cancel-btn" onclick="closeBanner()">
-                        Manter em Português
-                    </button>
-                </div>
-                <div style="margin-top: 10px;">
-                    <label style="font-size: 0.8em; color: var(--cloud-white);">
-                        <input type="checkbox" id="disableFuturePrompt"> Não mostrar novamente
-                    </label>
-                </div>
-            `;
-            
+            banner.innerHTML = '<p>🌍 <strong>Detectamos que você fala ' + supportedLanguages[lang].name + '</strong></p><p style="font-size:0.9em;opacity:0.8;margin-bottom:15px;">Deseja traduzir esta página?</p><div><button class="translate-btn" onclick="translatePage(\'' + lang + '\', \'' + supportedLanguages[lang].name + '\')">Sim, traduzir</button><button class="cancel-btn" onclick="closeBanner()">Manter em Português</button></div><div style="margin-top:10px;"><label style="font-size:0.8em;color:var(--cloud-white);"><input type="checkbox" id="disableFuturePrompt"> Não mostrar novamente</label></div>';
             document.body.appendChild(banner);
         }
 
         function closeBanner() {
-            const banner = document.querySelector('.translation-banner');
+            var banner = document.querySelector('.translation-banner');
             if (banner) {
-                const disableFuture = document.getElementById('disableFuturePrompt')?.checked;
-                if (disableFuture) {
-                    localStorage.setItem('disableAutoTranslate', 'true');
-                }
+                var cb = document.getElementById('disableFuturePrompt');
+                if (cb && cb.checked) localStorage.setItem('disableAutoTranslate', 'true');
                 banner.remove();
             }
         }
 
         function toggleLanguageDropdown() {
-            const dropdown = document.getElementById('languageDropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            var d = document.getElementById('languageDropdown');
+            d.style.display = d.style.display === 'block' ? 'none' : 'block';
         }
 
         function translatePage(lang, langName) {
-            const banner = document.querySelector('.translation-banner');
+            var banner = document.querySelector('.translation-banner');
             if (banner) banner.remove();
             document.getElementById('languageDropdown').style.display = 'none';
-            
-            const currentUrl = window.location.href;
-            const translateUrl = `https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(currentUrl)}`;
-            
-            window.open(translateUrl, '_blank');
-            alert(`A página será traduzida para ${langName} em uma nova aba.`);
+            window.open('https://translate.google.com/translate?hl=' + lang + '&sl=pt&tl=' + lang + '&u=' + encodeURIComponent(window.location.href), '_blank');
         }
 
         document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('languageDropdown');
-            const button = document.querySelector('.language-btn');
+            var dropdown = document.getElementById('languageDropdown');
+            var button   = document.querySelector('.language-btn');
             if (dropdown && button && !button.contains(event.target) && !dropdown.contains(event.target)) {
                 dropdown.style.display = 'none';
             }
-        });
-
-        // Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(detectUserLanguage, 2000);
-        });
-
-        /* Social links hover effect */
-        document.querySelectorAll('.social-btn').forEach(btn => {
-            btn.style.position = 'relative';
-            btn.style.zIndex = '10';
-            btn.style.pointerEvents = 'auto';
-            btn.style.cursor = 'pointer';
-            
-            btn.addEventListener('mouseenter', function() {
-                this.style.color = 'var(--golden-sun)';
-                this.style.transform = 'translateY(-5px)';
-            });
-            btn.addEventListener('mouseleave', function() {
-                this.style.color = 'var(--cloud-white)';
-                this.style.transform = 'translateY(0)';
-            });
         });
     </script>
 
