@@ -1272,7 +1272,7 @@
                             <div class="board-glow"></div>
                             <div id="chessboard-puzzle"></div>
                         </div>
-                        <div class="game-status" id="puzzleStatus"><i class="fas fa-chess-knight"></i> Brancas jogam — Encontre o mate!</div>
+                        <div class="game-status" id="puzzleStatus"><i class="fas fa-chess-knight"></i> Carregando puzzle...</div>
                         <div class="puzzle-feedback" id="puzzleFeedback"></div>
                     </div>
 
@@ -1677,16 +1677,191 @@
             document.getElementById('panel-puzzle').classList.toggle('active', tab === 'puzzle');
         };
 
-        // ── PUZZLES ───────────────────────────────────────────────
+        // ============================================================
+        // PUZZLES DO LICHESS — Chess Land (talento.dev.br)
+        // 19 puzzles multi-lance, rating ~2000–2600
+        //
+        // FORMATO:
+        //   fen       → posição inicial (antes do oponente jogar)
+        //   setupMove → lance do OPONENTE que dispara o puzzle
+        //   solution  → lances alternados: jogador / oponente / jogador ...
+        //               (índices pares = jogador, ímpares = resposta do bot)
+        // ============================================================
+
         var PUZZLES = [
-            { fen: '6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1',                        solution: ['e1e8'],      theme: 'Mate em 1',          desc: 'Uma jogada decide a partida!',        hint: 'A torre pode dar mate na 8ª fileira' },
-            { fen: '1k1r4/pp1b1R2/3p4/2pPp3/2P1P3/2K5/PP4B1/8 w - - 0 1',          solution: ['d5c6'],      theme: 'Peão Passado',        desc: 'O peão passado decide o jogo!',       hint: 'Avance o peão passado!' },
-            { fen: 'r1bk3r/p2pBpNp/n4n2/1p1NP2P/6P1/3P4/PPP1K1P1/q1B2R2 w - - 1 0', solution: ['f1f8'],    theme: 'Sacrifício de Torre', desc: 'Sacrifique para vencer!',             hint: 'Jogue a torre para f8' },
-            { fen: '8/8/8/8/8/6k1/6p1/6K1 w - - 0 1',                              solution: ['g1f1'],      theme: 'Final de Reis',       desc: 'Rei branco deve recuar!',             hint: 'O rei precisa recuar para f1' },
-            { fen: 'r2q1rk1/pp2ppbp/2np1np1/8/3NP3/2N1BP2/PPPQ2PP/R3KB1R w KQ - 0 10', solution: ['d4f5'], theme: 'Lance Central',        desc: 'Domínio do centro!',                  hint: 'O cavalo tem um salto poderoso' },
-            { fen: '6k1/pp4pp/2p5/4Pb2/4p3/1P2Q3/P5PP/5RK1 w - - 0 1',            solution: ['e5f7'],       theme: 'Ataque de Bispo',     desc: 'Um sacrifício que decide!',           hint: 'Ataque o rei com o bispo!' },
-            { fen: '5rk1/p4ppp/1p6/3pq3/3B4/1P3Q2/P4PPP/5RK1 w - - 0 1',          solution: ['d4g7'],       theme: 'Combinação',          desc: 'O bispo ataca decisivamente!',        hint: 'O bispo vai para g7!' }
+        {
+            id: '00OLF',
+            fen: 'k1r5/n1p3p1/Q2pN3/P2Pp2p/q3Pp1P/2RK4/5PP1/8 w - - 4 36',
+            setupMove: 'e6c7',
+            solution: ['c8c7','c3c7','a4d1','d3c3','d1c1','c3b3','c1c7'],
+            theme: 'Sacrifício de Torre',
+            desc: 'Sacrifício + Espeto – final devastador',
+            hint: 'Torre captura em c7!'
+        },
+        {
+            id: '01Xw1',
+            fen: 'r2q1r2/3b1pk1/p2p1n2/npp1pPN1/4P1PQ/PBPP3P/2P5/R4RK1 b - - 2 19',
+            setupMove: 'f8h8',
+            solution: ['g5e6','d7e6','h4g5','g7f8','f5e6'],
+            theme: 'Intermezzo',
+            desc: 'Lance intermediário + Sacrifício no meio-jogo',
+            hint: 'Cavalo salta para e6!'
+        },
+        {
+            id: '026QC',
+            fen: '2r5/R7/1p5p/1kq1pr2/1N1p4/P2P1p2/1PP4P/2K2Q2 b - - 0 36',
+            setupMove: 'c8c7',
+            solution: ['a3a4','b5b4','f1e1','c5c3','b2c3'],
+            theme: 'Sacrifício no Final',
+            desc: 'Sequência decisiva no final de jogo',
+            hint: 'Peão avança para a4!'
+        },
+        {
+            id: '04RrQ',
+            fen: '4q1r1/2p4k/3p3p/PP3r2/2PQ2n1/2P3B1/4pPP1/R1R3K1 w - - 2 28',
+            setupMove: 'a5a6',
+            solution: ['g4f2','g3f2','e8a8','d4d5','f5d5'],
+            theme: 'Sacrifício Longo',
+            desc: 'Combinação longa no meio-jogo (rating 2605)',
+            hint: 'Cavalo captura em f2!'
+        },
+        {
+            id: '05G3v',
+            fen: 'r3r1k1/7p/p5p1/1bbP1p2/1p3B1R/1P4QP/2B1q1P1/2R4K b - - 5 31',
+            setupMove: 'c5e3',
+            solution: ['h4h7','g8h7','c2f5','e2d1','c1d1'],
+            theme: 'Combinação Devastadora',
+            desc: 'Sacrifício duplo no meio-jogo',
+            hint: 'Torre vai para h7!'
+        },
+        {
+            id: '06com',
+            fen: 'r4rk1/pp3pp1/2p2q1p/8/6Q1/1PbRB2P/P4PP1/5RK1 b - - 7 23',
+            setupMove: 'a7a5',
+            solution: ['d3c3','f6c3','e3d4','c3d4','g4d4'],
+            theme: 'Série de Capturas',
+            desc: 'Capturas em cadeia vencem o material',
+            hint: 'Bispo captura em c3!'
+        },
+        {
+            id: '0AfJi',
+            fen: '8/p3nk2/1rp1p2P/4PpR1/1P1q1P2/P5P1/2Q5/5K2 b - - 2 45',
+            setupMove: 'e7g6',
+            solution: ['g5f5','e6f5','c2f5','f7e8','f5g6'],
+            theme: 'Deflexão no Final',
+            desc: 'Deflexão + Sacrifício de torre no final',
+            hint: 'Torre vai para f5!'
+        },
+        {
+            id: '0Bb8r',
+            fen: '1r4k1/1p3pp1/1Rr1p3/p2pP1QK/q4P2/6R1/6PP/8 b - - 3 31',
+            setupMove: 'g7g6',
+            solution: ['h5h6','c6b6','g5f6','g8f8','g3g6'],
+            theme: 'Ataque Descoberto',
+            desc: 'Ataque descoberto + Pregação no final',
+            hint: 'Peão vai para h6!'
+        },
+        {
+            id: '0BjmP',
+            fen: '2r3k1/qb3p1p/6p1/p3Q3/Pp1p4/1P4N1/1P3PPP/5RK1 b - - 0 31',
+            setupMove: 'c8d8',
+            solution: ['g3h5','g6h5','e5g5','g8f8','g5d8'],
+            theme: 'Garfo de Cavalo',
+            desc: 'Garfo + Sacrifício no final',
+            hint: 'Cavalo vai para h5!'
+        },
+        {
+            id: '0C2fK',
+            fen: '1r2k3/2q2pbQ/p2pp1r1/8/3N4/3R4/PPP2PPP/1K5R w - - 1 20',
+            setupMove: 'd4e6',
+            solution: ['b8b2','b1a1','b2a2','a1a2','c7c2'],
+            theme: 'Duplo Xeque',
+            desc: 'Atração + Duplo xeque – masterclass!',
+            hint: 'Torre vai para b2!'
+        },
+        {
+            id: '0Dl4g',
+            fen: '4r2k/1p3p1p/p5pQ/3N1b2/P1p5/2P4P/1q4P1/5R1K b - - 0 28',
+            setupMove: 'b2e2',
+            solution: ['d5f6','g6g5','f6h5','e2f1','h1h2','f1f4','h5f4'],
+            theme: 'Combinação Muito Longa',
+            desc: 'Sequência de 7 lances no final',
+            hint: 'Cavalo vai para f6!'
+        },
+        {
+            id: '0EPWL',
+            fen: '8/6p1/7p/2PR1p1P/1P3P2/1r4P1/4p1K1/4k3 w - - 1 45',
+            setupMove: 'd5d4',
+            solution: ['b3g3','g2g3','e1f1','d4e4','f5e4'],
+            theme: 'Final de Torres',
+            desc: 'Sacrifício em final de torres puras',
+            hint: 'Torre vai para g3!'
+        },
+        {
+            id: '0Et5C',
+            fen: '8/5k2/3R4/2P5/1p1p1pp1/4b3/1P4K1/8 w - - 0 63',
+            setupMove: 'c5c6',
+            solution: ['f4f3','g2g3','e3f4','g3f4','f3f2','f4e5','f2f1q'],
+            theme: 'Promoção de Peão',
+            desc: 'Corrida para promoção – 7 lances!',
+            hint: 'Peão vai para f3!'
+        },
+        {
+            id: '0HY7v',
+            fen: '8/8/3p2pk/qKp4p/1b3P1P/1Q3N2/6PB/8 w - - 10 41',
+            setupMove: 'b5c4',
+            solution: ['a5a6','c4d5','a6a8','d5d6','c5c4','b3b4','a8f8','d6e5','f8b4'],
+            theme: 'Espeto + Ataque Descoberto',
+            desc: 'Combinação de 9 lances – rating 2387!',
+            hint: 'Dama vai para a6!'
+        },
+        {
+            id: '0HZj3',
+            fen: '8/pb5k/1p3Ppp/2p3q1/2Bp4/P2P3Q/1PP1r1PP/5RK1 w - - 5 28',
+            setupMove: 'f1f2',
+            solution: ['g5c1','f2f1','c1e3','h3e3','e2g2'],
+            theme: 'Deflexão + Xeque',
+            desc: 'Deflexão decisiva – rating 2596!',
+            hint: 'Dama vai para c1!'
+        },
+        {
+            id: '0I0k1',
+            fen: '8/ppp3rk/8/4p2p/2Q2KP1/P4P2/1P2R3/6q1 w - - 0 38',
+            setupMove: 'e2e5',
+            solution: ['g7g4','f3g4','g1g4','f4e3','g4c4'],
+            theme: 'Espeto de Torre',
+            desc: 'Espeto + Sacrifício no final',
+            hint: 'Torre vai para g4!'
+        },
+        {
+            id: '0IShe',
+            fen: '1rr3k1/1b3ppp/p3pq2/2QpN3/1P3P2/P1n2P2/2P1B1PP/R4RK1 w - - 3 22',
+            setupMove: 'c5e3',
+            solution: ['f6f4','e3f4','c3e2','g1h1','e2f4'],
+            theme: 'Atração + Garfo',
+            desc: 'Atração + Garfo de cavalo no meio-jogo',
+            hint: 'Dama vai para f4!'
+        },
+        {
+            id: '0K90R',
+            fen: 'q6r/5pkp/r3p1P1/1Q1p2P1/2nP4/PpN2P2/1P6/1K1R3R w - - 1 28',
+            setupMove: 'h1h7',
+            solution: ['h8h7','g6h7','a6a3','b2a3','c4a3','b1b2','a3b5'],
+            theme: 'Sacrifício de Torre + Garfo',
+            desc: 'Sacrifício + Garfo – master vs master!',
+            hint: 'Torre captura em h7!'
+        },
+        {
+            id: '0NVC5',
+            fen: '2r1k2r/1q3p2/p2Rp1bp/1p2Q3/8/2P3P1/PP4PK/5R2 b k - 2 25',
+            setupMove: 'e8e7',
+            solution: ['d6e6','f7e6','e5g7','e7d6','g7b7'],
+            theme: 'Garfo + Espeto',
+            desc: 'Garfo + Espeto devastador no meio-jogo',
+            hint: 'Torre vai para e6!'
+        }
         ];
+
 
         function getTodayPuzzle() {
             var today = new Date();
@@ -1907,36 +2082,59 @@
             showToast('🧠 Dificuldade: ' + ['', 'Iniciante', 'Amador', 'Avançado', 'Mestre'][level]);
         };
 
-        // ── PUZZLE ────────────────────────────────────────────────
+        // ============================================================
+        // FUNÇÕES ATUALIZADAS — cole no index.html substituindo as
+        // funções: initPuzzle, onPuzzleDrop, makePuzzleResponse, showSolution
+        // ============================================================
+
         function initPuzzle() {
-            currentPuzzle = getTodayPuzzle();
-            puzzleAttempts = 0; puzzleSolved = false; puzzleMoveIndex = 0; puzzleMoves = [];
-            gamePuzzle = new Chess(currentPuzzle.fen);
+        currentPuzzle = getTodayPuzzle();
+        puzzleAttempts = 0;
+        puzzleSolved = false;
+        puzzleMoveIndex = 0;
+        puzzleMoves = [];
 
-            var today = new Date();
-            document.getElementById('puzzleDate').textContent = today.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
-            document.getElementById('puzzleTheme').textContent = currentPuzzle.theme;
-            document.getElementById('puzzleDesc').textContent  = currentPuzzle.desc;
+        gamePuzzle = new Chess(currentPuzzle.fen);
 
-            for (var i = 0; i < 3; i++) { document.getElementById('dot' + i).className = 'attempt-dot'; }
-
-            document.getElementById('puzzleMovesList').innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:0.8rem;grid-column:1/-1;">Nenhum movimento...</span>';
-            document.getElementById('puzzleFeedback').className  = 'puzzle-feedback';
-            document.getElementById('puzzleStatus').textContent  = '♞ Brancas jogam — Encontre o mate!';
-            document.getElementById('puzzleStatus').className    = 'game-status';
-            document.getElementById('puzzleStatsCard').style.display = 'none';
-
-            if (boardPuzzle) { boardPuzzle.destroy(); }
-            boardPuzzle = Chessboard('chessboard-puzzle', {
-                draggable: true,
-                position: currentPuzzle.fen,
-                orientation: 'white',
-                pieceTheme: PIECE_THEME,
-                onDragStart: onPuzzleDragStart,
-                onDrop: onPuzzleDrop,
-                onSnapEnd: function() { boardPuzzle.position(gamePuzzle.fen()); }
-            });
+        // Aplica o lance do oponente (setup do puzzle)
+        if (currentPuzzle.setupMove) {
+            var sm = currentPuzzle.setupMove;
+            gamePuzzle.move({ from: sm.slice(0,2), to: sm.slice(2,4), promotion: 'q' });
         }
+
+        var isWhiteTurn = gamePuzzle.turn() === 'w';
+        var orientation = isWhiteTurn ? 'white' : 'black';
+        var playerTurn  = isWhiteTurn ? 'Brancas' : 'Pretas';
+
+        var today = new Date();
+        document.getElementById('puzzleDate').textContent =
+            today.toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });
+        document.getElementById('puzzleTheme').textContent = currentPuzzle.theme;
+        document.getElementById('puzzleDesc').textContent  = currentPuzzle.desc;
+
+        for (var i = 0; i < 3; i++)
+            document.getElementById('dot' + i).className = 'attempt-dot';
+
+        document.getElementById('puzzleMovesList').innerHTML =
+            '<span style="color:rgba(255,255,255,0.3);font-size:0.8rem;grid-column:1/-1;">Nenhum movimento...</span>';
+        document.getElementById('puzzleFeedback').className = 'puzzle-feedback';
+        document.getElementById('puzzleStatus').textContent =
+            '♞ ' + playerTurn + ' jogam — ' + currentPuzzle.desc;
+        document.getElementById('puzzleStatus').className = 'game-status';
+        document.getElementById('puzzleStatsCard').style.display = 'none';
+
+        if (boardPuzzle) boardPuzzle.destroy();
+        boardPuzzle = Chessboard('chessboard-puzzle', {
+            draggable:    true,
+            position:     gamePuzzle.fen(),
+            orientation:  orientation,
+            pieceTheme:   PIECE_THEME,
+            onDragStart:  onPuzzleDragStart,
+            onDrop:       onPuzzleDrop,
+            onSnapEnd:    function() { boardPuzzle.position(gamePuzzle.fen()); }
+        });
+        }
+
 
         function onPuzzleDragStart(source, piece) {
             if (puzzleSolved || puzzleAttempts >= 3 || gamePuzzle.game_over()) return false;
@@ -1945,49 +2143,66 @@
         }
 
         function onPuzzleDrop(source, target) {
+            if (puzzleSolved || puzzleAttempts >= 3) return 'snapback';
+
             var move = gamePuzzle.move({ from: source, to: target, promotion: 'q' });
             if (move === null) return 'snapback';
 
-            puzzleMoves.push(move.san);
-            updatePuzzleMoves();
+            var played   = source + target;
+            var expected = currentPuzzle.solution[puzzleMoveIndex];
 
-            var exp = currentPuzzle.solution[puzzleMoveIndex];
-            if (source === exp.substring(0, 2) && target === exp.substring(2, 4)) {
+            if (played === expected) {
+                puzzleMoves.push(move.san);
+                updatePuzzleMoves();
                 puzzleMoveIndex++;
+
                 if (puzzleMoveIndex >= currentPuzzle.solution.length) {
-                    puzzleSolved = true;
-                    if (puzzleAttempts < 3) { document.getElementById('dot' + puzzleAttempts).className = 'attempt-dot success'; }
-                    showPuzzleFeedback(true);
-                    document.getElementById('puzzleStatus').textContent = '🏆 Correto! Excelente jogada!';
-                    document.getElementById('puzzleStatus').className   = 'game-status status-win';
-                    showPuzzleStats(true);
-                    showToast('🏆 Puzzle resolvido!');
+                // RESOLVIDO!
+                puzzleSolved = true;
+                if (puzzleAttempts < 3)
+                    document.getElementById('dot' + puzzleAttempts).className = 'attempt-dot success';
+                showPuzzleFeedback(true);
+                document.getElementById('puzzleStatus').textContent = '🏆 Correto! Excelente jogada!';
+                document.getElementById('puzzleStatus').className   = 'game-status status-win';
+                showPuzzleStats(true);
+                showToast('🏆 Puzzle resolvido!');
                 } else {
-                    setTimeout(makePuzzleResponse, 700);
+                // Resposta do oponente
+                setTimeout(makePuzzleResponse, 600);
                 }
             } else {
-                gamePuzzle.undo(); boardPuzzle.position(gamePuzzle.fen());
-                puzzleMoves.pop(); updatePuzzleMoves();
-                if (puzzleAttempts < 3) { document.getElementById('dot' + puzzleAttempts).className = 'attempt-dot used'; puzzleAttempts++; }
+                // Lance errado — desfaz
+                gamePuzzle.undo();
+                boardPuzzle.position(gamePuzzle.fen());
+
+                if (puzzleAttempts < 3) {
+                document.getElementById('dot' + puzzleAttempts).className = 'attempt-dot used';
+                puzzleAttempts++;
+                }
                 showPuzzleFeedback(false);
+
                 if (puzzleAttempts >= 3) {
-                    document.getElementById('puzzleStatus').textContent = '😞 Sem mais tentativas. Veja a solução!';
-                    document.getElementById('puzzleStatus').className   = 'game-status status-lose';
-                    showPuzzleStats(false);
+                document.getElementById('puzzleStatus').textContent = '😞 Sem mais tentativas! Veja a solução.';
+                document.getElementById('puzzleStatus').className   = 'game-status status-lose';
+                showPuzzleStats(false);
                 } else {
-                    document.getElementById('puzzleStatus').textContent = '⚠️ Lance errado! ' + (3 - puzzleAttempts) + ' tentativa(s) restante(s)';
-                    document.getElementById('puzzleStatus').className   = 'game-status status-check';
+                document.getElementById('puzzleStatus').textContent =
+                    '⚠️ Lance errado! ' + (3 - puzzleAttempts) + ' tentativa(s) restante(s)';
+                document.getElementById('puzzleStatus').className = 'game-status status-check';
                 }
             }
         }
 
         function makePuzzleResponse() {
-            if (puzzleMoveIndex < currentPuzzle.solution.length) {
-                var uci = currentPuzzle.solution[puzzleMoveIndex];
-                gamePuzzle.move({ from: uci.substring(0, 2), to: uci.substring(2, 4), promotion: 'q' });
-                boardPuzzle.position(gamePuzzle.fen());
-                puzzleMoveIndex++;
+            if (puzzleMoveIndex >= currentPuzzle.solution.length) return;
+            var uci = currentPuzzle.solution[puzzleMoveIndex];
+            var move = gamePuzzle.move({ from: uci.slice(0,2), to: uci.slice(2,4), promotion: 'q' });
+            if (move) {
+                puzzleMoves.push('(' + move.san + ')');
+                updatePuzzleMoves();
             }
+            boardPuzzle.position(gamePuzzle.fen());
+            puzzleMoveIndex++;
         }
 
         function updatePuzzleMoves() {
@@ -2020,30 +2235,55 @@
             }
         }
 
-        window.getPuzzleHint = function() { showToast('💡 Dica: ' + currentPuzzle.hint); };
-        window.resetPuzzle   = function() { initPuzzle(); showToast('🔄 Puzzle reiniciado!'); };
+        window.getPuzzleHint = function() {
+            var fb = document.getElementById('puzzleFeedback');
+            fb.textContent = '💡 Dica: ' + currentPuzzle.hint;
+            fb.className = 'puzzle-feedback show';
+            fb.style.background = 'rgba(255,215,0,0.12)';
+            fb.style.borderColor = 'rgba(255,215,0,0.6)';
+            fb.style.color = 'var(--golden-sun)';
+        };
 
         window.showSolution = function() {
             if (!currentPuzzle) return;
-            var sol = currentPuzzle.solution;
-            var game = new Chess(currentPuzzle.fen);
-            var str = '';
-            sol.forEach(function(uci, i) {
-                var m = game.move({ from: uci.substring(0, 2), to: uci.substring(2, 4), promotion: 'q' });
-                if (m) str += (i + 1) + '. ' + m.san + ' ';
-            });
-            showToast('🔍 Solução: ' + str.trim());
-            var idx = 0, pg = new Chess(currentPuzzle.fen);
-            boardPuzzle.position(currentPuzzle.fen);
-            (function playNext() {
-                if (idx >= sol.length) return;
-                pg.move({ from: sol[idx].substring(0, 2), to: sol[idx].substring(2, 4), promotion: 'q' });
-                boardPuzzle.position(pg.fen());
-                idx++;
-                setTimeout(playNext, 950);
-            })();
             puzzleSolved = true;
+
+            // Reconstrói posição do início
+            var g = new Chess(currentPuzzle.fen);
+            if (currentPuzzle.setupMove)
+                g.move({ from: currentPuzzle.setupMove.slice(0,2), to: currentPuzzle.setupMove.slice(2,4), promotion:'q' });
+
+            var solStr = '';
+            currentPuzzle.solution.forEach(function(uci, i) {
+                var m = g.move({ from: uci.slice(0,2), to: uci.slice(2,4), promotion:'q' });
+                if (m) solStr += (Math.floor(i/2)+1) + (i%2===0 ? '. ' : '... ') + m.san + ' ';
+            });
+
+            var fb = document.getElementById('puzzleFeedback');
+            fb.textContent = '🔍 Solução: ' + solStr.trim();
+            fb.className = 'puzzle-feedback show';
+            fb.style.cssText += 'background:rgba(46,204,113,0.12);border-color:#2ECC71;color:#2ECC71;';
+
+            // Anima os lances
+            var g2 = new Chess(currentPuzzle.fen);
+            if (currentPuzzle.setupMove)
+                g2.move({ from: currentPuzzle.setupMove.slice(0,2), to: currentPuzzle.setupMove.slice(2,4), promotion:'q' });
+            boardPuzzle.position(g2.fen());
+
+            var idx = 0;
+            (function play() {
+                if (idx >= currentPuzzle.solution.length) return;
+                g2.move({ from: currentPuzzle.solution[idx].slice(0,2), to: currentPuzzle.solution[idx].slice(2,4), promotion:'q' });
+                boardPuzzle.position(g2.fen());
+                idx++;
+                setTimeout(play, 900);
+            })();
         };
+
+    
+        window.resetPuzzle   = function() { initPuzzle(); showToast('🔄 Puzzle reiniciado!'); };
+
+    
 
         // ── INICIALIZA ─────────────────────────────────────────
         initBotGame();
