@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Privacidade | Privacy Policy — PicPuzzle</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #f4f4ff;
+            --surface: #ffffff;
+            --ink: #151520;
+            --muted: #5a5a7a;
+            --accent: #2a1a5e;
+            --accent-mid: #3d2a80;
+            --accent-light: #ede8ff;
+            --vivid: #FF6B35;
+            --border: #ddd8f5;
+            --radius: 12px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--accent);
+            color: #fff;
+            padding: 28px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand span {
+            color: var(--vivid);
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 6px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: var(--vivid);
+            border-color: var(--vivid);
+            color: #fff;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-mid) 60%, #5b3fa0 100%);
+            color: #fff;
+            padding: 64px 40px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🧩';
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8rem;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            right: -80px;
+            bottom: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 107, 53, 0.1);
+            pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 14px;
+            color: var(--vivid);
+        }
+
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .hero-date {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-date::before {
+            content: '📅';
+            font-size: 0.9rem;
+        }
+
+        /* ── LAYOUT ── */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 56px 24px 80px;
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 40px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.25s, transform 0.25s;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        .section:hover {
+            box-shadow: 0 6px 28px rgba(42, 26, 94, 0.1);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.10s;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 0.20s;
+        }
+
+        .section:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .section:nth-child(6) {
+            animation-delay: 0.30s;
+        }
+
+        .section:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .section:nth-child(8) {
+            animation-delay: 0.40s;
+        }
+
+        .section:nth-child(9) {
+            animation-delay: 0.45s;
+        }
+
+        .section:nth-child(10) {
+            animation-delay: 0.50s;
+        }
+
+        .section:nth-child(11) {
+            animation-delay: 0.55s;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .section-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--accent-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .section h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            line-height: 1.3;
+        }
+
+        .section p {
+            color: var(--muted);
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section ul {
+            margin: 8px 0 12px 20px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .section ul li {
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        .section ul li::marker {
+            color: var(--vivid);
+        }
+
+        .highlight {
+            background: var(--accent-light);
+            border-left: 3px solid var(--vivid);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            color: var(--ink);
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .badge {
+            background: var(--accent-light);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            padding: 5px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .contact-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1.5px solid var(--vivid);
+            transition: opacity 0.2s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        footer strong {
+            color: var(--accent);
+        }
+
+        [data-lang] {
+            display: none;
+        }
+
+        .lang-pt [data-lang="pt"] {
+            display: block;
+        }
+
+        .lang-en [data-lang="en"] {
+            display: block;
+        }
+
+        span[data-lang] {
+            display: none;
+        }
+
+        .lang-pt span[data-lang="pt"] {
+            display: inline;
+        }
+
+        .lang-en span[data-lang="en"] {
+            display: inline;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 44px 20px 40px;
+            }
+
+            .hero::before {
+                font-size: 5rem;
+                right: 20px;
+            }
+
+            .section {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="lang-pt">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">🧩 <span>PicPuzzle</span></div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+            <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-eyebrow">PicPuzzle — Talento DEV</div>
+
+        <h1 data-lang="pt">Política de<br>Privacidade</h1>
+        <h1 data-lang="en">Privacy<br>Policy</h1>
+
+        <div class="hero-date" data-lang="pt">Última atualização: 13 de Março de 2026</div>
+        <div class="hero-date" data-lang="en">Last updated: March 13, 2026</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="container">
+
+        <div class="highlight">
+            <span data-lang="pt">🧩 O <strong>PicPuzzle</strong> respeita a sua privacidade. O app utiliza a câmera e galeria apenas para criar puzzles a partir das suas fotos. Os dados de pontuação são salvos na nuvem somente com seu consentimento, via login com Google.</span>
+            <span data-lang="en">🧩 <strong>PicPuzzle</strong> respects your privacy. The app uses the camera and gallery only to create puzzles from your photos. Score data is saved to the cloud only with your consent, via Google Sign-In.</span>
+        </div>
+
+        <!-- 1. INFORMAÇÕES COLETADAS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2 data-lang="pt">1. Informações Coletadas</h2>
+                <h2 data-lang="en">1. Information Collected</h2>
+            </div>
+            <p data-lang="pt">O PicPuzzle <strong>não coleta nenhuma informação pessoal</strong> sem o seu consentimento. As configurações do jogo (nome, país, pontuação) são armazenadas apenas localmente no seu dispositivo via <strong>SharedPreferences</strong>.</p>
+            <p data-lang="en">PicPuzzle <strong>does not collect any personal information</strong> without your consent. Game settings (name, country, score) are stored only locally on your device via <strong>SharedPreferences</strong>.</p>
+
+            <p data-lang="pt">Caso o usuário opte por fazer login com o Google, o nome de exibição, foto de perfil e pontuação são sincronizados com o <strong>Firebase Realtime Database</strong> para participação no ranking global.</p>
+            <p data-lang="en">If the user chooses to sign in with Google, the display name, profile photo, and score are synced to <strong>Firebase Realtime Database</strong> to participate in the global leaderboard.</p>
+        </div>
+
+        <!-- 2. CÂMERA E GALERIA -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📷</div>
+                <h2 data-lang="pt">2. Câmera e Galeria</h2>
+                <h2 data-lang="en">2. Camera and Gallery</h2>
+            </div>
+            <p data-lang="pt">O aplicativo solicita permissão para acessar a câmera e a galeria de fotos do dispositivo com a finalidade exclusiva de criar puzzles a partir das imagens escolhidas pelo usuário.</p>
+            <p data-lang="en">The application requests permission to access the device camera and photo gallery for the sole purpose of creating puzzles from images chosen by the user.</p>
+
+            <p data-lang="pt">As imagens são processadas <strong>localmente no dispositivo</strong> e não são enviadas para nenhum servidor externo. Nenhuma foto é armazenada além do tempo necessário para o jogo em andamento.</p>
+            <p data-lang="en">Images are processed <strong>locally on the device</strong> and are not sent to any external server. No photo is stored beyond the time needed for the ongoing game.</p>
+
+            <p data-lang="pt">Você pode revogar essas permissões a qualquer momento nas configurações do seu dispositivo.</p>
+            <p data-lang="en">You can revoke these permissions at any time in your device settings.</p>
+        </div>
+
+        <!-- 3. LOGIN COM GOOGLE E RANKING -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🏆</div>
+                <h2 data-lang="pt">3. Login com Google e Ranking Global</h2>
+                <h2 data-lang="en">3. Google Sign-In and Global Leaderboard</h2>
+            </div>
+            <p data-lang="pt">O login com Google é <strong>completamente opcional</strong>. Sem ele, o jogo funciona normalmente e a pontuação é salva apenas no dispositivo.</p>
+            <p data-lang="en">Google Sign-In is <strong>completely optional</strong>. Without it, the game works normally and the score is saved only on the device.</p>
+
+            <p data-lang="pt">Ao optar por fazer login, as seguintes informações são salvas no Firebase Realtime Database para exibição no ranking:</p>
+            <p data-lang="en">By choosing to sign in, the following information is saved to Firebase Realtime Database for leaderboard display:</p>
+
+            <ul data-lang="pt">
+                <li>Nome de exibição da conta Google</li>
+                <li>Código do país selecionado nas configurações</li>
+                <li>Pontuação total acumulada</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Google account display name</li>
+                <li>Country code selected in settings</li>
+                <li>Total accumulated score</li>
+            </ul>
+
+            <p data-lang="pt">Nenhuma senha, e-mail ou dado financeiro é coletado ou armazenado.</p>
+            <p data-lang="en">No password, email, or financial data is collected or stored.</p>
+        </div>
+
+        <!-- 4. ANÚNCIOS E PLANO PREMIUM -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📢</div>
+                <h2 data-lang="pt">4. Anúncios e Plano Premium</h2>
+                <h2 data-lang="en">4. Ads and Premium Plan</h2>
+            </div>
+            <p data-lang="pt">O PicPuzzle é gratuito e sustentado por anúncios intersticiais exibidos via <strong>Google AdMob</strong> ao final de cada partida.</p>
+            <p data-lang="en">PicPuzzle is free and supported by interstitial ads displayed via <strong>Google AdMob</strong> at the end of each game.</p>
+
+            <p data-lang="pt">Ao assinar o <strong>plano Premium</strong>, os anúncios são removidos completamente.</p>
+            <p data-lang="en">By subscribing to the <strong>Premium plan</strong>, ads are completely removed.</p>
+
+            <p data-lang="pt">O Google AdMob pode utilizar um identificador de publicidade do dispositivo (<strong>Ad ID</strong>) para exibir anúncios relevantes. Você pode redefinir ou desativar esse identificador em <em>Configurações → Google → Anúncios</em>.</p>
+            <p data-lang="en">Google AdMob may use the device's advertising identifier (<strong>Ad ID</strong>) to display relevant ads. You can reset or disable this identifier under <em>Settings → Google → Ads</em>.</p>
+        </div>
+
+        <!-- 5. PERMISSÕES -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🔐</div>
+                <h2 data-lang="pt">5. Permissões do Aplicativo</h2>
+                <h2 data-lang="en">5. App Permissions</h2>
+            </div>
+            <p data-lang="pt">O PicPuzzle solicita apenas as seguintes permissões:</p>
+            <p data-lang="en">PicPuzzle requests only the following permissions:</p>
+
+            <div class="badges">
+                <span class="badge">🌐 INTERNET</span>
+                <span class="badge">📷 CAMERA</span>
+                <span class="badge">🖼️ READ_MEDIA_IMAGES</span>
+                <span class="badge">📣 AD_ID</span>
+            </div>
+
+            <p style="margin-top:18px" data-lang="pt"><strong>INTERNET:</strong> Necessária para o ranking global (Firebase), anúncios (AdMob) e login com Google.</p>
+            <p style="margin-top:18px" data-lang="en"><strong>INTERNET:</strong> Required for the global leaderboard (Firebase), ads (AdMob), and Google Sign-In.</p>
+
+            <p data-lang="pt"><strong>CAMERA:</strong> Necessária para tirar fotos diretamente no app e transformá-las em puzzles.</p>
+            <p data-lang="en"><strong>CAMERA:</strong> Required to take photos directly in the app and turn them into puzzles.</p>
+
+            <p data-lang="pt"><strong>READ_MEDIA_IMAGES:</strong> Necessária para selecionar fotos da galeria do dispositivo.</p>
+            <p data-lang="en"><strong>READ_MEDIA_IMAGES:</strong> Required to select photos from the device gallery.</p>
+
+            <p data-lang="pt"><strong>AD_ID:</strong> Identificador de publicidade usado pelo Google AdMob para exibir anúncios relevantes a usuários do plano gratuito.</p>
+            <p data-lang="en"><strong>AD_ID:</strong> Advertising identifier used by Google AdMob to display relevant ads to free plan users.</p>
+        </div>
+
+        <!-- 6. COMPARTILHAMENTO DE DADOS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🤝</div>
+                <h2 data-lang="pt">6. Compartilhamento de Dados</h2>
+                <h2 data-lang="en">6. Data Sharing</h2>
+            </div>
+            <p data-lang="pt">O PicPuzzle utiliza os seguintes serviços de terceiros:</p>
+            <p data-lang="en">PicPuzzle uses the following third-party services:</p>
+
+            <ul data-lang="pt">
+                <li><strong>Google Firebase Realtime Database:</strong> Armazenamento do ranking global de pontuações</li>
+                <li><strong>Google Sign-In / Firebase Auth:</strong> Autenticação opcional para o ranking</li>
+                <li><strong>Google AdMob:</strong> Exibição de anúncios para usuários do plano gratuito</li>
+                <li><strong>Google Play Billing:</strong> Processamento seguro de assinaturas Premium</li>
+            </ul>
+            <ul data-lang="en">
+                <li><strong>Google Firebase Realtime Database:</strong> Global score leaderboard storage</li>
+                <li><strong>Google Sign-In / Firebase Auth:</strong> Optional authentication for the leaderboard</li>
+                <li><strong>Google AdMob:</strong> Ad display for free plan users</li>
+                <li><strong>Google Play Billing:</strong> Secure Premium subscription processing</li>
+            </ul>
+
+            <p data-lang="pt">Nenhuma informação pessoal é vendida, alugada ou compartilhada com terceiros para fins comerciais.</p>
+            <p data-lang="en">No personal information is sold, rented, or shared with third parties for commercial purposes.</p>
+        </div>
+
+        <!-- 7. COOKIES -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🍪</div>
+                <h2 data-lang="pt">7. Cookies</h2>
+                <h2 data-lang="en">7. Cookies</h2>
+            </div>
+            <p data-lang="pt">O aplicativo não utiliza cookies nem tecnologias semelhantes de rastreamento.</p>
+            <p data-lang="en">The application does not use cookies or similar tracking technologies.</p>
+        </div>
+
+        <!-- 8. CRIANÇAS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">👶</div>
+                <h2 data-lang="pt">8. Crianças</h2>
+                <h2 data-lang="en">8. Children</h2>
+            </div>
+            <p data-lang="pt">O PicPuzzle não é direcionado especificamente a crianças menores de 13 anos e não coletamos intencionalmente dados de menores de idade.</p>
+            <p data-lang="en">PicPuzzle is not specifically directed at children under 13 and we do not intentionally collect data from minors.</p>
+        </div>
+
+        <!-- 9. SEGURANÇA -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🛡️</div>
+                <h2 data-lang="pt">9. Segurança</h2>
+                <h2 data-lang="en">9. Security</h2>
+            </div>
+            <p data-lang="pt">Todas as comunicações entre o aplicativo e os serviços externos são realizadas via conexões criptografadas (<strong>HTTPS/TLS</strong>), garantindo a segurança dos dados em trânsito.</p>
+            <p data-lang="en">All communications between the application and external services are conducted via encrypted connections (<strong>HTTPS/TLS</strong>), ensuring the security of data in transit.</p>
+        </div>
+
+        <!-- 10. ALTERAÇÕES -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <h2 data-lang="pt">10. Alterações a esta Política</h2>
+                <h2 data-lang="en">10. Changes to This Policy</h2>
+            </div>
+            <p data-lang="pt">Caso esta Política de Privacidade seja alterada, a versão atualizada será publicada nesta página com a nova data de vigência.</p>
+            <p data-lang="en">Should this Privacy Policy be modified, the updated version will be published on this page with the new effective date.</p>
+
+            <p data-lang="pt">Você pode imprimir uma cópia pressionando <strong>Ctrl + P</strong> no teclado.</p>
+            <p data-lang="en">You can print a copy by pressing <strong>Ctrl + P</strong> on your keyboard.</p>
+        </div>
+
+        <!-- 11. CONTATO -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">✉️</div>
+                <h2 data-lang="pt">11. Contato</h2>
+                <h2 data-lang="en">11. Contact</h2>
+            </div>
+            <p data-lang="pt">Caso tenha dúvidas sobre esta Política de Privacidade, entre em contato conosco:</p>
+            <p data-lang="en">If you have questions about this Privacy Policy, please contact us:</p>
+            <p><a href="https://www.talento.dev.br" target="_blank" rel="noopener" class="contact-link">www.talento.dev.br</a></p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <span data-lang="pt">© 2026 <strong>PicPuzzle</strong> · Talento DEV · Última atualização: 13 de Março de 2026</span>
+        <span data-lang="en">© 2026 <strong>PicPuzzle</strong> · Talento DEV · Last updated: March 13, 2026</span>
+    </footer>
+
+    <script>
+        function setLang(lang, btn) {
+            document.body.className = 'lang-' + lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.documentElement.lang = lang;
+        }
+    </script>
+
+</body>
+
+</html>
