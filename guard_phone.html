@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ98GYTZJF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GZ98GYTZJF');
+    </script>
+
+    <title>GuardPhone — Proteção Inteligente para seu Celular | Talento Dev</title>
+    <meta name="description" content="GuardPhone — Proteja seu celular com alarmes inteligentes. Anti-toque, alarme de bolso, alerta de carregador, bateria cheia, foto de intruso e detecção de som por IA.">
+    <meta name="keywords" content="guardphone, alarme celular, proteção celular, anti furto, talento dev, segurança android, intruder photo, pocket alarm">
+    <meta name="author" content="Erwin Vaz">
+    <meta property="og:title" content="GuardPhone — Proteção Inteligente para seu Celular">
+    <meta property="og:description" content="6 módulos de proteção: Anti-toque, Alarme de Bolso, Carregador, Bateria, Foto de Intruso e Detecção por IA.">
+    <meta property="og:url" content="https://www.talento.dev.br/guard_phone.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.talento.dev.br/site/ico.png">
+
+    <link href="assets/img/favicon.ico" rel="icon">
+    <link rel="canonical" href="https://www.talento.dev.br/guard_phone.html" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --deep:        #040C10;
+            --deep-mid:    #071520;
+            --dark-teal:   #0A2535;
+            --teal:        #0D6E8A;
+            --cyan:        #00C6D4;
+            --green:       #00E676;
+            --green-soft:  #43A047;
+            --red:         #FF3D3D;
+            --amber:       #FFB300;
+            --blue:        #1565C0;
+            --blue-soft:   #42A5F5;
+            --cream:       #E8F4F8;
+            --white:       #FFFFFF;
+
+            --grad-deep:   linear-gradient(160deg, #040C10 0%, #071520 50%, #0A2535 100%);
+            --grad-teal:   linear-gradient(135deg, #0D6E8A 0%, #00C6D4 100%);
+            --grad-green:  linear-gradient(135deg, #00897B 0%, #00E676 100%);
+            --grad-red:    linear-gradient(135deg, #B71C1C 0%, #FF3D3D 100%);
+            --grad-amber:  linear-gradient(135deg, #E65100 0%, #FFB300 100%);
+            --grad-blue:   linear-gradient(135deg, #1565C0 0%, #42A5F5 100%);
+            --grad-cyber:  linear-gradient(135deg, #00C6D4 0%, #00E676 100%);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--grad-deep);
+            font-family: 'Sora', sans-serif;
+            color: var(--cream);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ─── Animated Background ─── */
+        .bg-layer {
+            position: fixed; inset: 0; z-index: -2;
+            background: var(--grad-deep);
+        }
+
+        /* Floating shield/lock icons background */
+        .icons-bg {
+            position: fixed; inset: 0; z-index: -1;
+            pointer-events: none; overflow: hidden;
+        }
+        .icon-float {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.05;
+            animation: iconDrift 20s ease-in-out infinite;
+            user-select: none;
+        }
+        .icon-float:nth-child(1)  { left: 5%;  top: 8%;  font-size:3.5rem; animation-delay: 0s;   animation-duration:22s; }
+        .icon-float:nth-child(2)  { left: 85%; top: 15%; font-size:2rem;   animation-delay:-5s;  animation-duration:18s; }
+        .icon-float:nth-child(3)  { left: 15%; top: 55%; font-size:4rem;   animation-delay:-10s; animation-duration:25s; }
+        .icon-float:nth-child(4)  { left: 70%; top: 65%; font-size:2.5rem; animation-delay:-3s;  animation-duration:20s; }
+        .icon-float:nth-child(5)  { left: 45%; top: 25%; font-size:3rem;   animation-delay:-8s;  animation-duration:23s; }
+        .icon-float:nth-child(6)  { left: 92%; top: 45%; font-size:2rem;   animation-delay:-15s; animation-duration:19s; }
+        .icon-float:nth-child(7)  { left: 30%; top: 80%; font-size:3.5rem; animation-delay:-2s;  animation-duration:21s; }
+        .icon-float:nth-child(8)  { left: 58%; top: 5%;  font-size:2.5rem; animation-delay:-12s; animation-duration:24s; }
+        .icon-float:nth-child(9)  { left: 2%;  top: 40%; font-size:2rem;   animation-delay:-7s;  animation-duration:17s; }
+        .icon-float:nth-child(10) { left: 78%; top: 88%; font-size:3rem;   animation-delay:-4s;  animation-duration:26s; }
+        @keyframes iconDrift {
+            0%,100% { transform: translateY(0)    rotate(-6deg); opacity: 0.05; }
+            50%      { transform: translateY(-40px) rotate(6deg);  opacity: 0.10; }
+        }
+
+        /* Dot grid */
+        .dot-grid {
+            position: fixed; inset: 0; z-index: -1;
+            background-image: radial-gradient(rgba(0,198,212,0.10) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Scan line animation (cybersecurity feel) */
+        .scan-line {
+            position: fixed; inset: 0; z-index: -1;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,198,212,0.015) 2px,
+                rgba(0,198,212,0.015) 4px
+            );
+            animation: scanMove 8s linear infinite;
+        }
+        @keyframes scanMove {
+            0%   { background-position: 0 0; }
+            100% { background-position: 0 100px; }
+        }
+
+        /* ─── Header ─── */
+        .site-header {
+            background: linear-gradient(180deg, rgba(4,12,16,0.98) 0%, rgba(7,21,32,0.95) 100%);
+            border-bottom: 2px solid rgba(0,198,212,0.35);
+            box-shadow: 0 8px 40px rgba(13,110,138,0.25);
+            padding: 1.2rem 0 0;
+            position: relative; overflow: hidden;
+        }
+        .site-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% -20%, rgba(0,198,212,0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        /* ─── Navbar ─── */
+        .nav-bar {
+            display: flex; justify-content: center;
+            gap: 3rem; list-style: none;
+            padding: 0.5rem 0 1rem;
+            border-bottom: 1px solid rgba(0,198,212,0.15);
+            position: relative; z-index: 3;
+        }
+        .nav-bar a {
+            color: var(--cream); text-decoration: none;
+            font-family: 'Sora', sans-serif; font-weight: 600;
+            font-size: 0.95rem; letter-spacing: 0.04em;
+            padding: 0.4rem 0; position: relative; transition: color 0.3s;
+        }
+        .nav-bar a::after {
+            content: ''; position: absolute;
+            bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--grad-cyber); transition: width 0.3s;
+        }
+        .nav-bar a:hover { color: var(--cyan); }
+        .nav-bar a:hover::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid var(--cyan);
+            color: var(--cyan);
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px; font-size: 1.3rem;
+            cursor: pointer; transition: all 0.3s;
+            position: absolute; top: 1rem; right: 1rem; z-index: 10;
+        }
+        .nav-toggle:hover { background: var(--grad-teal); color: white; }
+
+        /* ─── Hero ─── */
+        .hero {
+            position: relative; z-index: 2;
+            text-align: center; padding: 3rem 1rem 3.5rem;
+        }
+
+        /* Animated shield */
+        .shield-demo {
+            width: 160px; height: 180px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+        }
+        .shield-svg {
+            width: 100%; height: 100%;
+            filter: drop-shadow(0 0 30px rgba(0,198,212,0.5));
+            animation: shieldPulse 3s ease-in-out infinite;
+        }
+        @keyframes shieldPulse {
+            0%,100% { filter: drop-shadow(0 0 20px rgba(0,198,212,0.4)); transform: scale(1); }
+            50%      { filter: drop-shadow(0 0 45px rgba(0,230,118,0.6)); transform: scale(1.04); }
+        }
+        .shield-rings {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,198,212,0.15);
+            animation: ringExpand 3s ease-out infinite;
+        }
+        .shield-rings:nth-child(2) { animation-delay: 1s; width: 240px; height: 240px; }
+        .shield-rings:nth-child(3) { animation-delay: 2s; width: 280px; height: 280px; }
+        @keyframes ringExpand {
+            0%   { opacity: 0.4; transform: translate(-50%,-50%) scale(0.8); }
+            100% { opacity: 0;   transform: translate(-50%,-50%) scale(1.3); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0,198,212,0.10);
+            border: 1px solid rgba(0,198,212,0.35);
+            color: var(--cyan);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem; letter-spacing: 0.18em;
+            padding: 0.35rem 1.1rem; border-radius: 20px;
+            margin-bottom: 1.2rem; text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 900; line-height: 1.05;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+            text-shadow: 0 0 60px rgba(0,198,212,0.3);
+        }
+        .hero-title .guard {
+            background: var(--grad-cyber);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-title .phone {
+            background: var(--grad-teal);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            opacity: 0.8; margin-bottom: 2rem;
+            font-weight: 300; max-width: 520px; margin-inline: auto;
+            line-height: 1.7;
+        }
+
+        .btn-dl {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            background: var(--grad-cyber);
+            color: #040C10;
+            font-family: 'Sora', sans-serif; font-weight: 700;
+            font-size: 1.1rem; border: none; border-radius: 50px;
+            text-decoration: none; transition: all 0.35s;
+            box-shadow: 0 8px 30px rgba(0,198,212,0.35);
+        }
+        .btn-dl:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 18px 50px rgba(0,230,118,0.5);
+            color: #040C10;
+        }
+
+        /* ─── Modules strip ─── */
+        .mod-strip {
+            display: flex; gap: 8px;
+            justify-content: center; flex-wrap: wrap;
+            margin: 2rem 0 0;
+            padding: 1rem 0;
+            border-top: 1px solid rgba(0,198,212,0.15);
+        }
+        .mod-chip {
+            display: flex; align-items: center; gap: 6px;
+            background: rgba(0,198,212,0.07);
+            border: 1px solid rgba(0,198,212,0.2);
+            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.78rem;
+            color: #80DEEA;
+            transition: all 0.3s;
+            cursor: default;
+        }
+        .mod-chip:hover {
+            background: rgba(0,198,212,0.18);
+            border-color: var(--cyan);
+            transform: translateY(-2px);
+            color: var(--white);
+        }
+
+        /* ─── Section Card ─── */
+        .card-section {
+            background: rgba(255,255,255,0.025);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0,198,212,0.18);
+            border-radius: 28px; padding: 3rem;
+            margin: 2.5rem 0; position: relative; z-index: 2;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .card-section:hover {
+            border-color: rgba(0,230,118,0.3);
+            box-shadow: 0 20px 60px rgba(13,110,138,0.15);
+        }
+
+        .sec-title {
+            font-family: 'Playfair Display', serif; font-weight: 700;
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            background: var(--grad-cyber);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center; margin-bottom: 0.75rem;
+        }
+        .sec-sub {
+            text-align: center; opacity: 0.75;
+            font-size: 1.05rem; margin-bottom: 2rem;
+            font-weight: 300; line-height: 1.7;
+        }
+
+        /* ─── Video ─── */
+        .video-wrap {
+            position: relative; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 20px;
+            border: 2px solid rgba(0,198,212,0.35);
+            box-shadow: 0 16px 60px rgba(13,110,138,0.3);
+        }
+        .video-wrap iframe {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            border: none; border-radius: 18px;
+        }
+
+        /* ─── Stats ─── */
+        .stats-wrap {
+            display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 3rem;
+        }
+        .stat { text-align: center; }
+        .stat-num {
+            font-family: 'Playfair Display', serif; font-weight: 900;
+            font-size: 2.8rem;
+            background: var(--grad-cyber);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; line-height: 1;
+        }
+        .stat-lbl {
+            font-size: 0.85rem; opacity: 0.65;
+            margin-top: 0.4rem;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* ─── Modules grid ─── */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem; margin-top: 1.5rem;
+        }
+        .module-card {
+            background: rgba(13,110,138,0.07);
+            border: 1px solid rgba(0,198,212,0.18);
+            border-radius: 20px; padding: 2rem;
+            text-align: center; transition: all 0.35s;
+            cursor: default; position: relative; overflow: hidden;
+        }
+        .module-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .module-card:hover::before { opacity: 1; }
+        .module-card.mod-1::before { background: var(--grad-red); }
+        .module-card.mod-2::before { background: var(--grad-amber); }
+        .module-card.mod-3::before { background: var(--grad-teal); }
+        .module-card.mod-4::before { background: var(--grad-blue); }
+        .module-card.mod-5::before { background: var(--grad-green); }
+        .module-card.mod-6::before { background: linear-gradient(135deg,#7B1FA2,#CE93D8); }
+        .module-card:hover {
+            background: rgba(0,198,212,0.10);
+            border-color: rgba(0,230,118,0.35);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(13,110,138,0.2);
+        }
+        .mod-icon { font-size: 2.8rem; margin-bottom: 0.9rem; display: block; }
+        .mod-name {
+            font-family: 'Sora', sans-serif; font-weight: 700;
+            font-size: 1.05rem; color: var(--cyan);
+            margin-bottom: 0.7rem;
+        }
+        .mod-desc {
+            font-size: 0.9rem; opacity: 0.75;
+            line-height: 1.65; font-weight: 300;
+        }
+        .mod-badge {
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem; letter-spacing: 0.12em;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+        .badge-free    { background: rgba(0,230,118,0.12); color: var(--green);  border: 1px solid rgba(0,230,118,0.3); }
+        .badge-premium { background: rgba(0,198,212,0.12); color: var(--cyan);   border: 1px solid rgba(0,198,212,0.3); }
+        .badge-ai      { background: rgba(123,31,162,0.15); color: #CE93D8;       border: 1px solid rgba(123,31,162,0.3); }
+
+        /* ─── How it works ─── */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem; margin-top: 1.5rem;
+        }
+        .step {
+            background: rgba(13,110,138,0.07);
+            border: 1px solid rgba(0,198,212,0.18);
+            border-radius: 20px; padding: 2rem 1.5rem;
+            text-align: center; transition: all 0.35s;
+        }
+        .step:hover {
+            background: rgba(0,198,212,0.10);
+            transform: translateY(-4px);
+        }
+        .step-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px;
+            background: var(--grad-cyber);
+            border-radius: 50%;
+            font-family: 'Playfair Display', serif; font-weight: 900;
+            font-size: 1.1rem; color: #040C10;
+            margin-bottom: 1rem;
+        }
+        .step-icon { font-size: 2rem; margin-bottom: 0.7rem; display: block; }
+        .step-title { font-weight: 700; color: var(--cyan); margin-bottom: 0.5rem; }
+        .step-desc { font-size: 0.88rem; opacity: 0.75; line-height: 1.6; }
+
+        /* ─── Premium section ─── */
+        .premium-card {
+            background: linear-gradient(135deg, rgba(13,110,138,0.3), rgba(0,198,212,0.1));
+            border: 1px solid rgba(0,198,212,0.3);
+            border-radius: 24px; padding: 2.5rem;
+            position: relative; overflow: hidden;
+        }
+        .premium-card::before {
+            content: '🛡️';
+            position: absolute; top: -10px; right: 20px;
+            font-size: 6rem; opacity: 0.06;
+            transform: rotate(15deg);
+        }
+        .premium-list {
+            list-style: none; padding: 0;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1rem; margin-top: 1.5rem;
+        }
+        .premium-list li {
+            display: flex; align-items: center; gap: 0.7rem;
+            font-size: 0.95rem;
+        }
+        .premium-list li .check { color: var(--green); font-size: 1.1rem; flex-shrink: 0; }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(13,110,138,0.2), rgba(0,230,118,0.08));
+            border: 1px solid rgba(0,198,212,0.25);
+        }
+
+        /* ─── Footer ─── */
+        .site-footer {
+            background: linear-gradient(180deg, #020810 0%, #040C10 100%);
+            border-top: 2px solid rgba(0,198,212,0.25);
+            position: relative; z-index: 2;
+        }
+
+        /* ─── Back to top ─── */
+        .btt {
+            position: fixed; bottom: 28px; right: 28px;
+            background: var(--grad-teal); color: #040C10;
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; text-decoration: none;
+            box-shadow: 0 5px 18px rgba(13,110,138,0.5);
+            transition: all 0.3s; z-index: 1000; opacity: 0;
+            pointer-events: none; font-weight: 700;
+        }
+        .btt.visible { opacity: 1; pointer-events: all; }
+        .btt:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,198,212,0.6); color: #040C10; }
+
+        /* ─── Language Selector ─── */
+        .lang-sel {
+            position: fixed !important; top: 18px !important;
+            right: 18px !important; z-index: 10000 !important;
+        }
+        .lang-btn {
+            background: linear-gradient(135deg, #040C10, #071520);
+            border: 2px solid var(--cyan);
+            color: var(--cream); padding: 0.55rem 1.1rem;
+            border-radius: 22px; cursor: pointer; transition: all 0.3s;
+            font-family: 'Sora', sans-serif; font-weight: 600;
+            font-size: 0.85rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 14px rgba(13,110,138,0.3);
+        }
+        .lang-btn:hover { background: var(--grad-teal); color: #040C10; transform: translateY(-2px); }
+        .lang-drop {
+            display: none; position: absolute;
+            top: 52px; right: 0;
+            background: rgba(4,12,16,0.97); backdrop-filter: blur(10px);
+            border: 2px solid var(--cyan); border-radius: 14px;
+            padding: 0.4rem; min-width: 190px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .lang-opt {
+            display: flex; align-items: center; gap: 0.7rem;
+            padding: 0.7rem 0.9rem; color: var(--cream);
+            text-decoration: none; border-radius: 8px;
+            transition: all 0.3s; font-size: 0.9rem;
+        }
+        .lang-opt:hover { background: rgba(0,198,212,0.15); color: var(--cyan); transform: translateX(4px); }
+        .lang-flag { width: 22px; border-radius: 3px; }
+
+        /* ─── Scroll reveal ─── */
+        .sr { opacity: 0; transform: translateY(32px); transition: all 0.8s ease; }
+        .sr.in { opacity: 1; transform: translateY(0); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-bar {
+                display: none; flex-direction: column;
+                gap: 0.5rem; padding: 1rem; margin-top: 3rem;
+            }
+            .nav-bar.open { display: flex; }
+            .nav-bar a {
+                padding: 0.7rem 1rem;
+                background: rgba(0,198,212,0.07);
+                border-radius: 8px; text-align: center;
+            }
+            .card-section { padding: 1.8rem 1.2rem; }
+            .premium-list { grid-template-columns: 1fr; }
+            .lang-btn span { display: none; }
+            .lang-drop { min-width: 175px; }
+            .stats-wrap { gap: 1.8rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-layer"></div>
+    <div class="dot-grid"></div>
+    <div class="scan-line"></div>
+
+    <!-- Floating background icons -->
+    <div class="icons-bg">
+        <div class="icon-float">🛡️</div>
+        <div class="icon-float">🔒</div>
+        <div class="icon-float">📷</div>
+        <div class="icon-float">🛡️</div>
+        <div class="icon-float">⚡</div>
+        <div class="icon-float">🔔</div>
+        <div class="icon-float">🛡️</div>
+        <div class="icon-float">🤖</div>
+        <div class="icon-float">📱</div>
+        <div class="icon-float">🛡️</div>
+    </div>
+
+    <!-- ─── Header ─── -->
+    <header class="site-header">
+        <div class="container position-relative">
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul class="nav-bar" id="navBar">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="#modulos">Módulos</a></li>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#premium">Premium</a></li>
+                    <li><a href="#footer">Sobre</a></li>
+                </ul>
+            </nav>
+
+            <!-- Hero -->
+            <div class="hero">
+
+                <!-- Animated shield -->
+                <div class="shield-demo">
+                    <div class="shield-rings"></div>
+                    <div class="shield-rings"></div>
+                    <div class="shield-rings"></div>
+                    <svg class="shield-svg" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 5 L92 22 L92 55 C92 78 72 97 50 108 C28 97 8 78 8 55 L8 22 Z"
+                              fill="url(#shieldGrad)" stroke="url(#strokeGrad)" stroke-width="1.5"/>
+                        <!-- Checkmark -->
+                        <path d="M32 57 L44 69 L68 45" stroke="#040C10" stroke-width="6"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0D6E8A"/>
+                                <stop offset="100%" stop-color="#00C6D4"/>
+                            </linearGradient>
+                            <linearGradient id="strokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00C6D4"/>
+                                <stop offset="100%" stop-color="#00E676"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="hero-badge">🛡️ 6 Módulos · Anti-Furto · IA · Alarme</div>
+                <h1 class="hero-title">
+                    <span class="guard">Guard</span><span class="phone">Phone</span>
+                </h1>
+                <p class="hero-sub">
+                    Proteção inteligente para o seu celular em 6 módulos.<br>
+                    Anti-toque, bolso, carregador, bateria, foto de intruso e IA.
+                </p>
+                <a href="https://play.google.com/store/apps/details?id=com.talentodev.telefone" target="_blank" class="btn-dl">
+                    <i class="fab fa-google-play"></i>
+                    <span>Baixar Grátis</span>
+                </a>
+
+                <!-- Modules strip -->
+                <div class="mod-strip">
+                    <div class="mod-chip">✋ Anti-Toque</div>
+                    <div class="mod-chip">👖 Alarme de Bolso</div>
+                    <div class="mod-chip">🔌 Alerta de Carregador</div>
+                    <div class="mod-chip">🔋 Bateria Cheia</div>
+                    <div class="mod-chip">📷 Foto de Intruso</div>
+                    <div class="mod-chip">🤖 IA de Som</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ─── Video ─── -->
+    <section id="video" class="container py-5">
+        <div class="card-section sr">
+            <h2 class="sec-title">🎥 Veja Como Funciona</h2>
+            <p class="sec-sub">Conheça todos os módulos do GuardPhone em ação</p>
+            <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/SEU_VIDEO_ID_AQUI" allowfullscreen
+                    title="GuardPhone — Demo"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Módulos ─── -->
+    <section id="modulos" class="container py-4">
+        <div class="card-section sr">
+            <h2 class="sec-title">🛡️ 6 Módulos de Proteção</h2>
+            <p class="sec-sub">Cada módulo é uma camada de segurança independente. Ative o que precisar.</p>
+            <div class="modules-grid">
+
+                <div class="module-card mod-1">
+                    <span class="mod-icon">✋</span>
+                    <h3 class="mod-name">Anti-Toque</h3>
+                    <p class="mod-desc">Dispara alarme ao menor toque no celular. Ideal para mesas, balcões e locais públicos. Protege contra furtos silenciosos.</p>
+                    <span class="mod-badge badge-free">Grátis</span>
+                </div>
+
+                <div class="module-card mod-2">
+                    <span class="mod-icon">👖</span>
+                    <h3 class="mod-name">Alarme de Bolso</h3>
+                    <p class="mod-desc">Sensor de proximidade detecta quando o celular é retirado do bolso. Alarme imediato contra batedores de carteira.</p>
+                    <span class="mod-badge badge-free">Grátis</span>
+                </div>
+
+                <div class="module-card mod-3">
+                    <span class="mod-icon">🔌</span>
+                    <h3 class="mod-name">Alerta de Carregador</h3>
+                    <p class="mod-desc">Alarme quando o carregador é desconectado sem sua permissão. Nunca mais saia sem o celular carregado.</p>
+                    <span class="mod-badge badge-free">Grátis</span>
+                </div>
+
+                <div class="module-card mod-4">
+                    <span class="mod-icon">🔋</span>
+                    <h3 class="mod-name">Bateria Cheia</h3>
+                    <p class="mod-desc">Avisa quando a bateria atinge 100%. Protege a vida útil da bateria e avisa que pode desconectar o carregador.</p>
+                    <span class="mod-badge badge-free">Grátis</span>
+                </div>
+
+                <div class="module-card mod-5">
+                    <span class="mod-icon">📷</span>
+                    <h3 class="mod-name">Foto de Intruso</h3>
+                    <p class="mod-desc">Fotografa automaticamente quem tenta desbloquear o celular com senha errada. Salva prova com data e hora.</p>
+                    <span class="mod-badge badge-premium">Premium</span>
+                </div>
+
+                <div class="module-card mod-6">
+                    <span class="mod-icon">🤖</span>
+                    <h3 class="mod-name">Detecção por IA</h3>
+                    <p class="mod-desc">TensorFlow analisa sons ao redor em tempo real. Detecta padrões suspeitos e emite alerta automático.</p>
+                    <span class="mod-badge badge-ai">IA · Premium</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Stats ─── -->
+    <section class="container py-2">
+        <div class="card-section sr">
+            <div class="stats-wrap">
+                <div class="stat">
+                    <div class="stat-num">6</div>
+                    <div class="stat-lbl">Módulos de Proteção</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">🤖</div>
+                    <div class="stat-lbl">TensorFlow IA</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">24/7</div>
+                    <div class="stat-lbl">Proteção Contínua</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">∞</div>
+                    <div class="stat-lbl">Fotos de Intruso</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Como Funciona ─── -->
+    <section id="como-funciona" class="container py-4">
+        <div class="card-section sr">
+            <h2 class="sec-title">⚡ Como Funciona</h2>
+            <p class="sec-sub">Configure em segundos e seu celular já está protegido</p>
+            <div class="steps-grid">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <span class="step-icon">📲</span>
+                    <div class="step-title">Baixe e Abra</div>
+                    <p class="step-desc">Instale o GuardPhone gratuitamente na Google Play e abra o aplicativo</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <span class="step-icon">🔧</span>
+                    <div class="step-title">Configure seu PIN</div>
+                    <p class="step-desc">Crie sua senha secreta para desativar os alarmes com segurança</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <span class="step-icon">🛡️</span>
+                    <div class="step-title">Ative os Módulos</div>
+                    <p class="step-desc">Ligue os módulos que desejar com um simples toque no switch</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">4</span>
+                    <span class="step-icon">🔒</span>
+                    <div class="step-title">Fique Protegido</div>
+                    <p class="step-desc">O GuardPhone trabalha em background, protegendo 24 horas por dia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Premium ─── -->
+    <section id="premium" class="container py-4">
+        <div class="card-section sr">
+            <h2 class="sec-title">💎 GuardPhone Premium</h2>
+            <p class="sec-sub">Desbloqueie proteção máxima sem interrupções</p>
+            <div class="premium-card">
+                <ul class="premium-list">
+                    <li><span class="check">✅</span> Sem anúncios</li>
+                    <li><span class="check">✅</span> Fotos de intruso ilimitadas</li>
+                    <li><span class="check">✅</span> Detecção de som por IA</li>
+                    <li><span class="check">✅</span> Todos os sensores ativos</li>
+                    <li><span class="check">✅</span> Alertas em tempo real</li>
+                    <li><span class="check">✅</span> Suporte prioritário</li>
+                    <li><span class="check">✅</span> Novidades em primeira mão</li>
+                    <li><span class="check">✅</span> Cancele quando quiser</li>
+                </ul>
+                <div class="text-center mt-4">
+                    <a href="https://play.google.com/store/apps/details?id=com.talentodev.telefone" target="_blank" class="btn-dl">
+                        <i class="fab fa-google-play"></i>
+                        <span>Assinar Premium</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CTA ─── -->
+    <section class="container py-4">
+        <div class="card-section cta-section sr">
+            <h2 class="sec-title">🚀 Proteja seu Celular Agora!</h2>
+            <p class="sec-sub">Baixe grátis e tenha 6 camadas de proteção ativas em menos de 1 minuto.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.talentodev.telefone" target="_blank" class="btn-dl">
+                <i class="fab fa-google-play"></i>
+                <span>Baixar GuardPhone — Grátis</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ─── Footer ─── -->
+    <footer id="footer" class="site-footer py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="mb-3" style="color:var(--cyan)">
+                        <i class="bi bi-code-square me-2"></i>Talento Dev
+                    </h5>
+                    <p class="small" style="color:var(--cream);opacity:.8">
+                        Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
+                    </p>
+                    <div class="mt-3">
+                        <small style="color:var(--cream)">
+                            <span class="me-2">Visitas:</span>
+                            <a href="https://megacontador.com.br" target="_blank" rel="noopener noreferrer">
+                                <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador de visitas" class="img-fluid">
+                            </a>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="mb-3" style="color:var(--cyan)">
+                        <i class="bi bi-people me-2"></i>Conecte-se
+                    </h5>
+                    <div>
+                        <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" target="_blank" rel="noopener noreferrer" style="color:var(--cream);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/erwinvaz" target="_blank" rel="noopener noreferrer" style="color:var(--cream);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/talento.dev.br" target="_blank" rel="noopener noreferrer" style="color:var(--cream);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@talentodev" target="_blank" rel="noopener noreferrer" style="color:var(--cream);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/5585998200392" target="_blank" rel="noopener noreferrer" style="color:var(--cream);font-size:1.7rem;margin:0 0.4rem;transition:all 0.3s"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <h6 class="mb-2" style="color:var(--cream)">Receba atualizações</h6>
+                        <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                            <input type="email" id="nlEmail" class="form-control form-control-sm me-2"
+                                placeholder="Seu e-mail" required
+                                style="background:rgba(255,255,255,0.06);border:1px solid rgba(0,198,212,0.3);color:var(--cream)">
+                            <button type="submit" class="btn btn-sm" style="background:var(--grad-cyber);color:#040C10;font-weight:700">
+                                <i class="bi bi-envelope"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12 text-center text-lg-end">
+                    <h5 class="mb-3" style="color:var(--cyan)">
+                        <i class="bi bi-heart me-2"></i>Apoie o Projeto
+                    </h5>
+                    <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                        <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                        <button type="submit" class="btn btn-sm" style="border:2px solid var(--cyan);color:var(--cyan);background:transparent;font-weight:700">
+                            <i class="bi bi-paypal me-1"></i>Doar via PayPal
+                        </button>
+                    </form>
+                    <div class="mt-4">
+                        <p class="small mb-1" style="color:var(--cream)">&copy; 2026 Talento Dev</p>
+                        <p class="small mb-0" style="color:var(--cream);opacity:.7">Todos os direitos reservados</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-3" style="background:rgba(0,198,212,0.25);height:1px;border:none">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a href="politica_de_privacidade.html" class="text-white small me-3">Política de Privacidade</a>
+                    <a href="termos-uso.html" class="text-white small me-3">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="btt" id="btt"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Language Selector -->
+    <div class="lang-sel">
+        <button class="lang-btn" onclick="toggleLangDrop()">
+            <i class="bi bi-translate"></i>
+            <span>Idioma</span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
+        <div class="lang-drop" id="langDrop">
+            <a href="#" class="lang-opt" onclick="translatePage('pt','Português')">
+                <img src="https://flagcdn.com/w20/br.png" class="lang-flag" alt="PT"> Português</a>
+            <a href="#" class="lang-opt" onclick="translatePage('en','English')">
+                <img src="https://flagcdn.com/w20/us.png" class="lang-flag" alt="EN"> English</a>
+            <a href="#" class="lang-opt" onclick="translatePage('es','Español')">
+                <img src="https://flagcdn.com/w20/es.png" class="lang-flag" alt="ES"> Español</a>
+            <a href="#" class="lang-opt" onclick="translatePage('fr','Français')">
+                <img src="https://flagcdn.com/w20/fr.png" class="lang-flag" alt="FR"> Français</a>
+            <a href="#" class="lang-opt" onclick="translatePage('de','Deutsch')">
+                <img src="https://flagcdn.com/w20/de.png" class="lang-flag" alt="DE"> Deutsch</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // ── Back to top ──────────────────────────────────────────────────
+    window.addEventListener('scroll', () => {
+        document.getElementById('btt').classList.toggle('visible', window.pageYOffset > 300);
+    });
+
+    // ── Nav toggle ───────────────────────────────────────────────────
+    function toggleNav() {
+        document.getElementById('navBar').classList.toggle('open');
+    }
+    document.querySelectorAll('.nav-bar a').forEach(a => {
+        a.addEventListener('click', () => document.getElementById('navBar').classList.remove('open'));
+    });
+
+    // ── Smooth scroll ────────────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            const t = this.getAttribute('href');
+            if (t !== '#' && document.querySelector(t)) {
+                e.preventDefault();
+                document.querySelector(t).scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        });
+    });
+
+    // ── Language selector ────────────────────────────────────────────
+    function toggleLangDrop() {
+        const d = document.getElementById('langDrop');
+        d.style.display = d.style.display === 'block' ? 'none' : 'block';
+    }
+    function translatePage(lang, name) {
+        document.getElementById('langDrop').style.display = 'none';
+        const url = `https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(location.href)}`;
+        window.open(url, '_blank');
+        alert(`A página será traduzida para ${name} em uma nova aba.`);
+    }
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('langDrop');
+        const b = document.querySelector('.lang-btn');
+        if (d && b && !b.contains(e.target) && !d.contains(e.target)) d.style.display = 'none';
+    });
+
+    // ── Newsletter ───────────────────────────────────────────────────
+    function subscribeNewsletter(e) {
+        e.preventDefault();
+        const email = document.getElementById('nlEmail').value;
+        const subj  = "Assinar newsletter - Talento Dev";
+        const body  = `Por favor, me adicione à newsletter do Talento Dev.\n\nE-mail: ${email}`;
+        location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+        alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar!");
+        document.getElementById('nlEmail').value = '';
+    }
+
+    // ── Scroll reveal ────────────────────────────────────────────────
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+    document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+
+    // ── GA tracking ──────────────────────────────────────────────────
+    document.querySelectorAll('.btn-dl').forEach(btn => {
+        btn.addEventListener('click', () => {
+            gtag('event','download_click',{event_category:'GuardPhone',event_label:'Download Button'});
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Privacidade | Privacy Policy — GuardPhone</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #f2f7f5;
+            --surface: #ffffff;
+            --ink: #0d1f1a;
+            --muted: #4a6560;
+            --accent: #013530;
+            --accent-mid: #025048;
+            --accent-light: #e0f5f1;
+            --vivid: #03DAC6;
+            --border: #c8e8e2;
+            --radius: 12px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--accent);
+            color: #fff;
+            padding: 28px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand span { color: var(--vivid); }
+
+        .lang-toggle { display: flex; gap: 6px; }
+
+        .lang-btn {
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--vivid);
+            border-color: var(--vivid);
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-mid) 60%, #036b5e 100%);
+            color: #fff;
+            padding: 64px 40px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🛡️';
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8rem;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            right: -80px;
+            bottom: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(3, 218, 198, 0.1);
+            pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 14px;
+            color: var(--vivid);
+        }
+
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .hero-date {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-date::before { content: '📅'; font-size: 0.9rem; }
+
+        /* ── LAYOUT ── */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 56px 24px 80px;
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 40px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.25s, transform 0.25s;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        .section:hover {
+            box-shadow: 0 6px 28px rgba(1, 53, 48, 0.1);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .section:nth-child(1)  { animation-delay: 0.05s; }
+        .section:nth-child(2)  { animation-delay: 0.10s; }
+        .section:nth-child(3)  { animation-delay: 0.15s; }
+        .section:nth-child(4)  { animation-delay: 0.20s; }
+        .section:nth-child(5)  { animation-delay: 0.25s; }
+        .section:nth-child(6)  { animation-delay: 0.30s; }
+        .section:nth-child(7)  { animation-delay: 0.35s; }
+        .section:nth-child(8)  { animation-delay: 0.40s; }
+        .section:nth-child(9)  { animation-delay: 0.45s; }
+        .section:nth-child(10) { animation-delay: 0.50s; }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .section-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--accent-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .section h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            line-height: 1.3;
+        }
+
+        .section p {
+            color: var(--muted);
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .section p:last-child { margin-bottom: 0; }
+
+        .section ul {
+            margin: 8px 0 12px 20px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .section ul li {
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        .section ul li::marker { color: var(--vivid); }
+
+        .highlight {
+            background: var(--accent-light);
+            border-left: 3px solid var(--vivid);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            color: var(--ink);
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .badge {
+            background: var(--accent-light);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            padding: 5px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .contact-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1.5px solid var(--vivid);
+            transition: opacity 0.2s;
+        }
+
+        .contact-link:hover { opacity: 0.7; }
+
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        footer strong { color: var(--accent); }
+
+        [data-lang]      { display: none; }
+        .lang-pt [data-lang="pt"] { display: block; }
+        .lang-en [data-lang="en"] { display: block; }
+
+        span[data-lang]  { display: none; }
+        .lang-pt span[data-lang="pt"] { display: inline; }
+        .lang-en span[data-lang="en"] { display: inline; }
+
+        @media (max-width: 600px) {
+            header { padding: 20px; }
+            .hero  { padding: 44px 20px 40px; }
+            .hero::before { font-size: 5rem; right: 20px; }
+            .section { padding: 24px 20px; }
+        }
+    </style>
+</head>
+
+<body class="lang-pt">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">🛡️ <span>GuardPhone</span></div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+            <button class="lang-btn"        onclick="setLang('en', this)">EN</button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-eyebrow">GuardPhone — Talento DEV</div>
+
+        <h1 data-lang="pt">Política de<br>Privacidade</h1>
+        <h1 data-lang="en">Privacy<br>Policy</h1>
+
+        <div class="hero-date" data-lang="pt">Última atualização: 16 de Março de 2026</div>
+        <div class="hero-date" data-lang="en">Last updated: March 16, 2026</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="container">
+
+        <div class="highlight">
+            <span data-lang="pt">🛡️ O <strong>GuardPhone</strong> respeita sua privacidade. Todas as funcionalidades operam localmente no dispositivo. Câmera, microfone e sensores são usados exclusivamente para proteger seu celular — nenhum dado é enviado a servidores externos.</span>
+            <span data-lang="en">🛡️ <strong>GuardPhone</strong> respects your privacy. All features operate locally on your device. Camera, microphone, and sensors are used exclusively to protect your phone — no data is sent to external servers.</span>
+        </div>
+
+        <!-- 1 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2 data-lang="pt">1. Coleta de Informações</h2>
+                <h2 data-lang="en">1. Information Collection</h2>
+            </div>
+            <p data-lang="pt">O <strong>GuardPhone</strong> <strong>não coleta, armazena nem compartilha</strong> quaisquer informações pessoais dos usuários. Todas as funcionalidades operam exclusivamente de forma local no dispositivo.</p>
+            <p data-lang="en"><strong>GuardPhone</strong> does <strong>not collect, store, or share</strong> any personal information from users. All features operate exclusively and locally on the device.</p>
+
+            <p data-lang="pt">Configurações do app (preferências, estado dos sensores) são armazenadas apenas localmente via <strong>SharedPreferences</strong> e banco de dados SQLite local.</p>
+            <p data-lang="en">App settings (preferences, sensor states) are stored only locally via <strong>SharedPreferences</strong> and a local SQLite database.</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📷</div>
+                <h2 data-lang="pt">2. Câmera — Fotos de Intruso</h2>
+                <h2 data-lang="en">2. Camera — Intruder Photos</h2>
+            </div>
+            <p data-lang="pt">O app solicita permissão de câmera para capturar automaticamente fotos quando movimento não autorizado é detectado no dispositivo.</p>
+            <p data-lang="en">The app requests camera permission to automatically capture photos when unauthorized movement is detected on the device.</p>
+
+            <p data-lang="pt">As fotos são armazenadas <strong>exclusivamente no armazenamento local</strong> do dispositivo e <strong>nunca são transmitidas</strong> a servidores externos ou terceiros.</p>
+            <p data-lang="en">Photos are stored <strong>exclusively in local storage</strong> on the device and are <strong>never transmitted</strong> to external servers or third parties.</p>
+
+            <p data-lang="pt">Você pode revogar essa permissão a qualquer momento em <em>Configurações → Aplicativos → GuardPhone → Permissões</em>.</p>
+            <p data-lang="en">You can revoke this permission at any time under <em>Settings → Apps → GuardPhone → Permissions</em>.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🎤</div>
+                <h2 data-lang="pt">3. Microfone — Detecção por Som</h2>
+                <h2 data-lang="en">3. Microphone — Sound Detection</h2>
+            </div>
+            <p data-lang="pt">O microfone é utilizado pelo módulo de <strong>detecção inteligente de som</strong> (powered by TensorFlow Lite / YAMNet) para identificar padrões sonoros como assobios que ativam o alarme de localização do dispositivo.</p>
+            <p data-lang="en">The microphone is used by the <strong>intelligent sound detection</strong> module (powered by TensorFlow Lite / YAMNet) to identify sound patterns such as whistles that trigger the device location alarm.</p>
+
+            <p data-lang="pt">O áudio é <strong>processado localmente em tempo real</strong> no dispositivo. Nenhum áudio é gravado, armazenado ou transmitido.</p>
+            <p data-lang="en">Audio is <strong>processed locally in real time</strong> on the device. No audio is recorded, stored, or transmitted.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2 data-lang="pt">4. Sensores e Serviços em Primeiro Plano</h2>
+                <h2 data-lang="en">4. Sensors and Foreground Services</h2>
+            </div>
+            <p data-lang="pt">O GuardPhone utiliza os seguintes sensores do dispositivo para suas funcionalidades de segurança:</p>
+            <p data-lang="en">GuardPhone uses the following device sensors for its security features:</p>
+
+            <ul data-lang="pt">
+                <li><strong>Acelerômetro:</strong> Detecção de movimento — dispara alarme ao mover o dispositivo sem autorização</li>
+                <li><strong>Sensor de proximidade:</strong> Alarme de bolso — detecta quando o celular é retirado do bolso</li>
+                <li><strong>Estado da bateria:</strong> Alerta quando a bateria atinge 100% ou quando o carregador é desconectado</li>
+            </ul>
+            <ul data-lang="en">
+                <li><strong>Accelerometer:</strong> Motion detection — triggers alarm when device is moved without authorization</li>
+                <li><strong>Proximity sensor:</strong> Pocket alarm — detects when the phone is removed from a pocket</li>
+                <li><strong>Battery state:</strong> Alert when battery reaches 100% or charger is disconnected</li>
+            </ul>
+
+            <p data-lang="pt">Todos os dados dos sensores são processados localmente e descartados após uso. Nenhuma informação é armazenada ou transmitida.</p>
+            <p data-lang="en">All sensor data is processed locally and discarded after use. No information is stored or transmitted.</p>
+        </div>
+
+        <!-- 5 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📢</div>
+                <h2 data-lang="pt">5. Anúncios e Plano Premium</h2>
+                <h2 data-lang="en">5. Ads and Premium Plan</h2>
+            </div>
+            <p data-lang="pt">O GuardPhone é gratuito e sustentado por anúncios exibidos via <strong>Google AdMob</strong> (banners e intersticiais).</p>
+            <p data-lang="en">GuardPhone is free and supported by ads displayed via <strong>Google AdMob</strong> (banners and interstitials).</p>
+
+            <p data-lang="pt">Ao assinar o <strong>plano Premium</strong>, os anúncios são removidos completamente e todas as funcionalidades são liberadas sem restrições.</p>
+            <p data-lang="en">By subscribing to the <strong>Premium plan</strong>, ads are completely removed and all features are unlocked without restrictions.</p>
+
+            <p data-lang="pt">O Google AdMob pode utilizar um identificador de publicidade do dispositivo (<strong>Ad ID</strong>) para exibir anúncios relevantes. Você pode redefinir ou desativar esse identificador em <em>Configurações → Google → Anúncios</em>.</p>
+            <p data-lang="en">Google AdMob may use the device's advertising identifier (<strong>Ad ID</strong>) to display relevant ads. You can reset or disable this identifier under <em>Settings → Google → Ads</em>.</p>
+        </div>
+
+        <!-- 6 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🔐</div>
+                <h2 data-lang="pt">6. Permissões do Aplicativo</h2>
+                <h2 data-lang="en">6. App Permissions</h2>
+            </div>
+            <p data-lang="pt">O GuardPhone solicita apenas as permissões estritamente necessárias para suas funcionalidades:</p>
+            <p data-lang="en">GuardPhone requests only the permissions strictly necessary for its features:</p>
+
+            <div class="badges">
+                <span class="badge">🌐 INTERNET</span>
+                <span class="badge">📷 CAMERA</span>
+                <span class="badge">🎤 RECORD_AUDIO</span>
+                <span class="badge">🔔 POST_NOTIFICATIONS</span>
+                <span class="badge">🖼️ READ_MEDIA_IMAGES</span>
+                <span class="badge">📣 AD_ID</span>
+                <span class="badge">⚡ FOREGROUND_SERVICE</span>
+                <span class="badge">🔋 VIBRATE</span>
+            </div>
+
+            <p style="margin-top:18px" data-lang="pt"><strong>INTERNET:</strong> Necessária para anúncios (AdMob), Firebase e assinatura Premium.</p>
+            <p style="margin-top:18px" data-lang="en"><strong>INTERNET:</strong> Required for ads (AdMob), Firebase, and Premium subscription.</p>
+
+            <p data-lang="pt"><strong>CAMERA:</strong> Captura fotos de intruso quando movimento não autorizado é detectado.</p>
+            <p data-lang="en"><strong>CAMERA:</strong> Captures intruder photos when unauthorized movement is detected.</p>
+
+            <p data-lang="pt"><strong>RECORD_AUDIO:</strong> Detecção inteligente de som por IA para localizar o dispositivo.</p>
+            <p data-lang="en"><strong>RECORD_AUDIO:</strong> AI-powered sound detection to locate the device.</p>
+
+            <p data-lang="pt"><strong>FOREGROUND_SERVICE:</strong> Mantém os serviços de segurança ativos mesmo com a tela desligada.</p>
+            <p data-lang="en"><strong>FOREGROUND_SERVICE:</strong> Keeps security services active even with the screen off.</p>
+
+            <p data-lang="pt"><strong>AD_ID:</strong> Identificador de publicidade para exibição de anúncios relevantes a usuários do plano gratuito.</p>
+            <p data-lang="en"><strong>AD_ID:</strong> Advertising identifier for displaying relevant ads to free plan users.</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🤝</div>
+                <h2 data-lang="pt">7. Compartilhamento de Dados</h2>
+                <h2 data-lang="en">7. Data Sharing</h2>
+            </div>
+            <p data-lang="pt">O GuardPhone utiliza os seguintes serviços de terceiros:</p>
+            <p data-lang="en">GuardPhone uses the following third-party services:</p>
+
+            <ul data-lang="pt">
+                <li><strong>Google AdMob:</strong> Exibição de anúncios para usuários do plano gratuito</li>
+                <li><strong>Google Firebase:</strong> Infraestrutura de backend (sem coleta de dados pessoais)</li>
+                <li><strong>Google Play Billing:</strong> Processamento seguro de assinaturas Premium</li>
+                <li><strong>TensorFlow Lite / YAMNet:</strong> Modelo de IA executado localmente para detecção de som</li>
+            </ul>
+            <ul data-lang="en">
+                <li><strong>Google AdMob:</strong> Ad display for free plan users</li>
+                <li><strong>Google Firebase:</strong> Backend infrastructure (no personal data collection)</li>
+                <li><strong>Google Play Billing:</strong> Secure Premium subscription processing</li>
+                <li><strong>TensorFlow Lite / YAMNet:</strong> AI model running locally for sound detection</li>
+            </ul>
+
+            <p data-lang="pt">Nenhuma informação pessoal é vendida, alugada ou compartilhada com terceiros para fins comerciais.</p>
+            <p data-lang="en">No personal information is sold, rented, or shared with third parties for commercial purposes.</p>
+        </div>
+
+        <!-- 8 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">💾</div>
+                <h2 data-lang="pt">8. Armazenamento Local</h2>
+                <h2 data-lang="en">8. Local Storage</h2>
+            </div>
+            <p data-lang="pt">Todas as fotos capturadas, configurações e dados do app são armazenados exclusivamente no seu dispositivo. Ao desinstalar o aplicativo, todos os dados são removidos automaticamente.</p>
+            <p data-lang="en">All captured photos, settings, and app data are stored exclusively on your device. When you uninstall the app, all data is automatically removed.</p>
+        </div>
+
+        <!-- 9 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">👶</div>
+                <h2 data-lang="pt">9. Crianças</h2>
+                <h2 data-lang="en">9. Children</h2>
+            </div>
+            <p data-lang="pt">O GuardPhone não é direcionado especificamente a crianças menores de 13 anos e não coleta intencionalmente dados de menores de idade.</p>
+            <p data-lang="en">GuardPhone is not specifically directed at children under 13 and does not intentionally collect data from minors.</p>
+        </div>
+
+        <!-- 10 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <h2 data-lang="pt">10. Alterações a esta Política</h2>
+                <h2 data-lang="en">10. Changes to This Policy</h2>
+            </div>
+            <p data-lang="pt">Caso esta Política de Privacidade seja alterada, a versão atualizada será publicada nesta página com a nova data de vigência.</p>
+            <p data-lang="en">Should this Privacy Policy be modified, the updated version will be published on this page with the new effective date.</p>
+
+            <p data-lang="pt">Você pode imprimir uma cópia pressionando <strong>Ctrl + P</strong> no teclado.</p>
+            <p data-lang="en">You can print a copy by pressing <strong>Ctrl + P</strong> on your keyboard.</p>
+        </div>
+
+        <!-- 11 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">✉️</div>
+                <h2 data-lang="pt">11. Contato</h2>
+                <h2 data-lang="en">11. Contact</h2>
+            </div>
+            <p data-lang="pt">Caso tenha dúvidas sobre esta Política de Privacidade, entre em contato conosco:</p>
+            <p data-lang="en">If you have questions about this Privacy Policy, please contact us:</p>
+            <p><a href="https://www.talento.dev.br" target="_blank" rel="noopener" class="contact-link">www.talento.dev.br</a></p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <span data-lang="pt">© 2026 <strong>GuardPhone</strong> · Talento DEV · Última atualização: 16 de Março de 2026</span>
+        <span data-lang="en">© 2026 <strong>GuardPhone</strong> · Talento DEV · Last updated: March 16, 2026</span>
+    </footer>
+
+    <script>
+        function setLang(lang, btn) {
+            document.body.className = 'lang-' + lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.documentElement.lang = lang;
+        }
+    </script>
+
+</body>
+</html>
