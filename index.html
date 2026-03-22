@@ -1160,38 +1160,196 @@
         <div class="floating-code">🚀</div>
     </div>
 
-    <!-- Banner -->
-    <div class="launch-banner">
-        <div class="container">
-            <nav class="navbar-integrated">
-                <button class="navbar-toggler-integrated" type="button" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links-integrated" id="navLinksIntegrated">
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="#apps">Google Play Store</a></li>
-                    <li><a href="#footer">Sobre</a></li>
-                </ul>
-            </nav>
+    <!-- 
+  SUBSTITUI o bloco <div class="launch-banner"> atual do index.html
+  Cole este trecho no lugar do banner existente
+-->
 
-            <div class="launch-content">
-                <div class="launch-badge">🎉 NOVO LANÇAMENTO</div>
-                <div class="app-icon-launch">
-                    <img src="chessland/chess_land.png" alt="Chess Land Icon" class="launch-app-icon">
-                </div>
-                <h2 class="launch-title">
-                    ♟️ <span class="highlight">Chess Land</span> - Seu Campo de Treino no Xadrez
-                </h2>
-                <p class="launch-subtitle">
-                    Evolua no xadrez de verdade com UI/UX revolucionária!
-                </p>
-                <a href="https://play.google.com/store/apps/details?id=com.talentodev.chess" target="_blank" class="btn-launch">
-                    <i class="fas fa-chess"></i>
-                    <span>Conhecer Chess Land</span>
-                </a>
-            </div>
+<div class="launch-banner">
+  <div class="container">
+
+    <!-- Nav integrada (mantém igual) -->
+    <nav class="navbar-integrated">
+      <button class="navbar-toggler-integrated" type="button" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links-integrated" id="navLinksIntegrated">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="#apps">Google Play Store</a></li>
+        <li><a href="#footer">Sobre</a></li>
+      </ul>
+    </nav>
+
+    <!-- Badge duplo lançamento -->
+    <div class="launch-content">
+      <div class="launch-badge">🎉 NOVOS LANÇAMENTOS</div>
+
+      <!-- Grid dos 2 apps -->
+      <div style="
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 860px;
+        margin: 1.5rem auto 0;
+      " class="launch-grid">
+
+        <!-- ── CHESS LAND ── -->
+        <div style="
+          background: rgba(255,255,255,0.06);
+          border: 2px solid rgba(255,215,0,0.35);
+          border-radius: 20px;
+          padding: 2rem 1.5rem;
+          text-align: center;
+          transition: all 0.3s;
+          position: relative;
+          overflow: hidden;
+        " onmouseover="this.style.borderColor='rgba(255,215,0,0.8)';this.style.transform='translateY(-4px)'"
+           onmouseout="this.style.borderColor='rgba(255,215,0,0.35)';this.style.transform='translateY(0)'">
+
+          <div style="
+            position: absolute; top: 12px; left: 12px;
+            background: rgba(255,215,0,0.15);
+            border: 1px solid rgba(255,215,0,0.4);
+            color: var(--golden-sun);
+            font-size: 0.7rem; font-weight: 700;
+            padding: 3px 10px; border-radius: 99px;
+            letter-spacing: 1px;
+          ">♟️ XADREZ</div>
+
+          <div style="animation: iconFloat 3s ease-in-out infinite; margin: 0.5rem 0 1rem;">
+            <img src="chessland/chess_land.png" alt="Chess Land"
+              style="width:90px;height:90px;border-radius:20px;
+                     border:3px solid var(--golden-sun);
+                     box-shadow:0 10px 30px rgba(255,215,0,0.4);">
+          </div>
+
+          <h3 style="
+            font-family:'Cinzel',serif; font-size:1.3rem; font-weight:900;
+            background: var(--gradient-gold);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            background-clip:text; margin-bottom:0.5rem;
+          ">♟️ Chess Land</h3>
+
+          <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;line-height:1.5;margin-bottom:1.2rem;">
+            Seu campo de treino no xadrez.<br>Evolua sem complicações!
+          </p>
+
+          <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+            <a href="https://play.google.com/store/apps/details?id=com.talentodev.chess"
+               target="_blank" class="btn-launch"
+               style="font-size:0.85rem;padding:0.6rem 1.2rem;">
+              <i class="fab fa-google-play"></i> Play Store
+            </a>
+            <a href="chess_land.html"
+               style="
+                 display:inline-flex;align-items:center;gap:0.4rem;
+                 padding:0.6rem 1.2rem;
+                 border:2px solid rgba(255,215,0,0.5);
+                 color:rgba(255,255,255,0.8);
+                 border-radius:30px;
+                 font-family:'Philosopher',sans-serif;font-weight:700;
+                 font-size:0.85rem;text-decoration:none;
+                 transition:all 0.3s;
+               "
+               onmouseover="this.style.borderColor='var(--golden-sun)';this.style.color='var(--golden-sun)'"
+               onmouseout="this.style.borderColor='rgba(255,215,0,0.5)';this.style.color='rgba(255,255,255,0.8)'">
+              <i class="fas fa-info-circle"></i> Saiba mais
+            </a>
+          </div>
         </div>
-    </div>
+
+        <!-- ── QUIZ LAND ── -->
+        <div style="
+          background: rgba(127,119,221,0.08);
+          border: 2px solid rgba(127,119,221,0.45);
+          border-radius: 20px;
+          padding: 2rem 1.5rem;
+          text-align: center;
+          transition: all 0.3s;
+          position: relative;
+          overflow: hidden;
+        " onmouseover="this.style.borderColor='rgba(127,119,221,0.9)';this.style.transform='translateY(-4px)'"
+           onmouseout="this.style.borderColor='rgba(127,119,221,0.45)';this.style.transform='translateY(0)'">
+
+          <div style="
+            position: absolute; top: 12px; left: 12px;
+            background: rgba(127,119,221,0.15);
+            border: 1px solid rgba(127,119,221,0.5);
+            color: #b0a8ff;
+            font-size: 0.7rem; font-weight: 700;
+            padding: 3px 10px; border-radius: 99px;
+            letter-spacing: 1px;
+          ">🏰 RPG QUIZ</div>
+
+          <div style="animation: iconFloat 3s ease-in-out infinite 0.5s; margin: 0.5rem 0 1rem;">
+            <div style="
+              width:90px;height:90px;border-radius:20px;
+              border:3px solid #7f77dd;
+              box-shadow:0 10px 30px rgba(127,119,221,0.4);
+              background:linear-gradient(135deg,#1a1040,#534ab7);
+              display:flex;align-items:center;justify-content:center;
+              margin:0 auto;font-size:3rem;
+            ">🏰</div>
+          </div>
+
+          <h3 style="
+            font-family:'Cinzel',serif; font-size:1.3rem; font-weight:900;
+            color:#b0a8ff; margin-bottom:0.5rem;
+          ">🏰 QuizLand</h3>
+
+          <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;line-height:1.5;margin-bottom:1.2rem;">
+            RPG de perguntas e respostas.<br>Explore, aprenda e suba de nível!
+          </p>
+
+          <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+            <a href="https://play.google.com/store/apps/details?id=com.talentodev.kingquiz"
+               target="_blank"
+               style="
+                 display:inline-flex;align-items:center;gap:0.5rem;
+                 padding:0.6rem 1.2rem;
+                 background:linear-gradient(135deg,#534ab7,#7f77dd);
+                 color:#fff;
+                 font-family:'Philosopher',sans-serif;font-weight:700;
+                 font-size:0.85rem;border:none;border-radius:30px;
+                 text-decoration:none;transition:all 0.3s;
+                 box-shadow:0 5px 15px rgba(127,119,221,0.4);
+               "
+               onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(127,119,221,0.6)'"
+               onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 5px 15px rgba(127,119,221,0.4)'">
+              <i class="fab fa-google-play"></i> Play Store
+            </a>
+            <a href="quiz_land.html"
+               style="
+                 display:inline-flex;align-items:center;gap:0.4rem;
+                 padding:0.6rem 1.2rem;
+                 border:2px solid rgba(127,119,221,0.5);
+                 color:rgba(255,255,255,0.8);
+                 border-radius:30px;
+                 font-family:'Philosopher',sans-serif;font-weight:700;
+                 font-size:0.85rem;text-decoration:none;
+                 transition:all 0.3s;
+               "
+               onmouseover="this.style.borderColor='#7f77dd';this.style.color='#b0a8ff'"
+               onmouseout="this.style.borderColor='rgba(127,119,221,0.5)';this.style.color='rgba(255,255,255,0.8)'">
+              <i class="fas fa-info-circle"></i> Saiba mais
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /launch-grid -->
+    </div><!-- /launch-content -->
+  </div>
+</div>
+
+<!-- CSS adicional — cole dentro do <style> existente do index.html -->
+<style>
+@media (max-width: 600px) {
+  .launch-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+</style>
 
     <!-- ===== SEÇÃO INTERATIVA XADREZ ===== -->
     <section class="chess-interactive-section" id="chess-play">

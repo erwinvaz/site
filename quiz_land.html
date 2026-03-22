@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ98GYTZJF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GZ98GYTZJF');
+    </script>
+
+    <title>QuizLand - RPG de Perguntas e Respostas | Talento Dev</title>
+
+    <meta name="description" content="QuizLand - Explore um mundo RPG respondendo perguntas e subindo de nível! 18 categorias, ranking global e sistema de conquistas.">
+    <meta name="keywords" content="quizland, quiz rpg, perguntas e respostas, jogo educativo, talento dev, quiz android">
+    <meta name="author" content="Erwin Vaz">
+    <meta property="og:title" content="QuizLand - RPG de Perguntas e Respostas">
+    <meta property="og:description" content="Explore um mundo RPG respondendo perguntas e subindo de nível!">
+    <meta property="og:url" content="https://www.talento.dev.br/quizland.html">
+    <meta property="og:type" content="website">
+
+    <link href="assets/img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="canonical" href="https://www.talento.dev.br/quizland.html" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        :root {
+            --quiz-purple:   #7f77dd;
+            --quiz-dark:     #1a1040;
+            --quiz-mid:      #534ab7;
+            --quiz-light:    #b0a8ff;
+            --quiz-gold:     #ef9f27;
+            --quiz-gold2:    #ba7517;
+            --cloud-white:   #f8f9fa;
+            --shadow-dark:   #0f0f1a;
+            --gradient-quiz: linear-gradient(135deg, #1a1040 0%, #534ab7 55%, #7f77dd 100%);
+            --gradient-gold: linear-gradient(135deg, #ef9f27 0%, #ba7517 100%);
+            --gradient-dark: linear-gradient(135deg, #0f0f1a 0%, #1a1040 100%);
+        }
+
+        body {
+            background: var(--gradient-quiz);
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .magic-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .floating-quiz {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.06;
+            animation: floatQuiz 30s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .floating-quiz:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .floating-quiz:nth-child(2) { left: 80%; top: 30%; animation-delay: -5s; }
+        .floating-quiz:nth-child(3) { left: 20%; top: 60%; animation-delay: -10s; }
+        .floating-quiz:nth-child(4) { left: 70%; top: 70%; animation-delay: -15s; }
+        .floating-quiz:nth-child(5) { left: 50%; top: 40%; animation-delay: -7s; }
+        .floating-quiz:nth-child(6) { left: 90%; top: 50%; animation-delay: -12s; }
+
+        @keyframes floatQuiz {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.06; }
+            50%       { transform: translateY(-40px) rotate(180deg); opacity: 0.10; }
+        }
+
+        /* ── Header ── */
+        .quiz-header {
+            background: linear-gradient(135deg, #0f0f1a 0%, #2a1a5e 50%, #534ab7 100%);
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--quiz-gold);
+            box-shadow: 0 10px 40px rgba(127,119,221,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(127,119,221,0.12), transparent 70%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        /* ── Navbar ── */
+        .navbar-quiz {
+            position: relative; z-index: 3;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(127,119,221,0.4);
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-links-quiz {
+            display: flex; justify-content: center;
+            gap: 3rem; list-style: none; margin: 0; padding: 0;
+        }
+
+        .nav-links-quiz a {
+            color: var(--cloud-white);
+            text-decoration: none;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s; position: relative; padding: 0.5rem 0;
+        }
+
+        .nav-links-quiz a::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0;
+            width: 0; height: 3px;
+            background: var(--gradient-gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links-quiz a:hover::after { width: 100%; }
+        .nav-links-quiz a:hover { color: var(--quiz-gold); }
+
+        .navbar-toggler-quiz {
+            display: none;
+            background: transparent;
+            border: 2px solid var(--quiz-gold);
+            color: var(--quiz-gold);
+            padding: 0.5rem 1rem;
+            border-radius: 10px; font-size: 1.5rem;
+            cursor: pointer; transition: all 0.3s;
+            position: absolute; top: 1rem; right: 1rem; z-index: 10;
+        }
+
+        .navbar-toggler-quiz:hover {
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+        }
+
+        /* ── Hero ── */
+        .hero-quiz {
+            position: relative; z-index: 2;
+            text-align: center; padding: 2rem 0;
+        }
+
+        .hero-icon-quiz {
+            width: 150px; height: 150px;
+            border-radius: 30px;
+            border: 5px solid var(--quiz-purple);
+            box-shadow: 0 20px 60px rgba(127,119,221,0.6);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1a1040, #534ab7);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 5rem; margin: 0 auto 1.5rem;
+            animation: heroFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-15px); }
+        }
+
+        .hero-title-quiz {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--cloud-white);
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero-title-quiz .highlight {
+            background: linear-gradient(135deg, var(--quiz-light), var(--quiz-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle-quiz {
+            color: var(--cloud-white);
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem; opacity: 0.95;
+        }
+
+        .btn-download-hero-quiz {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--quiz-mid), var(--quiz-purple));
+            color: #fff;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700; font-size: 1.2rem;
+            border: 2px solid var(--quiz-purple);
+            border-radius: 35px; text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(127,119,221,0.5);
+        }
+
+        .btn-download-hero-quiz:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(127,119,221,0.7);
+            color: #fff;
+        }
+
+        /* ── Sections ── */
+        .content-section {
+            background: rgba(127,119,221,0.06);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(127,119,221,0.3);
+            border-radius: 25px;
+            padding: 3rem; margin: 3rem 0;
+            position: relative; z-index: 2;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quiz-light), var(--quiz-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem; text-align: center;
+        }
+
+        .section-subtitle {
+            color: var(--cloud-white);
+            text-align: center; font-size: 1.1rem;
+            margin-bottom: 2rem; opacity: 0.9;
+        }
+
+        /* ── Categories grid ── */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem; margin-top: 2rem;
+        }
+
+        .category-card {
+            background: rgba(127,119,221,0.12);
+            border: 2px solid rgba(127,119,221,0.3);
+            border-radius: 16px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .category-card:hover {
+            background: rgba(127,119,221,0.25);
+            border-color: var(--quiz-purple);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(127,119,221,0.3);
+        }
+
+        .category-card .cat-icon { font-size: 2rem; margin-bottom: 0.4rem; }
+        .category-card .cat-name {
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700; font-size: 0.85rem;
+            color: var(--quiz-light);
+        }
+
+        /* ── Features ── */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: rgba(127,119,221,0.08);
+            border: 2px solid rgba(127,119,221,0.3);
+            border-radius: 20px;
+            padding: 2rem; text-align: center; transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            background: rgba(127,119,221,0.18);
+            border-color: var(--quiz-purple);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+        .feature-title {
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700; font-size: 1.3rem;
+            color: var(--quiz-light); margin-bottom: 0.8rem;
+        }
+
+        .feature-description {
+            color: var(--cloud-white); opacity: 0.9; line-height: 1.6;
+        }
+
+        /* ── Gallery ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative; overflow: hidden;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--quiz-purple);
+            box-shadow: 0 20px 60px rgba(127,119,221,0.5);
+        }
+
+        .gallery-item img { width: 100%; height: auto; display: block; transition: all 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(26,16,64,0.95), transparent);
+            color: var(--cloud-white);
+            padding: 1.5rem 1rem 1rem;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700; font-size: 1.1rem;
+            opacity: 0; transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption { opacity: 1; }
+
+        /* ── Footer ── */
+        .footer {
+            background: var(--gradient-dark);
+            border-top: 3px solid var(--quiz-purple);
+            position: relative; z-index: 2;
+        }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, var(--quiz-mid), var(--quiz-purple));
+            color: #fff; width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; text-decoration: none;
+            box-shadow: 0 5px 20px rgba(127,119,221,0.4);
+            transition: all 0.3s; z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(127,119,221,0.6);
+            color: #fff;
+        }
+
+        .language-selector {
+            position: fixed !important; top: 20px !important;
+            right: 20px !important; z-index: 10000 !important;
+        }
+
+        .language-btn {
+            background: linear-gradient(135deg, #1a1040, #534ab7);
+            backdrop-filter: blur(10px);
+            color: var(--cloud-white);
+            border: 3px solid var(--quiz-purple);
+            padding: 0.6rem 1.2rem; border-radius: 25px;
+            font-family: 'Philosopher', sans-serif;
+            font-weight: 700; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(127,119,221,0.4);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .language-btn:hover {
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .language-dropdown {
+            display: none; position: absolute;
+            top: 55px; right: 0;
+            background: rgba(26,16,64,0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--quiz-purple);
+            border-radius: 15px; padding: 0.5rem;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .language-option {
+            display: flex; align-items: center; gap: 0.8rem;
+            padding: 0.8rem 1rem; color: var(--cloud-white);
+            text-decoration: none; border-radius: 10px;
+            transition: all 0.3s; font-size: 0.95rem;
+        }
+
+        .language-option:hover {
+            background: rgba(127,119,221,0.3);
+            color: var(--quiz-light);
+            transform: translateX(5px);
+        }
+
+        .language-flag { width: 24px; border-radius: 3px; }
+
+        .scroll-reveal {
+            opacity: 0; transform: translateY(30px); transition: all 0.8s;
+        }
+
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .quiz-header { padding: 1rem 0; }
+            .navbar-toggler-quiz { display: block; top: 70px; }
+            .nav-links-quiz {
+                display: none; flex-direction: column; gap: 1rem;
+                padding: 1rem 0; margin-top: 3rem;
+            }
+            .nav-links-quiz.active { display: flex; }
+            .nav-links-quiz a {
+                padding: 0.8rem 1.5rem;
+                background: rgba(127,119,221,0.15);
+                border-radius: 10px; text-align: center;
+            }
+            .hero-icon-quiz { width: 100px; height: 100px; font-size: 3.5rem; }
+            .content-section { padding: 2rem 1.5rem; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .features-list { grid-template-columns: 1fr; }
+            .categories-grid { grid-template-columns: repeat(3, 1fr); }
+            .language-selector { top: 15px !important; right: 15px !important; }
+            .language-btn span { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Background -->
+<div class="magic-background">
+    <div class="floating-quiz">🏰</div>
+    <div class="floating-quiz">📚</div>
+    <div class="floating-quiz">⚔️</div>
+    <div class="floating-quiz">🌍</div>
+    <div class="floating-quiz">🔭</div>
+    <div class="floating-quiz">💡</div>
+</div>
+
+<!-- Header -->
+<header class="quiz-header">
+    <div class="container">
+
+        <nav class="navbar-quiz">
+            <button class="navbar-toggler-quiz" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links-quiz" id="navLinksQuiz">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#categorias">Categorias</a></li>
+                <li><a href="#funcionalidades">Funcionalidades</a></li>
+                <li><a href="#footer">Sobre</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-quiz">
+            <div class="hero-icon-quiz">🏰</div>
+            <h1 class="hero-title-quiz">
+                🏰 <span class="highlight">QuizLand</span>
+            </h1>
+            <p class="hero-subtitle-quiz">
+                RPG de Perguntas e Respostas — Explore, Aprenda e Suba de Nível!
+            </p>
+            <a href="https://play.google.com/store/apps/details?id=com.talentodev.kingquiz"
+               target="_blank" class="btn-download-hero-quiz">
+                <i class="fab fa-google-play"></i>
+                <span>Baixar Agora</span>
+            </a>
+        </div>
+
+    </div>
+</header>
+
+ <!-- Video Section -->
+    <section id="aprender" class="container py-5">
+        <div class="content-section scroll-reveal">
+            <h2 class="section-title">🎥 Veja Como Funciona</h2>
+            <p class="section-subtitle">
+                Conheça o Chess Land e descubra como ele vai revolucionar seu aprendizado no xadrez
+            </p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/GJQruGsh2cM" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    
+<!-- Categorias -->
+<section id="categorias" class="container py-5">
+    <div class="content-section scroll-reveal">
+        <h2 class="section-title">📚 18 Categorias para Explorar</h2>
+        <p class="section-subtitle">
+            Cada objeto no mapa esconde um quiz de uma categoria diferente.<br>
+            Quanto mais você acerta, mais XP ganha!
+        </p>
+
+        <div class="categories-grid">
+            <div class="category-card"><div class="cat-icon">💻</div><div class="cat-name">Computação</div></div>
+            <div class="category-card"><div class="cat-icon">⚽</div><div class="cat-name">Esportes</div></div>
+            <div class="category-card"><div class="cat-icon">💡</div><div class="cat-name">Invenções</div></div>
+            <div class="category-card"><div class="cat-icon">🌐</div><div class="cat-name">Geral</div></div>
+            <div class="category-card"><div class="cat-icon">🔬</div><div class="cat-name">Ciência</div></div>
+            <div class="category-card"><div class="cat-icon">📖</div><div class="cat-name">Inglês</div></div>
+            <div class="category-card"><div class="cat-icon">📚</div><div class="cat-name">Livros</div></div>
+            <div class="category-card"><div class="cat-icon">➕</div><div class="cat-name">Matemática</div></div>
+            <div class="category-card"><div class="cat-icon">🏛️</div><div class="cat-name">Capitais</div></div>
+            <div class="category-card"><div class="cat-icon">💰</div><div class="cat-name">Moedas</div></div>
+            <div class="category-card"><div class="cat-icon">🏰</div><div class="cat-name">História</div></div>
+            <div class="category-card"><div class="cat-icon">🌍</div><div class="cat-name">Geografia</div></div>
+            <div class="category-card"><div class="cat-icon">🔭</div><div class="cat-name">Astronomia</div></div>
+            <div class="category-card"><div class="cat-icon">⚽</div><div class="cat-name">Futebol</div></div>
+            <div class="category-card"><div class="cat-icon">🤔</div><div class="cat-name">Curiosidades</div></div>
+            <div class="category-card"><div class="cat-icon">🏺</div><div class="cat-name">Filosofia</div></div>
+            <div class="category-card"><div class="cat-icon">🙏</div><div class="cat-name">Religião</div></div>
+            <div class="category-card"><div class="cat-icon">🗳️</div><div class="cat-name">Política</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Funcionalidades -->
+<section id="funcionalidades" class="container py-5">
+    <div class="content-section scroll-reveal">
+        <h2 class="section-title">✨ Funcionalidades</h2>
+        <p class="section-subtitle">
+            Muito mais que um quiz — uma aventura completa de conhecimento
+        </p>
+
+        <div class="features-list">
+            <div class="feature-item">
+                <div class="feature-icon">🗺️</div>
+                <h3 class="feature-title">Mapa RPG</h3>
+                <p class="feature-description">
+                    Explore um mundo pixel art com o joystick e descubra objetos escondidos em cada canto do mapa
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Sistema de XP</h3>
+                <p class="feature-description">
+                    Ganhe XP a cada acerto, suba de nível e acompanhe seu progresso em tempo real
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Ranking Global</h3>
+                <p class="feature-description">
+                    Compete com jogadores do mundo inteiro. Cada país tem sua bandeira no ranking!
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🏅</div>
+                <h3 class="feature-title">Conquistas</h3>
+                <p class="feature-description">
+                    Desbloqueie medalhas únicas: Explorador, Veterano, Rei do Quiz e muito mais
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⏱️</div>
+                <h3 class="feature-title">Timer Inteligente</h3>
+                <p class="feature-description">
+                    30 segundos por pergunta com timer circular animado que muda de cor conforme o tempo passa
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🌍</div>
+                <h3 class="feature-title">PT + EN</h3>
+                <p class="feature-description">
+                    Jogue em Português ou Inglês. As perguntas mudam de idioma automaticamente com seu dispositivo
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">☁️</div>
+                <h3 class="feature-title">Salvo na Nuvem</h3>
+                <p class="feature-description">
+                    Faça login com Google e nunca perca seu XP — jogue em qualquer celular e continue de onde parou
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💎</div>
+                <h3 class="feature-title">Plano Premium</h3>
+                <p class="feature-description">
+                    Sem anúncios, XP dobrado e badge exclusivo no ranking global por apenas R$ 14,90/ano
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Como jogar -->
+<section class="container py-5">
+    <div class="content-section scroll-reveal">
+        <h2 class="section-title">🎮 Como Jogar</h2>
+        <p class="section-subtitle">Simples, intuitivo e viciante!</p>
+
+        <div class="row g-4 mt-2">
+            <div class="col-md-4 text-center">
+                <div style="
+                    width:70px;height:70px;border-radius:50%;
+                    background:rgba(127,119,221,0.2);
+                    border:3px solid var(--quiz-purple);
+                    display:flex;align-items:center;justify-content:center;
+                    font-family:'Cinzel',serif;font-size:1.5rem;font-weight:900;
+                    color:var(--quiz-light);margin:0 auto 1rem;
+                ">1</div>
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">🕹️</div>
+                <h4 style="font-family:'Philosopher',sans-serif;color:var(--quiz-light);font-weight:700;">Explore o mapa</h4>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Use o joystick para mover seu herói pelo mundo RPG e encontrar os objetos brilhantes</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div style="
+                    width:70px;height:70px;border-radius:50%;
+                    background:rgba(239,159,39,0.15);
+                    border:3px solid var(--quiz-gold);
+                    display:flex;align-items:center;justify-content:center;
+                    font-family:'Cinzel',serif;font-size:1.5rem;font-weight:900;
+                    color:var(--quiz-gold);margin:0 auto 1rem;
+                ">2</div>
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">📚</div>
+                <h4 style="font-family:'Philosopher',sans-serif;color:var(--quiz-gold);font-weight:700;">Toque no objeto</h4>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Quando um ❓ aparecer sobre o objeto, seu herói está perto o suficiente para abrir o quiz</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div style="
+                    width:70px;height:70px;border-radius:50%;
+                    background:rgba(39,174,96,0.15);
+                    border:3px solid #27ae60;
+                    display:flex;align-items:center;justify-content:center;
+                    font-family:'Cinzel',serif;font-size:1.5rem;font-weight:900;
+                    color:#2ecc71;margin:0 auto 1rem;
+                ">3</div>
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">⚡</div>
+                <h4 style="font-family:'Philosopher',sans-serif;color:#2ecc71;font-weight:700;">Responda e evolua</h4>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;">10 perguntas por sessão. Acerte para ganhar XP e subir de nível no ranking global!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="container py-5">
+    <div class="content-section scroll-reveal" style="text-align:center;">
+        <h2 class="section-title">🏰 Pronto para a Aventura?</h2>
+        <p class="section-subtitle" style="font-size:1.3rem;margin-bottom:2.5rem;">
+            Explore o QuizLand, responda perguntas e torne-se o Rei do Quiz!
+        </p>
+        <a href="https://play.google.com/store/apps/details?id=com.talentodev.kingquiz"
+           target="_blank" class="btn-download-hero-quiz">
+            <i class="fab fa-google-play"></i>
+            <span>Baixar QuizLand Grátis</span>
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer" class="footer py-5">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-lg-4 col-md-6">
+                <h5 class="mb-3" style="color:var(--quiz-light);">
+                    <i class="bi bi-code-square me-2"></i>Talento Dev
+                </h5>
+                <p class="small" style="color:var(--cloud-white);">
+                    Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
+                </p>
+                <div class="mt-3">
+                    <small style="color:var(--cloud-white);">
+                        <span class="me-2">Visitas:</span>
+                        <a href="https://megacontador.com.br" target="_blank" rel="noopener">
+                            <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador" class="img-fluid">
+                        </a>
+                    </small>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 text-center text-md-start">
+                <h5 class="mb-3" style="color:var(--quiz-light);">
+                    <i class="bi bi-people me-2"></i>Conecte-se
+                </h5>
+                <div class="social-share">
+                    <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com/erwinvaz" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/talento.dev.br" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@talentodev" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/5585998200392" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <div class="mt-4">
+                    <h6 class="mb-2" style="color:var(--cloud-white);">Receba atualizações</h6>
+                    <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                        <input type="email" id="newsletterEmail" class="form-control form-control-sm me-2"
+                               placeholder="Seu e-mail" required
+                               style="background:rgba(255,255,255,0.1);border:2px solid rgba(127,119,221,0.4);color:var(--cloud-white);">
+                        <button type="submit" class="btn btn-sm"
+                                style="background:linear-gradient(135deg,var(--quiz-mid),var(--quiz-purple));color:#fff;">
+                            <i class="bi bi-envelope"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 text-center text-lg-end">
+                <h5 class="mb-3" style="color:var(--quiz-light);">
+                    <i class="bi bi-heart me-2"></i>Apoie o Projeto
+                </h5>
+                <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                    <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                    <button type="submit" class="btn btn-sm"
+                            style="border:2px solid var(--quiz-purple);color:var(--quiz-light);font-weight:700;background:transparent;">
+                        <i class="bi bi-paypal me-1"></i>Doar via PayPal
+                    </button>
+                </form>
+                <div class="mt-4">
+                    <p class="small mb-1" style="color:var(--cloud-white);">&copy; 2026 Talento Dev</p>
+                    <p class="small mb-0" style="color:var(--cloud-white);opacity:0.8;">Todos os direitos reservados</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-4 mb-3" style="background:var(--quiz-purple);height:2px;">
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
+                <a href="quizland_privacy.html" class="text-white small me-3 mb-2">Privacidade QuizLand</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+<div class="language-selector">
+    <button class="language-btn" onclick="toggleLanguageDropdown()">
+        <i class="bi bi-translate"></i>
+        <span>Idioma</span>
+        <i class="bi bi-chevron-down"></i>
+    </button>
+    <div class="language-dropdown" id="languageDropdown">
+        <a href="#" class="language-option" onclick="translatePage('pt','Português')"><img src="https://flagcdn.com/w20/br.png" class="language-flag" alt="PT"> Português</a>
+        <a href="#" class="language-option" onclick="translatePage('en','English')"><img src="https://flagcdn.com/w20/us.png" class="language-flag" alt="EN"> English</a>
+        <a href="#" class="language-option" onclick="translatePage('es','Español')"><img src="https://flagcdn.com/w20/es.png" class="language-flag" alt="ES"> Español</a>
+        <a href="#" class="language-option" onclick="translatePage('fr','Français')"><img src="https://flagcdn.com/w20/fr.png" class="language-flag" alt="FR"> Français</a>
+        <a href="#" class="language-option" onclick="translatePage('de','Deutsch')"><img src="https://flagcdn.com/w20/de.png" class="language-flag" alt="DE"> Deutsch</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    window.addEventListener('scroll', function() {
+        document.querySelector('.back-to-top').classList.toggle('active', window.pageYOffset > 300);
+    });
+
+    function subscribeNewsletter(event) {
+        event.preventDefault();
+        const email = document.getElementById('newsletterEmail').value;
+        window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent('Assinar newsletter - Talento Dev')}&body=${encodeURIComponent('E-mail: ' + email)}`;
+        alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
+        document.getElementById('newsletterEmail').value = "";
+    }
+
+    function toggleMobileMenu() {
+        document.getElementById('navLinksQuiz').classList.toggle('active');
+    }
+
+    function toggleLanguageDropdown() {
+        const d = document.getElementById('languageDropdown');
+        d.style.display = d.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function translatePage(lang, langName) {
+        document.getElementById('languageDropdown').style.display = 'none';
+        window.open(`https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(window.location.href)}`, '_blank');
+    }
+
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('languageDropdown');
+        const b = document.querySelector('.language-btn');
+        if (d && b && !b.contains(e.target) && !d.contains(e.target)) d.style.display = 'none';
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.nav-links-quiz a').forEach(a => {
+            a.addEventListener('click', () => document.getElementById('navLinksQuiz').classList.remove('active'));
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('.social-btn, .social-share a').forEach(btn => {
+            btn.addEventListener('mouseenter', function() { this.style.color = 'var(--quiz-light)'; this.style.transform = 'translateY(-5px)'; });
+            btn.addEventListener('mouseleave', function() { this.style.color = 'var(--cloud-white)'; this.style.transform = 'translateY(0)'; });
+        });
+    });
+
+    document.querySelectorAll('.btn-download-hero-quiz').forEach(btn => {
+        btn.addEventListener('click', () => {
+            gtag('event', 'download_click', { 'event_category': 'QuizLand', 'event_label': 'Download Button' });
+        });
+    });
+</script>
+
+</body>
+</html>
