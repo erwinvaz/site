@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Plataforma de Concursos | Talento.dev.br</title>
+  <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
   <style>
@@ -42,25 +44,18 @@
       overflow-x: hidden;
     }
 
-    /* ── BACKGROUND MESH ── */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
+      position: fixed; inset: 0; z-index: 0;
       background:
         radial-gradient(ellipse 80% 60% at 15% 10%, rgba(240,165,0,0.06) 0%, transparent 60%),
         radial-gradient(ellipse 60% 50% at 85% 20%, rgba(96,165,250,0.07) 0%, transparent 55%),
         radial-gradient(ellipse 70% 60% at 50% 90%, rgba(16,185,129,0.05) 0%, transparent 55%);
       pointer-events: none;
     }
-
-    /* Grid dots */
     body::after {
       content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
+      position: fixed; inset: 0; z-index: 0;
       background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
       background-size: 32px 32px;
       pointer-events: none;
@@ -68,182 +63,101 @@
 
     #app { position: relative; z-index: 1; }
 
-    /* ── TOP BAR ── */
     .top-bar {
       background: rgba(11,15,28,0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--navy-border);
       padding: 0.7rem 1.5rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center;
     }
     .top-bar a {
-      color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 500;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: 0.02em;
-      transition: color 0.2s;
+      color: var(--text-muted); font-size: 12px; font-weight: 500;
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      letter-spacing: 0.02em; transition: color 0.2s;
     }
     .top-bar a:hover { color: var(--gold); }
     .top-bar a svg { opacity: 0.6; transition: opacity 0.2s; }
     .top-bar a:hover svg { opacity: 1; }
 
-    /* ── PAGES ── */
-    .page { display: none; }
-    .page.active { display: block; animation: fadeUp 0.35s ease both; }
+    .wrap { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+
+    .hero {
+      position: relative; overflow: hidden;
+      border-radius: var(--radius-xl);
+      padding: 3.5rem 2.5rem 3rem;
+      text-align: center; margin-bottom: 2.25rem;
+      background: linear-gradient(135deg, #0f1628 0%, #131e3a 40%, #0f1628 100%);
+      border: 1px solid var(--navy-border);
+      animation: fadeUp 0.35s ease both;
+    }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    /* ── WRAP ── */
-    .wrap { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-xl);
-      padding: 3.5rem 2.5rem 3rem;
-      text-align: center;
-      margin-bottom: 2.25rem;
-      background: linear-gradient(135deg, #0f1628 0%, #131e3a 40%, #0f1628 100%);
-      border: 1px solid var(--navy-border);
-    }
     .hero-glow {
-      position: absolute;
-      top: -60px; left: 50%;
-      transform: translateX(-50%);
-      width: 420px; height: 280px;
-      border-radius: 50%;
+      position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 420px; height: 280px; border-radius: 50%;
       background: radial-gradient(ellipse, rgba(240,165,0,0.18) 0%, transparent 70%);
       pointer-events: none;
     }
-    .hero-ring {
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      border: 1px solid rgba(240,165,0,0.12);
-    }
-    .hero-ring2 {
-      position: absolute;
-      bottom: -50px; left: -30px;
-      width: 160px; height: 160px;
-      border-radius: 50%;
-      border: 1px solid rgba(96,165,250,0.08);
-    }
+    .hero-ring  { position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(240,165,0,0.12); }
+    .hero-ring2 { position: absolute; bottom: -50px; left: -30px; width: 160px; height: 160px; border-radius: 50%; border: 1px solid rgba(96,165,250,0.08); }
     .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(240,165,0,0.10);
-      border: 1px solid rgba(240,165,0,0.20);
-      border-radius: 40px;
-      padding: 4px 14px;
-      margin-bottom: 1.25rem;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); background: rgba(240,165,0,0.10);
+      border: 1px solid rgba(240,165,0,0.20); border-radius: 40px;
+      padding: 4px 14px; margin-bottom: 1.25rem;
     }
     .hero-title {
       font-family: 'DM Serif Display', serif;
-      font-size: 38px;
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 0.65rem;
-      letter-spacing: -0.01em;
+      font-size: 38px; color: #fff; line-height: 1.15; margin-bottom: 0.65rem; letter-spacing: -0.01em;
     }
     .hero-title span { color: var(--gold); }
-    .hero-sub {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-weight: 400;
-      max-width: 320px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
+    .hero-sub { font-size: 14px; color: var(--text-muted); font-weight: 400; max-width: 320px; margin: 0 auto; line-height: 1.6; }
 
-    /* ── STATS ── */
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem; animation: fadeUp 0.4s 0.05s ease both; }
     .stat {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: var(--radius-md);
-      padding: 1.1rem 0.75rem;
-      text-align: center;
+      background: var(--navy-card); border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md); padding: 1.1rem 0.75rem; text-align: center;
       transition: border-color 0.2s, transform 0.2s;
     }
     .stat:hover { border-color: rgba(240,165,0,0.25); transform: translateY(-2px); }
-    .stat-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 30px;
-      color: var(--gold);
-      line-height: 1;
-    }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--gold); line-height: 1; }
     .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
 
-    /* ── SECTION LABEL ── */
     .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 0.9rem;
-      padding-left: 2px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 0.9rem; padding-left: 2px;
+      animation: fadeUp 0.4s 0.1s ease both;
     }
 
     /* ── CONCURSO CARD ── */
     .concurso-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: var(--radius-lg);
-      padding: 1.35rem 1.5rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      margin-bottom: 1rem;
-      transition: all 0.25s ease;
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      overflow: hidden;
+      background: var(--navy-card); border: 1px solid var(--navy-border);
+      border-radius: var(--radius-lg); padding: 1.35rem 1.5rem;
+      cursor: pointer; display: flex; align-items: flex-start; gap: 1.25rem;
+      margin-bottom: 1rem; transition: all 0.25s ease;
+      text-decoration: none; color: inherit;
+      position: relative; overflow: hidden;
+      animation: fadeUp 0.4s 0.15s ease both;
     }
+    .concurso-card:last-child { animation-delay: 0.2s; }
     .concurso-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.25s;
+      content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.25s;
     }
-    .concurso-card.inss-card::before {
-      background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, transparent 60%);
-    }
-    .concurso-card.tj-card::before {
-      background: linear-gradient(135deg, rgba(96,165,250,0.05) 0%, transparent 60%);
-    }
+    .concurso-card.inss-card::before { background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, transparent 60%); }
+    .concurso-card.tj-card::before   { background: linear-gradient(135deg, rgba(96,165,250,0.05) 0%, transparent 60%); }
     .concurso-card:hover { border-color: var(--navy-hover); transform: translateX(6px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
     .concurso-card:hover::before { opacity: 1; }
     .concurso-card.inss-card:hover { border-color: var(--inss-border); }
-    .concurso-card.tj-card:hover { border-color: var(--tj-border); }
+    .concurso-card.tj-card:hover   { border-color: var(--tj-border); }
 
     .c-icon {
-      width: 56px; height: 56px;
-      border-radius: 14px;
+      width: 56px; height: 56px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 26px; flex-shrink: 0;
-      position: relative; z-index: 1;
+      font-size: 26px; flex-shrink: 0; position: relative; z-index: 1;
     }
     .c-icon.inss { background: var(--inss-bg); border: 1px solid var(--inss-border); }
     .c-icon.tj   { background: var(--tj-bg);   border: 1px solid var(--tj-border); }
@@ -252,285 +166,55 @@
     .c-nome { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 2px; }
     .c-sub  { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
     .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-    .badge {
-      font-size: 10px; font-weight: 600;
-      padding: 3px 10px; border-radius: 40px;
-      letter-spacing: 0.03em;
-    }
+    .badge { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 40px; letter-spacing: 0.03em; }
     .badge.inss { background: var(--inss-bg); color: var(--inss-green); border: 1px solid var(--inss-border); }
     .badge.tj   { background: var(--tj-bg);   color: var(--tj-blue);   border: 1px solid var(--tj-border); }
     .badge.new  { background: rgba(240,165,0,0.12); color: var(--gold); border: 1px solid rgba(240,165,0,0.25); }
 
-    .c-arrow { font-size: 22px; color: var(--text-dim); flex-shrink: 0; position: relative; z-index: 1; transition: color 0.2s, transform 0.2s; }
+    /* ── BANCA INFO STRIP ── */
+    .banca-strip {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-top: 12px; padding-top: 11px;
+      border-top: 1px solid var(--navy-border);
+      position: relative; z-index: 1;
+    }
+    .banca-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 3px 10px; border-radius: 40px; flex-shrink: 0;
+    }
+    .banca-pill.inss { background: rgba(16,185,129,0.18); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.35); }
+    .banca-pill.tj   { background: rgba(96,165,250,0.18); color: #93c5fd; border: 1px solid rgba(96,165,250,0.35); }
+    .banca-desc { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+    .banca-desc strong { color: var(--text-muted); font-weight: 600; }
+
+    .c-arrow {
+      font-size: 22px; color: var(--text-dim); flex-shrink: 0;
+      position: relative; z-index: 1;
+      transition: color 0.2s, transform 0.2s;
+      margin-top: 4px;
+    }
     .concurso-card:hover .c-arrow { color: var(--text-muted); transform: translateX(3px); }
 
-    /* ── PAGE HEADER ── */
-    .page-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding-bottom: 1.5rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid var(--navy-border);
-    }
-    .back-btn {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: var(--radius-md);
-      padding: 7px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      color: var(--text-muted);
-      font-family: 'DM Sans', sans-serif;
-      transition: all 0.18s;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .back-btn:hover { background: var(--navy-hover); color: var(--text); border-color: var(--navy-hover); }
-    .ph-title { font-size: 19px; font-weight: 700; color: #fff; line-height: 1.3; }
-    .ph-sub   { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
-
-    /* ── MATERIA SECTION ── */
-    .materia-sec { margin-bottom: 2rem; }
-    .mat-label {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--text-dim);
-      margin-bottom: 0.65rem;
-      padding-left: 4px;
-    }
-    .topico-list { display: flex; flex-direction: column; gap: 5px; }
-    .topico-item {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: var(--radius-md);
-      padding: 0.8rem 1.1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.18s ease;
-    }
-    .topico-item:hover { background: var(--navy-hover); border-color: rgba(255,255,255,0.12); transform: translateX(3px); }
-    .topico-item.has-inss { border-left: 3px solid var(--inss-green); }
-    .topico-item.has-tj   { border-left: 3px solid var(--tj-blue); }
-
-    .t-num {
-      font-size: 11px; font-weight: 700;
-      min-width: 24px; height: 24px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .t-num.inss { background: var(--inss-bg); color: var(--inss-green); border: 1px solid var(--inss-border); }
-    .t-num.tj   { background: var(--tj-bg);   color: var(--tj-blue);   border: 1px solid var(--tj-border); }
-
-    .t-text { font-size: 13.5px; color: var(--text); flex: 1; line-height: 1.45; }
-    .t-tag {
-      font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; flex-shrink: 0;
-    }
-    .t-tag.inss { background: var(--inss-bg); color: var(--inss-green); border: 1px solid var(--inss-border); }
-    .t-tag.tj   { background: var(--tj-bg);   color: var(--tj-blue);   border: 1px solid var(--tj-border); }
-    .t-arrow { color: var(--text-dim); font-size: 15px; flex-shrink: 0; }
-
-    /* ── RESUMO ── */
-    .resumo-sec {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: var(--radius-lg);
-      padding: 1.6rem 1.75rem;
-      margin-bottom: 1.1rem;
-    }
-    .resumo-sec h2 {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 1rem;
-      padding-bottom: 0.65rem;
-      border-bottom: 1px solid var(--navy-border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .resumo-sec h2::before {
-      content: '';
-      display: inline-block;
-      width: 3px; height: 16px;
-      border-radius: 2px;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-    .resumo-sec p { font-size: 14px; color: var(--text-muted); line-height: 1.85; margin-bottom: 0.9rem; }
-    .resumo-sec p:last-child { margin-bottom: 0; }
-    .resumo-sec ul { padding-left: 1.1rem; margin-bottom: 0.9rem; }
-    .resumo-sec ul li { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 0.4rem; }
-    .resumo-sec ul li strong { color: var(--text); font-weight: 600; }
-    .tip {
-      background: rgba(240,165,0,0.06);
-      border-left: 3px solid var(--gold);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      padding: 0.9rem 1.1rem;
-      margin: 1.1rem 0 0;
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-    .tip-lbl {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.10em;
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .tip-lbl::before { content: '💡'; font-size: 12px; }
-
-    /* ── QUESTÕES ── */
-    .q-header {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      margin: 2rem 0 1rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .q-header::before {
-      content: '';
-      display: inline-block;
-      width: 4px; height: 18px;
-      border-radius: 2px;
-      background: var(--gold);
-    }
-
-    .q-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: var(--radius-lg);
-      padding: 1.35rem 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .q-num {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.55rem;
-    }
-    .q-txt { font-size: 14px; color: var(--text); line-height: 1.75; margin-bottom: 1rem; }
-
-    .opcoes { display: flex; flex-direction: column; gap: 7px; }
-    .opcao {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-      padding: 0.7rem 1rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--navy-border);
-      cursor: pointer;
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.55;
-      background: rgba(255,255,255,0.02);
-      transition: all 0.15s;
-    }
-    .opcao:hover:not(.disabled) {
-      background: var(--navy-hover);
-      border-color: rgba(255,255,255,0.14);
-      color: var(--text);
-    }
-    .opcao.correta  { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.4); color: #6ee7b7; }
-    .opcao.errada   { background: rgba(239,68,68,0.10);  border-color: rgba(239,68,68,0.35); color: #fca5a5; }
-    .opcao.disabled { cursor: default; }
-    .op-letra { font-weight: 700; flex-shrink: 0; min-width: 16px; }
-
-    .feedback {
-      display: none;
-      margin-top: 0.9rem;
-      padding: 0.8rem 1rem;
-      border-radius: var(--radius-md);
-      font-size: 13px;
-      line-height: 1.65;
-    }
-    .feedback.show { display: block; }
-    .feedback.certo  { background: rgba(16,185,129,0.10); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
-    .feedback.errado { background: rgba(239,68,68,0.10);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
-
-    .score-box {
-      display: none;
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: var(--radius-xl);
-      padding: 2rem;
-      text-align: center;
-      margin-top: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .score-box::before {
-      content: '';
-      position: absolute;
-      top: -40px; left: 50%;
-      transform: translateX(-50%);
-      width: 200px; height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(240,165,0,0.15) 0%, transparent 70%);
-    }
-    .score-box.show { display: block; }
-    .score-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 52px;
-      color: var(--gold);
-      position: relative;
-    }
-    .score-lbl { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
-
-    /* ── COMING SOON ── */
-    .coming {
-      background: var(--navy-card);
-      border: 1px dashed var(--navy-border);
-      border-radius: var(--radius-xl);
-      text-align: center;
-      padding: 4rem 2rem;
-    }
-    .coming-icon { font-size: 44px; margin-bottom: 1rem; opacity: 0.8; }
-    .coming-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-    .coming-sub { font-size: 13px; line-height: 1.7; color: var(--text-muted); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      .wrap { padding: 1.5rem 1rem 4rem; }
-      .hero { padding: 2.5rem 1.5rem 2.25rem; }
-      .hero-title { font-size: 28px; }
-      .stats { grid-template-columns: repeat(3,1fr); gap: 7px; }
-      .stat-num { font-size: 26px; }
-      .concurso-card { padding: 1.1rem 1.1rem; gap: 1rem; }
-      .c-icon { width: 48px; height: 48px; font-size: 22px; }
-      .c-nome { font-size: 15px; }
-      .resumo-sec { padding: 1.2rem 1.25rem; }
-      .q-card { padding: 1.1rem 1.1rem; }
-      .page-header { flex-direction: column; gap: 10px; }
-      .ph-title { font-size: 16px; }
-    }
-
-    @media (max-width: 380px) {
-      .hero-title { font-size: 24px; }
-      .stat-num { font-size: 22px; }
-      .badges { gap: 4px; }
-    }
-
-    /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--navy); }
     ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 1.5rem 1rem 4rem; }
+      .hero { padding: 2.5rem 1.5rem 2.25rem; }
+      .hero-title { font-size: 28px; }
+      .stats { gap: 7px; }
+      .stat-num { font-size: 26px; }
+      .concurso-card { padding: 1.1rem; gap: 1rem; }
+      .c-icon { width: 48px; height: 48px; font-size: 22px; }
+      .c-nome { font-size: 15px; }
+    }
+    @media (max-width: 380px) {
+      .hero-title { font-size: 24px; }
+      .stat-num { font-size: 22px; }
+    }
   </style>
 </head>
 <body>
@@ -543,507 +227,79 @@
 </div>
 
 <div id="app">
-
-  <!-- ════════════ HOME ════════════ -->
-  <div class="page active" id="page-home">
-    <div class="wrap">
-      <div class="hero">
-        <div class="hero-glow"></div>
-        <div class="hero-ring"></div>
-        <div class="hero-ring2"></div>
-        <div class="hero-eyebrow">✦ Plataforma de Estudos</div>
-        <div class="hero-title">Meus <span>Concursos</span></div>
-        <div class="hero-sub">Selecione um concurso para começar a estudar com resumos e questões</div>
-      </div>
-
-      <div class="stats">
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Concursos</div></div>
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Resumos prontos</div></div>
-        <div class="stat"><div class="stat-num">20</div><div class="stat-label">Questões</div></div>
-      </div>
-
-      <div class="section-label">Concursos disponíveis</div>
-
-      <div class="concurso-card inss-card" onclick="showPage('page-inss')">
-        <div class="c-icon inss">🏛️</div>
-        <div class="c-info">
-          <div class="c-nome">INSS</div>
-          <div class="c-sub">Técnico do Seguro Social</div>
-          <div class="badges">
-            <span class="badge inss">23 tópicos</span>
-            <span class="badge new">1 resumo novo ✦</span>
-          </div>
-        </div>
-        <div class="c-arrow">›</div>
-      </div>
-
-      <div class="concurso-card tj-card" onclick="showPage('page-tjce')">
-        <div class="c-icon tj">⚖️</div>
-        <div class="c-info">
-          <div class="c-nome">TJ/CE</div>
-          <div class="c-sub">Técnico Judiciário — Área Judiciária</div>
-          <div class="badges">
-            <span class="badge tj">29+ tópicos</span>
-            <span class="badge new">1 resumo novo ✦</span>
-          </div>
-        </div>
-        <div class="c-arrow">›</div>
-      </div>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-ring2"></div>
+      <div class="hero-eyebrow">✦ Plataforma de Estudos</div>
+      <div class="hero-title">Meus <span>Concursos</span></div>
+      <div class="hero-sub">Selecione um concurso para começar a estudar com resumos e questões</div>
     </div>
-  </div>
 
-  <!-- ════════════ INSS ════════════ -->
-  <div class="page" id="page-inss">
-    <div class="wrap">
-      <div class="page-header">
-        <button class="back-btn" onclick="showPage('page-home')">← Voltar</button>
-        <div>
-          <div class="ph-title">INSS — Técnico do Seguro Social</div>
-          <div class="ph-sub">Conteúdo programático do edital</div>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">Concursos</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Resumos prontos</div></div>
+      <div class="stat"><div class="stat-num">40</div><div class="stat-label">Questões</div></div>
+    </div>
+
+    <div class="section-label">Concursos disponíveis</div>
+
+    <a class="concurso-card inss-card" href="inss.html">
+      <div class="c-icon inss">🏛️</div>
+      <div class="c-info">
+        <div class="c-nome">INSS 2026</div>
+        <div class="c-sub">Técnico do Seguro Social</div>
+        <div class="badges">
+          <span class="badge inss">23 tópicos</span>
+          <span class="badge new" id="badge-inss-progress">4 resumos novos ✦</span>
+        </div>
+        <div class="banca-strip">
+          <span class="banca-pill inss">CEBRASPE</span>
+          <span class="banca-desc"><strong>Estilo:</strong> Certo ou Errado — assertivas únicas com pegadinhas sutis de interpretação. Atenção à negação implícita e a detalhes de legislação.</span>
         </div>
       </div>
-      <div id="edital-inss"></div>
-    </div>
-  </div>
+      <div class="c-arrow">›</div>
+    </a>
 
-  <!-- ════════════ TJ/CE ════════════ -->
-  <div class="page" id="page-tjce">
-    <div class="wrap">
-      <div class="page-header">
-        <button class="back-btn" onclick="showPage('page-home')">← Voltar</button>
-        <div>
-          <div class="ph-title">TJ/CE — Técnico Judiciário</div>
-          <div class="ph-sub">Área Judiciária · Conhecimentos Gerais e Específicos</div>
+    <a class="concurso-card tj-card" href="tjce.html">
+      <div class="c-icon tj">⚖️</div>
+      <div class="c-info">
+        <div class="c-nome">TJ/CE 2026</div>
+        <div class="c-sub">Técnico Judiciário — Área Judiciária</div>
+        <div class="badges">
+          <span class="badge tj">29+ tópicos</span>
+          <span class="badge new" id="badge-tjce-progress">4 resumos prontos ✦</span>
+        </div>
+        <div class="banca-strip">
+          <span class="banca-pill tj">FCC</span>
+          <span class="banca-desc"><strong>Estilo:</strong> Múltipla escolha — 5 alternativas, enunciados longos com contexto. Foco em interpretação contextual, distinções conceituais e aplicação prática.</span>
         </div>
       </div>
-      <div id="edital-tjce"></div>
-    </div>
+      <div class="c-arrow">›</div>
+    </a>
   </div>
-
-  <!-- ════════════ RESUMO INSS T1 ════════════ -->
-  <div class="page" id="page-resumo-inss-1">
-    <div class="wrap">
-      <div class="page-header">
-        <button class="back-btn" onclick="showPage('page-inss')">← Voltar</button>
-        <div>
-          <div class="ph-title">Compreensão e interpretação de textos</div>
-          <div class="ph-sub">INSS · Língua Portuguesa · Tópico 1</div>
-        </div>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>O que é compreensão e interpretação de textos?</h2>
-        <p>Compreender um texto significa entender o que ele diz de forma explícita — as informações que estão claramente escritas. Interpretar vai além: é relacionar o que está escrito com o contexto, inferir sentidos implícitos e captar a intenção do autor.</p>
-        <p>Em provas de concurso, estas habilidades são testadas por meio de textos de diferentes gêneros (notícias, artigos, crônicas, textos literários) seguidos de questões que cobram desde a localização de informações até a identificação de ironia, pressupostos e intenção comunicativa.</p>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>Compreensão literal (o que o texto diz)</h2>
-        <p>A compreensão literal envolve identificar informações que estão expressas diretamente no texto. As questões pedem para o candidato localizar dados, personagens, datas, causas e consequências mencionadas pelo autor.</p>
-        <ul>
-          <li>Leia o enunciado da questão antes de ler o texto — isso orienta sua leitura.</li>
-          <li>Sublinhe palavras-chave ao longo da leitura.</li>
-          <li>Desconfie de alternativas que usam as mesmas palavras do texto mas alteram o sentido.</li>
-        </ul>
-        <div class="tip"><div class="tip-lbl">Dica de prova</div>Alternativas com "sempre", "nunca", "apenas" e "somente" costumam ser armadilhas — o texto raramente é tão absoluto.</div>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>Interpretação e inferência (o que o texto implica)</h2>
-        <p>A interpretação exige que o leitor vá além do que está escrito. As bancas cobram: inferências, pressupostos, implicaturas e o ponto de vista do autor.</p>
-        <ul>
-          <li><strong>Inferência válida:</strong> decorre necessariamente do que foi dito no texto.</li>
-          <li><strong>Inferência inválida:</strong> traz informações externas ao texto ou distorce o sentido.</li>
-          <li><strong>Pressuposto:</strong> ideia que precisa ser verdadeira para que a afirmação faça sentido. Ex: "Pedro parou de fumar" pressupõe que ele fumava.</li>
-        </ul>
-        <div class="tip"><div class="tip-lbl">Dica de prova</div>Nunca use seu conhecimento de mundo para responder — a resposta correta deve estar ancorada no texto.</div>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>Tema, ideia principal e estrutura do texto</h2>
-        <p>O tema é o assunto geral do texto. A ideia principal (ou tese) é o que o autor defende sobre esse tema. O argumento é o que o autor usa para sustentar sua tese.</p>
-        <p>Para encontrar a ideia principal, pergunte-se: "O que o autor quer que eu entenda ao final da leitura?" A resposta quase sempre aparece na introdução ou na conclusão.</p>
-        <div class="tip"><div class="tip-lbl">Dica de prova</div>Questões "o texto trata principalmente de…" pedem a tese, não exemplos ou detalhes secundários.</div>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>Vocabulário contextual</h2>
-        <p>Questões sobre vocabulário pedem o sentido de uma palavra dentro do contexto do texto — não seu significado de dicionário. Palavras polissêmicas (com vários sentidos) são as favoritas das bancas.</p>
-        <p>Estratégia: substitua a palavra pela alternativa proposta e veja se o sentido do trecho se mantém coerente.</p>
-      </div>
-
-      <div class="q-header">Questões de fixação — 10 questões</div>
-      <div id="q-inss-1"></div>
-      <div class="score-box" id="score-inss-1">
-        <div class="score-num" id="snum-inss-1"></div>
-        <div class="score-lbl">questões corretas</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════ RESUMO TJ/CE T1 ════════════ -->
-  <div class="page" id="page-resumo-tj-1">
-    <div class="wrap">
-      <div class="page-header">
-        <button class="back-btn" onclick="showPage('page-tjce')">← Voltar</button>
-        <div>
-          <div class="ph-title">Compreensão e interpretação de textos de gêneros variados</div>
-          <div class="ph-sub">TJ/CE · Língua Portuguesa · Tópico 1</div>
-        </div>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>O diferencial do TJ/CE: gêneros variados</h2>
-        <p>O edital do TJ/CE especifica "gêneros variados", o que significa que a prova pode trazer textos literários, jornalísticos, científicos, publicitários, humorísticos e até textos multimodais. Reconhecer o gênero textual já é metade do caminho.</p>
-        <p>Ele indica o registro linguístico (formal ou informal), a finalidade (informar, persuadir, entreter) e como interpretar o tom do autor.</p>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>Principais gêneros e suas características</h2>
-        <ul>
-          <li><strong>Notícia / reportagem:</strong> linguagem objetiva, fatos verificáveis, estrutura de pirâmide invertida.</li>
-          <li><strong>Artigo de opinião / editorial:</strong> defende um ponto de vista, usa argumentos, linguagem formal.</li>
-          <li><strong>Crônica:</strong> tom coloquial ou literário, trata de situações cotidianas, pode ser irônica ou reflexiva.</li>
-          <li><strong>Texto literário (conto, poema):</strong> linguagem conotativa, figuras de linguagem, múltiplas interpretações.</li>
-          <li><strong>Texto científico / técnico:</strong> linguagem denotativa, termos especializados, argumentação com dados.</li>
-          <li><strong>Texto publicitário:</strong> linguagem persuasiva, uso de recursos visuais e slogan.</li>
-        </ul>
-        <div class="tip"><div class="tip-lbl">Dica de prova</div>Ao ler o texto, identifique: quem escreve, para quem, com qual finalidade. Isso resolve 80% das questões de interpretação.</div>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>Compreensão literal e interpretação inferencial</h2>
-        <p>O TJ/CE cobra tanto o explícito quanto o implícito. Por trazer textos literários com maior frequência, exige mais atenção a figuras de linguagem como ironia, metáfora e eufemismo.</p>
-        <ul>
-          <li><strong>Ironia:</strong> diz o contrário do que se quer dizer, com intenção crítica ou humorística.</li>
-          <li><strong>Metáfora:</strong> comparação implícita que atribui características de um ser a outro.</li>
-          <li><strong>Eufemismo:</strong> suaviza uma realidade desagradável. Ex: "ele nos deixou" em vez de "ele morreu".</li>
-        </ul>
-      </div>
-
-      <div class="resumo-sec">
-        <h2>Estratégias de leitura para a prova</h2>
-        <ul>
-          <li>Leia o enunciado das questões antes do texto para saber o que procurar.</li>
-          <li>Identifique o gênero logo no início da leitura.</li>
-          <li>Marque as informações principais: tese, argumentos, conclusão.</li>
-          <li>Ao responder, volte ao texto — nunca responda de memória.</li>
-          <li>Elimine alternativas com generalizações absolutas ("sempre", "nunca", "todos").</li>
-          <li>Desconfie de alternativas que parafraseiam o texto mas alteram o sentido com uma palavra.</li>
-        </ul>
-        <div class="tip"><div class="tip-lbl">Dica de prova</div>Questões que pedem "a alternativa que NÃO corresponde ao texto" exigem atenção redobrada.</div>
-      </div>
-
-      <div class="q-header">Questões de fixação — 10 questões</div>
-      <div id="q-tj-1"></div>
-      <div class="score-box" id="score-tj-1">
-        <div class="score-num" id="snum-tj-1"></div>
-        <div class="score-lbl">questões corretas</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════ RESUMO GENÉRICO ════════════ -->
-  <div class="page" id="page-resumo-gen">
-    <div class="wrap">
-      <div class="page-header">
-        <button class="back-btn" id="gen-back-btn" onclick="voltarEdital()">← Voltar</button>
-        <div>
-          <div class="ph-title" id="gen-title">Tópico</div>
-          <div class="ph-sub" id="gen-sub">Matéria</div>
-        </div>
-      </div>
-      <div class="coming">
-        <div class="coming-icon">📝</div>
-        <div class="coming-title">Resumo em construção</div>
-        <div class="coming-sub">Este tópico receberá seu resumo completo + 10 questões em breve.<br>Continue pelos tópicos já disponíveis!</div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /app -->
+</div>
 
 <script>
-/* ─────────── DADOS ─────────── */
-const INSS = {
-  port:  { label:"Língua Portuguesa", items:[
-    {n:1,t:"Compreensão e interpretação de textos", page:"page-resumo-inss-1"},
-    {n:2,t:"Tipologia textual"},{n:3,t:"Ortografia oficial"},{n:4,t:"Acentuação gráfica"},
-    {n:5,t:"Emprego das classes de palavras"},{n:6,t:"Emprego do sinal indicativo de crase"},
-    {n:7,t:"Sintaxe da oração e do período"},{n:8,t:"Pontuação"},
-    {n:9,t:"Concordância nominal e verbal"},{n:10,t:"Regências nominal e verbal"},
-    {n:11,t:"Significação das palavras"},
-    {n:12,t:"Redação de correspondências oficiais (Manual de Redação da Presidência)"}
-  ]},
-  etica: { label:"Ética no Serviço Público", items:[
-    {n:1,t:"Código de Ética Profissional do Servidor Público Civil — Decreto nº 1.171/1994 e Decreto nº 6.029/2007"}
-  ]},
-  const: { label:"Noções de Direito Constitucional", items:[
-    {n:1,t:"Direitos e garantias fundamentais: individuais, coletivos, sociais, nacionalidade, cidadania"},
-    {n:2,t:"Administração pública — arts. 37 a 41, Capítulo VII, CF/1988"}
-  ]},
-  adm:   { label:"Noções de Direito Administrativo", items:[
-    {n:1,t:"Estado, governo e administração pública: conceitos, elementos, poderes e organização"},
-    {n:2,t:"Direito administrativo: conceito, fontes e princípios"},
-    {n:3,t:"Organização administrativa da União: direta e indireta"},
-    {n:4,t:"Agentes públicos: espécies, classificação, RJU — Lei nº 8.112/1990"},
-    {n:5,t:"Poderes administrativos: hierárquico, disciplinar, regulamentar, de polícia"},
-    {n:6,t:"Ato administrativo: validade, eficácia, atributos, extinção"},
-    {n:7,t:"Serviços públicos: conceito, classificação, delegação"},
-    {n:8,t:"Controle e responsabilização — Lei nº 8.429/1992"},
-    {n:9,t:"Lei nº 9.784/1999 — Lei do Processo Administrativo"}
-  ]},
-  info:  { label:"Noções de Informática", items:[
-    {n:1,t:"Conceitos de Internet e intranet"},{n:2,t:"Tecnologias e ferramentas de informática"},
-    {n:3,t:"LibreOffice: textos, planilhas e apresentações"},
-    {n:4,t:"Sistemas operacionais Windows 7 e 10"},
-    {n:5,t:"Ferramentas de navegação e correio eletrônico"},
-    {n:6,t:"Segurança: vírus, worms e derivados"}
-  ]},
-  rac:   { label:"Raciocínio Lógico-Matemático", items:[
-    {n:1,t:"Raciocínio lógico: proposições, tabela-verdade, conectivos"},
-    {n:2,t:"Tautologia"},{n:3,t:"Operação com conjuntos"},{n:4,t:"Cálculos com porcentagens"}
-  ]},
-  prev:  { label:"Conhecimentos Específicos — Previdência Social", items:[
-    {n:1,t:"Seguridade Social: origem, evolução, conceito, organização e princípios constitucionais"},
-    {n:2,t:"Legislação Previdenciária: fontes, autonomia, vigência, hierarquia, interpretação"},
-    {n:3,t:"RGPS: segurados obrigatórios, filiação e inscrição"},
-    {n:4,t:"Segurado facultativo: conceito, características, filiação e inscrição"},
-    {n:5,t:"Financiamento da Seguridade Social: receitas e contribuições sociais"},
-    {n:6,t:"Salário de contribuição: conceito, parcelas, limites e reajustamento"},
-    {n:7,t:"Crimes contra a seguridade social — decadência e prescrição"},
-    {n:8,t:"Recurso das decisões administrativas"},
-    {n:9,t:"Plano de Benefícios da Previdência Social: espécies, carência, salário de benefício"},
-    {n:10,t:"Manutenção, perda e restabelecimento da qualidade de segurado"},
-    {n:11,t:"Serviços Previdenciários: serviço social e reabilitação profissional"},
-    {n:12,t:"Benefícios de legislações especiais: Talidomida, seringueiros, Zika Vírus"},
-    {n:13,t:"Seguro-defeso — Lei nº 10.779/2003"},
-    {n:14,t:"LOAS: BPC/LOAS e Auxílio-Inclusão"},
-    {n:15,t:"RPPS: certidão, contagem recíproca, compensação previdenciária"},
-    {n:16,t:"Emenda Constitucional nº 103/2019"},
-    {n:17,t:"Lei Complementar nº 142/2013"},
-    {n:18,t:"Lei nº 8.212/1991 e alterações"},
-    {n:19,t:"Lei nº 8.213/1991 e alterações"},
-    {n:20,t:"Decreto nº 3.048/1999 e alterações"},
-    {n:21,t:"IN PRES/INSS nº 128/2022"},
-    {n:22,t:"O servidor público como agente de desenvolvimento social"},
-    {n:23,t:"Saúde e qualidade de vida no serviço público"}
-  ]}
-};
-
-const TJCE = {
-  port:  { label:"Língua Portuguesa", items:[
-    {n:1,t:"Compreensão e interpretação de textos de gêneros variados", page:"page-resumo-tj-1"},
-    {n:2,t:"Reconhecimento de tipos e gêneros textuais"},
-    {n:3,t:"Domínio da ortografia oficial"},
-    {n:4,t:"Coesão textual: referenciação, substituição, conectores"},
-    {n:5,t:"Estrutura morfossintática: classes de palavras, coordenação, subordinação"},
-    {n:6,t:"Reescrita de frases e parágrafos do texto"},
-    {n:7,t:"Significação e substituição de palavras ou trechos"},
-    {n:8,t:"Reorganização e reescrita de textos de diferentes gêneros"}
-  ]},
-  info:  { label:"Noções de Informática", items:[
-    {n:1,t:"Sistema Operacional Windows 10"},
-    {n:2,t:"Microsoft Office 365: textos, planilhas e apresentações"},
-    {n:3,t:"Correio eletrônico (Outlook Express)"},
-    {n:4,t:"Busca, redes sociais e computação em nuvem"},
-    {n:5,t:"Organização e gerenciamento de arquivos e pastas"},
-    {n:6,t:"Segurança da informação: vírus, worms, antivírus, firewall"}
-  ]},
-  rac:   { label:"Raciocínio Lógico", items:[
-    {n:1,t:"Estruturas lógicas"},
-    {n:2,t:"Lógica de argumentação: analogias, inferências, deduções e conclusões"},
-    {n:3,t:"Lógica sentencial: proposições, tabelas verdade, equivalências, leis de De Morgan"},
-    {n:4,t:"Diagramas lógicos"},{n:5,t:"Lógica de primeira ordem"},
-    {n:6,t:"Contagem e probabilidade"},{n:7,t:"Operações com conjuntos"},
-    {n:8,t:"Problemas aritméticos, geométricos e matriciais"}
-  ]},
-  const: { label:"Noções de Direito Constitucional", items:[
-    {n:1,t:"CF/1988: princípios fundamentais"},
-    {n:2,t:"Aplicabilidade das normas constitucionais: eficácia plena, contida e limitada"},
-    {n:3,t:"Direitos e garantias fundamentais: individuais, coletivos, sociais, partidos políticos"},
-    {n:4,t:"Organização político-administrativa do Estado federal"},
-    {n:5,t:"Administração pública: disposições gerais, servidores públicos"},
-    {n:6,t:"Poder executivo: atribuições e responsabilidades do presidente"},
-    {n:7,t:"Poder legislativo: estrutura, processo legislativo, fiscalização, comissões"},
-    {n:8,t:"Poder judiciário: disposições gerais, CNJ e órgãos do judiciário"},
-    {n:9,t:"Funções essenciais à justiça: MP, Advocacia Pública, Defensoria Pública"}
-  ]},
-  adm:   { label:"Noções de Direito Administrativo", items:[
-    {n:1,t:"Estado, governo e administração pública: conceitos e fontes"},
-    {n:2,t:"Ato administrativo: conceito, atributos, espécies, extinção, decadência"},
-    {n:3,t:"Agentes públicos: cargo, emprego, provimento, efetividade, remuneração, PAD"},
-    {n:4,t:"Organização Judiciária — Lei nº 16.397/2017 e Resoluções do Pleno"},
-    {n:5,t:"Poderes da administração: hierárquico, disciplinar, regulamentar, de polícia"},
-    {n:6,t:"Regime jurídico-administrativo: princípios expressos e implícitos"},
-    {n:7,t:"Responsabilidade civil do Estado: ato comissivo, omissivo, excludentes, regresso"},
-    {n:8,t:"Serviços públicos: conceito, elementos, delegação, classificação"},
-    {n:9,t:"Organização administrativa: centralização, descentralização, direta e indireta"},
-    {n:10,t:"Entidades paraestatais e terceiro setor"},
-    {n:11,t:"Controle da administração pública: administrativo, judicial, legislativo"},
-    {n:12,t:"Improbidade administrativa — Lei nº 14.320/2021"},
-    {n:13,t:"Processo administrativo — Lei nº 9.784/1999"},
-    {n:14,t:"Licitações e contratos administrativos — Lei nº 14.133/2021"}
-  ]},
-  proc:  { label:"Noções de Direito Processual Civil", items:[
-    {n:1,t:"CPC — Lei nº 13.105/2015"},{n:2,t:"Normas processuais civis e jurisdição"},
-    {n:3,t:"A ação: conceito, elementos, condições e classificação"},
-    {n:4,t:"Pressupostos processuais e preclusão"},
-    {n:5,t:"Sujeitos do processo: capacidade, deveres, procuradores, litisconsórcio"},
-    {n:6,t:"Intervenção de terceiros e poderes do juiz"},
-    {n:7,t:"Ministério Público, Advocacia Pública e Defensoria Pública"},
-    {n:8,t:"Atos processuais: forma, prazos, comunicação, nulidades"},
-    {n:9,t:"Tutela provisória: tutela de urgência e evidência"},
-    {n:10,t:"Formação, suspensão e extinção do processo"},
-    {n:11,t:"Processo de conhecimento: procedimento comum, sentença"},
-    {n:12,t:"Recursos em geral e processos nos tribunais"},
-    {n:13,t:"Processos de execução e cumprimento de sentença"},
-    {n:14,t:"Procedimentos especiais: mandado de segurança, ação popular, improbidade"},
-    {n:15,t:"Processos de jurisdição voluntária"},
-    {n:16,t:"Jurisprudência dos tribunais superiores"},
-    {n:17,t:"Lei nº 8.245/1991 — Locação de imóveis urbanos"}
-  ]},
-  penal: { label:"Noções de Direito Processual Penal", items:[
-    {n:1,t:"Processo penal brasileiro: sistemas e princípios fundamentais"},
-    {n:2,t:"Aplicação da lei processual penal no tempo, espaço e às pessoas"},
-    {n:3,t:"CPP: disposições preliminares e fase pré-processual"},
-    {n:4,t:"Processo, procedimento e relação jurídica processual"},
-    {n:5,t:"Tipos de processo penal e ação civil ex delicto"},
-    {n:6,t:"Jurisdição, competência e questões incidentes"},
-    {n:7,t:"Prova — Lei nº 9.296/1996 (interceptação telefônica)"},
-    {n:8,t:"Prisão: medidas cautelares e liberdade provisória"},
-    {n:9,t:"Citações, intimações e atos processuais"},
-    {n:10,t:"Procedimentos: comum, especiais, STJ/STF"},
-    {n:11,t:"Juizados especiais cíveis e criminais"},
-    {n:12,t:"Prazos, nulidades e recursos em geral"},
-    {n:13,t:"Habeas corpus — Lei nº 13.964/2019"},
-    {n:14,t:"Execução penal — Lei nº 7.210/1984"},
-    {n:15,t:"Disposições processuais penais extravagantes"},
-    {n:16,t:"Relações jurisdicionais com autoridade estrangeira"},
-    {n:17,t:"Disposições Gerais do Código de Processo Penal"}
-  ]}
-};
-
-/* ─────────── QUESTÕES ─────────── */
-const QI = [
-  {e:"Leia o trecho: 'O estudo consistente é o único caminho para quem deseja alcançar resultados sólidos em concursos públicos.' De acordo com o texto, qual é a condição para se obter bons resultados em concursos?",ops:["A) Ter talento natural para as disciplinas cobradas.","B) Estudar de forma consistente e contínua.","C) Frequentar cursos preparatórios presenciais.","D) Decorar todo o conteúdo do edital.","E) Resolver apenas questões de provas anteriores."],g:1,fb:"O texto afirma diretamente que 'o estudo consistente é o único caminho', indicando que a condição é estudar de forma consistente. Resposta: B."},
-  {e:"Considere a afirmação: 'Muitos candidatos, apesar de se dedicarem bastante, não conseguem êxito por não organizarem bem seu tempo.' A palavra 'apesar de' indica qual relação entre as ideias?",ops:["A) Causa e consequência.","B) Adição de informações.","C) Concessão (contradição entre as ideias).","D) Finalidade.","E) Conclusão."],g:2,fb:"'Apesar de' é conjunção concessiva — introduz uma ideia que contradiz o que seria esperado. Resposta: C."},
-  {e:"'O servidor público deve pautar sua conduta pela ética e pela transparência.' O termo 'pautar' foi empregado no sentido de:",ops:["A) Registrar em pauta de reunião.","B) Guiar, orientar.","C) Questionar, debater.","D) Publicar oficialmente.","E) Suspender temporariamente."],g:1,fb:"No contexto, 'pautar' significa guiar ou orientar a conduta. Resposta: B."},
-  {e:"Qual das alternativas apresenta uma informação que pode ser inferida do trecho: 'A leitura diária de textos variados amplia o repertório linguístico e facilita a interpretação em provas.'?",ops:["A) Ler apenas textos literários é suficiente para se sair bem em provas.","B) Quem lê variados textos diariamente tende a interpretar melhor em provas.","C) A interpretação de textos independe do hábito de leitura.","D) Repertório linguístico não influencia no desempenho em provas.","E) Provas de concurso não exigem interpretação de texto."],g:1,fb:"O texto afirma que leitura diária 'facilita a interpretação em provas', o que permite inferir que quem tem esse hábito tende a interpretar melhor. Resposta: B."},
-  {e:"'Pedro parou de reclamar do trabalho.' Qual pressuposto está contido nessa afirmação?",ops:["A) Pedro nunca reclamou do trabalho.","B) Pedro trabalha em outro setor.","C) Pedro reclamava do trabalho antes.","D) Pedro foi demitido.","E) Pedro está satisfeito com o salário."],g:2,fb:"O verbo 'parar de' pressupõe que a ação acontecia antes. Resposta: C."},
-  {e:"Sobre compreensão e interpretação de textos, é INCORRETO afirmar:",ops:["A) A compreensão literal refere-se ao que está explicitamente escrito no texto.","B) A interpretação permite identificar sentidos implícitos e intenções do autor.","C) Informações externas ao texto devem embasar a resposta de questões interpretativas.","D) Palavras polissêmicas devem ser interpretadas conforme o contexto.","E) O tema do texto corresponde ao assunto geral tratado pelo autor."],g:2,fb:"A alternativa C está incorreta: questões de interpretação devem ser respondidas com base no texto, nunca em informações externas. Resposta: C."},
-  {e:"'O programa social reduziu, significativamente, o número de famílias em situação de vulnerabilidade.' Qual das alternativas substitui 'significativamente' sem alterar o sentido da frase?",ops:["A) Lentamente.","B) Superficialmente.","C) Expressivamente.","D) Marginalmente.","E) Raramente."],g:2,fb:"'Significativamente' indica uma redução de grande impacto. 'Expressivamente' carrega o mesmo sentido. Resposta: C."},
-  {e:"Leia: 'Embora o candidato soubesse o conteúdo, o nervosismo o impediu de responder corretamente.' Qual relação lógica a conjunção 'embora' estabelece?",ops:["A) Conclusão.","B) Concessão.","C) Causa.","D) Adição.","E) Alternância."],g:1,fb:"'Embora' é conjunção concessiva — introduz uma ideia que, apesar de ser verdadeira, não produziu o resultado esperado. Resposta: B."},
-  {e:"'A nota fiscal eletrônica foi instituída para combater a sonegação.' A finalidade expressa na frase é:",ops:["A) Sonegar impostos por meio eletrônico.","B) Combater a sonegação fiscal.","C) Substituir a nota fiscal em papel por razões ambientais.","D) Facilitar o trabalho dos contadores.","E) Reduzir a burocracia nos cartórios."],g:1,fb:"A preposição 'para' indica finalidade. A nota foi instituída com a finalidade de combater a sonegação. Resposta: B."},
-  {e:"Qual das alternativas representa uma generalização INDEVIDA ao interpretar um texto que afirma 'alguns servidores públicos são reconhecidos por sua dedicação'?",ops:["A) Parte dos servidores públicos é dedicada.","B) Existem servidores públicos dedicados.","C) Todos os servidores públicos são exemplos de dedicação.","D) Alguns servidores se destacam pelo comprometimento.","E) Há servidores públicos comprometidos com o trabalho."],g:2,fb:"'Alguns' não autoriza generalizar para 'todos'. A alternativa C extrapola o sentido do texto. Resposta: C."}
-];
-
-const QT = [
-  {e:"Um texto jornalístico inicia assim: 'O tribunal condenou o réu a cinco anos de prisão após julgamento realizado na última terça-feira.' Qual é a principal característica desse gênero textual?",ops:["A) Uso de linguagem conotativa e figuras de estilo.","B) Relato de fatos de forma objetiva com base em dados verificáveis.","C) Defesa de um ponto de vista pessoal do autor.","D) Finalidade de entreter o leitor com situações cotidianas.","E) Uso de linguagem informal e coloquial."],g:1,fb:"O texto jornalístico tem como principal característica a objetividade e a base em fatos verificáveis. Resposta: B."},
-  {e:"'Que saudade daquele tempo em que a vida era mais simples!' Esse trecho pertence provavelmente a qual gênero textual?",ops:["A) Artigo científico.","B) Notícia.","C) Manual técnico.","D) Crônica.","E) Lei."],g:3,fb:"O tom nostálgico, a linguagem coloquial e o tema cotidiano são marcas da crônica. Resposta: D."},
-  {e:"Em um texto publicitário, a frase 'Venha descobrir o sabor que transforma seu dia' tem como principal intenção:",ops:["A) Informar sobre os ingredientes do produto.","B) Persuadir o leitor a consumir o produto.","C) Narrar a história da empresa.","D) Descrever o processo de fabricação.","E) Apresentar dados científicos sobre alimentação."],g:1,fb:"A linguagem publicitária tem como finalidade persuadir o leitor a adquirir ou consumir algo. Resposta: B."},
-  {e:"Leia: 'Que país maravilhoso, onde as obras públicas nunca ficam prontas e o dinheiro some misteriosamente!' Qual figura de linguagem está presente?",ops:["A) Metáfora.","B) Eufemismo.","C) Ironia.","D) Hipérbole.","E) Antítese."],g:2,fb:"O autor elogia (maravilhoso) uma situação claramente negativa — trata-se de ironia. Resposta: C."},
-  {e:"'A vida é uma viagem sem mapa.' Que figura de linguagem é usada nessa frase?",ops:["A) Comparação (símile).","B) Metáfora.","C) Hipérbole.","D) Eufemismo.","E) Personificação."],g:1,fb:"A metáfora é uma comparação implícita (sem 'como' ou 'assim como'). Resposta: B."},
-  {e:"Um editorial de jornal conclui: 'Por essas razões, entendemos que a reforma tributária é urgente e necessária.' Isso indica que o texto:",ops:["A) É um relato neutro de fatos.","B) Defende um ponto de vista sobre a reforma tributária.","C) Descreve o histórico da tributação no Brasil.","D) É um texto literário com linguagem conotativa.","E) Tem como objetivo entreter o leitor."],g:1,fb:"Editoriais defendem um ponto de vista. A expressão 'entendemos que' confirma isso. Resposta: B."},
-  {e:"Ao ler um texto técnico-científico sobre vacinação, o leitor encontra termos como 'imunoglobulina' e 'anticorpos monoclonais'. Isso é característico de:",ops:["A) Uso de linguagem conotativa.","B) Intenção persuasiva sem argumentos.","C) Uso de linguagem denotativa com termos especializados.","D) Informalidade na comunicação com o leitor.","E) Ausência de dados ou evidências."],g:2,fb:"Textos científicos usam linguagem denotativa com termos especializados de sua área. Resposta: C."},
-  {e:"'A candidata não foi aprovada na primeira tentativa.' Qual pressuposto está contido nessa frase?",ops:["A) A candidata foi aprovada posteriormente.","B) A candidata fez mais de uma tentativa.","C) A candidata não se preparou adequadamente.","D) Houve pelo menos uma tentativa.","E) A candidata desistiu do concurso."],g:3,fb:"'Primeira tentativa' pressupõe que houve ao menos uma tentativa. Resposta: D."},
-  {e:"Qual estratégia de leitura é mais indicada para resolver questões de interpretação em provas de concurso?",ops:["A) Usar apenas o conhecimento prévio sobre o assunto.","B) Ler as questões após o texto para não ser influenciado.","C) Ler as questões antes do texto para direcionar a leitura.","D) Ignorar as alternativas e responder de memória.","E) Marcar a alternativa mais longa como correta."],g:2,fb:"Ler as questões antes do texto permite uma leitura direcionada e mais eficiente. Resposta: C."},
-  {e:"Sobre os gêneros textuais, é CORRETO afirmar:",ops:["A) Textos literários sempre usam linguagem denotativa.","B) Notícias têm como finalidade principal entreter o leitor.","C) Artigos de opinião apresentam o ponto de vista do autor sobre um tema.","D) Crônicas são textos científicos baseados em dados experimentais.","E) Textos publicitários são sempre objetivos e isentos."],g:2,fb:"O artigo de opinião é um gênero argumentativo que apresenta e defende o ponto de vista do autor. Resposta: C."}
-];
-
-/* ─────────── ENGINE ─────────── */
-let currentEdital = 'page-inss';
-
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function voltarEdital() { showPage(currentEdital); }
-
-function openTopico(page, titulo, materia, edital) {
-  currentEdital = edital;
-  if (page === 'gen') {
-    document.getElementById('gen-title').textContent = titulo;
-    document.getElementById('gen-sub').textContent = materia;
-    showPage('page-resumo-gen');
-  } else {
-    showPage(page);
+  const STORAGE_KEY = 'talento_progresso_v1';
+  function loadProgress() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
   }
-}
 
-function renderEdital(containerId, dados, concurso) {
-  const edital = document.getElementById(containerId);
-  if (!edital) return;
-  edital.innerHTML = Object.keys(dados).map(key => {
-    const sec = dados[key];
-    const items = sec.items.map(item => {
-      const hasPage = !!item.page;
-      const cls = 'topico-item' + (hasPage ? (concurso==='inss' ? ' has-inss' : ' has-tj') : '');
-      const tag = hasPage ? `<span class="t-tag ${concurso}">✓ pronto</span>` : '';
-      const pg = item.page || 'gen';
-      const mat = sec.label;
-      const edPg = concurso === 'inss' ? 'page-inss' : 'page-tjce';
-      return `<div class="${cls}" onclick="openTopico('${pg}','${item.t.replace(/'/g,"\\'")}','${mat}','${edPg}')">
-        <span class="t-num ${concurso}">${item.n}</span>
-        <span class="t-text">${item.t}</span>
-        ${tag}
-        <span class="t-arrow">›</span>
-      </div>`;
-    }).join('');
-    return `<div class="materia-sec"><div class="mat-label">${sec.label}</div><div class="topico-list">${items}</div></div>`;
-  }).join('');
-}
+  const done = loadProgress();
+  const inssPages = ['page-resumo-inss-1'];
+  const tjcePages = ['page-resumo-tj-1', 'page-resumo-tj-2', 'page-resumo-tj-3', 'page-resumo-tj-4'];
 
-function buildQuestoes(containerId, scoreId, snumId, questoes) {
-  const c = document.getElementById(containerId);
-  if (!c) return;
-  const answered = new Array(questoes.length).fill(false);
-  c.innerHTML = questoes.map((q, qi) => `
-    <div class="q-card">
-      <div class="q-num">Questão ${qi+1}</div>
-      <div class="q-txt">${q.e}</div>
-      <div class="opcoes">
-        ${q.ops.map((op, oi) => `<div class="opcao" id="op-${containerId}-${qi}-${oi}" onclick="responder('${containerId}','${scoreId}','${snumId}',${qi},${oi},${questoes.length})">${op}</div>`).join('')}
-      </div>
-      <div class="feedback" id="fb-${containerId}-${qi}"></div>
-    </div>`).join('');
-  window['_ans_'+containerId] = answered;
-  window['_cor_'+containerId] = 0;
-  window['_q_'+containerId] = questoes;
-}
+  const inssConc = inssPages.filter(p => done[p]).length;
+  const tjceConc = tjcePages.filter(p => done[p]).length;
 
-function responder(cid, sid, snid, qi, oi, total) {
-  const questoes = window['_q_'+cid];
-  const answered = window['_ans_'+cid];
-  if (answered[qi]) return;
-  answered[qi] = true;
-  const q = questoes[qi];
-  const isCorrect = oi === q.g;
-  if (isCorrect) window['_cor_'+cid]++;
-  q.ops.forEach((_, i) => {
-    const el = document.getElementById(`op-${cid}-${qi}-${i}`);
-    el.classList.add('disabled');
-    if (i === q.g) el.classList.add('correta');
-    else if (i === oi && !isCorrect) el.classList.add('errada');
-  });
-  const fb = document.getElementById(`fb-${cid}-${qi}`);
-  fb.textContent = (isCorrect ? '✓ Correto! ' : '✗ Incorreto. ') + q.fb;
-  fb.className = 'feedback show ' + (isCorrect ? 'certo' : 'errado');
-  if (answered.every(Boolean)) {
-    const s = document.getElementById(sid);
-    const sn = document.getElementById(snid);
-    s.classList.add('show');
-    sn.textContent = `${window['_cor_'+cid]}/${total}`;
+  if (inssConc > 0) {
+    document.getElementById('badge-inss-progress').textContent = `${inssConc}/${inssPages.length} concluídos ✓`;
   }
-}
-
-/* ─────────── INIT ─────────── */
-renderEdital('edital-inss', INSS, 'inss');
-renderEdital('edital-tjce', TJCE, 'tj');
-buildQuestoes('q-inss-1', 'score-inss-1', 'snum-inss-1', QI);
-buildQuestoes('q-tj-1', 'score-tj-1', 'snum-tj-1', QT);
+  if (tjceConc > 0) {
+    document.getElementById('badge-tjce-progress').textContent = `${tjceConc}/${tjcePages.length} concluídos ✓`;
+  }
 </script>
 </body>
 </html>

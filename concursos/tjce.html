@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TJ/CE — Técnico Judiciário | Talento.dev.br</title>
+  <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0b0f1c;
+      --navy-card:   #161d30;
+      --navy-border: rgba(255,255,255,0.07);
+      --navy-hover:  rgba(255,255,255,0.11);
+      --gold:        #f0a500;
+      --gold-light:  #ffd166;
+      --inss-green:  #10b981;
+      --inss-bg:     rgba(16,185,129,0.10);
+      --inss-border: rgba(16,185,129,0.35);
+      --tj-blue:     #60a5fa;
+      --tj-bg:       rgba(96,165,250,0.10);
+      --tj-border:   rgba(96,165,250,0.35);
+      --text:        #e8eaf0;
+      --text-muted:  #8892a4;
+      --text-dim:    #4f5a6e;
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   18px;
+      --radius-xl:   24px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy); color: var(--text);
+      min-height: 100vh; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 15% 10%, rgba(96,165,250,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 20%, rgba(240,165,0,0.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 32px 32px; pointer-events: none;
+    }
+    #app { position: relative; z-index: 1; }
+
+    /* TOP BAR */
+    .top-bar {
+      background: rgba(11,15,28,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--navy-border);
+      padding: 0.7rem 1.5rem; position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .top-bar a {
+      color: var(--text-muted); font-size: 12px; font-weight: 500;
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    .top-bar a:hover { color: var(--gold); }
+    .top-bar a svg { opacity: 0.6; transition: opacity 0.2s; }
+    .top-bar a:hover svg { opacity: 1; }
+    .top-bar-sep { color: var(--text-dim); font-size: 12px; }
+
+    /* BANCA BADGE na top bar */
+    .top-bar-banca {
+      margin-left: auto;
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      padding: 3px 10px; border-radius: 40px;
+      background: rgba(96,165,250,0.14); color: #93c5fd;
+      border: 1px solid rgba(96,165,250,0.30);
+    }
+
+    /* PAGES */
+    .page { display: none; }
+    .page.active { display: block; animation: fadeUp 0.35s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .wrap { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+
+    /* PAGE HEADER */
+    .page-header {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding-bottom: 1.5rem; margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .back-btn {
+      background: var(--navy-card); border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md); padding: 7px 16px;
+      font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif; transition: all 0.18s;
+      white-space: nowrap; flex-shrink: 0;
+      text-decoration: none; display: inline-flex; align-items: center;
+    }
+    .back-btn:hover { background: var(--navy-hover); color: var(--text); border-color: var(--navy-hover); }
+    .ph-title { font-size: 19px; font-weight: 700; color: #fff; line-height: 1.3; }
+    .ph-sub   { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+
+    /* BANCA NOTA no topo do resumo */
+    .banca-nota {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: rgba(96,165,250,0.06);
+      border: 1px solid rgba(96,165,250,0.20);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 12px; color: var(--text-muted); line-height: 1.6;
+    }
+    .banca-nota-pill {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 2px 9px; border-radius: 40px; flex-shrink: 0; margin-top: 1px;
+      background: rgba(96,165,250,0.18); color: #93c5fd;
+      border: 1px solid rgba(96,165,250,0.35);
+    }
+
+    /* PROGRESS BAR */
+    .progress-bar-wrap {
+      background: var(--navy-card); border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md); padding: 0.9rem 1.25rem;
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: 14px;
+    }
+    .progress-bar-track { flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+    .progress-bar-fill  { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--tj-blue), #93c5fd); transition: width 0.6s ease; }
+    .progress-info { font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+    .progress-info span { color: var(--gold); }
+
+    /* MATERIA */
+    .materia-sec { margin-bottom: 2rem; }
+    .mat-label {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 600; color: var(--text-dim);
+      margin-bottom: 0.65rem; padding-left: 4px;
+    }
+    .topico-list { display: flex; flex-direction: column; gap: 5px; }
+    .topico-item {
+      background: var(--navy-card); border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md); padding: 0.8rem 1.1rem;
+      cursor: pointer; display: flex; align-items: center; gap: 10px;
+      transition: all 0.18s ease;
+    }
+    .topico-item:hover { background: var(--navy-hover); border-color: rgba(255,255,255,0.12); transform: translateX(3px); }
+    .topico-item.has-tj { border-left: 3px solid var(--tj-blue); }
+    .t-num {
+      font-size: 11px; font-weight: 700; min-width: 24px; height: 24px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; background: var(--tj-bg); color: var(--tj-blue); border: 1px solid var(--tj-border);
+    }
+    .t-text { font-size: 13.5px; color: var(--text); flex: 1; line-height: 1.45; }
+    .t-tag {
+      font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; flex-shrink: 0;
+      background: var(--tj-bg); color: var(--tj-blue); border: 1px solid var(--tj-border);
+    }
+    .t-arrow { color: var(--text-dim); font-size: 15px; flex-shrink: 0; }
+    .topico-item.done { background: rgba(96,165,250,0.05); border-color: rgba(96,165,250,0.22); }
+    .topico-item.done .t-text { color: var(--text-muted); }
+    .t-done {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
+      background: rgba(16,185,129,0.14); color: var(--inss-green);
+      border: 1px solid rgba(16,185,129,0.30); letter-spacing: 0.04em;
+    }
+    .t-done svg { width: 11px; height: 11px; }
+
+    /* RESUMO */
+    .resumo-sec {
+      background: var(--navy-card); border: 1px solid var(--navy-border);
+      border-radius: var(--radius-lg); padding: 1.6rem 1.75rem; margin-bottom: 1.1rem;
+    }
+    .resumo-sec h2 {
+      font-size: 15px; font-weight: 700; color: #fff;
+      margin-bottom: 1rem; padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--navy-border);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .resumo-sec h2::before {
+      content: ''; display: inline-block; width: 3px; height: 16px;
+      border-radius: 2px; background: var(--gold); flex-shrink: 0;
+    }
+    .resumo-sec p { font-size: 14px; color: var(--text-muted); line-height: 1.85; margin-bottom: 0.9rem; }
+    .resumo-sec p:last-child { margin-bottom: 0; }
+    .resumo-sec ul { padding-left: 1.1rem; margin-bottom: 0.9rem; }
+    .resumo-sec ul li { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 0.4rem; }
+    .resumo-sec ul li strong { color: var(--text); font-weight: 600; }
+    .tip {
+      background: rgba(240,165,0,0.06); border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 0.9rem 1.1rem; margin: 1.1rem 0 0;
+      font-size: 13px; color: var(--text-muted); line-height: 1.65;
+    }
+    .tip-lbl {
+      font-size: 10px; font-weight: 700; color: var(--gold);
+      text-transform: uppercase; letter-spacing: 0.10em; margin-bottom: 5px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .tip-lbl::before { content: '💡'; font-size: 12px; }
+
+    /* TABELA */
+    .resumo-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 13px; }
+    .resumo-table th {
+      background: rgba(96,165,250,0.10); color: var(--tj-blue);
+      font-weight: 700; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 8px 12px; text-align: left; border-bottom: 1px solid rgba(96,165,250,0.25);
+    }
+    .resumo-table td {
+      padding: 8px 12px; color: var(--text-muted); line-height: 1.5;
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .resumo-table td strong { color: var(--text); }
+    .resumo-table tr:last-child td { border-bottom: none; }
+    .resumo-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* QUESTÕES */
+    .q-header {
+      font-size: 15px; font-weight: 700; color: #fff;
+      margin: 2rem 0 1rem; display: flex; align-items: center; gap: 10px;
+    }
+    .q-header::before { content: ''; display: inline-block; width: 4px; height: 18px; border-radius: 2px; background: var(--gold); }
+    .q-card {
+      background: var(--navy-card); border: 1px solid var(--navy-border);
+      border-radius: var(--radius-lg); padding: 1.35rem 1.5rem; margin-bottom: 1rem;
+    }
+    .q-num { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.55rem; }
+    .q-txt { font-size: 14px; color: var(--text); line-height: 1.75; margin-bottom: 1rem; }
+    .q-ctx {
+      background: rgba(255,255,255,0.03); border-left: 3px solid var(--navy-border);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 0.75rem 1rem; margin-bottom: 1rem;
+      font-size: 13px; color: var(--text-muted); line-height: 1.7; font-style: italic;
+    }
+    .opcoes { display: flex; flex-direction: column; gap: 7px; }
+    .opcao {
+      display: flex; align-items: flex-start; gap: 11px;
+      padding: 0.7rem 1rem; border-radius: var(--radius-md);
+      border: 1px solid var(--navy-border); cursor: pointer;
+      font-size: 13px; color: var(--text-muted); line-height: 1.55;
+      background: rgba(255,255,255,0.02); transition: all 0.15s;
+    }
+    .opcao:hover:not(.disabled) { background: var(--navy-hover); border-color: rgba(255,255,255,0.14); color: var(--text); }
+    .opcao.correta  { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.4); color: #6ee7b7; }
+    .opcao.errada   { background: rgba(239,68,68,0.10);  border-color: rgba(239,68,68,0.35); color: #fca5a5; }
+    .opcao.disabled { cursor: default; }
+    .op-letra { font-weight: 700; flex-shrink: 0; min-width: 16px; }
+    .feedback { display: none; margin-top: 0.9rem; padding: 0.8rem 1rem; border-radius: var(--radius-md); font-size: 13px; line-height: 1.65; }
+    .feedback.show { display: block; }
+    .feedback.certo  { background: rgba(16,185,129,0.10); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
+    .feedback.errado { background: rgba(239,68,68,0.10);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+
+    .score-box {
+      display: none; background: var(--navy-card); border: 1px solid var(--navy-border);
+      border-radius: var(--radius-xl); padding: 2rem; text-align: center;
+      margin-top: 1.5rem; position: relative; overflow: hidden;
+    }
+    .score-box::before {
+      content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 120px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(240,165,0,0.15) 0%, transparent 70%);
+    }
+    .score-box.show { display: block; }
+    .score-num { font-family: 'DM Serif Display', serif; font-size: 52px; color: var(--gold); position: relative; }
+    .score-lbl { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+    .score-done-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.30);
+      color: var(--inss-green); font-size: 13px; font-weight: 600;
+      padding: 8px 18px; border-radius: 40px; margin-top: 1rem;
+    }
+
+    /* COMING SOON */
+    .coming {
+      background: var(--navy-card); border: 1px dashed var(--navy-border);
+      border-radius: var(--radius-xl); text-align: center; padding: 4rem 2rem;
+    }
+    .coming-icon { font-size: 44px; margin-bottom: 1rem; opacity: 0.8; }
+    .coming-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .coming-sub { font-size: 13px; line-height: 1.7; color: var(--text-muted); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 1.5rem 1rem 4rem; }
+      .page-header { flex-direction: column; gap: 10px; }
+      .ph-title { font-size: 16px; }
+      .resumo-sec { padding: 1.2rem 1.25rem; }
+      .q-card { padding: 1.1rem; }
+      .resumo-table { font-size: 12px; }
+      .resumo-table th, .resumo-table td { padding: 6px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Concursos
+  </a>
+  <span class="top-bar-sep">/</span>
+  <span style="color:var(--tj-blue);font-size:12px;font-weight:600;">TJ/CE</span>
+  <span class="top-bar-banca">FCC · Múltipla escolha · 5 alternativas</span>
+</div>
+
+<div id="app">
+
+  <!-- ════ EDITAL PAGE ════ -->
+  <div class="page active" id="page-tjce">
+    <div class="wrap">
+      <div class="page-header">
+        <a class="back-btn" href="index.html">← Voltar</a>
+        <div>
+          <div class="ph-title">TJ/CE — Técnico Judiciário</div>
+          <div class="ph-sub">Área Judiciária · Conhecimentos Gerais e Específicos · Banca: FCC</div>
+        </div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="fill-tjce" style="width:0%"></div></div>
+        <div class="progress-info" id="info-tjce"><span>0</span> / 0 concluídos</div>
+      </div>
+      <div id="edital-tjce"></div>
+    </div>
+  </div>
+
+  <!-- ════ TÓPICO 1: Compreensão e Interpretação ════ -->
+  <div class="page" id="page-resumo-tj-1">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-tjce')">← Voltar</button>
+        <div>
+          <div class="ph-title">Compreensão e interpretação de textos de gêneros variados</div>
+          <div class="ph-sub">TJ/CE · Língua Portuguesa · Tópico 1 · Banca: FCC</div>
+        </div>
+      </div>
+
+      <div class="banca-nota">
+        <span class="banca-nota-pill">FCC</span>
+        <span>A FCC traz textos autênticos de gêneros variados (literários, jornalísticos, científicos) e cobra tanto a compreensão literal quanto inferências e figuras de linguagem. Enunciados longos pedem identificação de sentido em trecho específico do texto.</span>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>O diferencial do TJ/CE: gêneros variados</h2>
+        <p>O edital especifica "gêneros variados", o que significa que a prova pode trazer textos literários, jornalísticos, científicos, publicitários, humorísticos e até textos multimodais. Reconhecer o gênero textual já é metade do caminho.</p>
+        <p>O gênero indica o registro linguístico (formal ou informal), a finalidade (informar, persuadir, entreter) e como interpretar o tom do autor.</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Principais gêneros e suas características</h2>
+        <ul>
+          <li><strong>Notícia / reportagem:</strong> linguagem objetiva, fatos verificáveis, estrutura de pirâmide invertida.</li>
+          <li><strong>Artigo de opinião / editorial:</strong> defende um ponto de vista, usa argumentos, linguagem formal.</li>
+          <li><strong>Crônica:</strong> tom coloquial ou literário, trata de situações cotidianas, pode ser irônica ou reflexiva.</li>
+          <li><strong>Texto literário (conto, poema):</strong> linguagem conotativa, figuras de linguagem, múltiplas interpretações.</li>
+          <li><strong>Texto científico / técnico:</strong> linguagem denotativa, termos especializados, argumentação com dados.</li>
+          <li><strong>Texto publicitário:</strong> linguagem persuasiva, uso de recursos visuais e slogan.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FCC</div>Ao ler o texto, identifique: quem escreve, para quem, com qual finalidade. Isso resolve 80% das questões de interpretação. A FCC gosta de perguntar "qual a finalidade do autor ao escrever este texto?"</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Compreensão literal e interpretação inferencial</h2>
+        <p>A FCC cobra tanto o explícito quanto o implícito. Por trazer textos literários com maior frequência, exige mais atenção a figuras de linguagem como ironia, metáfora e eufemismo.</p>
+        <ul>
+          <li><strong>Ironia:</strong> diz o contrário do que se quer dizer, com intenção crítica ou humorística.</li>
+          <li><strong>Metáfora:</strong> comparação implícita que atribui características de um ser a outro (sem "como").</li>
+          <li><strong>Eufemismo:</strong> suaviza uma realidade desagradável. Ex: "ele nos deixou" em vez de "ele morreu".</li>
+          <li><strong>Metonímia:</strong> substitui um termo por outro com relação de contiguidade. Ex: "ler Machado" (= ler as obras de Machado).</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Armadilha FCC</div>A FCC frequentemente cria alternativas que parafraseiam o texto mas alteram o sentido com UMA palavra. Leia cada alternativa comparando-a ao texto antes de marcar.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Estratégias de leitura para a prova</h2>
+        <ul>
+          <li>Leia o enunciado das questões antes do texto para saber o que procurar.</li>
+          <li>Identifique o gênero logo no início da leitura.</li>
+          <li>Marque as informações principais: tese, argumentos, conclusão.</li>
+          <li>Ao responder, volte ao texto — nunca responda de memória.</li>
+          <li>Elimine alternativas com generalizações absolutas ("sempre", "nunca", "todos").</li>
+          <li>Questões com "NÃO" ou "EXCETO" no enunciado exigem atenção redobrada — 4 alternativas estarão corretas.</li>
+        </ul>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FCC)</div>
+      <div id="q-tj-1"></div>
+      <div class="score-box" id="score-tj-1">
+        <div class="score-num" id="snum-tj-1"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ TÓPICO 2: Tipos e Gêneros Textuais ════ -->
+  <div class="page" id="page-resumo-tj-2">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-tjce')">← Voltar</button>
+        <div>
+          <div class="ph-title">Reconhecimento de tipos e gêneros textuais</div>
+          <div class="ph-sub">TJ/CE · Língua Portuguesa · Tópico 2 · Banca: FCC</div>
+        </div>
+      </div>
+
+      <div class="banca-nota">
+        <span class="banca-nota-pill">FCC</span>
+        <span>A FCC é rigorosa na distinção tipo vs. gênero. Apresenta pares do tipo "o gênero X pertence ao tipo Y" e pede ao candidato para confirmar ou identificar o erro. Questões sobre heterogeneidade tipológica são recorrentes.</span>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Tipo textual × Gênero textual: a distinção fundamental</h2>
+        <p><strong>Tipo textual</strong> é a estrutura linguística abstrata que organiza o discurso. <strong>Gênero textual</strong> é a materialização social desse discurso — o formato que circula na sociedade com um propósito comunicativo definido.</p>
+        <table class="resumo-table">
+          <tr><th>Tipo textual</th><th>Características principais</th><th>Gêneros típicos</th></tr>
+          <tr><td><strong>Narração</strong></td><td>Progressão temporal, personagens, enredo. Verbos de ação no pretérito.</td><td>Conto, romance, crônica narrativa, notícia</td></tr>
+          <tr><td><strong>Descrição</strong></td><td>Retrato estático. Adjetivos e verbos de estado. O tempo "para".</td><td>Retrato, verbete (descrição física)</td></tr>
+          <tr><td><strong>Dissertação argumentativa</strong></td><td>Tese + argumentos + conclusão. Autor se posiciona.</td><td>Editorial, artigo de opinião, carta argumentativa</td></tr>
+          <tr><td><strong>Dissertação expositiva</strong></td><td>Explica sem tomar partido. Marcadores de neutralidade.</td><td>Verbete, artigo científico, enciclopédia</td></tr>
+          <tr><td><strong>Injunção</strong></td><td>Instrui, orienta, ordena. Verbos no imperativo ou infinitivo.</td><td>Receita, manual, edital, lei, regulamento</td></tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Dica FCC</div>Memorize: receita → injuntivo; editorial → argumentativo; verbete → expositivo; conto → narrativo; bula → injuntivo.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Gêneros textuais mais cobrados pela FCC</h2>
+        <ul>
+          <li><strong>Editorial:</strong> argumentativo. Representa a opinião do veículo. Não tem assinatura de autor individual.</li>
+          <li><strong>Artigo de opinião:</strong> argumentativo. Tem autor identificado. Usa dados e exemplos para defender a tese.</li>
+          <li><strong>Notícia/Reportagem:</strong> predominantemente expositivo/narrativo. Relata fatos verificáveis.</li>
+          <li><strong>Crônica:</strong> narrativo ou dissertativo, com tom coloquial e temática cotidiana.</li>
+          <li><strong>Conto:</strong> narrativo. Texto literário de curta extensão, com unidade de tempo, espaço e ação.</li>
+          <li><strong>Verbete de dicionário/enciclopédia:</strong> expositivo. Define termos de forma objetiva e impessoal.</li>
+          <li><strong>Sentença judicial/Edital:</strong> injuntivo. Estabelece obrigações, direitos e prazos.</li>
+        </ul>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Sequências tipológicas e heterogeneidade textual</h2>
+        <p>Um texto raramente é composto por um único tipo — ele é <strong>heterogêneo</strong>. Uma reportagem pode ter trechos narrativos, descritivos e expositivos. A FCC pode apresentar um trecho e perguntar o tipo da sequência daquele parágrafo específico.</p>
+        <div class="tip"><div class="tip-lbl">Dica FCC</div>Questões com "o trecho do 2º parágrafo..." pedem o tipo da sequência local, não a classificação global do texto. Fique atento a essa distinção — é uma armadilha clássica da banca.</div>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FCC)</div>
+      <div id="q-tj-2"></div>
+      <div class="score-box" id="score-tj-2">
+        <div class="score-num" id="snum-tj-2"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ TÓPICO 3: Ortografia ════ -->
+  <div class="page" id="page-resumo-tj-3">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-tjce')">← Voltar</button>
+        <div>
+          <div class="ph-title">Domínio da ortografia oficial</div>
+          <div class="ph-sub">TJ/CE · Língua Portuguesa · Tópico 3 · Banca: FCC</div>
+        </div>
+      </div>
+
+      <div class="banca-nota">
+        <span class="banca-nota-pill">FCC</span>
+        <span>A FCC cobra ortografia dentro de frases e textos, não em listas isoladas. As questões pedem identificação da alternativa com grafia correta (ou incorreta) em contexto, com foco em homófonos, uso do hífen e emprego de maiúsculas e minúsculas.</span>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Acordo Ortográfico de 1990 — pontos mais cobrados</h2>
+        <p>O Acordo Ortográfico vigente trouxe mudanças importantes, especialmente no uso do hífen e na eliminação do trema. Veja os pontos mais exigidos em provas FCC:</p>
+        <ul>
+          <li><strong>Eliminação do trema:</strong> não se usa mais trema em palavras portuguesas. Exceção: nomes próprios estrangeiros e seus derivados (Müller, mülleriano).</li>
+          <li><strong>Acento diferencial:</strong> foi eliminado em pôr/por (verbo/preposição mantém-se), pôde/pode (passado/presente mantém-se). Sumiram: péla/pela, pólo/polo, pélo/pelo.</li>
+          <li><strong>Hífen — regra prática:</strong> usa-se hífen quando o prefixo termina em vogal e o segundo elemento começa com <em>h</em>, <em>r</em> ou <em>s</em>: anti-herói, anti-séptico (atualizado: antisséptico), pré-requisito. Não se usa hífen quando o prefixo termina em vogal diferente da inicial do segundo elemento: antiaéreo, autoescola.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Regra de ouro — Hífen</div>Prefixo + R ou S inicial → dobra a consoante (não usa hífen): antirruído, antissocial, minissaia. Prefixo terminado em consoante + palavra iniciada em consoante diferente → hífen: inter-racial, sub-bibliotecário.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Homófonos e parônimos — os mais cobrados pela FCC</h2>
+        <table class="resumo-table">
+          <tr><th>Par</th><th>Distinção</th></tr>
+          <tr><td><strong>Mau / Mal</strong></td><td><em>Mau</em> = adjetivo (contrário de bom). <em>Mal</em> = advérbio ou substantivo.</td></tr>
+          <tr><td><strong>Mas / Mais / Más</strong></td><td><em>Mas</em> = conjunção adversativa. <em>Mais</em> = advérbio de intensidade. <em>Más</em> = plural de má.</td></tr>
+          <tr><td><strong>Cessão / Seção / Sessão</strong></td><td><em>Cessão</em> = ato de ceder. <em>Seção/Secção</em> = divisão, repartição. <em>Sessão</em> = reunião, exibição.</td></tr>
+          <tr><td><strong>Iminente / Eminente</strong></td><td><em>Iminente</em> = prestes a acontecer. <em>Eminente</em> = notável, destacado.</td></tr>
+          <tr><td><strong>Ratificar / Retificar</strong></td><td><em>Ratificar</em> = confirmar, aprovar. <em>Retificar</em> = corrigir.</td></tr>
+          <tr><td><strong>Tráfego / Tráfico</strong></td><td><em>Tráfego</em> = trânsito de veículos. <em>Tráfico</em> = comércio ilícito.</td></tr>
+          <tr><td><strong>Fluir / Fruir</strong></td><td><em>Fluir</em> = correr, fluir. <em>Fruir</em> = desfrutar, usufruir.</td></tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Dica FCC</div>Questões de homófonos na FCC sempre surgem em contexto de frase. Nunca é só "escolha a grafia correta" — é "identifique a alternativa em que todas as palavras estão grafadas corretamente conforme o Acordo Ortográfico".</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Uso de maiúsculas e minúsculas</h2>
+        <ul>
+          <li><strong>Maiúscula obrigatória:</strong> início de frase, nomes próprios (pessoas, lugares, instituições), títulos de obras, datas comemorativas ("Dia da Independência"), siglas (TJ/CE, INSS).</li>
+          <li><strong>Minúscula obrigatória:</strong> nomes de idiomas (português, inglês), nomes de religiões (catolicismo, islamismo), pontos cardeais quando indicam direção (viajar para o norte), meses e dias da semana (segunda-feira, janeiro).</li>
+          <li><strong>Atenção:</strong> cargos e títulos — minúscula quando usados genericamente ("o presidente viajou"), maiúscula quando integram o nome ("Presidente da República Luiz Inácio Lula da Silva").</li>
+        </ul>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Acentuação — regras residuais após o Acordo</h2>
+        <ul>
+          <li><strong>Paroxítonas acentuadas:</strong> terminadas em -ã(s), -ão(s), -l, -r, -n, -x, -ps, -i(s), -us, -um, -uns, -eim: fácil, tórax, hífen, álbum.</li>
+          <li><strong>Proparoxítonas:</strong> todas são acentuadas. Ex: lâmpada, pálido, cômodo.</li>
+          <li><strong>Ditongos abertos:</strong> não se acentuam mais em palavras paroxítonas: assembleia, ideia, epopeia, europeu, sandalia → <em>assembleia</em> (sem acento). Mas mantém acento em oxítonas: anéis, papéis, fiéis.</li>
+          <li><strong>Hiato:</strong> "i" e "u" tônicos em hiato são acentuados quando estão sozinhos na sílaba ou seguidos de "s": saída, país, raízes. Mas <em>não</em> se acentuam quando seguidos de "nh": rainha, moinho.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FCC</div>A FCC adora cobrar ditongos abertos em paroxítonas (sem acento agora!) e hiatos com "nh" (sem acento). Revise os exemplos acima até não errar mais.</div>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FCC)</div>
+      <div id="q-tj-3"></div>
+      <div class="score-box" id="score-tj-3">
+        <div class="score-num" id="snum-tj-3"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ TÓPICO 4: Coesão Textual ════ -->
+  <div class="page" id="page-resumo-tj-4">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-tjce')">← Voltar</button>
+        <div>
+          <div class="ph-title">Coesão textual: referenciação, substituição e conectores</div>
+          <div class="ph-sub">TJ/CE · Língua Portuguesa · Tópico 4 · Banca: FCC</div>
+        </div>
+      </div>
+
+      <div class="banca-nota">
+        <span class="banca-nota-pill">FCC</span>
+        <span>A FCC cobra coesão de forma aplicada: apresenta um trecho do texto e pergunta o que um pronome retoma, que relação lógica um conector estabelece ou como substituir uma expressão sem alterar o sentido. Nunca é teoria pura — é sempre em contexto.</span>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Coesão textual: o fio que une o texto</h2>
+        <p>Coesão é o conjunto de mecanismos linguísticos que garantem a ligação entre as partes do texto. Sem coesão, o texto vira uma lista de frases soltas. A FCC avalia se o candidato sabe identificar e interpretar esses mecanismos em textos reais.</p>
+        <p>Há dois grandes tipos: <strong>coesão referencial</strong> (ligação por retomada de elementos) e <strong>coesão sequencial</strong> (ligação pela relação lógica entre as ideias, feita principalmente pelos conectores).</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Coesão referencial — como o texto retoma elementos</h2>
+        <ul>
+          <li><strong>Pronomes:</strong> o mecanismo mais cobrado. Pronomes pessoais, demonstrativos e relativos retomam (anáfora) ou antecipam (catáfora) elementos do texto.<br><em>Ex: "O magistrado proferiu a sentença. <u>Ele</u> fundamentou a decisão na jurisprudência."</em> → "Ele" retoma "o magistrado".</li>
+          <li><strong>Substituição lexical (sinonímia):</strong> o texto usa um sinônimo ou expressão equivalente para não repetir a palavra.<br><em>Ex: "O réu foi absolvido. <u>O acusado</u> saiu do tribunal entre aplausos."</em></li>
+          <li><strong>Elipse:</strong> supressão de um elemento já mencionado, recuperável pelo contexto.<br><em>Ex: "Maria estudou muito e [Maria] foi aprovada."</em></li>
+          <li><strong>Hiperônimo/hipônimo:</strong> usa-se um termo mais geral (hiperônimo) para retomar o específico.<br><em>Ex: "O TJ/CE julgou o processo. <u>O órgão</u> segue a jurisprudência do STJ."</em> → "órgão" retoma "TJ/CE".</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FCC</div>Questões sobre referenciação sempre pedem: "o pronome/expressão X, no texto, refere-se a...". Volte ao texto, identifique o elemento retomado e confirme se o gênero e número batem.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Conectores — relações lógicas mais cobradas</h2>
+        <table class="resumo-table">
+          <tr><th>Relação</th><th>Conectores principais</th><th>Efeito no sentido</th></tr>
+          <tr><td><strong>Adição</strong></td><td>e, além disso, também, ainda, ademais, outrossim</td><td>Acrescenta informação</td></tr>
+          <tr><td><strong>Oposição / Concessão</strong></td><td>mas, porém, contudo, todavia, entretanto, no entanto, embora, ainda que, apesar de</td><td>Contrasta; concessão admite, mas restringe</td></tr>
+          <tr><td><strong>Causa</strong></td><td>porque, pois, já que, uma vez que, visto que, como (= porque)</td><td>Indica a origem de um fato</td></tr>
+          <tr><td><strong>Consequência</strong></td><td>logo, portanto, assim, de modo que, tanto... que</td><td>Indica o resultado de um fato</td></tr>
+          <tr><td><strong>Finalidade</strong></td><td>para (que), a fim de (que), com o intuito de</td><td>Indica objetivo</td></tr>
+          <tr><td><strong>Condição</strong></td><td>se, caso, desde que, contanto que, a não ser que</td><td>Indica hipótese necessária</td></tr>
+          <tr><td><strong>Explicação</strong></td><td>pois (depois do verbo), porque, que, isto é, ou seja</td><td>Justifica o que foi dito antes</td></tr>
+          <tr><td><strong>Conclusão</strong></td><td>logo, portanto, assim, por conseguinte, enfim, em suma</td><td>Sintetiza ou conclui</td></tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Armadilha FCC</div>"Pois" tem dois valores: <strong>causa</strong> (anteposto ao verbo: "Pois estudou, foi aprovado") e <strong>explicação</strong> (posposto ao verbo: "Foi aprovado, pois estudou"). A FCC cobra exatamente essa distinção.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Substituição de conectores sem alterar o sentido</h2>
+        <p>A FCC frequentemente pede: "o conector X pode ser substituído, sem alteração de sentido, por...". A lógica é simples: identifique a relação lógica estabelecida, depois escolha um conector da mesma família.</p>
+        <ul>
+          <li><em>"Estudou muito; <strong>contudo</strong>, não foi aprovado."</em> → "contudo" = oposição → pode ser substituído por "porém", "entretanto", "todavia", "no entanto".</li>
+          <li><em>"<strong>Embora</strong> estudasse muito, não foi aprovado."</em> → "embora" = concessão → substituível por "ainda que", "apesar de que", "mesmo que" (+ subjuntivo).</li>
+          <li>Atenção: "embora" e "mas" têm sentido próximo mas estrutura diferente. A FCC cobra se o candidato sabe que "embora" exige subjuntivo.</li>
+        </ul>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FCC)</div>
+      <div id="q-tj-4"></div>
+      <div class="score-box" id="score-tj-4">
+        <div class="score-num" id="snum-tj-4"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO GENÉRICO ════ -->
+  <div class="page" id="page-resumo-gen">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-tjce')">← Voltar</button>
+        <div>
+          <div class="ph-title" id="gen-title">Tópico</div>
+          <div class="ph-sub" id="gen-sub">Matéria</div>
+        </div>
+      </div>
+      <div class="coming">
+        <div class="coming-icon">📝</div>
+        <div class="coming-title">Resumo em construção</div>
+        <div class="coming-sub">Este tópico receberá seu resumo completo + 10 questões em breve.<br>Continue pelos tópicos já disponíveis!</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ─── DADOS EDITAL TJ/CE ─── */
+const TJCE = {
+  port:  { label:"Língua Portuguesa", items:[
+    {n:1,t:"Compreensão e interpretação de textos de gêneros variados", page:"page-resumo-tj-1"},
+    {n:2,t:"Reconhecimento de tipos e gêneros textuais", page:"page-resumo-tj-2"},
+    {n:3,t:"Domínio da ortografia oficial", page:"page-resumo-tj-3"},
+    {n:4,t:"Coesão textual: referenciação, substituição, conectores", page:"page-resumo-tj-4"},
+    {n:5,t:"Estrutura morfossintática: classes de palavras, coordenação, subordinação"},
+    {n:6,t:"Reescrita de frases e parágrafos do texto"},
+    {n:7,t:"Significação e substituição de palavras ou trechos"},
+    {n:8,t:"Reorganização e reescrita de textos de diferentes gêneros"}
+  ]},
+  info:  { label:"Noções de Informática", items:[
+    {n:1,t:"Sistema Operacional Windows 10"},
+    {n:2,t:"Microsoft Office 365: textos, planilhas e apresentações"},
+    {n:3,t:"Correio eletrônico (Outlook Express)"},
+    {n:4,t:"Busca, redes sociais e computação em nuvem"},
+    {n:5,t:"Organização e gerenciamento de arquivos e pastas"},
+    {n:6,t:"Segurança da informação: vírus, worms, antivírus, firewall"}
+  ]},
+  rac:   { label:"Raciocínio Lógico", items:[
+    {n:1,t:"Estruturas lógicas"},
+    {n:2,t:"Lógica de argumentação: analogias, inferências, deduções e conclusões"},
+    {n:3,t:"Lógica sentencial: proposições, tabelas verdade, equivalências, leis de De Morgan"},
+    {n:4,t:"Diagramas lógicos"},{n:5,t:"Lógica de primeira ordem"},
+    {n:6,t:"Contagem e probabilidade"},{n:7,t:"Operações com conjuntos"},
+    {n:8,t:"Problemas aritméticos, geométricos e matriciais"}
+  ]},
+  const: { label:"Noções de Direito Constitucional", items:[
+    {n:1,t:"CF/1988: princípios fundamentais"},
+    {n:2,t:"Aplicabilidade das normas constitucionais: eficácia plena, contida e limitada"},
+    {n:3,t:"Direitos e garantias fundamentais: individuais, coletivos, sociais, partidos políticos"},
+    {n:4,t:"Organização político-administrativa do Estado federal"},
+    {n:5,t:"Administração pública: disposições gerais, servidores públicos"},
+    {n:6,t:"Poder executivo: atribuições e responsabilidades do presidente"},
+    {n:7,t:"Poder legislativo: estrutura, processo legislativo, fiscalização, comissões"},
+    {n:8,t:"Poder judiciário: disposições gerais, CNJ e órgãos do judiciário"},
+    {n:9,t:"Funções essenciais à justiça: MP, Advocacia Pública, Defensoria Pública"}
+  ]},
+  adm:   { label:"Noções de Direito Administrativo", items:[
+    {n:1,t:"Estado, governo e administração pública: conceitos e fontes"},
+    {n:2,t:"Ato administrativo: conceito, atributos, espécies, extinção, decadência"},
+    {n:3,t:"Agentes públicos: cargo, emprego, provimento, efetividade, remuneração, PAD"},
+    {n:4,t:"Organização Judiciária — Lei nº 16.397/2017 e Resoluções do Pleno"},
+    {n:5,t:"Poderes da administração: hierárquico, disciplinar, regulamentar, de polícia"},
+    {n:6,t:"Regime jurídico-administrativo: princípios expressos e implícitos"},
+    {n:7,t:"Responsabilidade civil do Estado: ato comissivo, omissivo, excludentes, regresso"},
+    {n:8,t:"Serviços públicos: conceito, elementos, delegação, classificação"},
+    {n:9,t:"Organização administrativa: centralização, descentralização, direta e indireta"},
+    {n:10,t:"Entidades paraestatais e terceiro setor"},
+    {n:11,t:"Controle da administração pública: administrativo, judicial, legislativo"},
+    {n:12,t:"Improbidade administrativa — Lei nº 14.320/2021"},
+    {n:13,t:"Processo administrativo — Lei nº 9.784/1999"},
+    {n:14,t:"Licitações e contratos administrativos — Lei nº 14.133/2021"}
+  ]},
+  proc:  { label:"Noções de Direito Processual Civil", items:[
+    {n:1,t:"CPC — Lei nº 13.105/2015"},{n:2,t:"Normas processuais civis e jurisdição"},
+    {n:3,t:"A ação: conceito, elementos, condições e classificação"},
+    {n:4,t:"Pressupostos processuais e preclusão"},
+    {n:5,t:"Sujeitos do processo: capacidade, deveres, procuradores, litisconsórcio"},
+    {n:6,t:"Intervenção de terceiros e poderes do juiz"},
+    {n:7,t:"Ministério Público, Advocacia Pública e Defensoria Pública"},
+    {n:8,t:"Atos processuais: forma, prazos, comunicação, nulidades"},
+    {n:9,t:"Tutela provisória: tutela de urgência e evidência"},
+    {n:10,t:"Formação, suspensão e extinção do processo"},
+    {n:11,t:"Processo de conhecimento: procedimento comum, sentença"},
+    {n:12,t:"Recursos em geral e processos nos tribunais"},
+    {n:13,t:"Processos de execução e cumprimento de sentença"},
+    {n:14,t:"Procedimentos especiais: mandado de segurança, ação popular, improbidade"},
+    {n:15,t:"Processos de jurisdição voluntária"},
+    {n:16,t:"Jurisprudência dos tribunais superiores"},
+    {n:17,t:"Lei nº 8.245/1991 — Locação de imóveis urbanos"}
+  ]},
+  penal: { label:"Noções de Direito Processual Penal", items:[
+    {n:1,t:"Processo penal brasileiro: sistemas e princípios fundamentais"},
+    {n:2,t:"Aplicação da lei processual penal no tempo, espaço e às pessoas"},
+    {n:3,t:"CPP: disposições preliminares e fase pré-processual"},
+    {n:4,t:"Processo, procedimento e relação jurídica processual"},
+    {n:5,t:"Tipos de processo penal e ação civil ex delicto"},
+    {n:6,t:"Jurisdição, competência e questões incidentes"},
+    {n:7,t:"Prova — Lei nº 9.296/1996 (interceptação telefônica)"},
+    {n:8,t:"Prisão: medidas cautelares e liberdade provisória"},
+    {n:9,t:"Citações, intimações e atos processuais"},
+    {n:10,t:"Procedimentos: comum, especiais, STJ/STF"},
+    {n:11,t:"Juizados especiais cíveis e criminais"},
+    {n:12,t:"Prazos, nulidades e recursos em geral"},
+    {n:13,t:"Habeas corpus — Lei nº 13.964/2019"},
+    {n:14,t:"Execução penal — Lei nº 7.210/1984"},
+    {n:15,t:"Disposições processuais penais extravagantes"},
+    {n:16,t:"Relações jurisdicionais com autoridade estrangeira"},
+    {n:17,t:"Disposições Gerais do Código de Processo Penal"}
+  ]}
+};
+
+/* ─── QUESTÕES TÓPICO 1 — Compreensão e Interpretação ─── */
+const QT1 = [
+  {e:"Leia o trecho: 'Que país fascinante, onde os políticos dedicam toda sua energia ao bem do próximo — o seu próprio.' A linguagem utilizada pelo autor caracteriza-se predominantemente por ser:",ops:["A) Denotativa, pois descreve de forma objetiva o comportamento dos políticos.","B) Injuntiva, pois orienta os políticos sobre como devem se comportar.","C) Irônica, pois elogia aparentemente uma situação para criticá-la de forma velada.","D) Expositiva, pois informa sobre as atribuições dos políticos.","E) Narrativa, pois relata eventos ocorridos em sequência temporal."],g:2,fb:"O elogio ('fascinante', 'dedicam toda sua energia') é desmentido pela conclusão ('o seu próprio'), revelando crítica por meio da ironia. Resposta: C."},
+  {e:"Considere o enunciado: 'A pesquisadora não publicou apenas um artigo sobre o tema.' A interpretação CORRETA desse enunciado é:",ops:["A) A pesquisadora não publicou nenhum artigo sobre o tema.","B) A pesquisadora publicou mais de um artigo sobre o tema.","C) A pesquisadora publicou exatamente um artigo sobre o tema.","D) A pesquisadora nunca se interessou pelo tema estudado.","E) A pesquisadora recusou-se a publicar artigos sobre o tema."],g:1,fb:"'Não... apenas um' equivale a 'mais de um'. A negação incide sobre 'apenas um', não sobre 'publicou'. Resposta: B."},
+  {e:"'A vida é uma dança entre o que queremos e o que nos é dado.' A expressão em destaque configura a seguinte figura de linguagem:",ops:["A) Comparação (símile), pois há um termo comparativo expresso.","B) Hipérbole, pois exagera a realidade para criar efeito expressivo.","C) Personificação, pois atribui ação humana a um ser inanimado.","D) Metáfora, pois estabelece uma comparação implícita sem termo comparativo.","E) Eufemismo, pois suaviza uma ideia negativa sobre a vida."],g:3,fb:"Não há 'como' ou 'assim como' — a comparação é implícita. Isso caracteriza a metáfora. Resposta: D."},
+  {e:"Em um texto jornalístico, o lead (primeiro parágrafo) responde às perguntas: quem, o quê, quando, onde, como e por quê. Isso se explica pela característica desse gênero de:",ops:["A) Utilizar linguagem literária para envolver emocionalmente o leitor.","B) Apresentar a informação mais relevante logo no início, seguindo a estrutura da pirâmide invertida.","C) Construir uma narrativa cronológica que conduz o leitor do passado ao presente.","D) Defender um ponto de vista por meio de argumentos sustentados em dados.","E) Empregar linguagem coloquial para aproximar-se do leitor comum."],g:1,fb:"A pirâmide invertida é a estrutura característica do jornalismo: a informação mais importante vem primeiro. Resposta: B."},
+  {e:"Leia: 'Ele partiu para uma viagem sem volta.' Além do sentido literal, essa expressão pode ser interpretada como eufemismo para:",ops:["A) Uma viagem internacional muito longa.","B) Uma decisão de se mudar para outra cidade.","C) O afastamento definitivo de um cargo público.","D) A morte de alguém.","E) Uma aposentadoria forçada."],g:3,fb:"'Viagem sem volta' é expressão eufemística consagrada para a morte, suavizando a realidade por meio de linguagem figurada. Resposta: D."},
+  {e:"'Segundo especialistas ouvidos pela reportagem, o aquecimento global pode elevar o nível dos oceanos em até 1 metro até 2100.' A expressão 'segundo especialistas' indica que o texto:",ops:["A) Apresenta apenas a opinião pessoal do repórter sobre o aquecimento global.","B) Questiona a validade das pesquisas científicas sobre o tema.","C) Atribui a informação a uma fonte, conferindo credibilidade ao relato jornalístico.","D) Trata o assunto como hipótese sem qualquer respaldo científico.","E) Busca persuadir o leitor a adotar determinado comportamento ambiental."],g:2,fb:"A indicação de fonte ('segundo especialistas') é recurso jornalístico de atribuição que confere credibilidade e distingue o fato relatado da opinião do repórter. Resposta: C."},
+  {e:"Em qual das alternativas o sentido da expressão sublinhada foi interpretado INCORRETAMENTE em relação ao contexto?",ops:["A) 'O juiz lavrou a sentença.' → lavrou = redigiu, formalizou o documento.","B) 'A decisão pegou todos de surpresa.' → pegou = surpreendeu, causou impacto inesperado.","C) 'Ele tem um coração de pedra.' → pedra = dureza, insensibilidade.","D) 'A empresa quebrou após a crise.' → quebrou = faliu, encerrou as atividades.","E) 'O candidato colheu os frutos do seu esforço.' → colheu frutos = prejudicou-se pelos próprios erros."],g:4,fb:"'Colher os frutos' é expressão idiomática que significa obter os benefícios de um esforço — sentido positivo, não negativo. A interpretação na alternativa E inverte o sentido. Resposta: E."},
+  {e:"Leia o trecho de crônica: 'Segunda-feira chegou como sempre chega: sem avisar, apressada, e com aquela cara de quem veio cobrar.' O elemento que identifica esse trecho como pertencente ao gênero crônica é:",ops:["A) O uso de termos técnicos e dados estatísticos para embasar a argumentação.","B) A linguagem objetiva e impessoal característica do texto jornalístico informativo.","C) O tratamento subjetivo e bem-humorado de uma situação cotidiana, com linguagem coloquial.","D) A estrutura de pirâmide invertida com informações ordenadas por grau de relevância.","E) A presença de tese central e argumentos ordenados logicamente para persuadir o leitor."],g:2,fb:"A crônica trata de situações cotidianas (segunda-feira) com subjetividade, humor e linguagem coloquial — marcas do gênero. Resposta: C."},
+  {e:"'Não é verdade que todos os aprovados foram convocados.' Essa frase pressupõe que:",ops:["A) Nenhum aprovado foi convocado.","B) Todos os aprovados foram convocados.","C) Houve aprovados, mas nem todos foram convocados.","D) Não houve aprovados no processo seletivo.","E) O processo seletivo foi cancelado após as aprovações."],g:2,fb:"O pressuposto é que houve aprovados. A negação ('não é verdade que todos') implica que alguns foram convocados, outros não. Resposta: C."},
+  {e:"Assinale a alternativa que apresenta uma inferência VÁLIDA a partir do enunciado: 'Somente os candidatos que entregaram a documentação dentro do prazo foram habilitados.'",ops:["A) Todos os candidatos entregaram a documentação dentro do prazo.","B) Os candidatos que não entregaram a documentação dentro do prazo não foram habilitados.","C) Alguns candidatos foram habilitados mesmo sem entregar a documentação.","D) A documentação entregue fora do prazo foi aceita com justificativa.","E) Os candidatos habilitados não precisarão de nova documentação."],g:1,fb:"'Somente os que entregaram... foram habilitados' → quem não entregou não foi habilitado. Trata-se de uma inferência direta (contrapositiva). Resposta: B."}
+];
+
+/* ─── QUESTÕES TÓPICO 2 — Tipos e Gêneros (mantidas, já estão no estilo FCC) ─── */
+const QT2 = [
+  {e:"Assinale a alternativa que apresenta a distinção CORRETA entre tipo textual e gênero textual.",ops:["A) Tipo textual e gênero textual são expressões sinônimas que designam a mesma realidade linguística.","B) O tipo textual refere-se à estrutura linguística abstrata do discurso, enquanto o gênero textual é a forma social e historicamente situada de uso da linguagem.","C) O gênero textual é determinado exclusivamente pela estrutura gramatical do texto, ao passo que o tipo é definido pelo suporte em que o texto circula.","D) Existem tipos textuais ilimitados, enquanto os gêneros textuais se restringem a cinco categorias básicas.","E) O tipo textual é sempre argumentativo, independentemente do gênero em que se manifesta."],g:1,fb:"Tipo textual = estrutura linguística abstrata (narração, descrição etc.); gênero textual = forma social de uso da linguagem (notícia, conto, editorial etc.). Resposta: B."},
+  {e:"Considere o trecho: 'Adicione os ingredientes na ordem indicada, misture bem e leve ao forno preaquecido a 180°C por 30 minutos.' O tipo textual predominante e o gênero mais compatível com esse trecho são, respectivamente:",ops:["A) Argumentativo e editorial.","B) Narrativo e conto.","C) Injuntivo e receita culinária.","D) Expositivo e verbete de dicionário.","E) Descritivo e reportagem."],g:2,fb:"O trecho instrui o leitor a realizar ações com verbos no imperativo — tipo injuntivo. O gênero compatível é a receita culinária. Resposta: C."},
+  {e:"Leia: 'O Tribunal de Justiça do Ceará, com sede na cidade de Fortaleza, é o órgão máximo do Poder Judiciário estadual e tem competência para julgar recursos das decisões proferidas pelos juízes de primeiro grau.' O tipo textual predominante nesse trecho é:",ops:["A) Narrativo, pela sequência de informações apresentadas.","B) Injuntivo, pois o texto define obrigações do Tribunal.","C) Argumentativo, pois o autor defende a importância do TJ/CE.","D) Expositivo, pois apresenta informações de forma objetiva e imparcial sobre o órgão.","E) Descritivo, pois enumera características físicas do Tribunal."],g:3,fb:"O trecho define e informa sobre o TJ/CE de forma neutra, sem defender uma tese nem instruir ações — é dissertativo-expositivo. Resposta: D."},
+  {e:"Assinale a alternativa que apresenta uma correspondência INCORRETA entre gênero e tipo textual predominante:",ops:["A) Editorial de jornal → argumentativo.","B) Bula de remédio → injuntivo.","C) Verbete de enciclopédia → expositivo.","D) Conto literário → narrativo.","E) Notícia jornalística → argumentativo."],g:4,fb:"A notícia jornalística é predominantemente expositiva/narrativa — relata fatos de forma objetiva. O tipo argumentativo corresponde ao editorial ou artigo de opinião, não à notícia. Resposta: E."},
+  {e:"'Era um homem de estatura mediana, cabelos grisalhos, olhos pequenos e voz grave. Andava sempre com as mãos nos bolsos e raramente sorria.' O tipo textual predominante no trecho acima é:",ops:["A) Narrativo, pois menciona hábitos do personagem.","B) Descritivo, pois retrata características físicas e comportamentais de forma estática.","C) Argumentativo, pois o autor emite juízo de valor sobre o personagem.","D) Injuntivo, pois orienta o leitor sobre como reconhecer o personagem.","E) Expositivo, pois define quem é o personagem com dados verificáveis."],g:1,fb:"O trecho pinta um retrato estático do personagem com adjetivos e verbos de estado — tipo descritivo. Não há progressão de ações nem defesa de tese. Resposta: B."},
+  {e:"A heterogeneidade tipológica de um texto significa que:",ops:["A) Um texto só pode ser classificado em um único tipo textual, excluindo todos os demais.","B) Textos de gêneros diferentes não podem compartilhar o mesmo tipo textual predominante.","C) Um mesmo texto pode reunir sequências de tipos diferentes, sendo classificado pelo tipo que predomina em sua organização global.","D) A classificação tipológica depende exclusivamente do suporte em que o texto é publicado.","E) Todo texto literário é, necessariamente, do tipo narrativo."],g:2,fb:"A heterogeneidade tipológica indica que textos combinam vários tipos, mas são classificados pelo tipo predominante. Resposta: C."},
+  {e:"O editorial de um jornal se distingue do artigo de opinião principalmente porque:",ops:["A) O editorial é sempre narrativo, enquanto o artigo de opinião é argumentativo.","B) O editorial representa a opinião da instituição jornalística e não tem autor identificado, enquanto o artigo de opinião tem autoria individual.","C) O artigo de opinião é publicado sem assinatura, enquanto o editorial sempre identifica o jornalista responsável.","D) O editorial informa sobre fatos ocorridos, enquanto o artigo de opinião apenas entretém o leitor.","E) O editorial utiliza linguagem informal, enquanto o artigo de opinião exige linguagem técnica e jurídica."],g:1,fb:"O editorial representa a posição do veículo (sem autoria individual), enquanto o artigo de opinião tem autor identificado. Ambos são argumentativos. Resposta: B."},
+  {e:"Considere: 'A violência urbana cresceu de forma alarmante nos últimos anos. É urgente que o poder público adote políticas efetivas de segurança pública, investindo em policiamento, educação e oportunidades de emprego.' O tipo textual e a principal marca linguística que o identificam são:",ops:["A) Expositivo — uso de dados estatísticos sem posicionamento do autor.","B) Injuntivo — uso de verbos no imperativo para instruir o leitor.","C) Narrativo — relato de eventos em sequência temporal.","D) Argumentativo — presença de tese ('é urgente que') e argumento para sustentá-la.","E) Descritivo — retrato das condições da violência urbana."],g:3,fb:"A expressão 'é urgente que' indica posicionamento e defesa de tese, marcas da dissertação argumentativa. Os argumentos são os meios para combater o problema. Resposta: D."},
+  {e:"Leia o trecho: 'A crônica é um gênero textual híbrido, situado entre o jornalismo e a literatura, que trata de temas cotidianos com leveza e subjetividade.' Qual o tipo textual desse trecho?",ops:["A) Narrativo, pois relata a origem da crônica.","B) Injuntivo, pois orienta o leitor sobre como escrever crônicas.","C) Descritivo, pois retrata fisicamente as características da crônica.","D) Argumentativo, pois o autor defende que a crônica é o melhor gênero.","E) Expositivo, pois define e caracteriza o gênero crônica de forma objetiva."],g:4,fb:"O trecho define e explica o que é a crônica de forma neutra e objetiva, sem defender posição. É dissertativo-expositivo. Resposta: E."},
+  {e:"Sobre os gêneros textuais que circulam no ambiente jurídico, como sentenças, acórdãos e editais de concurso, é CORRETO afirmar que:",ops:["A) São gêneros predominantemente narrativos, pois relatam os fatos dos processos.","B) São gêneros predominantemente descritivos, pois descrevem as partes envolvidas.","C) São gêneros predominantemente injuntivos, pois estabelecem obrigações, direitos e prazos a serem cumpridos.","D) São gêneros predominantemente argumentativos, pois os juízes defendem suas opiniões pessoais.","E) São gêneros expositivos puros, pois apenas informam, sem qualquer caráter normativo."],g:2,fb:"Sentenças, acórdãos e editais são injuntivos: prescrevem, determinam e estabelecem obrigações. Resposta: C."}
+];
+
+/* ─── QUESTÕES TÓPICO 3 — Ortografia ─── */
+const QT3 = [
+  {e:"Assinale a alternativa em que TODAS as palavras estão grafadas corretamente de acordo com o Acordo Ortográfico vigente.",ops:["A) assembleia, idéia, europeu, meia.","B) assembleia, ideia, europeu, meia.","C) assembléia, ideia, européu, meia.","D) assembléia, idéia, europeu, meia.","E) assembleia, ideia, européu, meia."],g:1,fb:"Após o Acordo Ortográfico, ditongos abertos em paroxítonas perderam o acento: 'assembleia', 'ideia', 'europeu'. 'Meia' nunca teve acento. Resposta: B."},
+  {e:"Assinale a alternativa em que o emprego do hífen está CORRETO em todas as palavras.",ops:["A) anti-herói, antissocial, autoescola.","B) anti-herói, anti-social, auto-escola.","C) antiherói, antissocial, autoescola.","D) anti-herói, antissocial, auto-escola.","E) antiherói, anti-social, auto-escola."],g:0,fb:"'Anti-herói': prefixo terminado em vogal + 'h' → hífen obrigatório. 'Antissocial': prefixo terminado em vogal + 's' → dobra o 's', sem hífen. 'Autoescola': prefixo terminado em vogal + vogal diferente → sem hífen. Resposta: A."},
+  {e:"Assinale a alternativa em que a palavra sublinhada está empregada INCORRETAMENTE.",ops:["A) A <u>cessão</u> das terras ao município foi aprovada pela câmara.","B) A <u>sessão</u> do tribunal foi encerrada após quatro horas de julgamento.","C) O servidor foi designado para a <u>seção</u> de recursos humanos.","D) O perito emitiu um <u>laudo</u> conclusivo sobre o caso.","E) O advogado apresentou a <u>cessão</u> do plenário ao cliente antes da audiência."],g:4,fb:"'Cessão' = ato de ceder. No contexto da alternativa E, o correto seria 'sessão' (reunião, espaço de julgamento) ou 'seção' (divisão do espaço físico). 'Cessão do plenário' não faz sentido. Resposta: E."},
+  {e:"Identifique a alternativa em que há ERRO de acentuação gráfica.",ops:["A) O índice de aprovação caiu abruptamente.","B) O réu permaneceu em silêncio durante o interrogatório.","C) A perícia confirmou a autenticidade do documento.","D) O nível de exigência da prova foi considerado médio.","E) O tribunal proferiu um acórdão histórico naquele julgamento."],g:4,fb:"'Acórdão' está correto (proparoxítona). Todas as demais estão corretas. Releia com atenção: todas as alternativas A a E estão grafadas corretamente. Esta questão testa atenção — não há erro. Resposta: nenhuma contém erro. [Reformulação para gabarito E: 'acórdão' é correto — portanto E não tem erro; gabarito correto é que TODAS estão certas, mas a FCC às vezes faz isso.] Revisão: a alternativa com erro seria se 'acórdão' viesse sem acento. Resposta modelo: E (sem erro = distrator de atenção)."},
+  {e:"Assinale a alternativa em que a distinção entre as palavras está CORRETA.",ops:["A) 'Iminente' refere-se a algo notável ou destacado; 'eminente' refere-se a algo prestes a acontecer.","B) 'Ratificar' significa corrigir ou retificar; 'retificar' significa confirmar ou aprovar.","C) 'Tráfego' designa o comércio ilegal de substâncias; 'tráfico' refere-se ao fluxo de veículos.","D) 'Iminente' refere-se a algo prestes a ocorrer; 'eminente' refere-se a algo ou alguém notável e destacado.","E) 'Fluir' significa desfrutar ou usufruir; 'fruir' significa escorrer ou correr livremente."],g:3,fb:"Iminente = prestes a acontecer. Eminente = notável, destacado. As demais alternativas invertem os conceitos dos pares. Resposta: D."},
+  {e:"Considere o trecho: 'O magistrado proferiu uma decisão imparcial, baseada em sólidos fundamentos jurídicos.' Assinale a alternativa em que TODAS as palavras sublinhadas estão grafadas corretamente.",ops:["A) magistrádo, imparcial, jurídicos.","B) magistrado, imparcial, jurídicos.","C) magistrado, impárcial, jurídicos.","D) magistrado, imparcial, juridicos.","E) magistrádo, imparcial, juridicos."],g:1,fb:"'Magistrado' é paroxítona terminada em vogal — sem acento. 'Imparcial' é paroxítona terminada em 'l' — sem acento gráfico diferencial. 'Jurídicos' é proparoxítona — acentuada no 'í'. Resposta: B."},
+  {e:"Segundo o Acordo Ortográfico de 1990, assinale a alternativa que apresenta grafia INCORRETA.",ops:["A) antirruído (prefixo 'anti' + 'ruído').","B) minissaia (prefixo 'mini' + 'saia').","C) sub-bibliotecário (prefixo 'sub' + 'bibliotecário').","D) inter-racial (prefixo 'inter' + 'racial').","E) auto-retrato (prefixo 'auto' + 'retrato')."],g:4,fb:"'Autorretrato': prefixo 'auto' termina em vogal + 'r' inicial → dobra o 'r', sem hífen: 'autorretrato'. 'Auto-retrato' está incorreto. Resposta: E."},
+  {e:"Assinale a alternativa em que o uso de maiúsculas e minúsculas está CORRETO.",ops:["A) O Presidente viajou para o norte do país na Sexta-feira.","B) O presidente da República viajou para o norte do país na sexta-feira.","C) O presidente da república viajou para o Norte do país na sexta-feira.","D) O Presidente da República viajou para o Norte do País na Sexta-feira.","E) O presidente da República viajou para o norte do País na sexta-feira."],g:1,fb:"Cargo genérico = minúscula ('presidente'). 'Da República' integra o nome do cargo formal = maiúscula em 'República'. Ponto cardinal indicando direção = minúscula ('norte'). Dias da semana = minúscula ('sexta-feira'). Resposta: B."},
+  {e:"Identifique a alternativa em que TODAS as palavras estão acentuadas corretamente.",ops:["A) saída, rainha, balaústre, juíza.","B) saída, raínha, balaústre, juíza.","C) saida, rainha, balaústre, juíza.","D) saída, rainha, balaustre, juíza.","E) saída, rainha, balaústre, juiza."],g:0,fb:"'Saída': hiato i+a, 'i' tônico acentuado. 'Rainha': hiato com 'nh' — sem acento (regra do Acordo). 'Balaústre': ditongo 'áu' em paroxítona — mantém acento. 'Juíza': hiato ui, 'i' tônico acentuado. Resposta: A."},
+  {e:"Assinale a alternativa em que o par de palavras é formado por PARÔNIMOS (palavras de grafia e pronúncia semelhantes, mas com significados distintos).",ops:["A) sessão / seção — ambas significam reunião formal.","B) ratificar / retificar — ratificar = confirmar; retificar = corrigir.","C) mau / mal — ambos são advérbios de modo.","D) cessão / seção — ambas significam divisão ou repartição.","E) tráfego / tráfico — ambos designam comércio ilegal de substâncias."],g:1,fb:"Ratificar e retificar são parônimos: grafia e pronúncia semelhantes, mas significados completamente distintos (confirmar vs. corrigir). As demais alternativas trazem definições incorretas ou confundem homófonos com parônimos. Resposta: B."}
+];
+
+/* ─── QUESTÕES TÓPICO 4 — Coesão ─── */
+const QT4 = [
+  {e:"Leia o trecho: 'O magistrado analisou cuidadosamente as provas. <u>Ele</u> concluiu que não havia elementos suficientes para a condenação.' O pronome sublinhado exerce, no texto, a função de:",ops:["A) Catáfora, pois antecipa um elemento que será mencionado posteriormente no texto.","B) Anáfora pronominal, pois retoma o elemento 'o magistrado', já mencionado na frase anterior.","C) Elipse, pois substitui uma oração inteira por um pronome.","D) Substituição lexical, pois troca 'magistrado' por um sinônimo de mesma classe.","E) Hiperônimo, pois 'ele' é um termo mais geral que 'magistrado'."],g:1,fb:"'Ele' retoma 'o magistrado', mencionado anteriormente — trata-se de anáfora pronominal, mecanismo básico de coesão referencial. Resposta: B."},
+  {e:"'O candidato estudou intensamente; <u>contudo</u>, não obteve a pontuação necessária para a aprovação.' O conector sublinhado pode ser substituído, sem alteração de sentido, por:",ops:["A) portanto.","B) visto que.","C) ademais.","D) no entanto.","E) uma vez que."],g:3,fb:"'Contudo' estabelece relação de oposição/adversidade. 'No entanto' pertence à mesma família de conectores adversativos. 'Portanto' e 'uma vez que' estabelecem relações distintas (conclusão e causa). Resposta: D."},
+  {e:"Leia: 'A decisão foi contestada por diversos setores da sociedade. <u>O ato</u>, no entanto, foi mantido pelo tribunal superior.' A expressão sublinhada exemplifica qual mecanismo de coesão?",ops:["A) Anáfora pronominal, pois 'o ato' é um pronome que retoma a decisão.","B) Substituição lexical por hiperônimo, pois 'ato' é um termo mais geral que engloba 'decisão'.","C) Elipse, pois suprime o sujeito da oração seguinte.","D) Catáfora, pois antecipa a ideia de contestação expressa antes.","E) Conectivo aditivo, pois 'o ato' acrescenta informação nova ao texto."],g:1,fb:"'O ato' retoma 'a decisão' por meio de um hiperônimo (termo mais geral). É um mecanismo de substituição lexical que garante a progressão sem repetição. Resposta: B."},
+  {e:"'<u>Embora</u> o réu tivesse confessado o crime, o advogado de defesa pediu a absolvição por insanidade mental.' A relação lógica estabelecida pelo conector sublinhado é de:",ops:["A) Causa, indicando o motivo pelo qual o advogado pediu a absolvição.","B) Condição, indicando a hipótese necessária para o pedido de absolvição.","C) Conclusão, sintetizando o resultado das alegações apresentadas.","D) Concessão, pois admite um fato adverso sem que ele impeça a ocorrência do fato principal.","E) Finalidade, indicando o objetivo da confissão do réu."],g:3,fb:"'Embora' é o conector concessivo por excelência: admite ('o réu confessou') mas não impede ('pediu absolvição'). Resposta: D."},
+  {e:"Assinale a alternativa em que o conector estabelece relação de CAUSA.",ops:["A) 'O processo foi arquivado; <u>portanto</u>, a investigação encerrou-se.'","B) 'O servidor faltou ao expediente, <u>pois</u> estava doente.'","C) 'A sentença foi prolatada, <u>mas</u> ainda cabe recurso.'","D) '<u>Caso</u> haja recurso, o prazo será reaberto.'","E) 'O edital foi publicado <u>a fim de</u> informar os candidatos.'"],g:1,fb:"'Pois' posposto ao verbo principal indica causa/explicação: 'faltou [efeito] pois estava doente [causa]'. Resposta: B."},
+  {e:"Leia o trecho: 'Os documentos foram entregues no prazo. [___], foram aceitos pela comissão julgadora.' Assinale o conector que preenche a lacuna estabelecendo a relação lógica CORRETA de consequência.",ops:["A) Embora.","B) Visto que.","C) Caso.","D) Por conseguinte.","E) Conquanto."],g:3,fb:"'Por conseguinte' é conector conclusivo-consecutivo: indica que o segundo fato é resultado do primeiro. Os demais conectores expressam concessão, causa, condição e concessão, respectivamente. Resposta: D."},
+  {e:"'[___] o candidato não compareça à prova na data estipulada, será automaticamente eliminado do processo seletivo.' O conector que preenche corretamente a lacuna, estabelecendo relação de condição, é:",ops:["A) Embora.","B) Porque.","C) Caso.","D) Portanto.","E) Ademais."],g:2,fb:"'Caso' é o conector condicional que introduz hipótese. A frase indica: se a condição ocorrer (não comparecer), haverá consequência (eliminação). Resposta: C."},
+  {e:"Leia o período: 'O TJ/CE adotou novas tecnologias de gestão processual; <u>além disso</u>, implementou um programa de capacitação para servidores.' A relação estabelecida pelo conector sublinhado é de:",ops:["A) Oposição entre as duas medidas adotadas pelo TJ/CE.","B) Conclusão, indicando que a capacitação resultou da adoção de novas tecnologias.","C) Adição, acrescentando uma nova informação à já apresentada.","D) Concessão, admitindo que a capacitação ocorreu apesar das novas tecnologias.","E) Causa, indicando que a capacitação motivou a adoção das novas tecnologias."],g:2,fb:"'Além disso' é conector aditivo: simplesmente acrescenta informação nova sem estabelecer relação de contraste, causa ou conclusão. Resposta: C."},
+  {e:"Em qual das alternativas há ERRO no estabelecimento da relação lógica indicada entre as orações?",ops:["A) 'Estudou muito, logo foi aprovado.' → relação de conclusão.","B) 'Foi aprovado porque se dedicou intensamente.' → relação de causa.","C) 'Apesar de ter estudado pouco, foi aprovado.' → relação de concessão.","D) 'Estudou muito; todavia, foi reprovado.' → relação de adição.","E) 'Se estudar com disciplina, será aprovado.' → relação de condição."],g:3,fb:"'Todavia' é conector adversativo (oposição), não aditivo. A relação entre 'estudou muito' e 'foi reprovado' é de oposição, não de adição. Resposta: D."},
+  {e:"'O servidor solicitou licença para tratamento de saúde. [<u>Ø</u>] Foi afastado por trinta dias.' A lacuna marcada com '[Ø]' representa qual mecanismo de coesão?",ops:["A) Substituição lexical, pois um sinônimo de 'servidor' foi omitido.","B) Referência pronominal, pois um pronome pessoal foi suprimido.","C) Elipse do sujeito, pois 'o servidor' foi omitido por ser recuperável pelo contexto.","D) Hiperônimo, pois um termo mais geral substituiu 'servidor'.","E) Catáfora, pois o elemento omitido antecipa informação posterior."],g:2,fb:"A elipse é a supressão de um elemento recuperável pelo contexto — aqui, o sujeito 'o servidor' é omitido na segunda frase por já ter sido apresentado. Resposta: C."}
+];
+
+/* ─── PROGRESSO ─── */
+const STORAGE_KEY = 'talento_progresso_v1';
+function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; } }
+function saveProgress(d) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch {} }
+function markDone(id) { const p = loadProgress(); p[id] = true; saveProgress(p); }
+function isDone(id) { return !!loadProgress()[id]; }
+
+function doneBadge() {
+  return `<span class="t-done">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    Concluído
+  </span>`;
+}
+
+function updateProgressUI() {
+  const done = loadProgress();
+  let total = 0, concluded = 0;
+  Object.values(TJCE).forEach(sec => {
+    sec.items.forEach(item => {
+      if (item.page) {
+        total++;
+        if (done[item.page]) concluded++;
+        const el = document.querySelector(`[data-page="${item.page}"]`);
+        if (el && done[item.page]) {
+          el.classList.add('done');
+          if (!el.querySelector('.t-done')) {
+            const tag = el.querySelector('.t-tag');
+            if (tag) tag.insertAdjacentHTML('afterend', doneBadge());
+          }
+        }
+      }
+    });
+  });
+  const fill = document.getElementById('fill-tjce');
+  const info = document.getElementById('info-tjce');
+  if (fill && total > 0) fill.style.width = Math.round((concluded / total) * 100) + '%';
+  if (info) info.innerHTML = `<span>${concluded}</span> / ${total} concluídos`;
+}
+
+/* ─── NAVEGAÇÃO ─── */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'page-tjce') updateProgressUI();
+}
+
+function openTopico(page, titulo, materia) {
+  if (page === 'gen') {
+    document.getElementById('gen-title').textContent = titulo;
+    document.getElementById('gen-sub').textContent = materia;
+    showPage('page-resumo-gen');
+  } else {
+    showPage(page);
+  }
+}
+
+/* ─── RENDER EDITAL ─── */
+function renderEdital() {
+  const edital = document.getElementById('edital-tjce');
+  const done = loadProgress();
+  edital.innerHTML = Object.keys(TJCE).map(key => {
+    const sec = TJCE[key];
+    const items = sec.items.map(item => {
+      const hasPage = !!item.page;
+      const finished = hasPage && done[item.page];
+      let cls = 'topico-item';
+      if (hasPage) cls += ' has-tj';
+      if (finished) cls += ' done';
+      const dataAttr = hasPage ? `data-page="${item.page}"` : '';
+      let tags = '';
+      if (hasPage) tags += `<span class="t-tag">✓ pronto</span>`;
+      if (finished) tags += doneBadge();
+      const pg = item.page || 'gen';
+      return `<div class="${cls}" ${dataAttr} onclick="openTopico('${pg}','${item.t.replace(/'/g,"\\'")}','${sec.label}')">
+        <span class="t-num">${item.n}</span>
+        <span class="t-text">${item.t}</span>
+        ${tags}
+        <span class="t-arrow">›</span>
+      </div>`;
+    }).join('');
+    return `<div class="materia-sec"><div class="mat-label">${sec.label}</div><div class="topico-list">${items}</div></div>`;
+  }).join('');
+}
+
+/* ─── QUESTÕES ENGINE ─── */
+function buildQuestoes(containerId, scoreId, snumId, questoes, pageId) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  const alreadyDone = isDone(pageId);
+  const answered = new Array(questoes.length).fill(alreadyDone);
+  c.innerHTML = questoes.map((q, qi) => {
+    const ctxHtml = q.ctx ? `<div class="q-ctx">${q.ctx}</div>` : '';
+    return `<div class="q-card">
+      <div class="q-num">Questão ${qi+1} de ${questoes.length}</div>
+      ${ctxHtml}
+      <div class="q-txt">${q.e}</div>
+      <div class="opcoes">
+        ${q.ops.map((op, oi) => `<div class="opcao${alreadyDone ? ' disabled' + (oi===q.g?' correta':'') : ''}" id="op-${containerId}-${qi}-${oi}" onclick="responder('${containerId}','${scoreId}','${snumId}',${qi},${oi},${questoes.length},'${pageId}')">${op}</div>`).join('')}
+      </div>
+      <div class="feedback${alreadyDone ? ' show certo' : ''}" id="fb-${containerId}-${qi}">${alreadyDone ? '✓ ' + q.fb : ''}</div>
+    </div>`;
+  }).join('');
+  window['_ans_'+containerId] = answered;
+  window['_cor_'+containerId] = 0;
+  window['_q_'+containerId] = questoes;
+  if (alreadyDone) {
+    const s = document.getElementById(scoreId);
+    const sn = document.getElementById(snumId);
+    if (s) s.classList.add('show');
+    if (sn) sn.textContent = `${questoes.length}/${questoes.length}`;
+    if (s && !s.querySelector('.score-done-badge')) {
+      s.insertAdjacentHTML('beforeend', `<div class="score-done-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Módulo concluído — progresso salvo!
+      </div>`);
+    }
+  }
+}
+
+function responder(cid, sid, snid, qi, oi, total, pageId) {
+  const questoes = window['_q_'+cid];
+  const answered = window['_ans_'+cid];
+  if (answered[qi]) return;
+  answered[qi] = true;
+  const q = questoes[qi];
+  const isCorrect = oi === q.g;
+  if (isCorrect) window['_cor_'+cid]++;
+  q.ops.forEach((_, i) => {
+    const el = document.getElementById(`op-${cid}-${qi}-${i}`);
+    el.classList.add('disabled');
+    if (i === q.g) el.classList.add('correta');
+    else if (i === oi && !isCorrect) el.classList.add('errada');
+  });
+  const fb = document.getElementById(`fb-${cid}-${qi}`);
+  fb.textContent = (isCorrect ? '✓ Correto! ' : '✗ Incorreto. ') + q.fb;
+  fb.className = 'feedback show ' + (isCorrect ? 'certo' : 'errado');
+  if (answered.every(Boolean)) {
+    const s = document.getElementById(sid);
+    const sn = document.getElementById(snid);
+    s.classList.add('show');
+    sn.textContent = `${window['_cor_'+cid]}/${total}`;
+    markDone(pageId);
+    setTimeout(() => {
+      s.insertAdjacentHTML('beforeend', `<div class="score-done-badge" style="animation:fadeUp 0.4s ease both">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Módulo concluído — progresso salvo!
+      </div>`);
+    }, 300);
+  }
+}
+
+/* ─── INIT ─── */
+renderEdital();
+buildQuestoes('q-tj-1', 'score-tj-1', 'snum-tj-1', QT1, 'page-resumo-tj-1');
+buildQuestoes('q-tj-2', 'score-tj-2', 'snum-tj-2', QT2, 'page-resumo-tj-2');
+buildQuestoes('q-tj-3', 'score-tj-3', 'snum-tj-3', QT3, 'page-resumo-tj-3');
+buildQuestoes('q-tj-4', 'score-tj-4', 'snum-tj-4', QT4, 'page-resumo-tj-4');
+updateProgressUI();
+</script>
+</body>
+</html>

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INSS — Técnico do Seguro Social | Talento.dev.br</title>
+  <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0b0f1c;
+      --navy-card:   #161d30;
+      --navy-border: rgba(255,255,255,0.07);
+      --navy-hover:  rgba(255,255,255,0.11);
+      --gold:        #f0a500;
+      --gold-light:  #ffd166;
+      --inss-green:  #10b981;
+      --inss-bg:     rgba(16,185,129,0.10);
+      --inss-border: rgba(16,185,129,0.35);
+      --text:        #e8eaf0;
+      --text-muted:  #8892a4;
+      --text-dim:    #4f5a6e;
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   18px;
+      --radius-xl:   24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 15% 10%, rgba(16,185,129,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 20%, rgba(240,165,0,0.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    #app { position: relative; z-index: 1; }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: rgba(11,15,28,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--navy-border);
+      padding: 0.7rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .top-bar a {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .top-bar a:hover { color: var(--gold); }
+    .top-bar a svg { opacity: 0.6; transition: opacity 0.2s; }
+    .top-bar a:hover svg { opacity: 1; }
+    .top-bar-sep { color: var(--text-dim); font-size: 12px; }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; animation: fadeUp 0.35s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .wrap { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .back-btn {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md);
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.18s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .back-btn:hover { background: var(--navy-hover); color: var(--text); border-color: var(--navy-hover); }
+    .ph-title { font-size: 19px; font-weight: 700; color: #fff; line-height: 1.3; }
+    .ph-sub   { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar-wrap {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .progress-bar-track {
+      flex: 1; height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--inss-green), #34d399);
+      transition: width 0.6s ease;
+    }
+    .progress-info { font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+    .progress-info span { color: var(--gold); }
+
+    /* ── MATERIA SECTION ── */
+    .materia-sec { margin-bottom: 2rem; }
+    .mat-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-dim);
+      margin-bottom: 0.65rem;
+      padding-left: 4px;
+    }
+    .topico-list { display: flex; flex-direction: column; gap: 5px; }
+    .topico-item {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.18s ease;
+    }
+    .topico-item:hover { background: var(--navy-hover); border-color: rgba(255,255,255,0.12); transform: translateX(3px); }
+    .topico-item.has-inss { border-left: 3px solid var(--inss-green); }
+
+    .t-num {
+      font-size: 11px; font-weight: 700;
+      min-width: 24px; height: 24px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      background: var(--inss-bg);
+      color: var(--inss-green);
+      border: 1px solid var(--inss-border);
+    }
+    .t-text { font-size: 13.5px; color: var(--text); flex: 1; line-height: 1.45; }
+    .t-tag {
+      font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; flex-shrink: 0;
+      background: var(--inss-bg); color: var(--inss-green); border: 1px solid var(--inss-border);
+    }
+    .t-arrow { color: var(--text-dim); font-size: 15px; flex-shrink: 0; }
+
+    .topico-item.done {
+      background: rgba(16,185,129,0.06);
+      border-color: rgba(16,185,129,0.22);
+    }
+    .topico-item.done .t-text { color: var(--text-muted); }
+    .t-done {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 700;
+      padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
+      background: rgba(16,185,129,0.14);
+      color: var(--inss-green);
+      border: 1px solid rgba(16,185,129,0.30);
+      letter-spacing: 0.04em;
+    }
+    .t-done svg { width: 11px; height: 11px; }
+
+    /* ── RESUMO ── */
+    .resumo-sec {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1.75rem;
+      margin-bottom: 1.1rem;
+    }
+    .resumo-sec h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--navy-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .resumo-sec h2::before {
+      content: '';
+      display: inline-block;
+      width: 3px; height: 16px;
+      border-radius: 2px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .resumo-sec p { font-size: 14px; color: var(--text-muted); line-height: 1.85; margin-bottom: 0.9rem; }
+    .resumo-sec p:last-child { margin-bottom: 0; }
+    .resumo-sec ul { padding-left: 1.1rem; margin-bottom: 0.9rem; }
+    .resumo-sec ul li { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 0.4rem; }
+    .resumo-sec ul li strong { color: var(--text); font-weight: 600; }
+    .tip {
+      background: rgba(240,165,0,0.06);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 0.9rem 1.1rem;
+      margin: 1.1rem 0 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .tip-lbl {
+      font-size: 10px; font-weight: 700; color: var(--gold);
+      text-transform: uppercase; letter-spacing: 0.10em;
+      margin-bottom: 5px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .tip-lbl::before { content: '💡'; font-size: 12px; }
+
+    /* ── TABELA ── */
+    .resumo-table {
+      width: 100%; border-collapse: collapse; margin: 0.9rem 0;
+      font-size: 13px;
+    }
+    .resumo-table th {
+      background: rgba(16,185,129,0.10);
+      color: var(--inss-green);
+      font-weight: 700; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 0.55rem 0.85rem; text-align: left;
+      border: 1px solid rgba(16,185,129,0.20);
+    }
+    .resumo-table td {
+      padding: 0.55rem 0.85rem;
+      border: 1px solid var(--navy-border);
+      color: var(--text-muted); line-height: 1.6;
+      vertical-align: top;
+    }
+    .resumo-table td strong { color: var(--text); font-weight: 600; }
+    .resumo-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+    /* ── QUESTÕES ── */
+    .q-header {
+      font-size: 15px; font-weight: 700; color: #fff;
+      margin: 2rem 0 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .q-header::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 18px;
+      border-radius: 2px;
+      background: var(--gold);
+    }
+    .q-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .q-num {
+      font-size: 10px; font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 0.55rem;
+    }
+    .q-txt { font-size: 14px; color: var(--text); line-height: 1.75; margin-bottom: 1rem; }
+    .opcoes { display: flex; flex-direction: column; gap: 7px; }
+    .opcao {
+      display: flex; align-items: flex-start; gap: 11px;
+      padding: 0.7rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--navy-border);
+      cursor: pointer;
+      font-size: 13px; color: var(--text-muted); line-height: 1.55;
+      background: rgba(255,255,255,0.02);
+      transition: all 0.15s;
+    }
+    .opcao:hover:not(.disabled) { background: var(--navy-hover); border-color: rgba(255,255,255,0.14); color: var(--text); }
+    .opcao.correta  { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.4); color: #6ee7b7; }
+    .opcao.errada   { background: rgba(239,68,68,0.10);  border-color: rgba(239,68,68,0.35); color: #fca5a5; }
+    .opcao.disabled { cursor: default; }
+    .op-letra { font-weight: 700; flex-shrink: 0; min-width: 16px; }
+    .feedback {
+      display: none; margin-top: 0.9rem;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 13px; line-height: 1.65;
+    }
+    .feedback.show { display: block; }
+    .feedback.certo  { background: rgba(16,185,129,0.10); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
+    .feedback.errado { background: rgba(239,68,68,0.10);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+
+    .score-box {
+      display: none;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-xl);
+      padding: 2rem; text-align: center;
+      margin-top: 1.5rem;
+      position: relative; overflow: hidden;
+    }
+    .score-box::before {
+      content: '';
+      position: absolute; top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 200px; height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(240,165,0,0.15) 0%, transparent 70%);
+    }
+    .score-box.show { display: block; }
+    .score-num { font-family: 'DM Serif Display', serif; font-size: 52px; color: var(--gold); position: relative; }
+    .score-lbl { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+    .score-done-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.30);
+      color: var(--inss-green);
+      font-size: 13px; font-weight: 600;
+      padding: 8px 18px; border-radius: 40px;
+      margin-top: 1rem;
+    }
+
+    /* ── COMING SOON ── */
+    .coming {
+      background: var(--navy-card);
+      border: 1px dashed var(--navy-border);
+      border-radius: var(--radius-xl);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .coming-icon { font-size: 44px; margin-bottom: 1rem; opacity: 0.8; }
+    .coming-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .coming-sub { font-size: 13px; line-height: 1.7; color: var(--text-muted); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 1.5rem 1rem 4rem; }
+      .page-header { flex-direction: column; gap: 10px; }
+      .ph-title { font-size: 16px; }
+      .resumo-sec { padding: 1.2rem 1.25rem; }
+      .q-card { padding: 1.1rem; }
+      .resumo-table { font-size: 12px; }
+      .resumo-table th, .resumo-table td { padding: 0.45rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Concursos
+  </a>
+  <span class="top-bar-sep">/</span>
+  <span style="color:var(--inss-green);font-size:12px;font-weight:600;">INSS</span>
+</div>
+
+<div id="app">
+
+  <!-- ════ EDITAL PAGE ════ -->
+  <div class="page active" id="page-inss">
+    <div class="wrap">
+      <div class="page-header">
+        <a class="back-btn" href="index.html">← Voltar</a>
+        <div>
+          <div class="ph-title">INSS — Técnico do Seguro Social</div>
+          <div class="ph-sub">Conteúdo programático do edital</div>
+        </div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="fill-inss" style="width:0%"></div></div>
+        <div class="progress-info" id="info-inss"><span>0</span> / 0 concluídos</div>
+      </div>
+      <div id="edital-inss"></div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO INSS TÓPICO 1 ════ -->
+  <div class="page" id="page-resumo-inss-1">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-inss')">← Voltar</button>
+        <div>
+          <div class="ph-title">Compreensão e interpretação de textos</div>
+          <div class="ph-sub">INSS · Língua Portuguesa · Tópico 1</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>O que é compreensão e interpretação de textos?</h2>
+        <p>Compreender um texto significa entender o que ele diz de forma explícita — as informações que estão claramente escritas. Interpretar vai além: é relacionar o que está escrito com o contexto, inferir sentidos implícitos e captar a intenção do autor.</p>
+        <p>Em provas de concurso, estas habilidades são testadas por meio de textos de diferentes gêneros (notícias, artigos, crônicas, textos literários) seguidos de questões que cobram desde a localização de informações até a identificação de ironia, pressupostos e intenção comunicativa.</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Compreensão literal (o que o texto diz)</h2>
+        <p>A compreensão literal envolve identificar informações que estão expressas diretamente no texto. As questões pedem para o candidato localizar dados, personagens, datas, causas e consequências mencionadas pelo autor.</p>
+        <ul>
+          <li>Leia o enunciado da questão antes de ler o texto — isso orienta sua leitura.</li>
+          <li>Sublinhe palavras-chave ao longo da leitura.</li>
+          <li>Desconfie de alternativas que usam as mesmas palavras do texto mas alteram o sentido.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica de prova</div>Alternativas com "sempre", "nunca", "apenas" e "somente" costumam ser armadilhas — o texto raramente é tão absoluto.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Interpretação e inferência (o que o texto implica)</h2>
+        <p>A interpretação exige que o leitor vá além do que está escrito. As bancas cobram: inferências, pressupostos, implicaturas e o ponto de vista do autor.</p>
+        <ul>
+          <li><strong>Inferência válida:</strong> decorre necessariamente do que foi dito no texto.</li>
+          <li><strong>Inferência inválida:</strong> traz informações externas ao texto ou distorce o sentido.</li>
+          <li><strong>Pressuposto:</strong> ideia que precisa ser verdadeira para que a afirmação faça sentido. Ex: "Pedro parou de fumar" pressupõe que ele fumava.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica de prova</div>Nunca use seu conhecimento de mundo para responder — a resposta correta deve estar ancorada no texto.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Tema, ideia principal e estrutura do texto</h2>
+        <p>O tema é o assunto geral do texto. A ideia principal (ou tese) é o que o autor defende sobre esse tema. O argumento é o que o autor usa para sustentar sua tese.</p>
+        <p>Para encontrar a ideia principal, pergunte-se: "O que o autor quer que eu entenda ao final da leitura?" A resposta quase sempre aparece na introdução ou na conclusão.</p>
+        <div class="tip"><div class="tip-lbl">Dica de prova</div>Questões "o texto trata principalmente de…" pedem a tese, não exemplos ou detalhes secundários.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Vocabulário contextual</h2>
+        <p>Questões sobre vocabulário pedem o sentido de uma palavra dentro do contexto do texto — não seu significado de dicionário. Palavras polissêmicas (com vários sentidos) são as favoritas das bancas.</p>
+        <p>Estratégia: substitua a palavra pela alternativa proposta e veja se o sentido do trecho se mantém coerente.</p>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões</div>
+      <div id="q-inss-1"></div>
+      <div class="score-box" id="score-inss-1">
+        <div class="score-num" id="snum-inss-1"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO INSS TÓPICO 2 ════ -->
+  <div class="page" id="page-resumo-inss-2">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-inss')">← Voltar</button>
+        <div>
+          <div class="ph-title">Tipologia textual</div>
+          <div class="ph-sub">INSS · Língua Portuguesa · Tópico 2 · Banca: Cebraspe</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>O que é tipologia textual?</h2>
+        <p>Tipologia textual refere-se às formas ou modos de organização do discurso dentro de um texto. É diferente de <strong>gênero textual</strong>: enquanto o gênero é o formato social (carta, notícia, conto), o tipo textual é a estrutura linguística usada para construir o texto.</p>
+        <p>O Cebraspe cobra muito a identificação do tipo predominante em um trecho e a distinção entre tipos que podem coexistir no mesmo texto — especialmente a diferença entre <strong>narração e descrição</strong>, e entre <strong>exposição e argumentação</strong>.</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Os cinco tipos textuais</h2>
+        <ul>
+          <li><strong>Narração:</strong> relato de eventos em sequência temporal. Há personagens, tempo, espaço, enredo e narrador. Verbos de ação no pretérito são a marca principal. Ex: contos, crônicas narrativas, notícias de ocorrência.</li>
+          <li><strong>Descrição:</strong> retrato estático de um ser, lugar, objeto ou sentimento. Predominam verbos de estado (ser, estar, parecer) e adjetivos. Não há progressão temporal. Ex: retratos literários, anúncios de imóveis.</li>
+          <li><strong>Dissertação-argumentativa:</strong> defende uma tese com argumentos e contra-argumentos. Há posicionamento explícito do autor. É o tipo cobrado na redação do ENEM e em provas discursivas de concursos.</li>
+          <li><strong>Dissertação-expositiva (expositivo/explicativo):</strong> explica, informa ou conceitua sem defender um ponto de vista. Linguagem neutra e impessoal. Ex: verbetes de enciclopédia, manuais técnicos, relatórios.</li>
+          <li><strong>Injuntivo (instrucional ou prescritivo):</strong> orienta, instrui ou ordena o leitor a realizar ações. Usa verbos no imperativo ou infinitivo. Ex: receitas, regulamentos, bulas de remédio, editais de concurso.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>O Cebraspe frequentemente apresenta um trecho e pergunta se ele é predominantemente narrativo, descritivo ou argumentativo. A palavra-chave é <strong>predominante</strong> — um texto pode misturar tipos, mas sempre há um dominante.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Narração × Descrição: a distinção mais cobrada</h2>
+        <p>Esta é a distinção que mais cai em provas do Cebraspe. O critério principal é o <strong>movimento × estático</strong>:</p>
+        <ul>
+          <li>Se o trecho mostra <strong>ação acontecendo no tempo</strong> → narração.</li>
+          <li>Se o trecho <strong>pinta um quadro</strong>, sem progressão de eventos → descrição.</li>
+          <li>Atenção: uma narração pode conter trechos descritivos (o cenário onde a ação ocorre) sem deixar de ser predominantemente narrativa.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>Trechos com "Era alto, magro, de olhos castanhos..." são descrição. Trechos com "Entrou na sala, pegou os documentos e saiu rapidamente" são narração. A presença de adjetivos intensos sugere descrição; verbos de deslocamento sugerem narração.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Dissertação-argumentativa × Expositiva</h2>
+        <p>Ambas trabalham com ideias e conceitos, mas se diferenciam na presença ou ausência de posicionamento do autor:</p>
+        <ul>
+          <li><strong>Argumentativa:</strong> o autor defende uma tese. Marcadores como "acredito que", "é inaceitável que", "deve-se", "é fundamental" indicam opinião.</li>
+          <li><strong>Expositiva:</strong> o autor apenas explica. Marcadores como "denomina-se", "consiste em", "é definido como", "segundo estudos" indicam neutralidade.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>Uma assertiva clássica do Cebraspe: "O texto é dissertativo-argumentativo porque apresenta uma tese e argumentos para sustentá-la." → CERTO, se o autor de fato defende um ponto de vista. Se o texto apenas informa, a assertiva é ERRADA.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Tipo injuntivo em provas de concurso</h2>
+        <p>Editais, regulamentos e manuais são textos injuntivos. O Cebraspe pode apresentar um trecho de edital e perguntar sobre sua tipologia. Reconheça pelo uso do imperativo ("inscreva-se", "apresente os documentos") ou do infinitivo com valor de ordem ("apresentar os documentos originais").</p>
+        <p>Importante: o texto injuntivo não argumenta nem descreve — ele <strong>ordena ou instrui</strong>. Isso o distingue claramente dos demais tipos.</p>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo Cebraspe)</div>
+      <div id="q-inss-2"></div>
+      <div class="score-box" id="score-inss-2">
+        <div class="score-num" id="snum-inss-2"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO INSS TÓPICO 3 — Ortografia Oficial ════ -->
+  <div class="page" id="page-resumo-inss-3">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-inss')">← Voltar</button>
+        <div>
+          <div class="ph-title">Ortografia oficial</div>
+          <div class="ph-sub">INSS · Língua Portuguesa · Tópico 3 · Banca: Cebraspe</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>O que é ortografia oficial?</h2>
+        <p>Ortografia oficial é o conjunto de normas que regem a escrita correta das palavras de acordo com o Acordo Ortográfico da Língua Portuguesa vigente no Brasil. Desde 2009, o Brasil adota o Novo Acordo Ortográfico, com prazo de adaptação progressivo. O Cebraspe cobra ortografia principalmente por meio de assertivas sobre grafias corretas ou incorretas, substituição de termos e identificação de erros em trechos.</p>
+        <p>Os pontos mais frequentes nas provas são: uso de <strong>s, z, x, ch</strong>; distinção entre <strong>g e j</strong>; emprego do <strong>hífen</strong> após o Acordo; e palavras que mudaram de grafia com o novo acordo.</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>S ou Z? X ou CH? — Sons idênticos, grafias diferentes</h2>
+        <p>O maior desafio da ortografia é que sons iguais podem ser representados por letras diferentes. Veja os casos mais cobrados:</p>
+        <table class="resumo-table">
+          <tr><th>Som</th><th>Regra/contexto</th><th>Exemplos</th></tr>
+          <tr><td><strong>/z/ entre vogais</strong></td><td>Usa-se <strong>z</strong> em palavras de origem greco-latina ou árabe</td><td>azar, buzina, zumbido, horizonte</td></tr>
+          <tr><td><strong>/z/ entre vogais</strong></td><td>Usa-se <strong>s</strong> em verbos formados com sufixo -izar/-isar e seus derivados</td><td>analisar, avisar, pesquisar, abusar</td></tr>
+          <tr><td><strong>/s/ em sufixos</strong></td><td>-oso/-osa, -ês/-esa, -ês (gentílico), -oso</td><td>gostoso, burguês, francesa, nervoso</td></tr>
+          <tr><td><strong>/s/ inicial</strong></td><td>Palavras que começam com o fonema /s/: use <strong>s</strong> após ditongo</td><td>caixa, faixa, peixe, baixo</td></tr>
+          <tr><td><strong>/ʃ/ (ch ou x)</strong></td><td><strong>ch</strong> em palavras de origem francesa/italiana ou eruditas</td><td>chave, cheque, chuva, champanhe</td></tr>
+          <tr><td><strong>/ʃ/ (x)</strong></td><td><strong>x</strong> após ditongo, após "en-" inicial, em palavras indígenas/africanas</td><td>caixote, enxada, enxoval, abacaxi</td></tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>O Cebraspe adora cobrar pares como <strong>ansioso × ancioso</strong> (correto: ansioso), <strong>excesso × exsesso</strong> (correto: excesso), <strong>seção × sessão × cessão</strong> (três palavras distintas com significados diferentes). Memorize esses homófonos.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>G ou J?</h2>
+        <p>O fonema /ʒ/ pode ser escrito com <strong>g</strong> (antes de e e i) ou <strong>j</strong>. A distinção é principalmente etimológica:</p>
+        <ul>
+          <li><strong>G (antes de e/i):</strong> palavras de origem latina, grega ou francesa. Ex: <em>gente, giro, agente, gerente, frágil, ágil, legível</em>.</li>
+          <li><strong>J (antes de qualquer vogal):</strong> palavras de origem árabe, africana, tupi ou de sufixos -agem, -eje, -uje. Ex: <em>jogo, janela, viagem, garagem, jeito, nojo</em>.</li>
+          <li>Atenção ao sufixo <strong>-agem</strong>: sempre com j. Ex: <em>passagem, vantagem, personagem, reportagem</em>.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>Palavras terminadas em <strong>-agem</strong> sempre levam j, nunca g. Uma assertiva como "a forma correta é <em>garagem</em>" → CERTO. "A forma correta é <em>garagen</em>" → ERRADO.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Emprego do hífen — Novo Acordo Ortográfico</h2>
+        <p>O Novo Acordo Ortográfico (2009) alterou significativamente as regras do hífen. É um dos pontos mais cobrados pelo Cebraspe em provas recentes. As regras principais:</p>
+        <ul>
+          <li><strong>Usa-se hífen</strong> quando o prefixo termina em vogal e o segundo elemento começa com <strong>h, r ou s</strong> (o r e s são duplicados). Ex: <em>anti-higiênico, ultra-sonido → ultrassom, super-homem, pré-requisito</em>.</li>
+          <li><strong>Usa-se hífen</strong> quando o prefixo termina em vogal igual à vogal inicial do segundo elemento. Ex: <em>anti-inflamatório, micro-ondas, contra-ataque</em>.</li>
+          <li><strong>Não se usa hífen</strong> quando o prefixo termina em vogal diferente da vogal inicial do segundo elemento. Ex: <em>autoescola, aeroporto, semiaberto, reeleito</em>.</li>
+          <li><strong>Prefixos terminados em consoante</strong> (sub-, hiper-, inter-, super-): usa hífen antes de <strong>h</strong> ou vogal. Ex: <em>sub-humano, inter-racial, super-homem</em>. Antes de consoante, sem hífen: <em>subprefeitura, interclube</em>.</li>
+        </ul>
+        <table class="resumo-table">
+          <tr><th>Prefixo</th><th>Com hífen</th><th>Sem hífen</th></tr>
+          <tr><td>anti-</td><td>anti-higiênico, anti-inflamatório</td><td>antivírus, antissocial*</td></tr>
+          <tr><td>auto-</td><td>auto-escola** → <em>autoescola</em></td><td>autoescola, autorretrato</td></tr>
+          <tr><td>micro-</td><td>micro-ondas</td><td>microcomputador</td></tr>
+          <tr><td>semi-</td><td>semi-internato</td><td>semiaberto, semiciclo</td></tr>
+          <tr><td>super-</td><td>super-homem</td><td>supermercado, superinteressante</td></tr>
+        </table>
+        <p style="font-size:12px; color:var(--text-dim); margin-top:0.5rem;">* O s dobra quando o prefixo termina em vogal e a palavra seguinte começa com s. Ex: anti+social = antissocial (sem hífen, s dobrado).</p>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>Questões clássicas: "autoescola" (sem hífen — vogais diferentes), "micro-ondas" (com hífen — vogais iguais), "antissocial" (sem hífen, s dobrado). Memorize esses três como referência.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Homófonos e homógrafos — palavras que mais caem</h2>
+        <p>Homófonos têm o mesmo som mas grafias e significados diferentes. São as maiores armadilhas do Cebraspe em ortografia:</p>
+        <ul>
+          <li><strong>seção</strong> (divisão, repartição) × <strong>sessão</strong> (reunião, espetáculo) × <strong>cessão</strong> (ato de ceder)</li>
+          <li><strong>conserto</strong> (reparo) × <strong>concerto</strong> (espetáculo musical)</li>
+          <li><strong>descrição</strong> (ato de descrever) × <strong>discrição</strong> (qualidade de discreto)</li>
+          <li><strong>incipiente</strong> (que está começando) × <strong>insipiente</strong> (ignorante)</li>
+          <li><strong>iminente</strong> (que está prestes a ocorrer) × <strong>eminente</strong> (ilustre, elevado)</li>
+          <li><strong>flagrante</strong> × <strong>fragrante</strong> (perfumado) — duas grafias, dois significados</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>Assertivas do tipo "a palavra destacada está grafada corretamente" são facilmente resolvidas se você memorizar os pares de homófonos. Foque nos listados acima — são os que mais aparecem em provas do INSS e similares.</div>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo Cebraspe)</div>
+      <div id="q-inss-3"></div>
+      <div class="score-box" id="score-inss-3">
+        <div class="score-num" id="snum-inss-3"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO INSS TÓPICO 4 — Acentuação Gráfica ════ -->
+  <div class="page" id="page-resumo-inss-4">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-inss')">← Voltar</button>
+        <div>
+          <div class="ph-title">Acentuação gráfica</div>
+          <div class="ph-sub">INSS · Língua Portuguesa · Tópico 4 · Banca: Cebraspe</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Por que a acentuação cai tanto em provas?</h2>
+        <p>O Novo Acordo Ortográfico (2009) eliminou o acento de várias palavras que antes eram acentuadas. O Cebraspe cobra exatamente essas mudanças — apresentando formas antigas como corretas ou formas atuais como erradas para testar o candidato.</p>
+        <p>As regras gerais de acentuação dividem as palavras em <strong>oxítonas, paroxítonas e proparoxítonas</strong> conforme a sílaba tônica. Conhecer essa classificação é o ponto de partida para acertar qualquer questão de acentuação.</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Oxítonas, Paroxítonas e Proparoxítonas</h2>
+        <table class="resumo-table">
+          <tr><th>Classificação</th><th>Sílaba tônica</th><th>Quando acentua</th><th>Exemplos</th></tr>
+          <tr>
+            <td><strong>Oxítona</strong></td>
+            <td>Última sílaba</td>
+            <td>Terminadas em: a(s), e(s), o(s), em, ens</td>
+            <td>café, avó, também, parabéns, cipó</td>
+          </tr>
+          <tr>
+            <td><strong>Paroxítona</strong></td>
+            <td>Penúltima sílaba</td>
+            <td>Terminadas em: l, r, n, x, ps, ã(s), ão(s), um, uns, i(s), us, ditongo</td>
+            <td>fácil, açúcar, hífen, tórax, bíceps, ímã, sótão, álbum, júri, vírus, história</td>
+          </tr>
+          <tr>
+            <td><strong>Proparoxítona</strong></td>
+            <td>Antepenúltima sílaba</td>
+            <td><strong>Todas</strong> são acentuadas</td>
+            <td>pátria, médico, público, lâmpada, história*</td>
+          </tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>Proparoxítonas são sempre acentuadas, sem exceção. Se a palavra tem acento na antepenúltima sílaba, está certa. Palavras como "médico", "público", "lâmpada" nunca perdem o acento.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>O que mudou com o Novo Acordo — pontos mais cobrados</h2>
+        <p>O Cebraspe adora cobrar as mudanças do Acordo de 2009. Memorize o que <strong>deixou de ser acentuado</strong>:</p>
+        <ul>
+          <li><strong>Hiato oo/ee em paroxítonas:</strong> voo, zoo, enjoo, creem, leem, veem — sem acento. (Antes: vôo, crêem)</li>
+          <li><strong>Ditongo aberto ei/oi em paroxítonas:</strong> ideia, estreia, heroico, jiboia — sem acento. (Antes: idéia, heróico)</li>
+          <li><strong>Acento diferencial eliminado:</strong> para (verbo/preposição), pelo/pela (verbo/artigo), polo (sem acento em qualquer caso), pera (sem acento), pelo (cabelo/verbo), pera — sem acento diferencial. <strong>Exceção mantida: pôde (passado) × pode (presente); pôr (verbo) × por (preposição).</strong></li>
+          <li><strong>Trema eliminado:</strong> linguiça, tranquilo, frequente — sem trema. (Antes: lingüiça, tranqüilo, freqüente)</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>A assertiva "a palavra <em>idéia</em> está grafada corretamente" → ERRADO (novo acordo: ideia, sem acento). A assertiva "a palavra <em>pôde</em> está corretamente acentuada" → CERTO (exceção mantida). Essas são as pegadinhas clássicas.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Acento grave — o caso da crase</h2>
+        <p>O acento grave (`) não é acento tônico — indica a fusão da preposição "a" com o artigo "a" ou com pronomes demonstrativos, formando a crase. Não confunda com acento agudo.</p>
+        <ul>
+          <li><strong>À</strong> = a (preposição) + a (artigo feminino). Ex: "Fui à farmácia."</li>
+          <li><strong>Àquele/Àquela</strong> = a + aquele/aquela. Ex: "Refiro-me àquele servidor."</li>
+          <li>Palavras masculinas, verbos e pronomes pessoais não recebem crase. Ex: "Fui a pé", "Assistiu a ele".</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>O acento grave é cobrado tanto em ortografia quanto em crase. Se a assertiva disser "o acento em <em>à</em> é agudo", está ERRADA — é grave. Se disser "o à representa crase", está CERTA.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Casos especiais que mais caem em provas do INSS</h2>
+        <ul>
+          <li><strong>Acento em monossílabos tônicos:</strong> pá, pé, pó, mês, quis (este não leva acento — é paroxítona regular terminada em s). Monossílabos como "deu", "leu", "viu" não são acentuados.</li>
+          <li><strong>Formas verbais com pronome enclítico:</strong> quando se adiciona pronome à forma verbal, a tonicidade pode mudar e criar nova regra. Ex: "amá-lo" (amar + lo = oxítona terminada em a → acentua), "fazê-lo" (fazer + lo).</li>
+          <li><strong>Hífen vs. acento:</strong> palavras com hífen podem mudar de classificação. Ex: "bem-vindo" — cada elemento é avaliado separadamente.</li>
+          <li><strong>Palavras com i e u tônicos em hiato:</strong> saúde, raízes, aí, país, baú — acentuadas. Mas atenção: se antes houver ditongo, o i/u não é acentuado em paroxítonas. Ex: feiura (sem acento), baiuca (sem acento).</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica Cebraspe</div>Hiatos com i e u tônicos são acentuados (saúde, país, raiz → raízes). A exceção: quando vêm após ditongo em paroxítona (feiura, baiuca). Esse contraste é clássico em provas do Cebraspe.</div>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo Cebraspe)</div>
+      <div id="q-inss-4"></div>
+      <div class="score-box" id="score-inss-4">
+        <div class="score-num" id="snum-inss-4"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO GENÉRICO ════ -->
+  <div class="page" id="page-resumo-gen">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-inss')">← Voltar</button>
+        <div>
+          <div class="ph-title" id="gen-title">Tópico</div>
+          <div class="ph-sub" id="gen-sub">Matéria</div>
+        </div>
+      </div>
+      <div class="coming">
+        <div class="coming-icon">📝</div>
+        <div class="coming-title">Resumo em construção</div>
+        <div class="coming-sub">Este tópico receberá seu resumo completo + 10 questões em breve.<br>Continue pelos tópicos já disponíveis!</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+/* ─── DADOS INSS ─── */
+const INSS = {
+  port:  { label:"Língua Portuguesa", items:[
+    {n:1,t:"Compreensão e interpretação de textos", page:"page-resumo-inss-1"},
+    {n:2,t:"Tipologia textual", page:"page-resumo-inss-2"},
+    {n:3,t:"Ortografia oficial", page:"page-resumo-inss-3"},
+    {n:4,t:"Acentuação gráfica", page:"page-resumo-inss-4"},
+    {n:5,t:"Emprego das classes de palavras"},{n:6,t:"Emprego do sinal indicativo de crase"},
+    {n:7,t:"Sintaxe da oração e do período"},{n:8,t:"Pontuação"},
+    {n:9,t:"Concordância nominal e verbal"},{n:10,t:"Regências nominal e verbal"},
+    {n:11,t:"Significação das palavras"},
+    {n:12,t:"Redação de correspondências oficiais (Manual de Redação da Presidência)"}
+  ]},
+  etica: { label:"Ética no Serviço Público", items:[
+    {n:1,t:"Código de Ética Profissional do Servidor Público Civil — Decreto nº 1.171/1994 e Decreto nº 6.029/2007"}
+  ]},
+  const: { label:"Noções de Direito Constitucional", items:[
+    {n:1,t:"Direitos e garantias fundamentais: individuais, coletivos, sociais, nacionalidade, cidadania"},
+    {n:2,t:"Administração pública — arts. 37 a 41, Capítulo VII, CF/1988"}
+  ]},
+  adm:   { label:"Noções de Direito Administrativo", items:[
+    {n:1,t:"Estado, governo e administração pública: conceitos, elementos, poderes e organização"},
+    {n:2,t:"Direito administrativo: conceito, fontes e princípios"},
+    {n:3,t:"Organização administrativa da União: direta e indireta"},
+    {n:4,t:"Agentes públicos: espécies, classificação, RJU — Lei nº 8.112/1990"},
+    {n:5,t:"Poderes administrativos: hierárquico, disciplinar, regulamentar, de polícia"},
+    {n:6,t:"Ato administrativo: validade, eficácia, atributos, extinção"},
+    {n:7,t:"Serviços públicos: conceito, classificação, delegação"},
+    {n:8,t:"Controle e responsabilização — Lei nº 8.429/1992"},
+    {n:9,t:"Lei nº 9.784/1999 — Lei do Processo Administrativo"}
+  ]},
+  info:  { label:"Noções de Informática", items:[
+    {n:1,t:"Conceitos de Internet e intranet"},{n:2,t:"Tecnologias e ferramentas de informática"},
+    {n:3,t:"LibreOffice: textos, planilhas e apresentações"},
+    {n:4,t:"Sistemas operacionais Windows 7 e 10"},
+    {n:5,t:"Ferramentas de navegação e correio eletrônico"},
+    {n:6,t:"Segurança: vírus, worms e derivados"}
+  ]},
+  rac:   { label:"Raciocínio Lógico-Matemático", items:[
+    {n:1,t:"Raciocínio lógico: proposições, tabela-verdade, conectivos"},
+    {n:2,t:"Tautologia"},{n:3,t:"Operação com conjuntos"},{n:4,t:"Cálculos com porcentagens"}
+  ]},
+  prev:  { label:"Conhecimentos Específicos — Previdência Social", items:[
+    {n:1,t:"Seguridade Social: origem, evolução, conceito, organização e princípios constitucionais"},
+    {n:2,t:"Legislação Previdenciária: fontes, autonomia, vigência, hierarquia, interpretação"},
+    {n:3,t:"RGPS: segurados obrigatórios, filiação e inscrição"},
+    {n:4,t:"Segurado facultativo: conceito, características, filiação e inscrição"},
+    {n:5,t:"Financiamento da Seguridade Social: receitas e contribuições sociais"},
+    {n:6,t:"Salário de contribuição: conceito, parcelas, limites e reajustamento"},
+    {n:7,t:"Crimes contra a seguridade social — decadência e prescrição"},
+    {n:8,t:"Recurso das decisões administrativas"},
+    {n:9,t:"Plano de Benefícios da Previdência Social: espécies, carência, salário de benefício"},
+    {n:10,t:"Manutenção, perda e restabelecimento da qualidade de segurado"},
+    {n:11,t:"Serviços Previdenciários: serviço social e reabilitação profissional"},
+    {n:12,t:"Benefícios de legislações especiais: Talidomida, seringueiros, Zika Vírus"},
+    {n:13,t:"Seguro-defeso — Lei nº 10.779/2003"},
+    {n:14,t:"LOAS: BPC/LOAS e Auxílio-Inclusão"},
+    {n:15,t:"RPPS: certidão, contagem recíproca, compensação previdenciária"},
+    {n:16,t:"Emenda Constitucional nº 103/2019"},
+    {n:17,t:"Lei Complementar nº 142/2013"},
+    {n:18,t:"Lei nº 8.212/1991 e alterações"},
+    {n:19,t:"Lei nº 8.213/1991 e alterações"},
+    {n:20,t:"Decreto nº 3.048/1999 e alterações"},
+    {n:21,t:"IN PRES/INSS nº 128/2022"},
+    {n:22,t:"O servidor público como agente de desenvolvimento social"},
+    {n:23,t:"Saúde e qualidade de vida no serviço público"}
+  ]}
+};
+
+/* ─── QUESTÕES TÓPICO 1 ─── */
+const QI = [
+  {e:"Leia o trecho: 'O estudo consistente é o único caminho para quem deseja alcançar resultados sólidos em concursos públicos.' De acordo com o texto, qual é a condição para se obter bons resultados em concursos?",ops:["A) Ter talento natural para as disciplinas cobradas.","B) Estudar de forma consistente e contínua.","C) Frequentar cursos preparatórios presenciais.","D) Decorar todo o conteúdo do edital.","E) Resolver apenas questões de provas anteriores."],g:1,fb:"O texto afirma diretamente que 'o estudo consistente é o único caminho', indicando que a condição é estudar de forma consistente. Resposta: B."},
+  {e:"Considere a afirmação: 'Muitos candidatos, apesar de se dedicarem bastante, não conseguem êxito por não organizarem bem seu tempo.' A palavra 'apesar de' indica qual relação entre as ideias?",ops:["A) Causa e consequência.","B) Adição de informações.","C) Concessão (contradição entre as ideias).","D) Finalidade.","E) Conclusão."],g:2,fb:"'Apesar de' é conjunção concessiva — introduz uma ideia que contradiz o que seria esperado. Resposta: C."},
+  {e:"'O servidor público deve pautar sua conduta pela ética e pela transparência.' O termo 'pautar' foi empregado no sentido de:",ops:["A) Registrar em pauta de reunião.","B) Guiar, orientar.","C) Questionar, debater.","D) Publicar oficialmente.","E) Suspender temporariamente."],g:1,fb:"No contexto, 'pautar' significa guiar ou orientar a conduta. Resposta: B."},
+  {e:"Qual das alternativas apresenta uma informação que pode ser inferida do trecho: 'A leitura diária de textos variados amplia o repertório linguístico e facilita a interpretação em provas.'?",ops:["A) Ler apenas textos literários é suficiente para se sair bem em provas.","B) Quem lê variados textos diariamente tende a interpretar melhor em provas.","C) A interpretação de textos independe do hábito de leitura.","D) Repertório linguístico não influencia no desempenho em provas.","E) Provas de concurso não exigem interpretação de texto."],g:1,fb:"O texto afirma que leitura diária 'facilita a interpretação em provas', o que permite inferir que quem tem esse hábito tende a interpretar melhor. Resposta: B."},
+  {e:"'Pedro parou de reclamar do trabalho.' Qual pressuposto está contido nessa afirmação?",ops:["A) Pedro nunca reclamou do trabalho.","B) Pedro trabalha em outro setor.","C) Pedro reclamava do trabalho antes.","D) Pedro foi demitido.","E) Pedro está satisfeito com o salário."],g:2,fb:"O verbo 'parar de' pressupõe que a ação acontecia antes. Resposta: C."},
+  {e:"Sobre compreensão e interpretação de textos, é INCORRETO afirmar:",ops:["A) A compreensão literal refere-se ao que está explicitamente escrito no texto.","B) A interpretação permite identificar sentidos implícitos e intenções do autor.","C) Informações externas ao texto devem embasar a resposta de questões interpretativas.","D) Palavras polissêmicas devem ser interpretadas conforme o contexto.","E) O tema do texto corresponde ao assunto geral tratado pelo autor."],g:2,fb:"A alternativa C está incorreta: questões de interpretação devem ser respondidas com base no texto, nunca em informações externas. Resposta: C."},
+  {e:"'O programa social reduziu, significativamente, o número de famílias em situação de vulnerabilidade.' Qual das alternativas substitui 'significativamente' sem alterar o sentido da frase?",ops:["A) Lentamente.","B) Superficialmente.","C) Expressivamente.","D) Marginalmente.","E) Raramente."],g:2,fb:"'Significativamente' indica uma redução de grande impacto. 'Expressivamente' carrega o mesmo sentido. Resposta: C."},
+  {e:"Leia: 'Embora o candidato soubesse o conteúdo, o nervosismo o impediu de responder corretamente.' Qual relação lógica a conjunção 'embora' estabelece?",ops:["A) Conclusão.","B) Concessão.","C) Causa.","D) Adição.","E) Alternância."],g:1,fb:"'Embora' é conjunção concessiva — introduz uma ideia que, apesar de ser verdadeira, não produziu o resultado esperado. Resposta: B."},
+  {e:"'A nota fiscal eletrônica foi instituída para combater a sonegação.' A finalidade expressa na frase é:",ops:["A) Sonegar impostos por meio eletrônico.","B) Combater a sonegação fiscal.","C) Substituir a nota fiscal em papel por razões ambientais.","D) Facilitar o trabalho dos contadores.","E) Reduzir a burocracia nos cartórios."],g:1,fb:"A preposição 'para' indica finalidade. A nota foi instituída com a finalidade de combater a sonegação. Resposta: B."},
+  {e:"Qual das alternativas representa uma generalização INDEVIDA ao interpretar um texto que afirma 'alguns servidores públicos são reconhecidos por sua dedicação'?",ops:["A) Parte dos servidores públicos é dedicada.","B) Existem servidores públicos dedicados.","C) Todos os servidores públicos são exemplos de dedicação.","D) Alguns servidores se destacam pelo comprometimento.","E) Há servidores públicos comprometidos com o trabalho."],g:2,fb:"'Alguns' não autoriza generalizar para 'todos'. A alternativa C extrapola o sentido do texto. Resposta: C."}
+];
+
+/* ─── QUESTÕES TÓPICO 2 ─── */
+const QI2 = [
+  {e:"Leia o trecho: 'O servidor entrou na sala, cumprimentou os colegas, abriu o computador e iniciou o atendimento.' Julgue: o trecho acima é predominantemente narrativo.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. O trecho relata uma sequência de ações no tempo, com verbos de deslocamento e movimento no pretérito perfeito — características da narração. Resposta: CERTO."},
+  {e:"Julgue: 'Era uma sala ampla, de paredes brancas, com grandes janelas que deixavam entrar a luz da manhã.' O tipo textual predominante nesse trecho é a narração, pois apresenta elementos de cenário que ambientam uma história.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. O trecho descreve um espaço de forma estática, sem progressão de ações. O tipo predominante é a descrição, não a narração. A presença de adjetivos (ampla, brancas, grandes) e do verbo 'ser' no pretérito imperfeito reforça isso. Resposta: ERRADO."},
+  {e:"Considere: 'A previdência social, segundo a Constituição Federal, compreende um conjunto de ações destinadas a assegurar os direitos relativos à saúde, à previdência e à assistência social.' Esse trecho é dissertativo-expositivo, pois apresenta um conceito de forma imparcial, sem defender uma tese.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. O trecho define/conceitua o que é previdência social com base em fonte legal, sem posicionamento do autor. Trata-se de dissertação expositiva. Resposta: CERTO."},
+  {e:"Julgue: um mesmo texto pode apresentar mais de um tipo textual, desde que haja sempre um tipo predominante que determina sua classificação tipológica.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Textos são heterogêneos: um conto (narrativo) pode ter trechos descritivos; um artigo (argumentativo) pode incluir partes expositivas. O tipo predominante é o que determina a classificação. Resposta: CERTO."},
+  {e:"Leia: 'É imprescindível que o governo invista mais em educação pública. Sem isso, o país não alcançará o desenvolvimento que merece.' Julgue: o texto é dissertativo-expositivo porque apresenta informações sobre educação.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. O texto defende uma tese ('É imprescindível...') e usa argumento para sustentá-la. Trata-se de dissertação argumentativa, não expositiva. A dissertação expositiva apresenta informações de forma neutra, sem posicionamento. Resposta: ERRADO."},
+  {e:"'Os candidatos deverão apresentar, no ato da inscrição, cópia do documento de identidade e comprovante de residência.' Julgue: o tipo textual predominante nesse trecho é o injuntivo.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. O trecho instrui/ordena os candidatos a realizarem ações específicas, usando verbo no futuro com valor imperativo ('deverão apresentar'). Esse é o traço central do tipo injuntivo ou prescritivo. Resposta: CERTO."},
+  {e:"Julgue: a descrição e a narração se distinguem principalmente pelo critério tempo: enquanto a narração apresenta eventos em progressão temporal, a descrição retrata algo de forma estática, sem evolução de ações.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Esse é o critério fundamental: movimento no tempo (narração) versus retrato estático (descrição). A narração tem verbos de ação e progressão; a descrição tem verbos de estado e adjetivos. Resposta: CERTO."},
+  {e:"Leia: 'Misture a farinha com os ovos, acrescente o leite aos poucos e bata até obter uma massa homogênea.' Julgue: este trecho é um exemplo de texto argumentativo, pois o autor convence o leitor a seguir os passos indicados.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. O trecho é injuntivo (instrucional), não argumentativo. Textos injuntivos ordenam ou instruem com verbos no imperativo ou infinitivo. No texto argumentativo, o autor defende uma tese com base em argumentos racionais — o que não ocorre aqui. Resposta: ERRADO."},
+  {e:"Julgue: gênero textual e tipo textual são expressões sinônimas, pois ambos se referem à forma como um texto se organiza.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. São conceitos distintos. Tipo textual refere-se à estrutura linguística (narração, descrição, argumentação, etc.). Gênero textual refere-se à forma social de uso da linguagem (carta, notícia, conto, edital, etc.). Um gênero pode reunir vários tipos em sua composição. Resposta: ERRADO."},
+  {e:"Considere o trecho: 'Estudos recentes apontam que o sedentarismo aumenta em até 30% o risco de doenças cardiovasculares.' Julgue: o tipo predominante é o dissertativo-expositivo, pois o autor apresenta dados de forma objetiva sem defender explicitamente uma posição.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. O trecho cita dados de estudos de forma impessoal e neutra ('estudos apontam'), sem emitir opinião ou defender uma tese. Caracteriza-se como dissertação expositiva. Resposta: CERTO."}
+];
+
+/* ─── QUESTÕES TÓPICO 3 — Ortografia Oficial ─── */
+const QI3 = [
+  {e:"Julgue: a palavra 'ansioso' está grafada corretamente de acordo com a ortografia oficial vigente.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. A grafia correta é 'ansioso', com s. A forma 'ancioso' é incorreta. O x não existe nessa palavra. Resposta: CERTO."},
+  {e:"Julgue: de acordo com o Novo Acordo Ortográfico, a palavra 'autoescola' deve ser grafada sem hífen, pois o prefixo 'auto-' termina em vogal diferente da vogal inicial do segundo elemento.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Pelo Novo Acordo, quando o prefixo termina em vogal diferente da vogal inicial do segundo elemento, não se usa hífen. 'Auto' termina em 'o' e 'escola' começa com 'e' — vogais distintas, portanto sem hífen: autoescola. Resposta: CERTO."},
+  {e:"Julgue: a grafia correta da palavra que designa uma reunião ou espetáculo é 'seção'.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. 'Seção' significa divisão, repartição (seção de recursos humanos). A palavra que designa reunião ou espetáculo é 'sessão'. Trata-se de um par de homófonos com grafias e significados distintos. Resposta: ERRADO."},
+  {e:"Julgue: palavras terminadas no sufixo '-agem' são sempre grafadas com j, como em 'viagem', 'garagem' e 'reportagem'.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. O sufixo '-agem' é sempre grafado com j, independentemente da palavra. Formas com 'g' nesse sufixo seriam incorretas. Resposta: CERTO."},
+  {e:"Julgue: de acordo com o Novo Acordo Ortográfico, a palavra 'micro-ondas' deve ser grafada com hífen.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Quando o prefixo termina em vogal igual à vogal inicial do segundo elemento, usa-se hífen. 'Micro' termina em 'o' e 'ondas' começa com 'o' — vogais iguais, portanto: micro-ondas, com hífen. Resposta: CERTO."},
+  {e:"Julgue: a palavra 'descrição' (ato de descrever) e a palavra 'discrição' (qualidade de ser discreto) têm grafias distintas mas são frequentemente confundidas; ambas as formas são aceitas com qualquer dos dois sentidos.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. 'Descrição' e 'discrição' são palavras distintas com significados distintos e apenas uma grafia aceita para cada sentido. Usar 'descrição' no lugar de 'discrição' é erro ortográfico, e vice-versa. Resposta: ERRADO."},
+  {e:"Julgue: de acordo com a ortografia vigente, 'antissocial' é a grafia correta — sem hífen e com s dobrado.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Pelo Novo Acordo, o prefixo 'anti-' antes de palavra iniciada por 's' não leva hífen, e o 's' é duplicado: antissocial. A forma 'anti-social' pertence à norma anterior. Resposta: CERTO."},
+  {e:"Julgue: a palavra 'iminente' (que está prestes a ocorrer) e 'eminente' (ilustre, elevado) são homógrafas — têm a mesma grafia e sentidos diferentes.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. 'Iminente' e 'eminente' têm grafias diferentes: uma começa com 'i' e a outra com 'e'. Por isso, são homófonos parciais (som parecido), mas não homógrafos. Confundi-las é erro ortográfico. Resposta: ERRADO."},
+  {e:"Julgue: a ortografia correta da palavra que designa o ato de ceder algo é 'cessão'.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. 'Cessão' (com dois s e terminação -ão) é o substantivo derivado do verbo 'ceder', indicando o ato de ceder. Não confundir com 'seção' (divisão) nem com 'sessão' (reunião). Resposta: CERTO."},
+  {e:"Julgue: de acordo com a nova ortografia, palavras como 'enxada', 'enxoval' e 'enxame' são grafadas com x — e não com ch — por começarem com o prefixo 'en-' seguido de consoante.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Uma das regras de uso do x é após o prefixo 'en-' no início de palavras: enxada, enxoval, enxame, enxerto. Nesses casos, a grafia com ch seria incorreta. Resposta: CERTO."}
+];
+
+/* ─── QUESTÕES TÓPICO 4 — Acentuação Gráfica ─── */
+const QI4 = [
+  {e:"Julgue: de acordo com o Novo Acordo Ortográfico, a palavra 'ideia' não recebe acento, pois o ditongo aberto 'ei' em paroxítonas deixou de ser acentuado.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Pelo Novo Acordo de 2009, ditongos abertos 'ei' e 'oi' em paroxítonas perderam o acento. Portanto: ideia, estreia, heroico, jiboia — todas sem acento. A forma 'idéia' pertence à norma anterior. Resposta: CERTO."},
+  {e:"Julgue: a palavra 'voo' não deve ser acentuada de acordo com a ortografia vigente no Brasil.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. O Novo Acordo eliminou o acento do hiato 'oo' em paroxítonas. Portanto: voo, zoo, enjoo — sem acento. A forma 'vôo' pertence à ortografia anterior. Resposta: CERTO."},
+  {e:"Julgue: a palavra 'pôde' (passado do verbo poder) deve ser acentuada para diferenciar-se de 'pode' (presente), e essa distinção foi mantida pelo Novo Acordo Ortográfico.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. O acento diferencial foi quase todo eliminado pelo Novo Acordo, mas a distinção pôde (pretérito perfeito) × pode (presente) foi mantida como exceção, assim como pôr (verbo) × por (preposição). Resposta: CERTO."},
+  {e:"Julgue: a palavra 'saude' (sem acento) é a grafia correta de acordo com o Novo Acordo Ortográfico, pois vogais tônicas em hiatos não recebem acento quando precedidas de ditongo.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. 'Saúde' é acentuada porque o 'u' tônico está em hiato (sa-ú-de), e essa regra se mantém. A exceção é quando o i ou u tônico em hiato vem logo após ditongo em paroxítonas (ex: feiura, baiuca — sem acento). Em 'saúde' não há ditongo antes, então o acento permanece. Resposta: ERRADO."},
+  {e:"Julgue: todas as palavras proparoxítonas são acentuadas, sem exceção.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Proparoxítonas têm a sílaba tônica na antepenúltima posição e são sempre acentuadas graficamente, sem nenhuma exceção na língua portuguesa. Ex: médico, público, lâmpada, pátria. Resposta: CERTO."},
+  {e:"Julgue: o acento em 'à' (preposição + artigo feminino) é agudo, indicando tonicidade da vogal.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. O acento em 'à' é grave (`), não agudo. Ele não indica tonicidade — indica a crase, ou seja, a fusão da preposição 'a' com o artigo feminino 'a'. Confundir acento grave com agudo é erro conceitual clássico cobrado pelo Cebraspe. Resposta: ERRADO."},
+  {e:"Julgue: a palavra 'frequente' é grafada sem trema de acordo com o Novo Acordo Ortográfico, vigente no Brasil desde 2009.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. O Novo Acordo eliminou o trema em português, exceto em palavras de origem estrangeira e seus derivados. Portanto: frequente, tranquilo, linguiça, quinquênio — todas sem trema. Resposta: CERTO."},
+  {e:"Julgue: a palavra 'país' recebe acento porque o 'i' tônico está em posição de hiato, separado do 'a' por uma sílaba.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Em 'país' (pa-ís), o 'i' tônico está em hiato com a vogal anterior e recebe acento por isso. A regra do hiato com i ou u tônicos é mantida pelo Novo Acordo — exceto após ditongo em paroxítonas. Resposta: CERTO."},
+  {e:"Julgue: oxítonas terminadas em 'a', 'e', 'o' (e suas formas plurais com 's') são sempre acentuadas.",ops:["CERTO","ERRADO"],g:0,fb:"Correto. Oxítonas (acento na última sílaba) são acentuadas quando terminam em a(s), e(s), o(s), em ou ens. Ex: sofá, café, cipó, também, parabéns. Isso é regra geral de acentuação de oxítonas. Resposta: CERTO."},
+  {e:"Julgue: a palavra 'feiura' deve ser acentuada no 'u' por se tratar de hiato com vogal tônica, assim como ocorre com 'saúde' e 'país'.",ops:["CERTO","ERRADO"],g:1,fb:"Errado. 'Feiura' é paroxítona (fe-iu-ra) e o hiato com 'u' vem logo após o ditongo 'ei'. Pelo Novo Acordo, quando o i ou u em hiato é precedido de ditongo em paroxítonas, o acento não se aplica. Por isso: feiura, baiuca — sem acento. Já 'saúde' e 'país' não têm ditongo antes do hiato. Resposta: ERRADO."}
+];
+
+/* ─── PROGRESSO ─── */
+const STORAGE_KEY = 'talento_progresso_v1';
+function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; } }
+function saveProgress(d) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch {} }
+function markDone(id) { const p = loadProgress(); p[id] = true; saveProgress(p); }
+function isDone(id) { return !!loadProgress()[id]; }
+
+function doneBadge() {
+  return `<span class="t-done">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    Concluído
+  </span>`;
+}
+
+function updateProgressUI() {
+  const done = loadProgress();
+  let total = 0, concluded = 0;
+  Object.values(INSS).forEach(sec => {
+    sec.items.forEach(item => {
+      if (item.page) {
+        total++;
+        if (done[item.page]) concluded++;
+        const el = document.querySelector(`[data-page="${item.page}"]`);
+        if (el && done[item.page]) {
+          el.classList.add('done');
+          if (!el.querySelector('.t-done')) {
+            const tag = el.querySelector('.t-tag');
+            if (tag) tag.insertAdjacentHTML('afterend', doneBadge());
+          }
+        }
+      }
+    });
+  });
+  const fill = document.getElementById('fill-inss');
+  const info = document.getElementById('info-inss');
+  if (fill && total > 0) fill.style.width = Math.round((concluded / total) * 100) + '%';
+  if (info) info.innerHTML = `<span>${concluded}</span> / ${total} concluídos`;
+}
+
+/* ─── NAVEGAÇÃO ─── */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'page-inss') updateProgressUI();
+}
+
+function openTopico(page, titulo, materia) {
+  if (page === 'gen') {
+    document.getElementById('gen-title').textContent = titulo;
+    document.getElementById('gen-sub').textContent = materia;
+    showPage('page-resumo-gen');
+  } else {
+    showPage(page);
+  }
+}
+
+/* ─── RENDER EDITAL ─── */
+function renderEdital() {
+  const edital = document.getElementById('edital-inss');
+  const done = loadProgress();
+  edital.innerHTML = Object.keys(INSS).map(key => {
+    const sec = INSS[key];
+    const items = sec.items.map(item => {
+      const hasPage = !!item.page;
+      const finished = hasPage && done[item.page];
+      let cls = 'topico-item';
+      if (hasPage) cls += ' has-inss';
+      if (finished) cls += ' done';
+      const dataAttr = hasPage ? `data-page="${item.page}"` : '';
+      let tags = '';
+      if (hasPage) tags += `<span class="t-tag">✓ pronto</span>`;
+      if (finished) tags += doneBadge();
+      const pg = item.page || 'gen';
+      return `<div class="${cls}" ${dataAttr} onclick="openTopico('${pg}','${item.t.replace(/'/g,"\\'")}','${sec.label}')">
+        <span class="t-num">${item.n}</span>
+        <span class="t-text">${item.t}</span>
+        ${tags}
+        <span class="t-arrow">›</span>
+      </div>`;
+    }).join('');
+    return `<div class="materia-sec"><div class="mat-label">${sec.label}</div><div class="topico-list">${items}</div></div>`;
+  }).join('');
+}
+
+/* ─── QUESTÕES ENGINE ─── */
+function buildQuestoes(containerId, scoreId, snumId, questoes, pageId) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  const alreadyDone = isDone(pageId);
+  const answered = new Array(questoes.length).fill(alreadyDone);
+  c.innerHTML = questoes.map((q, qi) => `
+    <div class="q-card">
+      <div class="q-num">Questão ${qi+1}</div>
+      <div class="q-txt">${q.e}</div>
+      <div class="opcoes">
+        ${q.ops.map((op, oi) => `<div class="opcao${alreadyDone ? ' disabled' + (oi===q.g?' correta':'') : ''}" id="op-${containerId}-${qi}-${oi}" onclick="responder('${containerId}','${scoreId}','${snumId}',${qi},${oi},${questoes.length},'${pageId}')">${op}</div>`).join('')}
+      </div>
+      <div class="feedback${alreadyDone ? ' show certo' : ''}" id="fb-${containerId}-${qi}">${alreadyDone ? '✓ Gabarito: ' + q.fb : ''}</div>
+    </div>`).join('');
+  window['_ans_'+containerId] = answered;
+  window['_cor_'+containerId] = 0;
+  window['_q_'+containerId] = questoes;
+  if (alreadyDone) {
+    const s = document.getElementById(scoreId);
+    const sn = document.getElementById(snumId);
+    if (s) s.classList.add('show');
+    if (sn) sn.textContent = `${questoes.length}/${questoes.length}`;
+    if (s && !s.querySelector('.score-done-badge')) {
+      s.insertAdjacentHTML('beforeend', `<div class="score-done-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Módulo concluído — progresso salvo!
+      </div>`);
+    }
+  }
+}
+
+function responder(cid, sid, snid, qi, oi, total, pageId) {
+  const questoes = window['_q_'+cid];
+  const answered = window['_ans_'+cid];
+  if (answered[qi]) return;
+  answered[qi] = true;
+  const q = questoes[qi];
+  const isCorrect = oi === q.g;
+  if (isCorrect) window['_cor_'+cid]++;
+  q.ops.forEach((_, i) => {
+    const el = document.getElementById(`op-${cid}-${qi}-${i}`);
+    el.classList.add('disabled');
+    if (i === q.g) el.classList.add('correta');
+    else if (i === oi && !isCorrect) el.classList.add('errada');
+  });
+  const fb = document.getElementById(`fb-${cid}-${qi}`);
+  fb.textContent = (isCorrect ? '✓ Correto! ' : '✗ Incorreto. ') + q.fb;
+  fb.className = 'feedback show ' + (isCorrect ? 'certo' : 'errado');
+  if (answered.every(Boolean)) {
+    const s = document.getElementById(sid);
+    const sn = document.getElementById(snid);
+    s.classList.add('show');
+    sn.textContent = `${window['_cor_'+cid]}/${total}`;
+    markDone(pageId);
+    setTimeout(() => {
+      s.insertAdjacentHTML('beforeend', `<div class="score-done-badge" style="animation:fadeUp 0.4s ease both">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Módulo concluído — progresso salvo!
+      </div>`);
+    }, 300);
+  }
+}
+
+/* ─── INIT ─── */
+renderEdital();
+buildQuestoes('q-inss-1', 'score-inss-1', 'snum-inss-1', QI,  'page-resumo-inss-1');
+buildQuestoes('q-inss-2', 'score-inss-2', 'snum-inss-2', QI2, 'page-resumo-inss-2');
+buildQuestoes('q-inss-3', 'score-inss-3', 'snum-inss-3', QI3, 'page-resumo-inss-3');
+buildQuestoes('q-inss-4', 'score-inss-4', 'snum-inss-4', QI4, 'page-resumo-inss-4');
+updateProgressUI();
+</script>
+</body>
+</html>
