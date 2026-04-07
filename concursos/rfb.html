@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RFB — Analista Tributário | Talento.dev.br</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0b0f1c;
+      --navy-card:   #161d30;
+      --navy-border: rgba(255,255,255,0.07);
+      --navy-hover:  rgba(255,255,255,0.11);
+      --gold:        #f0a500;
+      --gold-light:  #ffd166;
+      --rfb-blue:    #3b82f6;
+      --rfb-bg:      rgba(59,130,246,0.10);
+      --rfb-border:  rgba(59,130,246,0.35);
+      --text:        #e8eaf0;
+      --text-muted:  #8892a4;
+      --text-dim:    #4f5a6e;
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   18px;
+      --radius-xl:   24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 15% 10%, rgba(59,130,246,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 20%, rgba(240,165,0,0.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    #app { position: relative; z-index: 1; }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: rgba(11,15,28,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--navy-border);
+      padding: 0.7rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .top-bar a {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .top-bar a:hover { color: var(--gold); }
+    .top-bar a svg { opacity: 0.6; transition: opacity 0.2s; }
+    .top-bar a:hover svg { opacity: 1; }
+    .top-bar-sep { color: var(--text-dim); font-size: 12px; }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; animation: fadeUp 0.35s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .wrap { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .back-btn {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md);
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.18s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .back-btn:hover { background: var(--navy-hover); color: var(--text); border-color: var(--navy-hover); }
+    .ph-title { font-size: 19px; font-weight: 700; color: #fff; line-height: 1.3; }
+    .ph-sub   { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+
+    /* ── HERO BANNER ── */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(240,165,0,0.08) 100%);
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: var(--radius-xl);
+      padding: 1.8rem 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::before {
+      content: '🏛️';
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 52px;
+      opacity: 0.15;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--rfb-bg);
+      border: 1px solid var(--rfb-border);
+      color: var(--rfb-blue);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .hero-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .hero-meta-item::before { content: '•'; color: var(--rfb-blue); }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar-wrap {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .progress-bar-track {
+      flex: 1; height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--rfb-blue), #60a5fa);
+      transition: width 0.6s ease;
+    }
+    .progress-info { font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+    .progress-info span { color: var(--gold); }
+
+    /* ── MATÉRIA SECTION ── */
+    .materia-sec { margin-bottom: 2rem; }
+    .mat-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-dim);
+      margin-bottom: 0.65rem;
+      padding-left: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mat-label-icon { font-size: 14px; }
+    .topico-list { display: flex; flex-direction: column; gap: 5px; }
+    .topico-item {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.18s ease;
+    }
+    .topico-item:hover { background: var(--navy-hover); border-color: rgba(255,255,255,0.12); transform: translateX(3px); }
+    .topico-item.has-rfb { border-left: 3px solid var(--rfb-blue); }
+
+    .t-num {
+      font-size: 11px; font-weight: 700;
+      min-width: 24px; height: 24px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      background: var(--rfb-bg);
+      color: var(--rfb-blue);
+      border: 1px solid var(--rfb-border);
+    }
+    .t-text { font-size: 13.5px; color: var(--text); flex: 1; line-height: 1.45; }
+    .t-tag {
+      font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; flex-shrink: 0;
+      background: var(--rfb-bg); color: var(--rfb-blue); border: 1px solid var(--rfb-border);
+    }
+    .t-tag-hot {
+      font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 700; flex-shrink: 0;
+      background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.25);
+    }
+    .t-arrow { color: var(--text-dim); font-size: 15px; flex-shrink: 0; }
+
+    .topico-item.done {
+      background: rgba(59,130,246,0.06);
+      border-color: rgba(59,130,246,0.22);
+    }
+    .topico-item.done .t-text { color: var(--text-muted); }
+    .t-done {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 700;
+      padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
+      background: rgba(16,185,129,0.14);
+      color: #10b981;
+      border: 1px solid rgba(16,185,129,0.30);
+      letter-spacing: 0.04em;
+    }
+    .t-done svg { width: 11px; height: 11px; }
+
+    /* ── RESUMO ── */
+    .resumo-sec {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1.75rem;
+      margin-bottom: 1.1rem;
+    }
+    .resumo-sec h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--navy-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .resumo-sec h2::before {
+      content: '';
+      display: inline-block;
+      width: 3px; height: 16px;
+      border-radius: 2px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .resumo-sec p { font-size: 14px; color: var(--text-muted); line-height: 1.85; margin-bottom: 0.9rem; }
+    .resumo-sec p:last-child { margin-bottom: 0; }
+    .resumo-sec ul { padding-left: 1.1rem; margin-bottom: 0.9rem; }
+    .resumo-sec ul li { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 0.4rem; }
+    .resumo-sec ul li strong { color: var(--text); font-weight: 600; }
+    .tip {
+      background: rgba(240,165,0,0.06);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 0.9rem 1.1rem;
+      margin: 1.1rem 0 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .tip-lbl {
+      font-size: 10px; font-weight: 700; color: var(--gold);
+      text-transform: uppercase; letter-spacing: 0.10em;
+      margin-bottom: 5px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .tip-lbl::before { content: '💡'; font-size: 12px; }
+
+    /* ── TABELA ── */
+    .resumo-table {
+      width: 100%; border-collapse: collapse; margin: 0.9rem 0;
+      font-size: 13px;
+    }
+    .resumo-table th {
+      background: var(--rfb-bg);
+      color: var(--rfb-blue);
+      font-weight: 700; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 0.55rem 0.85rem; text-align: left;
+      border: 1px solid rgba(59,130,246,0.20);
+    }
+    .resumo-table td {
+      padding: 0.55rem 0.85rem;
+      border: 1px solid var(--navy-border);
+      color: var(--text-muted); line-height: 1.6;
+      vertical-align: top;
+    }
+    .resumo-table td strong { color: var(--text); font-weight: 600; }
+    .resumo-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+    /* ── QUESTÕES ── */
+    .q-header {
+      font-size: 15px; font-weight: 700; color: #fff;
+      margin: 2rem 0 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .q-header::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 18px;
+      border-radius: 2px;
+      background: var(--gold);
+    }
+    .q-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .q-num {
+      font-size: 10px; font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 0.55rem;
+    }
+    .q-txt { font-size: 14px; color: var(--text); line-height: 1.75; margin-bottom: 1rem; }
+    .opcoes { display: flex; flex-direction: column; gap: 7px; }
+    .opcao {
+      display: flex; align-items: flex-start; gap: 11px;
+      padding: 0.7rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--navy-border);
+      cursor: pointer;
+      font-size: 13px; color: var(--text-muted); line-height: 1.55;
+      background: rgba(255,255,255,0.02);
+      transition: all 0.15s;
+    }
+    .opcao:hover:not(.disabled) { background: var(--navy-hover); border-color: rgba(255,255,255,0.14); color: var(--text); }
+    .opcao.correta  { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.4); color: #6ee7b7; }
+    .opcao.errada   { background: rgba(239,68,68,0.10);  border-color: rgba(239,68,68,0.35); color: #fca5a5; }
+    .opcao.disabled { cursor: default; }
+    .op-letra { font-weight: 700; flex-shrink: 0; min-width: 16px; }
+    .feedback {
+      display: none; margin-top: 0.9rem;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 13px; line-height: 1.65;
+    }
+    .feedback.show { display: block; }
+    .feedback.certo  { background: rgba(16,185,129,0.10); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
+    .feedback.errado { background: rgba(239,68,68,0.10);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+
+    .score-box {
+      display: none;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-xl);
+      padding: 2rem; text-align: center;
+      margin-top: 1.5rem;
+      position: relative; overflow: hidden;
+    }
+    .score-box::before {
+      content: '';
+      position: absolute; top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 200px; height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(240,165,0,0.15) 0%, transparent 70%);
+    }
+    .score-box.show { display: block; }
+    .score-num { font-family: 'DM Serif Display', serif; font-size: 52px; color: var(--gold); position: relative; }
+    .score-lbl { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+    .score-done-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.30);
+      color: #10b981;
+      font-size: 13px; font-weight: 600;
+      padding: 8px 18px; border-radius: 40px;
+      margin-top: 1rem;
+    }
+
+    /* ── COMING SOON ── */
+    .coming {
+      background: var(--navy-card);
+      border: 1px dashed var(--navy-border);
+      border-radius: var(--radius-xl);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .coming-icon { font-size: 44px; margin-bottom: 1rem; opacity: 0.8; }
+    .coming-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .coming-sub { font-size: 13px; line-height: 1.7; color: var(--text-muted); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 1.5rem 1rem 4rem; }
+      .page-header { flex-direction: column; gap: 10px; }
+      .ph-title { font-size: 16px; }
+      .hero-title { font-size: 20px; }
+      .resumo-sec { padding: 1.2rem 1.25rem; }
+      .q-card { padding: 1.1rem; }
+      .resumo-table { font-size: 12px; }
+      .resumo-table th, .resumo-table td { padding: 0.45rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Concursos
+  </a>
+  <span class="top-bar-sep">/</span>
+  <span style="color:var(--rfb-blue);font-size:12px;font-weight:600;">RFB</span>
+</div>
+
+<div id="app">
+
+    <!-- ════ EDITAL PAGE ════ -->
+  <div class="page active" id="page-rfb">
+    <div class="wrap">
+      <div class="page-header">
+        <a class="back-btn" href="index.html">← Voltar</a>
+        <div>
+          <div class="ph-title">🏛️ Receita Federal do Brasil</div>
+          <div class="ph-sub">Analista Tributário · Banca: FGV (Última)</div>
+        </div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="fill-tjce" style="width:0%"></div></div>
+        <div class="progress-info" id="info-rfb"><span>0</span> / 0 concluídos</div>
+      </div>
+      <div id="edital-rfb"></div>
+    </div>
+  </div>
+  
+  
+
+  <!-- ════ RESUMO: PORTUGUÊS T1 — Interpretação de Textos ════ -->
+  <div class="page" id="page-rfb-port-1">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-rfb')">← Voltar</button>
+        <div>
+          <div class="ph-title">Interpretação de textos</div>
+          <div class="ph-sub">RFB · Língua Portuguesa · Tópico 1 · Banca: FGV</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Por que interpretação é tão cobrada na RFB?</h2>
+        <p>A FGV costuma apresentar textos densos — jornalísticos, acadêmicos ou literários — e elaborar questões que exigem do candidato muito mais do que localizar informações: é preciso identificar o posicionamento do autor, distinguir fato de opinião, captar ironias e reconhecer relações lógicas entre parágrafos.</p>
+        <p>O diferencial da FGV em relação a outras bancas é a ênfase em <strong>intertextualidade</strong> e em questões sobre o <strong>efeito de sentido</strong> produzido por escolhas linguísticas do autor (uso de aspas, travessão, ironia, eufemismo).</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Compreensão literal × Inferência</h2>
+        <p>A compreensão literal recupera o que está explicitamente dito. A inferência vai além, ativando o conhecimento prévio e as pistas textuais para deduzir o não-dito.</p>
+        <ul>
+          <li><strong>Inferência válida:</strong> necessariamente decorre do texto, sem acrescentar informações externas.</li>
+          <li><strong>Inferência inválida:</strong> extrapola o texto ou distorce seu sentido.</li>
+          <li><strong>Pressuposto:</strong> ideia já assumida como verdadeira para que o enunciado faça sentido. "O candidato deixou de estudar" pressupõe que ele estudava.</li>
+          <li><strong>Subentendido:</strong> ideia que o leitor capta sem que esteja explícita ou pressuposta — depende do contexto pragmático.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>A FGV adora perguntar "o que o texto PERMITE inferir" — a alternativa correta nunca afirma mais do que o texto autoriza. Fuja de generalizações absolutas ("todos", "sempre", "nenhum") que o texto não sustenta.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Tema, tese e argumento</h2>
+        <p>O <strong>tema</strong> é o assunto central. A <strong>tese</strong> é o posicionamento do autor sobre esse assunto. O <strong>argumento</strong> é a justificativa usada para sustentar a tese. Para encontrá-los:</p>
+        <ul>
+          <li>Tema → responde "do que trata o texto?"</li>
+          <li>Tese → responde "o que o autor defende/pensa sobre esse assunto?"</li>
+          <li>Argumento → responde "por que o autor pensa assim?"</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>Questões "o texto critica / defende / ironiza" pedem que você identifique o posicionamento do autor — não o que você acha. O título e o último parágrafo quase sempre entregam a tese.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Recursos de linguagem e efeitos de sentido</h2>
+        <p>A FGV frequentemente pede a análise de recursos como ironia, eufemismo, antítese e metáfora no contexto do texto, perguntando qual é o <em>efeito de sentido</em> produzido por esses recursos.</p>
+        <ul>
+          <li><strong>Ironia:</strong> diz o oposto do que pretende — cria distância crítica.</li>
+          <li><strong>Eufemismo:</strong> suaviza algo negativo — cria atenuação.</li>
+          <li><strong>Antítese:</strong> contraste de ideias opostas — cria tensão/paradoxo.</li>
+          <li><strong>Metáfora:</strong> comparação implícita — cria imagem e expressividade.</li>
+        </ul>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FGV)</div>
+      <div id="q-rfb-port-1"></div>
+      <div class="score-box" id="score-rfb-port-1">
+        <div class="score-num" id="snum-rfb-port-1"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO: PORTUGUÊS T2 — Coesão e Coerência ════ -->
+  <div class="page" id="page-rfb-port-2">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-rfb')">← Voltar</button>
+        <div>
+          <div class="ph-title">Coesão e coerência textual</div>
+          <div class="ph-sub">RFB · Língua Portuguesa · Tópico 2 · Banca: FGV</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Coesão e coerência: qual a diferença?</h2>
+        <p><strong>Coesão</strong> é a articulação entre os elementos superficiais do texto — as palavras e frases se conectam por meio de mecanismos gramaticais e lexicais. <strong>Coerência</strong> é a unidade de sentido do texto — as ideias formam um todo lógico e não se contradizem.</p>
+        <p>É possível ter um texto coeso mas incoerente (gramaticalmente correto, mas sem sentido) e, em teoria, um texto coerente mas não coeso (ideias relacionadas, mas mal articuladas gramaticalmente).</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Mecanismos de coesão referencial</h2>
+        <p>A coesão referencial ocorre quando um elemento do texto retoma ou antecipa outro. Os principais tipos:</p>
+        <ul>
+          <li><strong>Pronomes:</strong> substituem substantivos para evitar repetição. Ex: "O servidor entrou. <em>Ele</em> cumprimentou os colegas." ('Ele' retoma 'o servidor')</li>
+          <li><strong>Elipse:</strong> omissão de um termo já identificado. Ex: "O diretor assinou o documento e [o diretor] saiu."</li>
+          <li><strong>Sinônimos / hiperônimos:</strong> substituição lexical. Ex: "O funcionário foi promovido. O <em>servidor</em> recebeu o novo cargo."</li>
+          <li><strong>Expressão nominal definida:</strong> retomada por descrição. Ex: "Lula foi eleito. <em>O presidente</em> tomou posse em janeiro."</li>
+        </ul>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Mecanismos de coesão sequencial — Conectivos</h2>
+        <p>Os conectivos (conjunções, advérbios, locuções) garantem a progressão lógica entre as ideias. A FGV cobra muito a identificação da relação semântica estabelecida pelo conectivo:</p>
+        <table class="resumo-table">
+          <tr><th>Relação</th><th>Conectivos típicos</th></tr>
+          <tr><td><strong>Adição</strong></td><td>e, além disso, também, ademais, outrossim</td></tr>
+          <tr><td><strong>Adversidade</strong></td><td>mas, porém, contudo, todavia, entretanto, no entanto</td></tr>
+          <tr><td><strong>Conclusão</strong></td><td>portanto, logo, assim, por isso, consequentemente</td></tr>
+          <tr><td><strong>Causa</strong></td><td>porque, pois, visto que, uma vez que, já que</td></tr>
+          <tr><td><strong>Concessão</strong></td><td>embora, ainda que, mesmo que, apesar de (que)</td></tr>
+          <tr><td><strong>Condição</strong></td><td>se, caso, desde que, contanto que</td></tr>
+          <tr><td><strong>Finalidade</strong></td><td>para (que), a fim de (que), com o intuito de</td></tr>
+          <tr><td><strong>Explicação</strong></td><td>pois, porque, que (explicativo)</td></tr>
+          <tr><td><strong>Alternância</strong></td><td>ou...ou, ora...ora, seja...seja</td></tr>
+          <tr><td><strong>Conformidade</strong></td><td>conforme, segundo, de acordo com, consoante</td></tr>
+          <tr><td><strong>Comparação</strong></td><td>assim como, tal qual, mais...do que, menos...do que</td></tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>A FGV pede com frequência: "O conectivo X pode ser substituído por Y sem alterar o sentido?" — verifique se a relação lógica se mantém. "Mas" ≠ "porque": adversidade ≠ causalidade.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Coerência: progressão temática e continuidade</h2>
+        <p>Para que um texto seja coerente, é necessário que haja: <strong>progressão</strong> (o texto avança, traz informações novas), <strong>continuidade</strong> (mantém o tema central) e <strong>não-contradição</strong> (as ideias não se anulam).</p>
+        <p>A FGV costuma apresentar textos com lacunas e pedir qual alternativa completa o trecho mantendo coerência — o candidato precisa identificar qual ideia é compatível com a argumentação do parágrafo.</p>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FGV)</div>
+      <div id="q-rfb-port-2"></div>
+      <div class="score-box" id="score-rfb-port-2">
+        <div class="score-num" id="snum-rfb-port-2"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO: INGLÊS — Interpretação de Texto ════ -->
+  <div class="page" id="page-rfb-ing-1">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-rfb')">← Voltar</button>
+        <div>
+          <div class="ph-title">Reading Comprehension — Interpretação de Texto em Inglês</div>
+          <div class="ph-sub">RFB · Inglês · Tópico 1 · Banca: FGV</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Como a FGV cobra inglês na RFB</h2>
+        <p>A prova de inglês da RFB/FGV foca quase que exclusivamente em <strong>leitura e compreensão de textos</strong>. Não há gramática isolada. Os textos são geralmente artigos jornalísticos ou acadêmicos sobre economia, direito tributário internacional, comércio exterior e administração pública — temas diretamente ligados à carreira.</p>
+        <p>As questões cobram: identificação da ideia principal, inferência de sentido, vocabulário no contexto, relações entre parágrafos e o ponto de vista do autor.</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Estratégia de leitura (Skimming & Scanning)</h2>
+        <ul>
+          <li><strong>Skimming:</strong> leitura rápida para captar a ideia geral. Leia o título, subtítulo, primeiro e último parágrafo, e a primeira frase de cada parágrafo intermediário.</li>
+          <li><strong>Scanning:</strong> leitura direcionada para localizar informação específica (um nome, um número, uma data). Útil após ler a questão.</li>
+          <li>Leia as questões antes de ler o texto — isso orienta o que procurar.</li>
+          <li>Não traduza mentalmente palavra por palavra — busque o sentido global.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>Palavras cognatas (semelhantes ao português) são aliadas: "fiscal policy", "tax reform", "administrative process" são facilmente compreensíveis. Cuidado com os falsos cognatos: "eventually" = eventualmente NO INGLÊS significa "finalmente", não eventualmente.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Vocabulário essencial — campo semântico da RFB</h2>
+        <table class="resumo-table">
+          <tr><th>Inglês</th><th>Português</th></tr>
+          <tr><td>tax revenue</td><td>arrecadação tributária</td></tr>
+          <tr><td>customs duty / tariff</td><td>tarifa aduaneira</td></tr>
+          <tr><td>tax evasion</td><td>sonegação fiscal</td></tr>
+          <tr><td>tax avoidance</td><td>elisão fiscal (legal)</td></tr>
+          <tr><td>trade deficit/surplus</td><td>déficit/superávit comercial</td></tr>
+          <tr><td>fiscal policy</td><td>política fiscal</td></tr>
+          <tr><td>enforcement</td><td>fiscalização, aplicação da lei</td></tr>
+          <tr><td>taxpayer</td><td>contribuinte</td></tr>
+          <tr><td>withholding tax</td><td>imposto retido na fonte</td></tr>
+          <tr><td>compliance</td><td>conformidade, cumprimento das normas</td></tr>
+          <tr><td>assessment</td><td>lançamento (tributário), avaliação</td></tr>
+          <tr><td>statute of limitations</td><td>prescrição/decadência</td></tr>
+          <tr><td>audit</td><td>auditoria, fiscalização</td></tr>
+          <tr><td>penalty / fine</td><td>multa, penalidade</td></tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>Falsos cognatos clássicos em contexto tributário: "eventually" (finalmente, não eventualmente), "actually" (na verdade, não atualmente), "pretend" (fingir, não pretender), "fabric" (tecido, não fábrica). Memorize esses.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Conectivos em inglês — relações lógicas</h2>
+        <table class="resumo-table">
+          <tr><th>Relação</th><th>Conectivos em inglês</th></tr>
+          <tr><td>Adição</td><td>furthermore, moreover, in addition, also</td></tr>
+          <tr><td>Adversidade</td><td>however, nevertheless, yet, although, despite</td></tr>
+          <tr><td>Causa</td><td>because, since, as, due to, owing to</td></tr>
+          <tr><td>Conclusão</td><td>therefore, thus, hence, consequently, as a result</td></tr>
+          <tr><td>Concessão</td><td>even though, while, whereas, albeit</td></tr>
+          <tr><td>Condição</td><td>if, provided that, unless, as long as</td></tr>
+        </table>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FGV)</div>
+      <div id="q-rfb-ing-1"></div>
+      <div class="score-box" id="score-rfb-ing-1">
+        <div class="score-num" id="snum-rfb-ing-1"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO: DIREITO TRIBUTÁRIO T1 — STN e Competência ════ -->
+  <div class="page" id="page-rfb-trib-1">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-rfb')">← Voltar</button>
+        <div>
+          <div class="ph-title">Sistema Tributário Nacional e Competência Tributária</div>
+          <div class="ph-sub">RFB · Direito Tributário · Tópico 1 · Banca: FGV</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Sistema Tributário Nacional (STN)</h2>
+        <p>O Sistema Tributário Nacional está previsto nos arts. 145 a 162 da Constituição Federal de 1988 e regulamentado principalmente pelo Código Tributário Nacional (CTN — Lei nº 5.172/1966). É o conjunto de normas que disciplina a instituição, arrecadação e fiscalização de tributos no Brasil.</p>
+        <p>Princípios constitucionais tributários fundamentais:</p>
+        <ul>
+          <li><strong>Legalidade:</strong> nenhum tributo pode ser exigido sem lei que o estabeleça (art. 150, I, CF).</li>
+          <li><strong>Isonomia:</strong> vedado tratamento desigual entre contribuintes em situação equivalente.</li>
+          <li><strong>Irretroatividade:</strong> a lei tributária não pode retroagir para alcançar fatos geradores passados.</li>
+          <li><strong>Anterioridade:</strong> o tributo não pode ser cobrado no mesmo exercício financeiro em que publicada a lei que o instituiu (anterioridade anual + nonagesimal).</li>
+          <li><strong>Vedação ao confisco:</strong> o tributo não pode ter efeito confiscatório.</li>
+          <li><strong>Liberdade de tráfego:</strong> vedado estabelecer limitações ao tráfego de pessoas ou bens por meio de tributos interestaduais/intermunicipais.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>A FGV adora questões sobre exceções à anterioridade. II, IE, IPI, IOF e empréstimos compulsórios de guerra são exceções à anterioridade anual. CIDE-Combustíveis e ICMS-Combustíveis têm regra especial (noventena sem anterioridade anual).</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Espécies tributárias</h2>
+        <p>O STN adota a teoria pentapartida (cinco espécies tributárias), conforme o STF:</p>
+        <table class="resumo-table">
+          <tr><th>Espécie</th><th>Característica principal</th><th>Exemplo</th></tr>
+          <tr><td><strong>Imposto</strong></td><td>Não vinculado — independe de atividade estatal específica ao contribuinte</td><td>IR, ICMS, IPTU</td></tr>
+          <tr><td><strong>Taxa</strong></td><td>Vinculada — contraprestação de serviço público ou poder de polícia</td><td>Taxa de licença, taxa judiciária</td></tr>
+          <tr><td><strong>Contribuição de melhoria</strong></td><td>Vinculada — decorrente de obra pública que valoriza imóvel do contribuinte</td><td>Asfaltamento, metrô</td></tr>
+          <tr><td><strong>Empréstimo compulsório</strong></td><td>Restituível — somente União, por lei complementar, em casos específicos</td><td>Calamidade pública, guerra</td></tr>
+          <tr><td><strong>Contribuições especiais</strong></td><td>Finalidade específica — sociais, econômicas, profissionais</td><td>COFINS, CSLL, CIDE</td></tr>
+        </table>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Competência tributária</h2>
+        <p>Competência tributária é o poder outorgado pela CF para que os entes políticos (União, Estados, DF e Municípios) criem tributos por lei própria. É <strong>indelegável</strong> (não pode ser transferida), <strong>incaducável</strong> (não se perde pelo não exercício) e <strong>irrenunciável</strong>.</p>
+        <ul>
+          <li><strong>Privativa:</strong> cada ente possui tributos exclusivos (ex: IPI é privativo da União).</li>
+          <li><strong>Comum:</strong> todos os entes podem instituir taxas e contribuições de melhoria.</li>
+          <li><strong>Residual:</strong> somente a União pode criar novos impostos não previstos na CF (art. 154, I — por lei complementar, não cumulativos).</li>
+          <li><strong>Extraordinária:</strong> somente a União, em guerra ou iminência, pode criar impostos extraordinários (art. 154, II).</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>Atenção: competência tributária ≠ capacidade tributária ativa. A competência é indelegável (criar o tributo). A capacidade ativa (arrecadar/fiscalizar) pode ser delegada a outra pessoa jurídica de direito público — o que acontece com o INSS/Receita Federal.</div>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FGV)</div>
+      <div id="q-rfb-trib-1"></div>
+      <div class="score-box" id="score-rfb-trib-1">
+        <div class="score-num" id="snum-rfb-trib-1"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO: LEGISLAÇÃO ADUANEIRA T1 ════ -->
+  <div class="page" id="page-rfb-aduan-1">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-rfb')">← Voltar</button>
+        <div>
+          <div class="ph-title">Importação, Exportação e Regimes Aduaneiros</div>
+          <div class="ph-sub">RFB · Legislação Aduaneira · Tópico 1 · Banca: FGV</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Por que aduaneira é CRÍTICA para Analista Tributário</h2>
+        <p>A Legislação Aduaneira é uma das matérias com maior peso específico para o Analista Tributário da RFB, pois corresponde diretamente à atuação profissional do cargo. O Regulamento Aduaneiro (Decreto nº 6.759/2009) é a principal fonte normativa, complementado por instruções normativas da RFB.</p>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Zonas aduaneiras</h2>
+        <ul>
+          <li><strong>Zona primária:</strong> área contínua de porto, aeroporto ou posto de fronteira sob controle aduaneiro. É onde ocorre o despacho de importação/exportação. Ex: porto de Santos, aeroporto de Guarulhos.</li>
+          <li><strong>Zona secundária:</strong> restante do território aduaneiro (todo o território nacional, exceto a zona primária). Inclui os recintos alfandegados no interior.</li>
+          <li><strong>Território aduaneiro:</strong> totalidade do território nacional — inclui espaço aéreo, águas territoriais e plataforma continental.</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>A FGV adora perguntar se determinado recinto está na zona primária ou secundária. Lembre: porto/aeroporto/fronteira = primária. O restante do Brasil, incluindo recintos alfandegados no interior, = secundária.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Despacho aduaneiro de importação</h2>
+        <p>O despacho aduaneiro é o procedimento pelo qual a autoridade aduaneira verifica a exatidão dos dados declarados pelo importador. Etapas:</p>
+        <ul>
+          <li><strong>Declaração de Importação (DI):</strong> documento eletrônico preenchido no SISCOMEX pelo importador ou despachante.</li>
+          <li><strong>Canais de parametrização:</strong> após o registro da DI, a mercadoria é direcionada para um canal de conferência:</li>
+        </ul>
+        <table class="resumo-table">
+          <tr><th>Canal</th><th>O que ocorre</th></tr>
+          <tr><td><strong>Verde</strong></td><td>Desembaraço automático — sem conferência documental ou física</td></tr>
+          <tr><td><strong>Amarelo</strong></td><td>Conferência documental — sem exame físico da mercadoria</td></tr>
+          <tr><td><strong>Vermelho</strong></td><td>Conferência documental E exame físico da mercadoria</td></tr>
+          <tr><td><strong>Cinza</strong></td><td>Conferência documental, exame físico E controle de preço/dumping</td></tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>Os canais são mnemônicos: Verde = livre; Amarelo = documentos; Vermelho = documentos + físico; Cinza = tudo + preço. O canal cinza é usado quando há suspeita de subfaturamento ou dumping.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Regimes aduaneiros especiais</h2>
+        <p>Os regimes aduaneiros especiais permitem a entrada ou saída de mercadorias com suspensão ou isenção de tributos, sujeitos a condições e prazos específicos:</p>
+        <table class="resumo-table">
+          <tr><th>Regime</th><th>Descrição</th><th>Prazo típico</th></tr>
+          <tr><td><strong>Admissão temporária</strong></td><td>Entrada de bens estrangeiros com suspensão de tributos, para fins específicos (feiras, shows, maquinário)</td><td>Até 1 ano (prorrogável)</td></tr>
+          <tr><td><strong>Drawback</strong></td><td>Suspensão/isenção de tributos sobre insumos importados para industrialização de produto destinado à exportação</td><td>1 ano (até 5 anos para navios)</td></tr>
+          <tr><td><strong>Entreposto aduaneiro</strong></td><td>Armazenagem de mercadoria em local alfandegado com suspensão de tributos aguardando destinação</td><td>Até 1 ano (prorrogável)</td></tr>
+          <tr><td><strong>Exportação temporária</strong></td><td>Saída de bens nacionais para o exterior com previsão de retorno</td><td>Até 1 ano (prorrogável)</td></tr>
+          <tr><td><strong>Trânsito aduaneiro</strong></td><td>Transporte de mercadoria sob controle aduaneiro entre pontos do território aduaneiro</td><td>Conforme trajeto</td></tr>
+        </table>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FGV)</div>
+      <div id="q-rfb-aduan-1"></div>
+      <div class="score-box" id="score-rfb-aduan-1">
+        <div class="score-num" id="snum-rfb-aduan-1"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO: CONTABILIDADE T1 ════ -->
+  <div class="page" id="page-rfb-cont-1">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-rfb')">← Voltar</button>
+        <div>
+          <div class="ph-title">Balanço Patrimonial, DRE e Lançamentos Contábeis</div>
+          <div class="ph-sub">RFB · Contabilidade Geral · Tópico 1 · Banca: FGV</div>
+        </div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Equação fundamental do patrimônio</h2>
+        <p>Toda a contabilidade gira em torno de uma equação fundamental:</p>
+        <p style="text-align:center; font-size: 16px; font-weight: 700; color: var(--gold); padding: 1rem; background: rgba(240,165,0,0.06); border-radius: 8px; border: 1px solid rgba(240,165,0,0.2);">ATIVO = PASSIVO + PATRIMÔNIO LÍQUIDO</p>
+        <ul>
+          <li><strong>Ativo:</strong> bens e direitos da entidade (o que ela TEM e o que lhe é DEVIDO).</li>
+          <li><strong>Passivo:</strong> obrigações com terceiros (o que ela DEVE a terceiros).</li>
+          <li><strong>Patrimônio Líquido (PL):</strong> recursos próprios — o que sobra para os sócios/acionistas (Ativo – Passivo).</li>
+        </ul>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Estrutura do Balanço Patrimonial (BP)</h2>
+        <table class="resumo-table">
+          <tr><th colspan="2">ATIVO</th><th colspan="2">PASSIVO + PL</th></tr>
+          <tr><td><strong>Ativo Circulante</strong></td><td>Realizável até 12 meses: caixa, bancos, estoques, clientes</td><td><strong>Passivo Circulante</strong></td><td>Exigível até 12 meses: fornecedores, salários, impostos a pagar</td></tr>
+          <tr><td><strong>Ativo Não Circulante</strong></td><td>Realizável após 12 meses: imobilizado, intangível, investimentos</td><td><strong>Passivo Não Circulante</strong></td><td>Exigível após 12 meses: financiamentos LP, debêntures</td></tr>
+          <tr><td></td><td></td><td><strong>Patrimônio Líquido</strong></td><td>Capital social, reservas, lucros acumulados</td></tr>
+        </table>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>A FGV cobra classificação de contas no BP. Lembre: estoques e clientes = Ativo Circulante. Máquinas e terrenos = Ativo Imobilizado (Não Circulante). Empréstimos a vencer em mais de 12 meses = Passivo Não Circulante.</div>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Demonstração do Resultado do Exercício (DRE)</h2>
+        <p>A DRE apresenta o desempenho econômico da empresa num período. Estrutura simplificada:</p>
+        <ul>
+          <li>( + ) Receita Bruta de Vendas</li>
+          <li>( – ) Deduções (devoluções, descontos, impostos sobre vendas)</li>
+          <li>( = ) <strong>Receita Líquida</strong></li>
+          <li>( – ) Custo dos Produtos Vendidos (CPV)</li>
+          <li>( = ) <strong>Lucro Bruto</strong></li>
+          <li>( – ) Despesas Operacionais (vendas, administrativas, financeiras)</li>
+          <li>( = ) <strong>Lucro Antes do IR (LAIR)</strong></li>
+          <li>( – ) IR e CSLL</li>
+          <li>( = ) <strong>Lucro Líquido do Exercício</strong></li>
+        </ul>
+      </div>
+
+      <div class="resumo-sec">
+        <h2>Método das partidas dobradas — lançamentos contábeis</h2>
+        <p>Todo lançamento contábil tem pelo menos um <strong>débito</strong> e um <strong>crédito</strong> de mesmo valor. A regra básica:</p>
+        <table class="resumo-table">
+          <tr><th>Conta</th><th>Débito aumenta</th><th>Crédito aumenta</th></tr>
+          <tr><td><strong>Ativo</strong></td><td>✓</td><td>–</td></tr>
+          <tr><td><strong>Passivo</strong></td><td>–</td><td>✓</td></tr>
+          <tr><td><strong>Patrimônio Líquido</strong></td><td>–</td><td>✓</td></tr>
+          <tr><td><strong>Despesa</strong></td><td>✓</td><td>–</td></tr>
+          <tr><td><strong>Receita</strong></td><td>–</td><td>✓</td></tr>
+        </table>
+        <p>Exemplo: compra de mercadoria a prazo por R$ 10.000.</p>
+        <ul>
+          <li>D — Estoques (Ativo +) R$ 10.000</li>
+          <li>C — Fornecedores (Passivo +) R$ 10.000</li>
+        </ul>
+        <div class="tip"><div class="tip-lbl">Dica FGV</div>Mnemônico: "ADEPRE" — Ativo e Despesa aumentam com Débito; Passivo, PL e Receita aumentam com Crédito. A FGV cobra lançamentos envolvendo depreciação, amortização e provisões — estude esses com atenção.</div>
+      </div>
+
+      <div class="q-header">Questões de fixação — 10 questões (estilo FGV)</div>
+      <div id="q-rfb-cont-1"></div>
+      <div class="score-box" id="score-rfb-cont-1">
+        <div class="score-num" id="snum-rfb-cont-1"></div>
+        <div class="score-lbl">questões corretas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ RESUMO GENÉRICO ════ -->
+  <div class="page" id="page-rfb-gen">
+    <div class="wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('page-rfb')">← Voltar</button>
+        <div>
+          <div class="ph-title" id="gen-title-rfb">Tópico</div>
+          <div class="ph-sub" id="gen-sub-rfb">Matéria</div>
+        </div>
+      </div>
+      <div class="coming">
+        <div class="coming-icon">📝</div>
+        <div class="coming-title">Resumo em construção</div>
+        <div class="coming-sub">Este tópico receberá seu resumo completo + 10 questões em breve.<br>Continue pelos tópicos já disponíveis!</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+/* ─── DADOS RFB ─── */
+const RFB = {
+  port: { label: "Língua Portuguesa", icon: "📝", items: [
+    {n:1, t:"Interpretação de textos", page:"page-rfb-port-1", hot:true},
+    {n:2, t:"Tipologia textual"},
+    {n:3, t:"Coesão e coerência", page:"page-rfb-port-2"},
+    {n:4, t:"Ortografia oficial"},
+    {n:5, t:"Acentuação gráfica"},
+    {n:6, t:"Classes de palavras"},
+    {n:7, t:"Concordância nominal e verbal"},
+    {n:8, t:"Regência nominal e verbal"},
+    {n:9, t:"Crase"},
+    {n:10, t:"Pontuação"},
+    {n:11, t:"Reescrita de frases"}
+  ]},
+  ing: { label: "Inglês", icon: "🔵", items: [
+    {n:1, t:"Interpretação de texto em inglês", page:"page-rfb-ing-1"},
+    {n:2, t:"Vocabulário e inferência de sentido"},
+    {n:3, t:"Identificação de ideias principais e conectivos"}
+  ]},
+  rac: { label: "Raciocínio Lógico", icon: "🟣", items: [
+    {n:1, t:"Proposições lógicas e tabela-verdade"},
+    {n:2, t:"Conectivos e equivalências lógicas"},
+    {n:3, t:"Argumentação lógica e validade de argumentos"},
+    {n:4, t:"Sequências e problemas com lógica básica"}
+  ]},
+  adm: { label: "Administração Geral e Pública", icon: "🟡", items: [
+    {n:1, t:"Teorias da administração (clássica ao sociotécnico)"},
+    {n:2, t:"Planejamento estratégico: missão, visão, objetivos, BSC"},
+    {n:3, t:"Organização, direção e controle"},
+    {n:4, t:"Gestão de pessoas, motivação e liderança"},
+    {n:5, t:"Processo decisório"},
+    {n:6, t:"Administração pública: modelos e nova gestão pública"},
+    {n:7, t:"Governança pública e controle"}
+  ]},
+  eco: { label: "Economia", icon: "🟠", items: [
+    {n:1, t:"Oferta, demanda e equilíbrio de mercado"},
+    {n:2, t:"Elasticidade e estruturas de mercado"},
+    {n:3, t:"PIB, inflação e desemprego"},
+    {n:4, t:"Política fiscal e política monetária"}
+  ]},
+  const: { label: "Direito Constitucional", icon: "⚖️", items: [
+    {n:1, t:"Princípios fundamentais da CF/1988"},
+    {n:2, t:"Direitos e garantias fundamentais"},
+    {n:3, t:"Organização do Estado e administração pública (art. 37)"},
+    {n:4, t:"Poder Executivo e Poder Legislativo"},
+    {n:5, t:"Controle de constitucionalidade"}
+  ]},
+  dadm: { label: "Direito Administrativo", icon: "🏛️", items: [
+    {n:1, t:"Princípios da administração pública"},
+    {n:2, t:"Atos administrativos: atributos, extinção e validade"},
+    {n:3, t:"Poderes administrativos"},
+    {n:4, t:"Serviços públicos: conceito, delegação e classificação"},
+    {n:5, t:"Licitações e contratos administrativos"},
+    {n:6, t:"Responsabilidade civil do Estado"},
+    {n:7, t:"Improbidade administrativa — Lei nº 8.429/1992"}
+  ]},
+  trib: { label: "Direito Tributário", icon: "💰", items: [
+    {n:1, t:"Sistema Tributário Nacional e competência tributária", page:"page-rfb-trib-1", hot:true},
+    {n:2, t:"Espécies tributárias e obrigação tributária"},
+    {n:3, t:"Crédito tributário: lançamento, modalidades"},
+    {n:4, t:"Suspensão, extinção e exclusão do crédito tributário"},
+    {n:5, t:"Administração tributária: fiscalização, dívida ativa, certidões"},
+    {n:6, t:"Princípios constitucionais tributários"}
+  ]},
+  ltrib: { label: "Legislação Tributária Federal", icon: "📜", items: [
+    {n:1, t:"Imposto de Renda (IRPJ e IRPF) — regras gerais", hot:true},
+    {n:2, t:"IPI — Imposto sobre Produtos Industrializados"},
+    {n:3, t:"IOF — Imposto sobre Operações Financeiras"},
+    {n:4, t:"II e IE — Imposto de Importação e Exportação"},
+    {n:5, t:"Normas da Receita Federal e processo administrativo fiscal (PAF)"}
+  ]},
+  aduan: { label: "Legislação Aduaneira", icon: "🌎", items: [
+    {n:1, t:"Importação, exportação e regimes aduaneiros especiais", page:"page-rfb-aduan-1", hot:true},
+    {n:2, t:"Controle e despacho aduaneiro — canais de parametrização"},
+    {n:3, t:"Zona primária, secundária e território aduaneiro"},
+    {n:4, t:"Infrações aduaneiras e penalidades"},
+    {n:5, t:"Valor aduaneiro — Acordo de Valoração Aduaneira (AVA-GATT)"}
+  ]},
+  cont: { label: "Contabilidade Geral", icon: "📊", items: [
+    {n:1, t:"Balanço Patrimonial, DRE e lançamentos contábeis", page:"page-rfb-cont-1", hot:true},
+    {n:2, t:"Ativo, Passivo e Patrimônio Líquido — classificação de contas"},
+    {n:3, t:"Escrituração contábil e método das partidas dobradas"},
+    {n:4, t:"Depreciação, amortização e exaustão"},
+    {n:5, t:"Análise de demonstrações financeiras: índices e indicadores"}
+  ]}
+};
+
+/* ─── QUESTÕES: PORTUGUÊS — Interpretação ─── */
+const Q_PORT_1 = [
+  {e:"Leia o trecho: 'A reforma tributária, embora esperada há décadas, encontrou resistência em setores que temiam perder privilégios fiscais historicamente consolidados.' Qual é a relação lógica estabelecida pela conjunção 'embora'?", ops:["A) Causalidade — a reforma causou resistência.","B) Concessão — algo esperado enfrentou obstáculo inesperado.","C) Conclusão — a resistência prova que a reforma era necessária.","D) Adição — acrescenta informação sobre setores resistentes.","E) Condição — a reforma dependia da ausência de resistência."], g:1, fb:"'Embora' é conjunção concessiva: introduz uma ideia (reforma esperada) que, apesar de real, foi acompanhada de um resultado aparentemente contraditório (resistência). Resposta: B."},
+  {e:"Considere: 'O texto ironiza a posição dos que defendem a manutenção do status quo tributário.' Para que essa afirmação seja verdadeira, o texto deve necessariamente:", ops:["A) Apresentar dados estatísticos sobre arrecadação.","B) Usar linguagem técnica e impessoal.","C) Expressar crítica por meio de recursos que sugerem o oposto do que se pensa.","D) Narrar episódios históricos da reforma.","E) Defender explicitamente a mudança do sistema tributário."], g:2, fb:"Ironia é um recurso em que se diz o oposto do que se pretende comunicar, criando efeito crítico. Para identificar ironia, deve-se perceber a contradição entre o que é dito e o que é insinuado. Resposta: C."},
+  {e:"'Muitos analistas fiscais reconhecem que o sistema atual é complexo.' Que inferência pode ser validamente extraída dessa afirmação?", ops:["A) Todos os analistas consideram o sistema complexo.","B) O sistema tributário brasileiro é o mais complexo do mundo.","C) Pelo menos uma parte dos especialistas da área reconhece a complexidade do sistema.","D) A complexidade do sistema impede qualquer reforma.","E) Os analistas desejam simplificar o sistema."], g:2, fb:"'Muitos' indica uma parte significativa, mas não a totalidade. A única inferência válida é que parte dos especialistas reconhece a complexidade — sem generalizar para 'todos' nem adicionar informações não ditas. Resposta: C."},
+  {e:"O trecho 'O governo engavetou o projeto' usa a palavra 'engavetou' no sentido de:", ops:["A) Arquivou definitivamente, sem perspectiva de retomada.","B) Organizou o projeto em arquivos físicos.","C) Enviou para aprovação do Congresso.","D) Tornou o projeto confidencial.","E) Publicou o projeto em Diário Oficial."], g:0, fb:"'Engavetar' é uma metáfora que, no contexto político, significa arquivar/suspender indefinidamente algo sem que seja levado adiante. Resposta: A."},
+  {e:"'A Receita Federal lançou, ainda que com atraso, o novo sistema de controle de obrigações acessórias.' O pressuposto da frase é que:", ops:["A) O novo sistema já deveria ter sido lançado antes.","B) O sistema antigo era mais eficiente.","C) O atraso foi causado por problemas técnicos.","D) O lançamento foi aprovado pelo Congresso.","E) Os contribuintes solicitaram o novo sistema."], g:0, fb:"A expressão 'ainda que com atraso' pressupõe que havia uma expectativa ou prazo anterior para o lançamento — ou seja, que ele deveria ter ocorrido antes. Resposta: A."},
+  {e:"Qual das alternativas apresenta uma generalização INDEVIDA a partir do trecho 'alguns países desenvolvidos adotam alíquotas progressivas para o imposto de renda'?", ops:["A) Parte dos países desenvolvidos usa tributação progressiva.","B) Há nações desenvolvidas com IR progressivo.","C) Todos os países desenvolvidos adotam alíquotas progressivas.","D) Alguns Estados organizam seu IR de forma progressiva.","E) Nem todo país aplica o mesmo modelo tributário."], g:2, fb:"'Alguns' restringe a afirmação a uma parte. Concluir que 'todos' fazem o mesmo é generalização indevida — extrapolação não autorizada pelo texto. Resposta: C."},
+  {e:"Leia: 'A transparência fiscal não é um fim em si mesma, mas um meio para alcançar a justiça tributária.' O autor defende que:", ops:["A) A transparência fiscal é desnecessária.","B) A justiça tributária é mais importante do que a transparência.","C) A transparência fiscal é um objetivo a ser alcançado.","D) Transparência e justiça são conceitos independentes.","E) Sem transparência, é impossível existir tributação."], g:1, fb:"O autor posiciona a transparência como instrumento (meio) e a justiça como objetivo final (fim). Isso implica que a justiça tributária é o propósito maior, e a transparência serve para alcançá-la. Resposta: B."},
+  {e:"O eufemismo é um recurso que suaviza algo negativo. Qual das alternativas usa eufemismo?", ops:["A) 'O autuado foi multado em R$ 500 mil por sonegação.'","B) 'O contribuinte teve uma irregularidade identificada em sua declaração.'","C) 'A empresa fraudou o Fisco por dez anos consecutivos.'","D) 'O executivo foi preso por crime tributário.'","E) 'O imposto foi cobrado indevidamente pelo órgão.'"], g:1, fb:"'Irregularidade identificada' é um eufemismo para o que poderia ser chamado de 'erro' ou 'fraude'. A alternativa B suaviza a informação negativa sem mencionar palavras de conotação grave como 'fraude' ou 'sonegação'. Resposta: B."},
+  {e:"Em qual alternativa a substituição do conectivo ALTERA o sentido original da frase 'Estudou muito; portanto, foi aprovado'?", ops:["A) 'Estudou muito; logo, foi aprovado.'","B) 'Estudou muito; consequentemente, foi aprovado.'","C) 'Estudou muito; porém, foi aprovado.'","D) 'Estudou muito; por isso, foi aprovado.'","E) 'Estudou muito; assim, foi aprovado.'"], g:2, fb:"'Portanto', 'logo', 'consequentemente', 'por isso' e 'assim' são conectivos de conclusão — todos equivalentes aqui. 'Porém' é adversativo (introduz ideia contrária), alterando completamente o sentido da frase. Resposta: C."},
+  {e:"Leia o trecho hipotético: 'A reforma silenciosa do sistema tributário avança nas brechas da lei.' A expressão 'brechas da lei' sugere que a reforma:", ops:["A) Atua dentro dos mecanismos legais existentes de forma pouco visível.","B) Viola abertamente a legislação vigente.","C) Propõe alterações constitucionais formais.","D) Depende de aprovação parlamentar urgente.","E) Faz parte de um programa governamental oficial."], g:0, fb:"'Brechas da lei' indica lacunas ou espaços não vedados pela legislação. Combinado com 'silenciosa', o texto sugere avanço por vias legais mas discretas — dentro da lei, mas sem destaque. Resposta: A."}
+];
+
+/* ─── QUESTÕES: COESÃO E COERÊNCIA ─── */
+const Q_PORT_2 = [
+  {e:"Identifique o mecanismo de coesão em: 'A Receita Federal lançou o novo programa. O órgão estima arrecadar R$ 5 bilhões.'", ops:["A) Elipse — omissão do sujeito na segunda oração.","B) Pronome anafórico retomando 'Receita Federal'.","C) Sinonímia — 'O órgão' substitui 'a Receita Federal' lexicalmente.","D) Conectivo de conclusão ligando as duas orações.","E) Hiperônimo — 'órgão' é categoria mais geral que 'Receita Federal'."], g:2, fb:"'O órgão' substitui 'a Receita Federal' por substituição lexical (sinonímia/hiperônimo). 'Órgão' é uma categoria mais geral (hiperônimo) que retoma o termo anterior — mecanismo de coesão referencial por substituição. Resposta: C."},
+  {e:"Qual conectivo preenche a lacuna mantendo coerência? 'O contribuinte recolheu o tributo dentro do prazo; ___, foi dispensado da multa.'", ops:["A) porém","B) contudo","C) entretanto","D) portanto","E) embora"], g:3, fb:"A relação é de conclusão: recolheu no prazo → por isso foi dispensado da multa. 'Portanto' é o conectivo conclusivo adequado. Os demais são adversativos (porém, contudo, entretanto) ou introduzem subordinação concessiva (embora). Resposta: D."},
+  {e:"Julgue: 'Um texto pode ser coeso e ainda assim ser incoerente.'", ops:["CERTO","ERRADO"], g:0, fb:"Correto. Coesão é a articulação gramatical e léxica entre os elementos. Coerência é a unidade de sentido. Um texto pode usar conectivos e referências corretamente (coeso) mas apresentar ideias que se contradizem (incoerente). Resposta: CERTO."},
+  {e:"Em 'Maria comprou o apartamento. Ela ficou muito feliz com a aquisição.', o pronome 'Ela' e a palavra 'aquisição' exercem, respectivamente, funções de:", ops:["A) Elipse e sinonímia.","B) Pronome anafórico e sinonímia/nominalização.","C) Catáfora e hiperônimo.","D) Conector e elipse.","E) Pronome catafórico e antônimo."], g:1, fb:"'Ela' é pronome pessoal que retoma 'Maria' anaforicamente. 'Aquisição' é nominalização de 'comprou/compra', substituindo o verbo por um substantivo — mecanismo de sinonímia/nominalização. Resposta: B."},
+  {e:"Qual alternativa apresenta erro de coerência no trecho?", ops:["A) 'A inflação subiu. Consequentemente, o poder de compra aumentou.'","B) 'O réu foi absolvido. Por isso, será solto.'","C) 'O servidor se aposentou. Em seguida, recebeu o benefício.'","D) 'A empresa lucrou. Por isso, distribuiu dividendos.'","E) 'A chuva aumentou. Logo, os rios transbordaram.'"], g:0, fb:"Inflação alta não causa aumento do poder de compra — pelo contrário, reduz. A relação de conclusão ('consequentemente') cria incoerência lógica entre as ideias. As demais alternativas apresentam relações lógicas válidas. Resposta: A."},
+  {e:"O conectivo 'embora' estabelece qual relação semântica?", ops:["A) Causalidade.","B) Adição.","C) Conclusão.","D) Concessão.","E) Condição."], g:3, fb:"'Embora' é conjunção subordinativa concessiva. Introduz uma ideia que, apesar de real, não impede o que vem na oração principal. Equivalentes: ainda que, mesmo que, por mais que. Resposta: D."},
+  {e:"'O fiscal verificou os documentos e, sem encontrar irregularidades, liberou a carga.' O elemento de coesão que justifica a ausência de repetição de 'o fiscal' na segunda oração é:", ops:["A) Pronome anafórico implícito.","B) Elipse do sujeito — omissão de 'o fiscal'.","C) Sinonímia — substituição por sinônimo.","D) Hiperônimo — categoria mais ampla.","E) Catáfora — antecipação do referente."], g:1, fb:"A ausência do sujeito 'o fiscal' nas orações seguintes é elipse — o sujeito é omitido por já estar identificado anteriormente. É o mecanismo de coesão referencial por omissão. Resposta: B."},
+  {e:"Qual trecho apresenta ruptura de coerência por contradição interna?", ops:["A) 'O país cresceu economicamente, mas a desigualdade persistiu.'","B) 'Todos aprovaram a medida; ninguém votou a favor.'","C) 'A empresa expandiu e abriu novas filiais.'","D) 'O réu negou o crime, embora as provas fossem contundentes.'","E) 'A reforma foi aprovada depois de longa negociação.'"], g:1, fb:"'Todos aprovaram' contradiz diretamente 'ninguém votou a favor' — os dois enunciados não podem ser verdadeiros simultaneamente. Isso configura contradição interna e ruptura de coerência. Resposta: B."},
+  {e:"Em 'Segundo a ONU, a evasão fiscal custa trilhões às economias emergentes anualmente', o conectivo 'Segundo' indica:", ops:["A) Conformidade — indica a fonte da informação.","B) Conclusão — sintetiza dados anteriores.","C) Adversidade — contrasta com outra posição.","D) Adição — acrescenta dado ao parágrafo.","E) Concessão — admite uma ressalva."], g:0, fb:"'Segundo', 'de acordo com', 'conforme' e 'consoante' são conectivos de conformidade — indicam a fonte ou referência da informação apresentada. Resposta: A."},
+  {e:"Julgue: a coerência de um texto depende exclusivamente da gramática e da ortografia corretas.", ops:["CERTO","ERRADO"], g:1, fb:"Errado. A coerência é a propriedade semântico-pragmática do texto — diz respeito à unidade de sentido, à não-contradição entre ideias e à progressão temática. Um texto pode ser gramaticalmente correto e ortograficamente perfeito, mas ainda assim ser incoerente se as ideias se contradisserem ou não fizerem sentido. Resposta: ERRADO."}
+];
+
+/* ─── QUESTÕES: INGLÊS ─── */
+const Q_ING_1 = [
+  {e:"Read the excerpt: 'Tax compliance has become increasingly complex, yet most taxpayers manage to meet their obligations.' The word 'yet' in this context indicates:", ops:["A) Addition of information.","B) Contrast or concession.","C) Cause and effect.","D) Conclusion.","E) Condition."], g:1, fb:"'Yet' functions as an adversative conjunction, similar to 'however' or 'but'. It introduces a contrasting idea: despite growing complexity, taxpayers still comply. This is concession/contrast. Answer: B."},
+  {e:"The word 'enforcement' in the sentence 'Tax enforcement has been strengthened by new digital tools' most closely means:", ops:["A) Exemption from taxes.","B) Collection of evidence for lawsuits.","C) Application and reinforcement of tax rules.","D) Reduction of tax rates.","E) International tax agreements."], g:2, fb:"'Enforcement' refers to the act of ensuring compliance with laws or rules — fiscalização, aplicação da lei. It does not mean exemption or reduction. Answer: C."},
+  {e:"'The government eventually agreed to reduce tariffs on imported goods.' The word 'eventually' most accurately means:", ops:["A) Possibly, maybe.","B) At some point, in the end.","C) Occasionally, sometimes.","D) Urgently.","E) On an occasional basis."], g:1, fb:"'Eventually' is a false cognate: it does NOT mean 'eventualmente' (occasionally) in Portuguese. In English, it means 'in the end', 'at some point', 'finally'. Answer: B."},
+  {e:"Which sentence best expresses the main idea of this passage: 'Developing countries often struggle to collect taxes efficiently. Limited administrative capacity, widespread informality, and political obstacles combine to erode the tax base.'", ops:["A) Political corruption is the main cause of tax evasion in developing nations.","B) Developed countries have no tax collection problems.","C) Several factors — administrative, economic, and political — hinder effective tax collection in developing countries.","D) Tax informality is exclusively a problem in Latin America.","E) Developing countries have the highest tax rates in the world."], g:2, fb:"The passage presents three factors that make tax collection difficult: limited capacity, informality, and political obstacles. The main idea combines all three as challenges to efficiency. Answer: C."},
+  {e:"In the context of international trade, 'customs duty' refers to:", ops:["A) The obligation of a customs officer.","B) A tax levied on imported or exported goods.","C) A legal document for clearing merchandise.","D) A voluntary contribution to state revenues.","E) A penalty for late tax payment."], g:1, fb:"'Customs duty' is the tariff or tax imposed on goods when they cross international borders — equivalent to 'tarifa aduaneira' or 'imposto de importação/exportação'. Answer: B."},
+  {e:"'Despite the new regulations, tax evasion remains a persistent challenge for revenue authorities.' The connector 'despite' indicates:", ops:["A) Cause.","B) Conclusion.","C) Addition.","D) Concession.","E) Condition."], g:3, fb:"'Despite' introduces a concessive clause — something that doesn't prevent the main outcome: even with new regulations, the problem persists. Synonyms: although, even though, notwithstanding. Answer: D."},
+  {e:"The sentence 'The reform is expected to boost fiscal revenues by 15% over the next decade' implies that:", ops:["A) The reform has already increased revenues by 15%.","B) The reform is projected to increase tax collection in the future.","C) Fiscal authorities are certain revenues will grow by 15%.","D) The reform has been in place for a decade.","E) Revenues fell 15% before the reform."], g:1, fb:"'Is expected to' indicates a future expectation or projection, not a certainty or past fact. The sentence projects a 15% increase in the coming years. Answer: B."},
+  {e:"Which word is closest in meaning to 'taxpayer'?", ops:["A) Tax auditor.","B) Person who evades taxes.","C) Person or entity that pays taxes.","D) Government tax authority.","E) International trade inspector."], g:2, fb:"'Taxpayer' = contribuinte — any person or entity legally obligated to pay taxes. It is not the collector, the authority, or an evader. Answer: C."},
+  {e:"'Tax avoidance is legal; tax evasion is not.' This sentence primarily establishes:", ops:["A) A condition for tax planning.","B) A contrast between two related concepts.","C) A cause-and-effect relationship.","D) An argument in favor of tax reform.","E) A description of fiscal policy."], g:1, fb:"The semicolon separates two contrasting ideas: one legal (avoidance) and one illegal (evasion). The structure establishes a clear contrast between the two concepts. Answer: B."},
+  {e:"Read: 'The audit revealed significant discrepancies between declared income and actual revenues.' The word 'discrepancies' most nearly means:", ops:["A) Similarities.","B) Agreements.","C) Differences or inconsistencies.","D) Reductions.","E) Improvements."], g:2, fb:"'Discrepancies' refers to differences or inconsistencies between two things that should match — in this case, declared vs. actual income. It is the key word for identifying potential tax fraud in audits. Answer: C."}
+];
+
+/* ─── QUESTÕES: DIREITO TRIBUTÁRIO ─── */
+const Q_TRIB_1 = [
+  {e:"Segundo o Código Tributário Nacional, tributo é toda prestação pecuniária compulsória que não constitua sanção de ato ilícito. Qual das alternativas CORRETAMENTE identifica uma característica do tributo?", ops:["A) O tributo pode ter natureza sancionatória quando aplicado a contribuintes inadimplentes.","B) A multa por sonegação fiscal é uma espécie de tributo.","C) O tributo é instituído e cobrado por lei, independentemente da vontade do contribuinte.","D) O tributo pode ser pago em bens ou serviços, a critério do Fisco.","E) O tributo é sempre vinculado a uma atividade estatal específica em favor do contribuinte."], g:2, fb:"O CTN, art. 3º, define tributo como prestação pecuniária compulsória, instituída em lei — ou seja, independe da vontade do contribuinte. Não é sanção (elimina A e B). Impostos não são vinculados (elimina E). Deve ser pago em moeda (elimina D). Resposta: C."},
+  {e:"Qual é o ente federativo competente para instituir impostos residuais — novos impostos não previstos na Constituição?", ops:["A) Qualquer ente, desde que por lei complementar.","B) Somente os Estados, em razão de sua autonomia fiscal.","C) Somente a União, por lei complementar, desde que não cumulativos e com fatos geradores distintos dos já previstos.","D) Somente os Municípios, para fins de política urbana.","E) A União e os Estados, em competência comum."], g:2, fb:"Art. 154, I, CF: a competência residual é exclusiva da União, exercida por lei complementar, sendo os novos impostos não cumulativos e com fato gerador/base de cálculo distintos dos já previstos na CF. Resposta: C."},
+  {e:"O princípio da anterioridade anual veda a cobrança de tributo no mesmo exercício financeiro em que publicada a lei instituidora. Assinale a alternativa que apresenta tributo EXCETUADO dessa regra.", ops:["A) Imposto sobre a Propriedade Territorial Rural (ITR).","B) Imposto sobre Grandes Fortunas (IGF).","C) Imposto sobre Produtos Industrializados (IPI).","D) Imposto sobre a Propriedade Predial e Territorial Urbana (IPTU).","E) Contribuição para o FGTS."], g:2, fb:"O IPI é exceção à anterioridade anual (art. 150, §1º, CF): pode ter alíquota alterada e ser cobrado no mesmo exercício, devendo respeitar apenas a anterioridade nonagesimal (90 dias). Resposta: C."},
+  {e:"A competência tributária distingue-se da capacidade tributária ativa porque:", ops:["A) A competência pode ser delegada a outro ente público; a capacidade não.","B) A capacidade pode ser delegada a pessoa jurídica de direito público; a competência é indelegável.","C) Ambas podem ser delegadas, mas somente a capacidade pode ser renunciada.","D) A competência refere-se à fiscalização; a capacidade, à instituição do tributo.","E) Competência e capacidade são expressões sinônimas no direito tributário."], g:1, fb:"Competência tributária (poder de criar o tributo) é indelegável e irrenunciável. Capacidade tributária ativa (poder de arrecadar/fiscalizar) pode ser delegada a outra pessoa jurídica de direito público — como ocorre com a Receita Federal em relação às contribuições previdenciárias. Resposta: B."},
+  {e:"Julgue: a taxa pode ter como fato gerador uma situação independente de qualquer atividade estatal específica relativa ao contribuinte.", ops:["CERTO","ERRADO"], g:1, fb:"Errado. A taxa é tributo vinculado: seu fato gerador é o exercício do poder de polícia ou a prestação efetiva ou potencial de serviço público específico e divisível (art. 145, II, CF e art. 77, CTN). Diferentemente do imposto, que não depende de atividade estatal. Resposta: ERRADO."},
+  {e:"O princípio da legalidade tributária, previsto no art. 150, I da CF/1988, determina que:", ops:["A) O Poder Executivo pode, por decreto, criar tributos em situações de urgência.","B) Nenhum tributo pode ser exigido ou aumentado sem lei que o estabeleça.","C) A lei tributária pode retroagir para alcançar fatos geradores anteriores à sua vigência.","D) Medidas provisórias nunca podem tratar de matéria tributária.","E) O tributo pode ser instituído por instrução normativa da Receita Federal."], g:1, fb:"Art. 150, I, CF: é vedado à União, Estados, DF e Municípios exigir ou aumentar tributo sem lei que o estabeleça. Medidas provisórias podem tratar de alguns tributos (exceto os reservados à lei complementar). Resposta: B."},
+  {e:"O empréstimo compulsório se distingue das demais espécies tributárias porque:", ops:["A) É tributo de competência comum de todos os entes federativos.","B) Não precisa ser restituído ao contribuinte.","C) É instituído por lei ordinária e independe de situação excepcional.","D) É restituível e de competência exclusiva da União, instituído por lei complementar.","E) Pode ser cobrado por estados em situações de calamidade regional."], g:3, fb:"Art. 148, CF: empréstimos compulsórios são de competência exclusiva da União, instituídos por lei complementar, em casos de calamidade/guerra ou investimento público urgente, e são obrigatoriamente restituídos. Resposta: D."},
+  {e:"Qual tributo, segundo a Constituição, pode ter suas alíquotas alteradas pelo Poder Executivo (via decreto), por ser instrumento de política cambial e de comércio exterior?", ops:["A) Imposto de Renda (IR).","B) Imposto sobre Produtos Industrializados (IPI).","C) Imposto de Importação (II).","D) Imposto Territorial Rural (ITR).","E) Imposto sobre Grandes Fortunas (IGF)."], g:2, fb:"O Imposto de Importação (II) — assim como o IE, IPI e IOF — pode ter suas alíquotas alteradas pelo Poder Executivo (art. 153, §1º, CF), pois são instrumentos de política econômica que precisam de agilidade. Resposta: C."},
+  {e:"Julgue: a contribuição de melhoria somente pode ser cobrada quando houver valorização imobiliária decorrente de obra pública, sendo limitada ao valor da valorização individual do imóvel.", ops:["CERTO","ERRADO"], g:0, fb:"Correto. A contribuição de melhoria tem duplo limite: o custo total da obra (limite global) e a valorização individual de cada imóvel (limite individual). Sem valorização imobiliária, não há fato gerador para a contribuição. Resposta: CERTO."},
+  {e:"O princípio do não-confisco veda tributos com efeito de:", ops:["A) Arrecadação insuficiente para o Estado.","B) Absorção substancial da propriedade privada do contribuinte sem indenização.","C) Cobrar tributos cumulativos em toda a cadeia produtiva.","D) Redução de alíquotas sem autorização legal.","E) Isenção de tributos para determinadas categorias econômicas."], g:1, fb:"O princípio do não-confisco (art. 150, IV, CF) veda tributos que, pela sua magnitude, acabem por absorver parcela substancial da propriedade do contribuinte, tendo efeito equivalente ao de uma expropriação sem indenização. Resposta: B."}
+];
+
+/* ─── QUESTÕES: LEGISLAÇÃO ADUANEIRA ─── */
+const Q_ADUAN_1 = [
+  {e:"O despacho aduaneiro de importação é o procedimento por meio do qual se processa o desembaraço de mercadorias. Ao ser parametrizada no canal VERMELHO, a mercadoria será submetida a:", ops:["A) Apenas conferência documental, sem exame físico.","B) Desembaraço automático, sem conferência.","C) Conferência documental e exame físico da mercadoria.","D) Conferência documental, física e verificação de preço/dumping.","E) Apenas exame físico, sem verificação de documentos."], g:2, fb:"Canal vermelho = conferência documental + exame físico da mercadoria. O canal cinza inclui os três elementos (documental, físico e verificação de preço). O canal amarelo faz apenas conferência documental. O verde resulta em desembaraço automático. Resposta: C."},
+  {e:"Qual das alternativas descreve corretamente a zona primária aduaneira?", ops:["A) Todo o território nacional sob controle da Receita Federal.","B) Área contínua de porto, aeroporto ou posto de fronteira onde ocorre o despacho aduaneiro.","C) Região do interior onde estão localizados recintos alfandegados.","D) Espaço aéreo e águas territoriais sob controle militar.","E) Qualquer área onde haja postos fiscais estaduais."], g:1, fb:"Zona primária é a área contínua e delimitada dos portos, aeroportos e postos de fronteira onde se realiza o despacho aduaneiro. Recintos alfandegados no interior do país ficam na zona secundária. Resposta: B."},
+  {e:"O regime aduaneiro especial de DRAWBACK é utilizado para:", ops:["A) Armazenar mercadorias estrangeiras com suspensão de tributos, aguardando destinação.","B) Permitir entrada temporária de bens para fins específicos, com retorno previsto.","C) Suspender ou isentar tributos sobre insumos importados para industrialização de produto destinado à exportação.","D) Transportar mercadorias sob controle aduaneiro entre pontos do território nacional.","E) Importar bens para reexportação sem qualquer transformação industrial."], g:2, fb:"Drawback é regime que incentiva exportações: tributos sobre insumos importados são suspensos/isentos quando esses insumos serão usados na fabricação de produtos destinados à exportação. É um dos regimes mais cobrados pela FGV. Resposta: C."},
+  {e:"No regime de ADMISSÃO TEMPORÁRIA, a mercadoria importada:", ops:["A) Paga todos os tributos integralmente na entrada.","B) Deve ser vendida no mercado interno dentro do prazo.","C) Entra com suspensão de tributos e deve retornar ao exterior dentro do prazo estabelecido.","D) Fica armazenada em zona primária indefinidamente.","E) Pode ser industrializada e reexportada sem pagamento de tributos."], g:2, fb:"Admissão temporária permite entrada de bens estrangeiros com suspensão de tributos para fins específicos (feiras, shows, equipamentos para uso temporário), com obrigação de retorno ao exterior. O descumprimento do prazo converte a suspensão em exigência integral dos tributos. Resposta: C."},
+  {e:"Julgue: o território aduaneiro brasileiro compreende apenas o espaço terrestre do país, excluindo o espaço aéreo e as águas territoriais.", ops:["CERTO","ERRADO"], g:1, fb:"Errado. O território aduaneiro abrange a totalidade do território nacional: espaço terrestre, espaço aéreo, águas territoriais (12 milhas náuticas) e a plataforma continental. É mais amplo do que apenas o espaço terrestre. Resposta: ERRADO."},
+  {e:"No despacho aduaneiro de exportação, qual é o documento eletrônico que registra a operação no SISCOMEX?", ops:["A) Declaração de Importação (DI).","B) Declaração Única de Exportação (DU-E).","C) Conhecimento de Embarque (BL).","D) Certificado de Origem.","E) Nota Fiscal Eletrônica (NF-e)."], g:1, fb:"A Declaração Única de Exportação (DU-E) substituiu o Registro de Exportação (RE) e é o documento eletrônico principal do despacho de exportação. A DI é usada na importação. Resposta: B."},
+  {e:"O canal CINZA de conferência aduaneira é acionado principalmente quando há suspeita de:", ops:["A) Erro no preenchimento da declaração de importação.","B) Mercadoria perigosa ou inflamável.","C) Subfaturamento do valor aduaneiro ou dumping.","D) Ausência de certificado sanitário.","E) Inexistência de licença de importação."], g:2, fb:"O canal cinza inclui, além da conferência documental e do exame físico, o controle de valor aduaneiro — acionado quando há indícios de subfaturamento (preço declarado abaixo do real) ou práticas de dumping. Resposta: C."},
+  {e:"Julgue: no regime de ENTREPOSTO ADUANEIRO, a mercadoria pode ser armazenada com suspensão dos tributos incidentes sobre a importação, aguardando definição de destino.", ops:["CERTO","ERRADO"], g:0, fb:"Correto. O entreposto aduaneiro permite armazenagem de mercadorias em local alfandegado com suspensão dos tributos, enquanto o importador define a destinação da mercadoria (importação, reexportação, destruição etc.). Resposta: CERTO."},
+  {e:"A importação por conta e ordem de terceiro distingue-se da importação por conta própria porque:", ops:["A) Utiliza câmbio diferenciado e alíquotas reduzidas.","B) O adquirente contrata empresa importadora para realizar o despacho em nome e por conta do adquirente real.","C) Dispensa registro no SISCOMEX.","D) Só é permitida para produtos da cesta básica.","E) É exclusiva de empresas com regime aduaneiro especial."], g:1, fb:"Na importação por conta e ordem, o adquirente contrata uma trading/importadora para, em seu nome e por sua conta, realizar a importação. O real interessado (adquirente) assume todos os riscos e responsabilidades. Resposta: B."},
+  {e:"Qual tributo incide especificamente na importação de mercadorias estrangeiras e tem como fato gerador a entrada no território aduaneiro?", ops:["A) IPI — Imposto sobre Produtos Industrializados.","B) ICMS — Imposto sobre Circulação de Mercadorias.","C) II — Imposto de Importação.","D) IOF — Imposto sobre Operações Financeiras.","E) PIS/COFINS-Importação."], g:2, fb:"O Imposto de Importação (II) tem como fato gerador a entrada de mercadoria estrangeira no território aduaneiro (art. 19, CTN). É o tributo aduaneiro por excelência — de competência exclusiva da União e com função predominantemente extrafiscal (política comercial). Resposta: C."}
+];
+
+/* ─── QUESTÕES: CONTABILIDADE ─── */
+const Q_CONT_1 = [
+  {e:"A equação fundamental do patrimônio é expressa por:", ops:["A) Ativo + Passivo = Patrimônio Líquido","B) Ativo = Passivo + Patrimônio Líquido","C) Passivo = Ativo + Patrimônio Líquido","D) Patrimônio Líquido = Ativo + Passivo","E) Ativo – Patrimônio Líquido = Receitas"], g:1, fb:"A equação fundamental da contabilidade é: Ativo = Passivo + Patrimônio Líquido. O Ativo representa bens e direitos; o Passivo representa obrigações com terceiros; o PL representa recursos próprios. Resposta: B."},
+  {e:"Uma empresa adquire um veículo por R$ 80.000 à vista. Como deve ser feito o lançamento contábil?", ops:["A) D — Caixa; C — Veículos.","B) D — Veículos; C — Caixa.","C) D — Fornecedores; C — Veículos.","D) D — Veículos; C — Fornecedores.","E) D — Caixa; C — Fornecedores."], g:1, fb:"O veículo (Ativo Imobilizado) aumenta → débito em Veículos. O Caixa (Ativo Circulante) diminui → crédito em Caixa. Mnemônico ADEPRE: Ativo aumenta com Débito. Resposta: B."},
+  {e:"A depreciação de um bem imobilizado é registrada como:", ops:["A) D — Ativo Imobilizado; C — Receita de Depreciação.","B) D — Despesa de Depreciação; C — Depreciação Acumulada (retificadora do Ativo).","C) D — Caixa; C — Ativo Imobilizado.","D) D — Patrimônio Líquido; C — Ativo Imobilizado.","E) D — Depreciação Acumulada; C — Despesa de Depreciação."], g:1, fb:"A depreciação gera uma despesa (débito em Despesa de Depreciação) e reduz o valor líquido do ativo por meio de conta retificadora (crédito em Depreciação Acumulada). O Ativo Imobilizado bruto não é alterado diretamente. Resposta: B."},
+  {e:"No Balanço Patrimonial, em qual grupo são classificados os estoques de mercadoria de uma empresa comercial?", ops:["A) Ativo Não Circulante — Imobilizado.","B) Passivo Circulante.","C) Ativo Circulante.","D) Ativo Não Circulante — Investimentos.","E) Patrimônio Líquido."], g:2, fb:"Estoques são realizáveis no curso normal das operações (geralmente dentro de 12 meses) e por isso classificam-se no Ativo Circulante do Balanço Patrimonial. Resposta: C."},
+  {e:"A empresa XYZ tem: Ativo Total = R$ 500.000; Passivo Total = R$ 180.000. Qual é o valor do Patrimônio Líquido?", ops:["A) R$ 680.000","B) R$ 180.000","C) R$ 500.000","D) R$ 320.000","E) R$ 280.000"], g:3, fb:"PL = Ativo – Passivo = R$ 500.000 – R$ 180.000 = R$ 320.000. A equação PL = A – P é derivada diretamente da equação fundamental A = P + PL. Resposta: D."},
+  {e:"Na DRE, o Lucro Bruto é obtido pela diferença entre:", ops:["A) Receita Bruta e Despesas Financeiras.","B) Receita Líquida e Custo dos Produtos/Mercadorias Vendidos.","C) Receita Bruta e Impostos sobre Vendas.","D) Lucro Operacional e Despesas Administrativas.","E) Receita Líquida e Despesas Operacionais totais."], g:1, fb:"Receita Líquida – Custo dos Produtos Vendidos (CPV) = Lucro Bruto. Este é o resultado antes das despesas operacionais (vendas, administrativas, financeiras). Resposta: B."},
+  {e:"Uma empresa emite nota fiscal de R$ 50.000 a prazo para um cliente. O lançamento correto é:", ops:["A) D — Caixa; C — Receita de Vendas.","B) D — Clientes (Contas a Receber); C — Receita de Vendas.","C) D — Receita de Vendas; C — Clientes.","D) D — Fornecedores; C — Receita de Vendas.","E) D — Estoque; C — Clientes."], g:1, fb:"Venda a prazo: o direito de receber (Clientes/Contas a Receber = Ativo) aumenta → débito. A receita de vendas aumenta → crédito. Resposta: B."},
+  {e:"A amortização aplica-se a:", ops:["A) Bens tangíveis sujeitos a desgaste físico, como máquinas e veículos.","B) Recursos naturais consumidos na exploração, como jazidas e florestas.","C) Bens intangíveis com prazo de uso limitado, como patentes, marcas e softwares.","D) Imóveis adquiridos para revenda.","E) Valores em estoques de produtos acabados."], g:2, fb:"Depreciação → bens tangíveis (máquinas, veículos, edificações). Amortização → bens intangíveis (patentes, marcas, franquias, softwares). Exaustão → recursos naturais (minas, florestas). Resposta: C."},
+  {e:"Julgue: o método das partidas dobradas exige que, para todo débito, haja um ou mais créditos de mesmo valor total, e vice-versa.", ops:["CERTO","ERRADO"], g:0, fb:"Correto. O método das partidas dobradas (Frei Luca Pacioli, 1494) é a base da contabilidade moderna: para cada débito há um crédito de mesmo valor, garantindo que a equação A = P + PL se mantenha sempre em equilíbrio. Resposta: CERTO."},
+  {e:"Um ativo é classificado como NÃO CIRCULANTE quando:", ops:["A) É realizado dentro dos próximos 12 meses.","B) É representado exclusivamente por imóveis.","C) Sua realização é esperada após 12 meses ou não se enquadra no ciclo operacional normal.","D) É adquirido mediante financiamento de longo prazo.","E) Está vinculado a operações no exterior."], g:2, fb:"Ativo Não Circulante compreende os bens e direitos realizáveis após 12 meses (ou fora do ciclo operacional normal): imobilizado, intangível, investimentos de longo prazo e realizável a longo prazo. Resposta: C."}
+];
+
+/* ─── PROGRESSO ─── */
+const STORAGE_KEY_RFB = 'talento_rfb_v1';
+function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY_RFB)) || {}; } catch { return {}; } }
+function saveProgress(d) { try { localStorage.setItem(STORAGE_KEY_RFB, JSON.stringify(d)); } catch {} }
+function markDone(id) { const p = loadProgress(); p[id] = true; saveProgress(p); }
+function isDone(id) { return !!loadProgress()[id]; }
+
+function doneBadge() {
+  return `<span class="t-done">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    Concluído
+  </span>`;
+}
+
+function updateProgressUI() {
+  const done = loadProgress();
+  let total = 0, concluded = 0;
+  Object.values(RFB).forEach(sec => {
+    sec.items.forEach(item => {
+      if (item.page) {
+        total++;
+        if (done[item.page]) concluded++;
+        const el = document.querySelector(`[data-page="${item.page}"]`);
+        if (el && done[item.page]) {
+          el.classList.add('done');
+          if (!el.querySelector('.t-done')) {
+            const tag = el.querySelector('.t-tag, .t-tag-hot');
+            if (tag) tag.insertAdjacentHTML('afterend', doneBadge());
+            else el.querySelector('.t-arrow').insertAdjacentHTML('beforebegin', doneBadge());
+          }
+        }
+      }
+    });
+  });
+  const fill = document.getElementById('fill-rfb');
+  const info = document.getElementById('info-rfb');
+  if (fill && total > 0) fill.style.width = Math.round((concluded / total) * 100) + '%';
+  if (info) info.innerHTML = `<span>${concluded}</span> / ${total} concluídos`;
+}
+
+/* ─── NAVEGAÇÃO ─── */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'page-rfb') updateProgressUI();
+}
+
+function openTopico(page, titulo, materia) {
+  if (page === 'gen') {
+    document.getElementById('gen-title-rfb').textContent = titulo;
+    document.getElementById('gen-sub-rfb').textContent = materia;
+    showPage('page-rfb-gen');
+  } else {
+    showPage(page);
+  }
+}
+
+/* ─── RENDER EDITAL ─── */
+function renderEdital() {
+  const edital = document.getElementById('edital-rfb');
+  const done = loadProgress();
+  edital.innerHTML = Object.keys(RFB).map(key => {
+    const sec = RFB[key];
+    const items = sec.items.map(item => {
+      const hasPage = !!item.page;
+      const finished = hasPage && done[item.page];
+      let cls = 'topico-item';
+      if (hasPage) cls += ' has-rfb';
+      if (finished) cls += ' done';
+      const dataAttr = hasPage ? `data-page="${item.page}"` : '';
+      let tags = '';
+      if (item.hot && !finished) tags += `<span class="t-tag-hot">🔥 ESSENCIAL</span>`;
+      else if (hasPage && !finished) tags += `<span class="t-tag">✓ pronto</span>`;
+      if (finished) tags += doneBadge();
+      const pg = item.page || 'gen';
+      return `<div class="${cls}" ${dataAttr} onclick="openTopico('${pg}','${item.t.replace(/'/g,"\\'")}','RFB · ${sec.label}')">
+        <span class="t-num">${item.n}</span>
+        <span class="t-text">${item.t}</span>
+        ${tags}
+        <span class="t-arrow">›</span>
+      </div>`;
+    }).join('');
+    return `<div class="materia-sec">
+      <div class="mat-label"><span class="mat-label-icon">${sec.icon}</span>${sec.label}</div>
+      <div class="topico-list">${items}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ─── QUESTÕES ENGINE ─── */
+function buildQuestoes(containerId, scoreId, snumId, questoes, pageId) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  const alreadyDone = isDone(pageId);
+  const answered = new Array(questoes.length).fill(alreadyDone);
+  c.innerHTML = questoes.map((q, qi) => `
+    <div class="q-card">
+      <div class="q-num">Questão ${qi+1}</div>
+      <div class="q-txt">${q.e}</div>
+      <div class="opcoes">
+        ${q.ops.map((op, oi) => `<div class="opcao${alreadyDone ? ' disabled' + (oi===q.g?' correta':'') : ''}" id="op-${containerId}-${qi}-${oi}" onclick="responder('${containerId}','${scoreId}','${snumId}',${qi},${oi},${questoes.length},'${pageId}')">${op}</div>`).join('')}
+      </div>
+      <div class="feedback${alreadyDone ? ' show certo' : ''}" id="fb-${containerId}-${qi}">${alreadyDone ? '✓ Gabarito: ' + q.fb : ''}</div>
+    </div>`).join('');
+  window['_ans_'+containerId] = answered;
+  window['_cor_'+containerId] = 0;
+  window['_q_'+containerId] = questoes;
+  if (alreadyDone) {
+    const s = document.getElementById(scoreId);
+    const sn = document.getElementById(snumId);
+    if (s) s.classList.add('show');
+    if (sn) sn.textContent = `${questoes.length}/${questoes.length}`;
+    if (s && !s.querySelector('.score-done-badge')) {
+      s.insertAdjacentHTML('beforeend', `<div class="score-done-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Módulo concluído — progresso salvo!
+      </div>`);
+    }
+  }
+}
+
+function responder(cid, sid, snid, qi, oi, total, pageId) {
+  const questoes = window['_q_'+cid];
+  const answered = window['_ans_'+cid];
+  if (answered[qi]) return;
+  answered[qi] = true;
+  const q = questoes[qi];
+  const isCorrect = oi === q.g;
+  if (isCorrect) window['_cor_'+cid]++;
+  q.ops.forEach((_, i) => {
+    const el = document.getElementById(`op-${cid}-${qi}-${i}`);
+    el.classList.add('disabled');
+    if (i === q.g) el.classList.add('correta');
+    else if (i === oi && !isCorrect) el.classList.add('errada');
+  });
+  const fb = document.getElementById(`fb-${cid}-${qi}`);
+  fb.textContent = (isCorrect ? '✓ Correto! ' : '✗ Incorreto. ') + q.fb;
+  fb.className = 'feedback show ' + (isCorrect ? 'certo' : 'errado');
+  if (answered.every(Boolean)) {
+    const s = document.getElementById(sid);
+    const sn = document.getElementById(snid);
+    s.classList.add('show');
+    sn.textContent = `${window['_cor_'+cid]}/${total}`;
+    markDone(pageId);
+    setTimeout(() => {
+      s.insertAdjacentHTML('beforeend', `<div class="score-done-badge" style="animation:fadeUp 0.4s ease both">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Módulo concluído — progresso salvo!
+      </div>`);
+    }, 300);
+  }
+}
+
+/* ─── INIT ─── */
+renderEdital();
+buildQuestoes('q-rfb-port-1', 'score-rfb-port-1', 'snum-rfb-port-1', Q_PORT_1, 'page-rfb-port-1');
+buildQuestoes('q-rfb-port-2', 'score-rfb-port-2', 'snum-rfb-port-2', Q_PORT_2, 'page-rfb-port-2');
+buildQuestoes('q-rfb-ing-1',  'score-rfb-ing-1',  'snum-rfb-ing-1',  Q_ING_1,  'page-rfb-ing-1');
+buildQuestoes('q-rfb-trib-1', 'score-rfb-trib-1', 'snum-rfb-trib-1', Q_TRIB_1, 'page-rfb-trib-1');
+buildQuestoes('q-rfb-aduan-1','score-rfb-aduan-1','snum-rfb-aduan-1',Q_ADUAN_1,'page-rfb-aduan-1');
+buildQuestoes('q-rfb-cont-1', 'score-rfb-cont-1', 'snum-rfb-cont-1', Q_CONT_1, 'page-rfb-cont-1');
+updateProgressUI();
+</script>
+</body>
+</html>
