@@ -435,24 +435,109 @@
 </div>
 
 <script>
-  const STORAGE_KEY = 'talento_progresso_v1';
-  function loadProgress() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+// ── Páginas de cada concurso ──────────────────────────────────────
+// Mantenha esta lista atualizada sempre que adicionar novos tópicos!
+const INSS_PAGES = [
+  'page-resumo-inss-1',   // LP: Compreensão e interpretação
+  'page-resumo-inss-2',   // LP: Tipologia textual
+  'page-resumo-inss-3',   // LP: Ortografia oficial
+  'page-resumo-inss-4',   // LP: Acentuação gráfica
+  'page-resumo-inss-5',   // LP: Classes de palavras
+  'page-resumo-inss-6',   // LP: Crase
+  'page-resumo-inss-7',   // LP: Sintaxe
+  'page-resumo-inss-8',   // LP: Pontuação
+  'page-resumo-inss-9',   // LP: Concordância
+  'page-resumo-inss-10',  // LP: Regência
+  'page-resumo-inss-11',  // LP: Significação
+  'page-resumo-inss-12',  // LP: Redação oficial
+  'page-resumo-inss-etica-1',  // Ética: Dec. 1171/94 e 6029/07
+  'page-resumo-inss-const-1',  // Const.: Direitos fundamentais
+  'page-resumo-inss-const-2',  // Const.: Adm. pública arts. 37-41
+]
+ 
+const TJCE_PAGES = [
+  'page-resumo-inss-1',
+  'page-resumo-inss-2',
+  'page-resumo-inss-3',
+  'page-resumo-inss-4',
+  'page-resumo-inss-5',
+  'page-resumo-inss-6',
+  'page-resumo-inss-7',
+  'page-resumo-inss-8',
+  'page-resumo-inss-9',
+  'page-resumo-inss-10',
+  'page-resumo-inss-11',
+  'page-resumo-inss-12',
+  'page-resumo-tjce-info-win10',  // Info: Windows 10
+  // adicione os próximos tópicos do TJ/CE aqui
+]
+ 
+// ── Busca progresso do Supabase ───────────────────────────────────
+;(async () => {
+  const SUPABASE_URL  = 'https://cgfzhltysavnwmqhaskj.supabase.co'
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnZnpobHR5c2F2bndtcWhhc2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MjA4NDQsImV4cCI6MjA5MTM5Njg0NH0.SJDMkHsilRXNsg6ar9rM1AYPDXzxauUOgxunHmTM9Jc'
+  const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+ 
+  // Pega sessão
+  const { data: { session } } = await _sb.auth.getSession()
+  if (!session) return  // sem sessão = sem progresso para exibir
+ 
+  // Busca todas as linhas do usuário na tabela user_progress
+  const { data: rows, error } = await _sb
+    .from('user_progress')
+    .select('page_id, completed')
+    .eq('user_id', session.user.id)
+    .eq('completed', true)
+ 
+  if (error || !rows) return
+ 
+  // Monta um Set com os page_ids concluídos
+  const concluded = new Set(rows.map(r => r.page_id))
+ 
+  // ── INSS ──
+  const inssTotal     = INSS_PAGES.length
+  const inssConcluded = INSS_PAGES.filter(p => concluded.has(p)).length
+ 
+  const badgeInss = document.getElementById('badge-inss-progress')
+  if (badgeInss) {
+    if (inssConcluded === 0) {
+      badgeInss.textContent = `${inssTotal} resumos disponíveis ✦`
+    } else if (inssConcluded === inssTotal) {
+      badgeInss.textContent = `${inssTotal}/${inssTotal} concluídos 🏆`
+      badgeInss.style.background = 'rgba(16,185,129,0.15)'
+      badgeInss.style.color = '#10b981'
+      badgeInss.style.borderColor = 'rgba(16,185,129,0.35)'
+    } else {
+      badgeInss.textContent = `${inssConcluded}/${inssTotal} concluídos ✓`
+    }
   }
-
-  const done = loadProgress();
-  const inssPages = ['page-resumo-inss-1'];
-  const tjcePages = ['page-resumo-tj-1', 'page-resumo-tj-2', 'page-resumo-tj-3', 'page-resumo-tj-4'];
-
-  const inssConc = inssPages.filter(p => done[p]).length;
-  const tjceConc = tjcePages.filter(p => done[p]).length;
-
-  if (inssConc > 0) {
-    document.getElementById('badge-inss-progress').textContent = `${inssConc}/${inssPages.length} concluídos ✓`;
+ 
+  // ── TJ/CE ──
+  const tjceTotal     = TJCE_PAGES.length
+  const tjceConcluded = TJCE_PAGES.filter(p => concluded.has(p)).length
+ 
+  const badgeTjce = document.getElementById('badge-tjce-progress')
+  if (badgeTjce) {
+    if (tjceConcluded === 0) {
+      badgeTjce.textContent = `${tjceTotal} resumo disponível ✦`
+    } else if (tjceConcluded === tjceTotal) {
+      badgeTjce.textContent = `${tjceTotal}/${tjceTotal} concluídos 🏆`
+      badgeTjce.style.background = 'rgba(16,185,129,0.15)'
+      badgeTjce.style.color = '#10b981'
+      badgeTjce.style.borderColor = 'rgba(16,185,129,0.35)'
+    } else {
+      badgeTjce.textContent = `${tjceConcluded}/${tjceTotal} concluídos ✓`
+    }
   }
-  if (tjceConc > 0) {
-    document.getElementById('badge-tjce-progress').textContent = `${tjceConc}/${tjcePages.length} concluídos ✓`;
-  }
+ 
+  // ── Stats globais (opcional — atualiza os números do hero) ──────
+  const totalModulos  = INSS_PAGES.length + TJCE_PAGES.length
+  const totalConcluidos = inssConcluded + tjceConcluded
+ 
+  // Se quiser atualizar o contador de "Resumos prontos" no hero:
+  // const statResumos = document.querySelector('.stat-num') // ajuste o seletor conforme necessário
+  // if (statResumos) statResumos.textContent = totalModulos
+})()
 </script>
 
 <!-- ───────────────────────────────────────────────────
