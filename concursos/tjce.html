@@ -1225,18 +1225,14 @@ function responder(cid, sid, snid, qi, oi, total, pageId) {
 
   // buildQuestoes agora é async — carrega em paralelo
   await Promise.all([
-    buildQuestoes('q-tj-1',  'score-tj-1',  'snum-tj-1',  QI,   'page-resumo-tj-1'),
-    buildQuestoes('q-tj-2',  'score-tj-2',  'snum-tj-2',  QI2,  'page-resumo-tj-2'),
-    buildQuestoes('q-tj-3',  'score-tj-3',  'snum-tj-3',  QI3,  'page-resumo-tj-3'),
-    buildQuestoes('q-tj-4',  'score-tj-4',  'snum-tj-4',  QI4,  'page-resumo-tj-4'),
-    buildQuestoes('q-tj-5',  'score-tj-5',  'snum-tj-5',  QI5,  'page-resumo-tj-5'),
-    buildQuestoes('q-tj-6',  'score-tj-6',  'snum-tj-6',  QI6,  'page-resumo-tj-6'),
-    buildQuestoes('q-tj-7',  'score-tj-7',  'snum-tj-7',  QI7,  'page-resumo-tj-7'),
-    buildQuestoes('q-tj-8',  'score-tj-8',  'snum-tj-8',  QI8,  'page-resumo-tj-8'),
-    buildQuestoes('q-tj-9',  'score-tj-9',  'snum-tj-9',  QI9,  'page-resumo-tj-9'),
-    buildQuestoes('q-tj-10', 'score-tj-10', 'snum-tj-10', QI10, 'page-resumo-tj-10'),
-    buildQuestoes('q-tj-11', 'score-tj-11', 'snum-tj-11', QI11, 'page-resumo-tj-11'),
-    buildQuestoes('q-tj-12', 'score-tj-12', 'snum-tj-12', QI12, 'page-resumo-tj-12'),
+    buildQuestoes('q-tj-1',  'score-tj-1',  'snum-tj-1',  QT1,      'page-resumo-tj-1'),
+    buildQuestoes('q-tj-2',  'score-tj-2',  'snum-tj-2',  QT2,      'page-resumo-tj-2'),
+    buildQuestoes('q-tj-3',  'score-tj-3',  'snum-tj-3',  QT3,      'page-resumo-tj-3'),
+    buildQuestoes('q-tj-4',  'score-tj-4',  'snum-tj-4',  QT4,      'page-resumo-tj-4'),
+    buildQuestoes('q-tj-5',  'score-tj-5',  'snum-tj-5',  QT5,      'page-resumo-tj-5'),
+    buildQuestoes('q-tj-6',  'score-tj-6',  'snum-tj-6',  QT6,      'page-resumo-tj-6'),
+    buildQuestoes('q-tj-7',  'score-tj-7',  'snum-tj-7',  QT7,      'page-resumo-tj-7'),
+    buildQuestoes('q-tj-8',  'score-tj-8',  'snum-tj-8',  QT8,      'page-resumo-tj-8'),
     buildQuestoes('q-tjce-info-win10', 'score-tjce-info-win10', 'snum-tjce-info-win10', QT_WIN10, 'page-resumo-tjce-info-win10'),
   ])
 
