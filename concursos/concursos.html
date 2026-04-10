@@ -422,7 +422,7 @@
         <div class="c-sub">Analista-Tributário</div>
         <div class="badges">
           <span class="badge" style="background:rgba(250,238,218,0.15);color:#EF9F27;border:1px solid rgba(239,159,39,0.3);">Edital previsto 2027</span>
-          <span class="badge new">Tecnólogo aceito ✓</span>
+          <span class="badge new" id="badge-rfb-progress">Edital previsto 2027 ✦</span>
         </div>
         <div class="banca-strip">
           <span class="banca-pill" style="background:rgba(250,238,218,0.15);color:#FAC775;border:1px solid rgba(239,159,39,0.3);">FGV (último)</span>
@@ -451,6 +451,15 @@ const TJCE_PAGES = [
   'page-resumo-tj-1','page-resumo-tj-2','page-resumo-tj-3',
   'page-resumo-tj-4','page-resumo-tj-5','page-resumo-tj-6',
   'page-resumo-tj-7','page-resumo-tj-8','page-resumo-tjce-info-win10',
+]
+
+const RFB_PAGES = [
+  'page-rfb-port-1',
+  'page-rfb-port-2',
+  'page-rfb-ing-1',
+  'page-rfb-trib-1',
+  'page-rfb-aduan-1',
+  'page-rfb-cont-1',
 ]
 
 const FRASES = [
@@ -517,9 +526,26 @@ async function carregarProgresso(userId) {
 
   const inssConcluidos = INSS_PAGES.filter(p => concluded.has(p)).length
   const tjceConcluidos = TJCE_PAGES.filter(p => concluded.has(p)).length
+  const rfbConcluidos = RFB_PAGES.filter(p => concluded.has(p)).length
 
   atualizarBadge('badge-inss-progress', inssConcluidos, INSS_PAGES.length)
   atualizarBadge('badge-tjce-progress', tjceConcluidos, TJCE_PAGES.length)
+  atualizarBadge('badge-rfb-progress', rfbConcluidos, RFB_PAGES.length)
+
+  // ── Atualiza os stats dinamicamente ──────────────────────────
+  const totalResumos  = INSS_PAGES.length + TJCE_PAGES.length + RFB_PAGES.length
+  const totalQuestoes = totalResumos * 10
+  const totalConcluidos = inssConcluidos + tjceConcluidos
+
+  const [statConcursos, statResumos, statQuestoes] = document.querySelectorAll('.stat-num')
+  if (statResumos)  statResumos.textContent  = totalResumos
+  if (statQuestoes) statQuestoes.textContent = totalQuestoes
+
+  // Opcional: trocar "Resumos prontos" por "X/Y concluídos"
+  const [, labelResumos] = document.querySelectorAll('.stat-label')
+  if (labelResumos && totalConcluidos > 0) {
+    labelResumos.textContent = `${totalConcluidos}/${totalResumos} concluídos`
+  }
 }
 
 window.logout = async () => {

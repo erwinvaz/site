@@ -1097,7 +1097,7 @@ async function updateProgressUI() {
   const all = await loadAllProgress()
   let total = 0, concluded = 0
 
-  Object.values(INSS).forEach(sec => {
+  Object.values(RFB).forEach(sec => {
     sec.items.forEach(item => {
       if (!item.page) return
       total++
@@ -1114,8 +1114,8 @@ async function updateProgressUI() {
     })
   })
 
-  const fill = document.getElementById('fill-inss')
-  const info = document.getElementById('info-inss')
+  const fill = document.getElementById('fill-tjce')
+  const info = document.getElementById('info-rfb')
   if (fill && total > 0) fill.style.width = Math.round((concluded / total) * 100) + '%'
   if (info) info.innerHTML = `<span>${concluded}</span> / ${total} concluídos`
 }
@@ -1287,21 +1287,14 @@ function responder(cid, sid, snid, qi, oi, total, pageId) {
 
   renderEdital()
 
-  // buildQuestoes agora é async — carrega em paralelo
   await Promise.all([
-    buildQuestoes('q-inss-1',  'score-inss-1',  'snum-inss-1',  QI,   'page-resumo-inss-1'),
-    buildQuestoes('q-inss-2',  'score-inss-2',  'snum-inss-2',  QI2,  'page-resumo-inss-2'),
-    buildQuestoes('q-inss-3',  'score-inss-3',  'snum-inss-3',  QI3,  'page-resumo-inss-3'),
-    buildQuestoes('q-inss-4',  'score-inss-4',  'snum-inss-4',  QI4,  'page-resumo-inss-4'),
-    buildQuestoes('q-inss-5',  'score-inss-5',  'snum-inss-5',  QI5,  'page-resumo-inss-5'),
-    buildQuestoes('q-inss-6',  'score-inss-6',  'snum-inss-6',  QI6,  'page-resumo-inss-6'),
-    buildQuestoes('q-inss-7',  'score-inss-7',  'snum-inss-7',  QI7,  'page-resumo-inss-7'),
-    buildQuestoes('q-inss-8',  'score-inss-8',  'snum-inss-8',  QI8,  'page-resumo-inss-8'),
-    buildQuestoes('q-inss-9',  'score-inss-9',  'snum-inss-9',  QI9,  'page-resumo-inss-9'),
-    buildQuestoes('q-inss-10', 'score-inss-10', 'snum-inss-10', QI10, 'page-resumo-inss-10'),
-    buildQuestoes('q-inss-11', 'score-inss-11', 'snum-inss-11', QI11, 'page-resumo-inss-11'),
-    buildQuestoes('q-inss-12', 'score-inss-12', 'snum-inss-12', QI12, 'page-resumo-inss-12'),
-  ])
+  buildQuestoes('q-rfb-port-1',  'score-rfb-port-1',  'snum-rfb-port-1',  Q_PORT_1,  'page-rfb-port-1'),
+  buildQuestoes('q-rfb-port-2',  'score-rfb-port-2',  'snum-rfb-port-2',  Q_PORT_2,  'page-rfb-port-2'),
+  buildQuestoes('q-rfb-ing-1',   'score-rfb-ing-1',   'snum-rfb-ing-1',   Q_ING_1,   'page-rfb-ing-1'),
+  buildQuestoes('q-rfb-trib-1',  'score-rfb-trib-1',  'snum-rfb-trib-1',  Q_TRIB_1,  'page-rfb-trib-1'),
+  buildQuestoes('q-rfb-aduan-1', 'score-rfb-aduan-1', 'snum-rfb-aduan-1', Q_ADUAN_1, 'page-rfb-aduan-1'),
+  buildQuestoes('q-rfb-cont-1',  'score-rfb-cont-1',  'snum-rfb-cont-1',  Q_CONT_1,  'page-rfb-cont-1'),
+])
 
   updateProgressUI()
 })()
