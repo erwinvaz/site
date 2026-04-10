@@ -435,191 +435,115 @@
 </div>
 
 <script>
-// ── Páginas de cada concurso ──────────────────────────────────────
-// Mantenha esta lista atualizada sempre que adicionar novos tópicos!
+const SUPABASE_URL  = 'https://cgfzhltysavnwmqhaskj.supabase.co'
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnZnpobHR5c2F2bndtcWhhc2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MjA4NDQsImV4cCI6MjA5MTM5Njg0NH0.SJDMkHsilRXNsg6ar9rM1AYPDXzxauUOgxunHmTM9Jc'
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+
 const INSS_PAGES = [
-  'page-resumo-inss-1',   // LP: Compreensão e interpretação
-  'page-resumo-inss-2',   // LP: Tipologia textual
-  'page-resumo-inss-3',   // LP: Ortografia oficial
-  'page-resumo-inss-4',   // LP: Acentuação gráfica
-  'page-resumo-inss-5',   // LP: Classes de palavras
-  'page-resumo-inss-6',   // LP: Crase
-  'page-resumo-inss-7',   // LP: Sintaxe
-  'page-resumo-inss-8',   // LP: Pontuação
-  'page-resumo-inss-9',   // LP: Concordância
-  'page-resumo-inss-10',  // LP: Regência
-  'page-resumo-inss-11',  // LP: Significação
-  'page-resumo-inss-12',  // LP: Redação oficial
-  'page-resumo-inss-etica-1',  // Ética: Dec. 1171/94 e 6029/07
-  'page-resumo-inss-const-1',  // Const.: Direitos fundamentais
-  'page-resumo-inss-const-2',  // Const.: Adm. pública arts. 37-41
+  'page-resumo-inss-1','page-resumo-inss-2','page-resumo-inss-3',
+  'page-resumo-inss-4','page-resumo-inss-5','page-resumo-inss-6',
+  'page-resumo-inss-7','page-resumo-inss-8','page-resumo-inss-9',
+  'page-resumo-inss-10','page-resumo-inss-11','page-resumo-inss-12',
+  'page-resumo-inss-etica-1','page-resumo-inss-const-1','page-resumo-inss-const-2',
 ]
- 
+
 const TJCE_PAGES = [
-  'page-resumo-tj-1',
-  'page-resumo-tj-2',
-  'page-resumo-tj-3',
-  'page-resumo-tj-4',
-  'page-resumo-tj-5',
-  'page-resumo-tj-6',
-  'page-resumo-tj-7',
-  'page-resumo-tj-8',
-  'page-resumo-tjce-info-win10',  // Info: Windows 10
-  // adicione os próximos tópicos do TJ/CE aqui
+  'page-resumo-tj-1','page-resumo-tj-2','page-resumo-tj-3',
+  'page-resumo-tj-4','page-resumo-tj-5','page-resumo-tj-6',
+  'page-resumo-tj-7','page-resumo-tj-8','page-resumo-tjce-info-win10',
 ]
- 
-// ── Busca progresso do Supabase ───────────────────────────────────
-;(async () => {
-  const SUPABASE_URL  = 'https://cgfzhltysavnwmqhaskj.supabase.co'
-  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnZnpobHR5c2F2bndtcWhhc2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MjA4NDQsImV4cCI6MjA5MTM5Njg0NH0.SJDMkHsilRXNsg6ar9rM1AYPDXzxauUOgxunHmTM9Jc'
-  const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
- 
-  // Pega sessão
-  const { data: { session } } = await _sb.auth.getSession()
-  if (!session) return  // sem sessão = sem progresso para exibir
- 
-  // Busca todas as linhas do usuário na tabela user_progress
+
+const FRASES = [
+  'Cada questão respondida é um passo mais perto da <em>aprovação</em>.',
+  'Consistência supera talento. Continue <em>estudando</em>.',
+  'Sua dedicação hoje é a sua <em>aprovação</em> amanhã.',
+  'Foco total. A vaga é <em>sua</em>.',
+  'Mais um dia de estudo, mais perto do <em>resultado</em>.',
+  'A aprovação é construída <em>questão por questão</em>.',
+  'O concurseiro que não desiste é o que <em>passa</em>.',
+  'Estude como se dependesse só de <em>você</em>. Porque depende.',
+]
+
+function getFrase() {
+  return FRASES[new Date().getDay() % FRASES.length]
+}
+
+function getPrimeiroNome(fullName) {
+  if (!fullName) return 'Concurseiro'
+  return fullName.split(' ')[0]
+}
+
+function renderUserPanel(user) {
+  const meta   = user.user_metadata || {}
+  const name   = meta.full_name || meta.name || user.email || 'Concurseiro'
+  const avatar = meta.avatar_url || meta.picture || null
+  const first  = getPrimeiroNome(name)
+
+  const wrap = document.getElementById('user-avatar-wrap')
+  wrap.innerHTML = avatar
+    ? `<img class="user-avatar" src="${avatar}" alt="${first}" referrerpolicy="no-referrer" />`
+    : `<div class="user-avatar-fallback">${first.charAt(0).toUpperCase()}</div>`
+
+  document.getElementById('user-name').textContent    = name
+  document.getElementById('user-motivation').innerHTML = getFrase()
+  document.getElementById('user-panel').style.display  = 'flex'
+}
+
+function atualizarBadge(id, concluidos, total, corVerde) {
+  const badge = document.getElementById(id)
+  if (!badge) return
+  if (concluidos === 0) {
+    badge.textContent = `${total} resumos disponíveis ✦`
+  } else if (concluidos === total) {
+    badge.textContent = `${total}/${total} concluídos 🏆`
+    badge.style.background   = 'rgba(16,185,129,0.15)'
+    badge.style.color        = '#10b981'
+    badge.style.borderColor  = 'rgba(16,185,129,0.35)'
+  } else {
+    badge.textContent = `${concluidos}/${total} concluídos ✓`
+  }
+}
+
+async function carregarProgresso(userId) {
   const { data: rows, error } = await _sb
     .from('user_progress')
-    .select('page_id, completed')
-    .eq('user_id', session.user.id)
+    .select('page_id')
+    .eq('user_id', userId)
     .eq('completed', true)
- 
+
   if (error || !rows) return
- 
-  // Monta um Set com os page_ids concluídos
+
   const concluded = new Set(rows.map(r => r.page_id))
- 
-  // ── INSS ──
-  const inssTotal     = INSS_PAGES.length
-  const inssConcluded = INSS_PAGES.filter(p => concluded.has(p)).length
- 
-  const badgeInss = document.getElementById('badge-inss-progress')
-  if (badgeInss) {
-    if (inssConcluded === 0) {
-      badgeInss.textContent = `${inssTotal} resumos disponíveis ✦`
-    } else if (inssConcluded === inssTotal) {
-      badgeInss.textContent = `${inssTotal}/${inssTotal} concluídos 🏆`
-      badgeInss.style.background = 'rgba(16,185,129,0.15)'
-      badgeInss.style.color = '#10b981'
-      badgeInss.style.borderColor = 'rgba(16,185,129,0.35)'
-    } else {
-      badgeInss.textContent = `${inssConcluded}/${inssTotal} concluídos ✓`
-    }
-  }
- 
-  // ── TJ/CE ──
-  const tjceTotal     = TJCE_PAGES.length
-  const tjceConcluded = TJCE_PAGES.filter(p => concluded.has(p)).length
- 
-  const badgeTjce = document.getElementById('badge-tjce-progress')
-  if (badgeTjce) {
-    if (tjceConcluded === 0) {
-      badgeTjce.textContent = `${tjceTotal} resumo disponível ✦`
-    } else if (tjceConcluded === tjceTotal) {
-      badgeTjce.textContent = `${tjceTotal}/${tjceTotal} concluídos 🏆`
-      badgeTjce.style.background = 'rgba(16,185,129,0.15)'
-      badgeTjce.style.color = '#10b981'
-      badgeTjce.style.borderColor = 'rgba(16,185,129,0.35)'
-    } else {
-      badgeTjce.textContent = `${tjceConcluded}/${tjceTotal} concluídos ✓`
-    }
-  }
- 
-  // ── Stats globais (opcional — atualiza os números do hero) ──────
-  const totalModulos  = INSS_PAGES.length + TJCE_PAGES.length
-  const totalConcluidos = inssConcluded + tjceConcluded
- 
-  // Se quiser atualizar o contador de "Resumos prontos" no hero:
-  // const statResumos = document.querySelector('.stat-num') // ajuste o seletor conforme necessário
-  // if (statResumos) statResumos.textContent = totalModulos
-})()
-</script>
 
-<!-- ───────────────────────────────────────────────────
-  3. JS — adicionar no final do <script> existente
-    (após a inicialização do Supabase client)
-───────────────────────────────────────────────────── -->
-<script>
-  // ── Frases motivacionais ──────────────────────────────
-  const FRASES = [
-    'Cada questão respondida é um passo mais perto da <em>aprovação</em>.',
-    'Consistência supera talento. Continue <em>estudando</em>.',
-    'Sua dedicação hoje é a sua <em>aprovação</em> amanhã.',
-    'Foco total. A vaga é <em>sua</em>.',
-    'Mais um dia de estudo, mais perto do <em>resultado</em>.',
-    'A aprovação é construída <em>questão por questão</em>.',
-    'O concurseiro que não desiste é o que <em>passa</em>.',
-    'Estude como se dependesse só de <em>você</em>. Porque depende.',
-  ]
- 
-  function getFrase() {
-    const idx = new Date().getDay() % FRASES.length
-    return FRASES[idx]
-  }
- 
-  function getPrimeiroNome(fullName) {
-    if (!fullName) return 'Concurseiro'
-    return fullName.split(' ')[0]
-  }
- 
-  function renderUserPanel(user) {
-    const meta    = user.user_metadata || {}
-    const name    = meta.full_name || meta.name || user.email || 'Concurseiro'
-    const avatar  = meta.avatar_url || meta.picture || null
-    const first   = getPrimeiroNome(name)
- 
-    // Avatar
-    const wrap = document.getElementById('user-avatar-wrap')
-    if (avatar) {
-      wrap.innerHTML = `<img class="user-avatar" src="${avatar}" alt="${first}" referrerpolicy="no-referrer" />`
-    } else {
-      wrap.innerHTML = `<div class="user-avatar-fallback">${first.charAt(0).toUpperCase()}</div>`
-    }
- 
-    // Nome e frase
-    document.getElementById('user-name').textContent = name
-    document.getElementById('user-motivation').innerHTML = getFrase()
- 
-    // Exibe o painel
-    document.getElementById('user-panel').style.display = 'flex'
-  }
- 
-  async function logout() {
-    await supabase.auth.signOut()
-    window.location.href = 'index.html'
-  }
- 
-  ;(async () => {
-  const SUPABASE_URL  = 'https://cgfzhltysavnwmqhaskj.supabase.co'
-  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnZnpobHR5c2F2bndtcWhhc2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MjA4NDQsImV4cCI6MjA5MTM5Njg0NH0.SJDMkHsilRXNsg6ar9rM1AYPDXzxauUOgxunHmTM9Jc'
+  const inssConcluidos = INSS_PAGES.filter(p => concluded.has(p)).length
+  const tjceConcluidos = TJCE_PAGES.filter(p => concluded.has(p)).length
 
-  const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+  atualizarBadge('badge-inss-progress', inssConcluidos, INSS_PAGES.length)
+  atualizarBadge('badge-tjce-progress', tjceConcluidos, TJCE_PAGES.length)
+}
 
-  // 1. Tenta pegar sessão existente primeiro
+window.logout = async () => {
+  await _sb.auth.signOut()
+  window.location.href = 'index.html'
+}
+
+;(async () => {
+  // 1. Tenta sessão existente
   const { data: { session } } = await _sb.auth.getSession()
 
   if (session) {
-    // Já logado — renderiza direto
     renderUserPanel(session.user)
-
-    window.logout = async () => {
-      await _sb.auth.signOut()
-      window.location.href = 'index.html'
-    }
+    await carregarProgresso(session.user.id)  // ← progresso carregado AQUI
     return
   }
 
-  // 2. Sem sessão — verifica se tem token OAuth na URL (#access_token=...)
-  const hasToken = window.location.hash.includes('access_token')
-
-  if (!hasToken) {
-    // Sem token na URL = não está logando agora = manda pro login
+  // 2. Verifica token OAuth na URL
+  if (!window.location.hash.includes('access_token')) {
     window.location.href = 'index.html'
     return
   }
 
-  // 3. Tem token na URL — aguarda o Supabase processar
+  // 3. Aguarda Supabase processar o token
   const newSession = await new Promise(resolve => {
     const { data: listener } = _sb.auth.onAuthStateChange((event, sess) => {
       if (sess) {
@@ -635,11 +559,7 @@ const TJCE_PAGES = [
   }
 
   renderUserPanel(newSession.user)
-
-  window.logout = async () => {
-    await _sb.auth.signOut()
-    window.location.href = 'index.html'
-  }
+  await carregarProgresso(newSession.user.id)  // ← progresso carregado AQUI
 })()
 </script>
  
