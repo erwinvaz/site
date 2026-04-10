@@ -1254,6 +1254,12 @@
 
 </div><!-- /app -->
 
+
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<!-- Engine de progresso compartilhada -->
+<script src="supabase-progress.js"></script>
+
 <script>
 /* ─── DADOS INSS ─── */
 const INSS = {
@@ -1895,13 +1901,6 @@ const QI12 = [
   }
 ];
 
-/* ─── PROGRESSO ─── */
-const STORAGE_KEY = 'talento_progresso_v1';
-function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; } }
-function saveProgress(d) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch {} }
-function markDone(id) { const p = loadProgress(); p[id] = true; saveProgress(p); }
-function isDone(id) { return !!loadProgress()[id]; }
-
 function doneBadge() {
   return `<span class="t-done">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1909,31 +1908,32 @@ function doneBadge() {
   </span>`;
 }
 
-function updateProgressUI() {
-  const done = loadProgress();
-  let total = 0, concluded = 0;
+async function updateProgressUI() {
+  const all = await loadAllProgress()
+  let total = 0, concluded = 0
+
   Object.values(INSS).forEach(sec => {
     sec.items.forEach(item => {
-      if (item.page) {
-        total++;
-        if (done[item.page]) concluded++;
-        const el = document.querySelector(`[data-page="${item.page}"]`);
-        if (el && done[item.page]) {
-          el.classList.add('done');
-          if (!el.querySelector('.t-done')) {
-            const tag = el.querySelector('.t-tag');
-            if (tag) tag.insertAdjacentHTML('afterend', doneBadge());
-          }
+      if (!item.page) return
+      total++
+      const done = !!(all[item.page]?.completed)
+      if (done) concluded++
+      const el = document.querySelector(`[data-page="${item.page}"]`)
+      if (el && done) {
+        el.classList.add('done')
+        if (!el.querySelector('.t-done')) {
+          const tag = el.querySelector('.t-tag')
+          if (tag) tag.insertAdjacentHTML('afterend', doneBadge())
         }
       }
-    });
-  });
-  const fill = document.getElementById('fill-inss');
-  const info = document.getElementById('info-inss');
-  if (fill && total > 0) fill.style.width = Math.round((concluded / total) * 100) + '%';
-  if (info) info.innerHTML = `<span>${concluded}</span> / ${total} concluídos`;
-}
+    })
+  })
 
+  const fill = document.getElementById('fill-inss')
+  const info = document.getElementById('info-inss')
+  if (fill && total > 0) fill.style.width = Math.round((concluded / total) * 100) + '%'
+  if (info) info.innerHTML = `<span>${concluded}</span> / ${total} concluídos`
+}
 /* ─── NAVEGAÇÃO ─── */
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1981,85 +1981,139 @@ function renderEdital() {
 }
 
 /* ─── QUESTÕES ENGINE ─── */
-function buildQuestoes(containerId, scoreId, snumId, questoes, pageId) {
-  const c = document.getElementById(containerId);
-  if (!c) return;
-  const alreadyDone = isDone(pageId);
-  const answered = new Array(questoes.length).fill(alreadyDone);
-  c.innerHTML = questoes.map((q, qi) => `
+async function buildQuestoes(containerId, scoreId, snumId, questoes, pageId) {
+  const c = document.getElementById(containerId)
+  if (!c) return
+
+  // Carrega estado da nuvem
+  const alreadyDone = await isDone(pageId)
+  const allProgress = await loadAllProgress()
+  const savedAnswers = allProgress[pageId]?.answers || null
+  const savedScore   = allProgress[pageId]?.score   ?? null
+
+  const answered = new Array(questoes.length).fill(false)
+  c.innerHTML = questoes.map((q, qi) => {
+    const wasAnswered = alreadyDone && savedAnswers
+    const chosenOi = wasAnswered ? savedAnswers[qi] : null
+    return `
     <div class="q-card">
       <div class="q-num">Questão ${qi+1}</div>
       <div class="q-txt">${q.e}</div>
       <div class="opcoes">
-        ${q.ops.map((op, oi) => `<div class="opcao${alreadyDone ? ' disabled' + (oi===q.g?' correta':'') : ''}" id="op-${containerId}-${qi}-${oi}" onclick="responder('${containerId}','${scoreId}','${snumId}',${qi},${oi},${questoes.length},'${pageId}')">${op}</div>`).join('')}
+        ${q.ops.map((op, oi) => {
+          let cls = 'opcao'
+          if (wasAnswered) {
+            cls += ' disabled'
+            if (oi === q.g) cls += ' correta'
+            else if (oi === chosenOi && chosenOi !== q.g) cls += ' errada'
+          }
+          return `<div class="${cls}" id="op-${containerId}-${qi}-${oi}"
+            onclick="responder('${containerId}','${scoreId}','${snumId}',${qi},${oi},${questoes.length},'${pageId}')">${op}</div>`
+        }).join('')}
       </div>
-      <div class="feedback${alreadyDone ? ' show certo' : ''}" id="fb-${containerId}-${qi}">${alreadyDone ? '✓ Gabarito: ' + q.fb : ''}</div>
-    </div>`).join('');
-  window['_ans_'+containerId] = answered;
-  window['_cor_'+containerId] = 0;
-  window['_q_'+containerId] = questoes;
+      <div class="feedback${wasAnswered ? ' show certo' : ''}" id="fb-${containerId}-${qi}">
+        ${wasAnswered ? '✓ Gabarito: ' + q.fb : ''}
+      </div>
+    </div>`
+  }).join('')
+
+  window['_ans_'+containerId] = answered
+  window['_cor_'+containerId] = savedScore ?? 0
+  window['_q_'+containerId]   = questoes
+  window['_chosen_'+containerId] = savedAnswers ? [...savedAnswers] : new Array(questoes.length).fill(null)
+
   if (alreadyDone) {
-    const s = document.getElementById(scoreId);
-    const sn = document.getElementById(snumId);
-    if (s) s.classList.add('show');
-    if (sn) sn.textContent = `${questoes.length}/${questoes.length}`;
+    const s  = document.getElementById(scoreId)
+    const sn = document.getElementById(snumId)
+    if (s)  s.classList.add('show')
+    if (sn) sn.textContent = `${savedScore ?? questoes.length}/${questoes.length}`
     if (s && !s.querySelector('.score-done-badge')) {
       s.insertAdjacentHTML('beforeend', `<div class="score-done-badge">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
         Módulo concluído — progresso salvo!
-      </div>`);
+      </div>`)
     }
   }
 }
-
 function responder(cid, sid, snid, qi, oi, total, pageId) {
-  const questoes = window['_q_'+cid];
-  const answered = window['_ans_'+cid];
-  if (answered[qi]) return;
-  answered[qi] = true;
-  const q = questoes[qi];
-  const isCorrect = oi === q.g;
-  if (isCorrect) window['_cor_'+cid]++;
+  const questoes = window['_q_'+cid]
+  const answered = window['_ans_'+cid]
+  if (answered[qi]) return
+  answered[qi] = true
+
+  // Salva a resposta escolhida
+  if (!window['_chosen_'+cid]) window['_chosen_'+cid] = new Array(questoes.length).fill(null)
+  window['_chosen_'+cid][qi] = oi
+
+  const q = questoes[qi]
+  const isCorrect = oi === q.g
+  if (isCorrect) window['_cor_'+cid]++
+
   q.ops.forEach((_, i) => {
-    const el = document.getElementById(`op-${cid}-${qi}-${i}`);
-    el.classList.add('disabled');
-    if (i === q.g) el.classList.add('correta');
-    else if (i === oi && !isCorrect) el.classList.add('errada');
-  });
-  const fb = document.getElementById(`fb-${cid}-${qi}`);
-  fb.textContent = (isCorrect ? '✓ Correto! ' : '✗ Incorreto. ') + q.fb;
-  fb.className = 'feedback show ' + (isCorrect ? 'certo' : 'errado');
+    const el = document.getElementById(`op-${cid}-${qi}-${i}`)
+    el.classList.add('disabled')
+    if (i === q.g) el.classList.add('correta')
+    else if (i === oi && !isCorrect) el.classList.add('errada')
+  })
+
+  const fb = document.getElementById(`fb-${cid}-${qi}`)
+  fb.textContent = (isCorrect ? '✓ Correto! ' : '✗ Incorreto. ') + q.fb
+  fb.className = 'feedback show ' + (isCorrect ? 'certo' : 'errado')
+
+  // Todas respondidas → salva na nuvem
   if (answered.every(Boolean)) {
-    const s = document.getElementById(sid);
-    const sn = document.getElementById(snid);
-    s.classList.add('show');
-    sn.textContent = `${window['_cor_'+cid]}/${total}`;
-    markDone(pageId);
+    const score   = window['_cor_'+cid]
+    const answers = window['_chosen_'+cid]
+
+    // Salva no Supabase (async, não bloqueia UI)
+    markDone(pageId, score, total, answers)
+
+    const s  = document.getElementById(sid)
+    const sn = document.getElementById(snid)
+    s.classList.add('show')
+    sn.textContent = `${score}/${total}`
     setTimeout(() => {
       s.insertAdjacentHTML('beforeend', `<div class="score-done-badge" style="animation:fadeUp 0.4s ease both">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        Módulo concluído — progresso salvo!
-      </div>`);
-    }, 300);
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Módulo concluído — progresso salvo na nuvem!
+      </div>`)
+    }, 300)
   }
 }
 
-/* ─── INIT ─── */
-renderEdital();
-buildQuestoes('q-inss-1', 'score-inss-1', 'snum-inss-1', QI,  'page-resumo-inss-1');
-buildQuestoes('q-inss-2', 'score-inss-2', 'snum-inss-2', QI2, 'page-resumo-inss-2');
-buildQuestoes('q-inss-3', 'score-inss-3', 'snum-inss-3', QI3, 'page-resumo-inss-3');
-buildQuestoes('q-inss-4', 'score-inss-4', 'snum-inss-4', QI4, 'page-resumo-inss-4');
-buildQuestoes('q-inss-5',  'score-inss-5',  'snum-inss-5',  QI5,  'page-resumo-inss-5');
-buildQuestoes('q-inss-6',  'score-inss-6',  'snum-inss-6',  QI6,  'page-resumo-inss-6');
-buildQuestoes('q-inss-7',  'score-inss-7',  'snum-inss-7',  QI7,  'page-resumo-inss-7');
-buildQuestoes('q-inss-8',  'score-inss-8',  'snum-inss-8',  QI8,  'page-resumo-inss-8');
-buildQuestoes('q-inss-9',  'score-inss-9',  'snum-inss-9',  QI9,  'page-resumo-inss-9');
-buildQuestoes('q-inss-10', 'score-inss-10', 'snum-inss-10', QI10, 'page-resumo-inss-10');
-buildQuestoes('q-inss-11', 'score-inss-11', 'snum-inss-11', QI11, 'page-resumo-inss-11');
-buildQuestoes('q-inss-12', 'score-inss-12', 'snum-inss-12', QI12, 'page-resumo-inss-12');
+// ─── INIT ─── (substitua o bloco final)
+;(async () => {
+  // Verifica sessão — redireciona se não logado
+  const session = await getSession()
+  if (!session) {
+    window.location.href = 'index.html'
+    return
+  }
 
-updateProgressUI();
+  renderEdital()
+
+  // buildQuestoes agora é async — carrega em paralelo
+  await Promise.all([
+    buildQuestoes('q-inss-1',  'score-inss-1',  'snum-inss-1',  QI,   'page-resumo-inss-1'),
+    buildQuestoes('q-inss-2',  'score-inss-2',  'snum-inss-2',  QI2,  'page-resumo-inss-2'),
+    buildQuestoes('q-inss-3',  'score-inss-3',  'snum-inss-3',  QI3,  'page-resumo-inss-3'),
+    buildQuestoes('q-inss-4',  'score-inss-4',  'snum-inss-4',  QI4,  'page-resumo-inss-4'),
+    buildQuestoes('q-inss-5',  'score-inss-5',  'snum-inss-5',  QI5,  'page-resumo-inss-5'),
+    buildQuestoes('q-inss-6',  'score-inss-6',  'snum-inss-6',  QI6,  'page-resumo-inss-6'),
+    buildQuestoes('q-inss-7',  'score-inss-7',  'snum-inss-7',  QI7,  'page-resumo-inss-7'),
+    buildQuestoes('q-inss-8',  'score-inss-8',  'snum-inss-8',  QI8,  'page-resumo-inss-8'),
+    buildQuestoes('q-inss-9',  'score-inss-9',  'snum-inss-9',  QI9,  'page-resumo-inss-9'),
+    buildQuestoes('q-inss-10', 'score-inss-10', 'snum-inss-10', QI10, 'page-resumo-inss-10'),
+    buildQuestoes('q-inss-11', 'score-inss-11', 'snum-inss-11', QI11, 'page-resumo-inss-11'),
+    buildQuestoes('q-inss-12', 'score-inss-12', 'snum-inss-12', QI12, 'page-resumo-inss-12'),
+  ])
+
+  updateProgressUI()
+})()
 </script>
 </body>
 </html>

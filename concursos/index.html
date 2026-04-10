@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plataforma de Concursos | Talento.dev.br</title>
-  <meta name="google-adsense-account" content="ca-pub-9521177044478820">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+  <title>Entrar | Plataforma de Concursos · Talento.dev.br</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -16,32 +15,22 @@
       --navy-mid:    #111827;
       --navy-card:   #161d30;
       --navy-border: rgba(255,255,255,0.07);
-      --navy-hover:  rgba(255,255,255,0.11);
       --gold:        #f0a500;
       --gold-light:  #ffd166;
-      --inss-green:  #10b981;
-      --inss-bg:     rgba(16,185,129,0.10);
-      --inss-border: rgba(16,185,129,0.35);
-      --tj-blue:     #60a5fa;
-      --tj-bg:       rgba(96,165,250,0.10);
-      --tj-border:   rgba(96,165,250,0.35);
       --text:        #e8eaf0;
       --text-muted:  #8892a4;
       --text-dim:    #4f5a6e;
-      --radius-sm:   6px;
       --radius-md:   12px;
       --radius-lg:   18px;
       --radius-xl:   24px;
     }
 
-    html { scroll-behavior: smooth; }
-
-    body {
+    html, body {
+      height: 100%;
       font-family: 'DM Sans', sans-serif;
       background: var(--navy);
       color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     body::before {
@@ -61,262 +50,304 @@
       pointer-events: none;
     }
 
-    #app { position: relative; z-index: 1; }
+    .page {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100vh;
+    }
 
-    .top-bar {
-      background: rgba(11,15,28,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--navy-border);
-      padding: 0.7rem 1.5rem;
-      position: sticky; top: 0; z-index: 100;
+    /* ── LEFT ── */
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem;
+      border-right: 1px solid var(--navy-border);
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; }
+
+    .logo-mark {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; color: var(--navy);
+    }
+
+    .logo-name { font-size: 15px; font-weight: 600; color: var(--text); }
+    .logo-name span { color: var(--gold); }
+
+    .hero { padding-bottom: 1rem; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+      background: rgba(240,165,0,0.10); border: 1px solid rgba(240,165,0,0.20);
+      border-radius: 40px; padding: 4px 14px; margin-bottom: 1.5rem;
+    }
+
+    .eyebrow::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); opacity: 0.8;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; } 50% { opacity: 0.2; }
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 3.5vw, 3.4rem);
+      color: #fff; line-height: 1.1;
+      letter-spacing: -0.01em; margin-bottom: 1.25rem;
+    }
+
+    .hero h1 em { font-style: italic; color: var(--gold); }
+
+    .hero p {
+      font-size: 14px; line-height: 1.7;
+      color: var(--text-muted); max-width: 360px;
+    }
+
+    .stats { display: flex; gap: 2.5rem; }
+
+    .stat-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.75rem; color: var(--gold); line-height: 1;
+    }
+
+    .stat-label { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-weight: 500; }
+
+    /* ── RIGHT ── */
+    .right {
       display: flex; align-items: center;
+      justify-content: center; padding: 3rem;
     }
-    .top-bar a {
-      color: var(--text-muted); font-size: 12px; font-weight: 500;
-      text-decoration: none; display: flex; align-items: center; gap: 6px;
-      letter-spacing: 0.02em; transition: color 0.2s;
-    }
-    .top-bar a:hover { color: var(--gold); }
-    .top-bar a svg { opacity: 0.6; transition: opacity 0.2s; }
-    .top-bar a:hover svg { opacity: 1; }
 
-    .wrap { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
-
-    .hero {
-      position: relative; overflow: hidden;
-      border-radius: var(--radius-xl);
-      padding: 3.5rem 2.5rem 3rem;
-      text-align: center; margin-bottom: 2.25rem;
-      background: linear-gradient(135deg, #0f1628 0%, #131e3a 40%, #0f1628 100%);
+    .card {
+      width: 100%; max-width: 400px;
+      background: var(--navy-card);
       border: 1px solid var(--navy-border);
-      animation: fadeUp 0.35s ease both;
+      border-radius: var(--radius-xl); padding: 2.5rem;
+      animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .hero-glow {
-      position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
-      width: 420px; height: 280px; border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(240,165,0,0.18) 0%, transparent 70%);
-      pointer-events: none;
+
+    .card-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.5rem;
     }
-    .hero-ring  { position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(240,165,0,0.12); }
-    .hero-ring2 { position: absolute; bottom: -50px; left: -30px; width: 160px; height: 160px; border-radius: 50%; border: 1px solid rgba(96,165,250,0.08); }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold); background: rgba(240,165,0,0.10);
-      border: 1px solid rgba(240,165,0,0.20); border-radius: 40px;
-      padding: 4px 14px; margin-bottom: 1.25rem;
-    }
-    .hero-title {
+
+    .card h2 {
       font-family: 'DM Serif Display', serif;
-      font-size: 38px; color: #fff; line-height: 1.15; margin-bottom: 0.65rem; letter-spacing: -0.01em;
-    }
-    .hero-title span { color: var(--gold); }
-    .hero-sub { font-size: 14px; color: var(--text-muted); font-weight: 400; max-width: 320px; margin: 0 auto; line-height: 1.6; }
-
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem; animation: fadeUp 0.4s 0.05s ease both; }
-    .stat {
-      background: var(--navy-card); border: 1px solid var(--navy-border);
-      border-radius: var(--radius-md); padding: 1.1rem 0.75rem; text-align: center;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .stat:hover { border-color: rgba(240,165,0,0.25); transform: translateY(-2px); }
-    .stat-num { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--gold); line-height: 1; }
-    .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
-
-    .section-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--text-dim); margin-bottom: 0.9rem; padding-left: 2px;
-      animation: fadeUp 0.4s 0.1s ease both;
+      font-size: 1.75rem; color: #fff;
+      letter-spacing: -0.01em; margin-bottom: 0.5rem; line-height: 1.2;
     }
 
-    /* ── CONCURSO CARD ── */
-    .concurso-card {
-      background: var(--navy-card); border: 1px solid var(--navy-border);
-      border-radius: var(--radius-lg); padding: 1.35rem 1.5rem;
-      cursor: pointer; display: flex; align-items: flex-start; gap: 1.25rem;
-      margin-bottom: 1rem; transition: all 0.25s ease;
-      text-decoration: none; color: inherit;
-      position: relative; overflow: hidden;
-      animation: fadeUp 0.4s 0.15s ease both;
+    .card .subtitle {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.6; margin-bottom: 2rem;
     }
-    .concurso-card:last-child { animation-delay: 0.2s; }
-    .concurso-card::before {
-      content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.25s;
+
+    .btn-google {
+      width: 100%; display: flex; align-items: center;
+      justify-content: center; gap: 12px;
+      padding: 0.85rem 1.5rem;
+      background: #fff; color: #1f1f1f; border: none;
+      border-radius: var(--radius-md);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 500; cursor: pointer;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      margin-bottom: 0.75rem;
     }
-    .concurso-card.inss-card::before { background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, transparent 60%); }
-    .concurso-card.tj-card::before   { background: linear-gradient(135deg, rgba(96,165,250,0.05) 0%, transparent 60%); }
-    .concurso-card:hover { border-color: var(--navy-hover); transform: translateX(6px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-    .concurso-card:hover::before { opacity: 1; }
-    .concurso-card.inss-card:hover { border-color: var(--inss-border); }
-    .concurso-card.tj-card:hover   { border-color: var(--tj-border); }
 
-    .c-icon {
-      width: 56px; height: 56px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; flex-shrink: 0; position: relative; z-index: 1;
+    .btn-google:hover {
+      background: #f5f5f5;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      transform: translateY(-1px);
     }
-    .c-icon.inss { background: var(--inss-bg); border: 1px solid var(--inss-border); }
-    .c-icon.tj   { background: var(--tj-bg);   border: 1px solid var(--tj-border); }
 
-    .c-info { flex: 1; position: relative; z-index: 1; }
-    .c-nome { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 2px; }
-    .c-sub  { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-    .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-    .badge { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 40px; letter-spacing: 0.03em; }
-    .badge.inss { background: var(--inss-bg); color: var(--inss-green); border: 1px solid var(--inss-border); }
-    .badge.tj   { background: var(--tj-bg);   color: var(--tj-blue);   border: 1px solid var(--tj-border); }
-    .badge.new  { background: rgba(240,165,0,0.12); color: var(--gold); border: 1px solid rgba(240,165,0,0.25); }
+    .btn-google:active { transform: translateY(0); box-shadow: none; }
+    .btn-google.loading { pointer-events: none; opacity: 0.6; }
 
-    /* ── BANCA INFO STRIP ── */
-    .banca-strip {
+    #status-msg {
+      font-size: 13px; color: var(--gold);
+      text-align: center; margin-top: 0.75rem;
+      min-height: 18px; display: none;
+    }
+
+    .notice {
       display: flex; align-items: flex-start; gap: 10px;
-      margin-top: 12px; padding-top: 11px;
-      border-top: 1px solid var(--navy-border);
-      position: relative; z-index: 1;
+      margin-top: 1.75rem; padding: 0.85rem 1rem;
+      background: rgba(240,165,0,0.06);
+      border: 1px solid rgba(240,165,0,0.15);
+      border-radius: var(--radius-md);
     }
-    .banca-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
-      padding: 3px 10px; border-radius: 40px; flex-shrink: 0;
-    }
-    .banca-pill.inss { background: rgba(16,185,129,0.18); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.35); }
-    .banca-pill.tj   { background: rgba(96,165,250,0.18); color: #93c5fd; border: 1px solid rgba(96,165,250,0.35); }
-    .banca-desc { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
-    .banca-desc strong { color: var(--text-muted); font-weight: 600; }
 
-    .c-arrow {
-      font-size: 22px; color: var(--text-dim); flex-shrink: 0;
-      position: relative; z-index: 1;
-      transition: color 0.2s, transform 0.2s;
-      margin-top: 4px;
-    }
-    .concurso-card:hover .c-arrow { color: var(--text-muted); transform: translateX(3px); }
+    .notice-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
 
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--navy); }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+    .notice p { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+    .notice p strong { color: var(--gold-light); font-weight: 500; }
 
-    @media (max-width: 600px) {
-      .wrap { padding: 1.5rem 1rem 4rem; }
-      .hero { padding: 2.5rem 1.5rem 2.25rem; }
-      .hero-title { font-size: 28px; }
-      .stats { gap: 7px; }
-      .stat-num { font-size: 26px; }
-      .concurso-card { padding: 1.1rem; gap: 1rem; }
-      .c-icon { width: 48px; height: 48px; font-size: 22px; }
-      .c-nome { font-size: 15px; }
-    }
-    @media (max-width: 380px) {
-      .hero-title { font-size: 24px; }
-      .stat-num { font-size: 22px; }
+    @media (max-width: 768px) {
+      html, body { overflow: auto; }
+      .page { grid-template-columns: 1fr; }
+      .left { display: none; }
+      .right { min-height: 100vh; }
     }
   </style>
 </head>
 <body>
 
-<div class="top-bar">
-  <a href="../index.html">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    Voltar ao talento.dev.br
-  </a>
-</div>
+<div class="page">
 
-<div id="app">
-  <div class="wrap">
+  <!-- LEFT -->
+  <div class="left">
+    <div class="logo">
+      <div class="logo-mark">T</div>
+      <div class="logo-name">Talento <span>DEV</span></div>
+    </div>
+
     <div class="hero">
-      <div class="hero-glow"></div>
-      <div class="hero-ring"></div>
-      <div class="hero-ring2"></div>
-      <div class="hero-eyebrow">✦ Plataforma de Estudos</div>
-      <div class="hero-title">Meus <span>Concursos</span></div>
-      <div class="hero-sub">Selecione um concurso para começar a estudar com resumos e questões</div>
+      <div class="eyebrow">✦ Plataforma de Estudos</div>
+      <h1>Estude com<br /><em>propósito.</em><br />Evolua de<br />verdade.</h1>
+      <p>Centenas de questões organizadas por matéria e banca. Acompanhe seu progresso e alcance a aprovação.</p>
     </div>
 
     <div class="stats">
-      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Concursos</div></div>
-      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Resumos prontos</div></div>
-      <div class="stat"><div class="stat-num">40</div><div class="stat-label">Questões</div></div>
+      <div>
+        <div class="stat-value">500+</div>
+        <div class="stat-label">Questões</div>
+      </div>
+      <div>
+        <div class="stat-value">12</div>
+        <div class="stat-label">Matérias</div>
+      </div>
+      <div>
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Gratuito</div>
+      </div>
     </div>
-
-    <div class="section-label">Concursos disponíveis</div>
-
-    <a class="concurso-card inss-card" href="inss.html">
-      <div class="c-icon inss">🏛️</div>
-      <div class="c-info">
-        <div class="c-nome">INSS 2026</div>
-        <div class="c-sub">Técnico do Seguro Social</div>
-        <div class="badges">
-          <span class="badge inss">23 tópicos</span>
-          <span class="badge new" id="badge-inss-progress">4 resumos novos ✦</span>
-        </div>
-        <div class="banca-strip">
-          <span class="banca-pill inss">CEBRASPE</span>
-          <span class="banca-desc"><strong>Estilo:</strong> Certo ou Errado — assertivas únicas com pegadinhas sutis de interpretação. Atenção à negação implícita e a detalhes de legislação.</span>
-        </div>
-      </div>
-      <div class="c-arrow">›</div>
-    </a>
-
-    <a class="concurso-card tj-card" href="tjce.html">
-      <div class="c-icon tj">⚖️</div>
-      <div class="c-info">
-        <div class="c-nome">TJ/CE 2026</div>
-        <div class="c-sub">Técnico Judiciário — Área Judiciária</div>
-        <div class="badges">
-          <span class="badge tj">29+ tópicos</span>
-          <span class="badge new" id="badge-tjce-progress">4 resumos prontos ✦</span>
-        </div>
-        <div class="banca-strip">
-          <span class="banca-pill tj">FCC</span>
-          <span class="banca-desc"><strong>Estilo:</strong> Múltipla escolha — 5 alternativas, enunciados longos com contexto. Foco em interpretação contextual, distinções conceituais e aplicação prática.</span>
-        </div>
-      </div>
-      <div class="c-arrow">›</div>
-    </a>
-
-    <a class="concurso-card" href="rfb.html" style="border-color: rgba(239,159,39,0.3);">
-      <div class="c-icon" style="background:rgba(250,238,218,0.15); border:1px solid rgba(239,159,39,0.35);">💰</div>
-      <div class="c-info">
-        <div class="c-nome">Receita Federal 2027</div>
-        <div class="c-sub">Analista-Tributário</div>
-        <div class="badges">
-          <span class="badge" style="background:rgba(250,238,218,0.15);color:#EF9F27;border:1px solid rgba(239,159,39,0.3);">Edital previsto 2027</span>
-          <span class="badge new">Tecnólogo aceito ✓</span>
-        </div>
-        <div class="banca-strip">
-          <span class="banca-pill" style="background:rgba(250,238,218,0.15);color:#FAC775;border:1px solid rgba(239,159,39,0.3);">FGV (último)</span>
-          <span class="banca-desc"><strong>Estilo:</strong> Múltipla escolha + discursiva. Peso em Direito Tributário, Contabilidade, Direito Constitucional/Administrativo.</span>
-        </div>
-      </div>
-      <div class="c-arrow">›</div>
-    </a>
   </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <div class="card">
+      <div class="card-tag">Acesso seguro</div>
+      <h2>Entrar na plataforma</h2>
+      <p class="subtitle">Faça login para salvar seu progresso na nuvem e acessar de qualquer dispositivo.</p>
+
+      <button class="btn-google" id="btn-google" onclick="loginWithGoogle()">
+        <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+          <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+          <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+        </svg>
+        <span class="btn-text">Continuar com Google</span>
+      </button>
+
+      <div id="status-msg"></div>
+
+      <div class="notice">
+        <div class="notice-icon">🔒</div>
+        <p>Ao fazer login, seu progresso é salvo automaticamente. <strong>Se você já usou a plataforma antes</strong>, seus dados serão migrados do dispositivo atual para a nuvem.</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
-  const STORAGE_KEY = 'talento_progresso_v1';
-  function loadProgress() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+  const SUPABASE_URL  = 'https://cgfzhltysavnwmqhaskj.supabase.co'
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnZnpobHR5c2F2bndtcWhhc2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MjA4NDQsImV4cCI6MjA5MTM5Njg0NH0.SJDMkHsilRXNsg6ar9rM1AYPDXzxauUOgxunHmTM9Jc'
+  const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+
+  // Aguarda o Supabase processar token OAuth que pode vir na URL
+  _sb.auth.onAuthStateChange((event, session) => {
+    if (session) redirectToApp()
+  })
+
+  // Verifica sessão já existente
+  ;(async () => {
+    const { data: { session } } = await _sb.auth.getSession()
+    if (session) redirectToApp()
+  })()
+
+  _sb.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_IN' && session) {
+      showStatus('Login realizado! Carregando...')
+      await migrateLocalStorage(session.user)
+      redirectToApp()
+    }
+  })
+
+  async function loginWithGoogle() {
+    const btn = document.getElementById('btn-google')
+    btn.classList.add('loading')
+    btn.querySelector('.btn-text').textContent = 'Abrindo Google...'
+
+    const isProd = window.location.hostname !== 'localhost'
+    const BASE = isProd
+      ? 'https://www.talento.dev.br'
+      : 'http://localhost:80'
+
+    const { error } = await _sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${BASE}/site/concursos/concursos.html`
+      }
+    })
+
+    if (error) {
+      btn.classList.remove('loading')
+      btn.querySelector('.btn-text').textContent = 'Continuar com Google'
+      showStatus('Erro ao conectar. Tente novamente.')
+    }
   }
 
-  const done = loadProgress();
-  const inssPages = ['page-resumo-inss-1'];
-  const tjcePages = ['page-resumo-tj-1', 'page-resumo-tj-2', 'page-resumo-tj-3', 'page-resumo-tj-4'];
-
-  const inssConc = inssPages.filter(p => done[p]).length;
-  const tjceConc = tjcePages.filter(p => done[p]).length;
-
-  if (inssConc > 0) {
-    document.getElementById('badge-inss-progress').textContent = `${inssConc}/${inssPages.length} concluídos ✓`;
+  async function migrateLocalStorage(user) {
+    try {
+      const KEYS = ['talento_tjce_v1', 'talento_inss_v1', 'talento_progresso_v1']
+      const rows = []
+      KEYS.forEach(key => {
+        const raw = localStorage.getItem(key)
+        if (!raw) return
+        const data = JSON.parse(raw)
+        Object.entries(data).forEach(([page_id, val]) => {
+          if (val === true)
+            rows.push({ user_id: user.id, page_id, completed: true,
+                        score: null, total: null, answers: null })
+        })
+      })
+      if (!rows.length) return
+      await _sb.from('user_progress')
+        .upsert(rows, { onConflict: 'user_id,page_id', ignoreDuplicates: true })
+      KEYS.forEach(k => localStorage.removeItem(k))
+      console.log(`✅ ${rows.length} módulos migrados.`)
+    } catch(e) { console.warn('Migração ignorada:', e) }
   }
-  if (tjceConc > 0) {
-    document.getElementById('badge-tjce-progress').textContent = `${tjceConc}/${tjcePages.length} concluídos ✓`;
+
+  function redirectToApp() {
+    window.location.href = 'concursos.html'
+  }
+
+  function showStatus(msg) {
+    const el = document.getElementById('status-msg')
+    el.textContent = msg
+    el.style.display = 'block'
   }
 </script>
+
 </body>
 </html>
