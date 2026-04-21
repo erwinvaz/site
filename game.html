@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChessLand — Ver Partida</title>
+  <meta name="description" content="Abra no app ChessLand para analisar esta partida de xadrez.">
+
+  <!-- Open Graph — preview no WhatsApp/Telegram/Discord -->
+  <meta property="og:title" content="♟️ ChessLand — Ver Partida">
+  <meta property="og:description" content="Alguém compartilhou uma partida de xadrez com você. Abra no app ChessLand!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://talento.dev.br/chess-preview.png">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&display=swap');
+
+    :root {
+      --bg:       #0A0A14;
+      --surface:  #12121F;
+      --border:   rgba(255,255,255,0.07);
+      --accent:   #C8F050;
+      --accent2:  #50F0C8;
+      --text:     #E8E8F0;
+      --muted:    rgba(232,232,240,0.45);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    /* ── Tabuleiro decorativo de fundo ── */
+    .board-bg {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      opacity: 0.03;
+      pointer-events: none;
+      transform: rotate(15deg) scale(1.4);
+    }
+    .board-bg div:nth-child(odd)  { background: #fff; }
+    .board-bg div:nth-child(even) { background: transparent; }
+    .board-bg div:nth-child(16n+1),
+    .board-bg div:nth-child(16n+3),
+    .board-bg div:nth-child(16n+5),
+    .board-bg div:nth-child(16n+7),
+    .board-bg div:nth-child(16n+10),
+    .board-bg div:nth-child(16n+12),
+    .board-bg div:nth-child(16n+14),
+    .board-bg div:nth-child(16n+16) { background: transparent; }
+    .board-bg div:nth-child(16n+2),
+    .board-bg div:nth-child(16n+4),
+    .board-bg div:nth-child(16n+6),
+    .board-bg div:nth-child(16n+8),
+    .board-bg div:nth-child(16n+9),
+    .board-bg div:nth-child(16n+11),
+    .board-bg div:nth-child(16n+13),
+    .board-bg div:nth-child(16n+15) { background: #fff; }
+
+    /* ── Card principal ── */
+    .card {
+      position: relative;
+      max-width: 420px;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px 32px 36px;
+      text-align: center;
+      animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+
+    /* linha de acento no topo */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 32px; right: 32px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 0 0 4px 4px;
+    }
+
+    /* ── Peça animada ── */
+    .piece {
+      font-size: 64px;
+      line-height: 1;
+      display: block;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    /* ── Tipografia ── */
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Botões ── */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px 24px;
+      border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color: #0A0A14;
+      box-shadow: 0 4px 24px rgba(200,240,80,0.25);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 6px 32px rgba(200,240,80,0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.18); color: var(--text); }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Status ── */
+    .status {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .status.show { display: flex; }
+    .status-info    { background: rgba(80,200,240,0.08); color: var(--accent2); border: 1px solid rgba(80,200,240,0.15); }
+    .status-success { background: rgba(200,240,80,0.08); color: var(--accent);  border: 1px solid rgba(200,240,80,0.15); }
+    .status-warn    { background: rgba(255,167,38,0.08); color: #FFA726;        border: 1px solid rgba(255,167,38,0.15); }
+    .status-error   { background: rgba(255,82,82,0.08);  color: #FF5252;        border: 1px solid rgba(255,82,82,0.15); }
+
+    /* ── Spinner ── */
+    .spinner {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Instruções ── */
+    .instructions {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-align: left;
+    }
+    .instructions-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: rgba(200,240,80,0.1);
+      border: 1px solid rgba(200,240,80,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- tabuleiro decorativo -->
+  <div class="board-bg" id="boardBg"></div>
+
+  <div class="card">
+    <span class="piece" id="pieceEmoji">♟️</span>
+    <h1 id="cardTitle">Ver Partida</h1>
+    <p class="subtitle" id="cardSubtitle">Abrindo no ChessLand...</p>
+
+    <div class="status" id="status"></div>
+
+    <div class="btn-group" id="btnGroup">
+      <a href="#" id="btnOpen" class="btn btn-primary">
+        <span>🚀</span><span>Abrir no ChessLand</span>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.talentodev.chess"
+         target="_blank" id="btnStore" class="btn btn-secondary">
+        Baixar na Play Store
+      </a>
+    </div>
+
+    <div class="instructions" id="instructions">
+      <div class="instructions-title">Como assistir</div>
+      <div class="step"><span class="step-num">1</span><span>Toque em "Abrir no ChessLand"</span></div>
+      <div class="step"><span class="step-num">2</span><span>Se o app não abrir, baixe grátis na Play Store</span></div>
+      <div class="step"><span class="step-num">3</span><span>A partida abrirá automaticamente na análise interativa</span></div>
+    </div>
+  </div>
+
+  <script>
+    // ── Tabuleiro de fundo ──────────────────────────────────────
+    const bg = document.getElementById('boardBg');
+    for (let i = 0; i < 64; i++) {
+      const d = document.createElement('div');
+      const row = Math.floor(i / 8), col = i % 8;
+      if ((row + col) % 2 === 0) d.style.background = '#fff';
+      bg.appendChild(d);
+    }
+
+    // ── Lógica principal ────────────────────────────────────────
+    const params   = new URLSearchParams(location.search);
+    const gameId   = params.get('game');
+    const statusEl = document.getElementById('status');
+    const btnOpen  = document.getElementById('btnOpen');
+
+    function setStatus(msg, type) {
+      statusEl.className = `status show status-${type}`;
+      statusEl.innerHTML = msg;
+    }
+
+    if (!gameId) {
+      document.getElementById('pieceEmoji').textContent = '⚠️';
+      document.getElementById('cardTitle').textContent  = 'Link inválido';
+      document.getElementById('cardSubtitle').textContent = 'Nenhum ID de partida encontrado.';
+      setStatus('Verifique se o link está completo.', 'error');
+      document.getElementById('btnGroup').style.display = 'none';
+      document.getElementById('instructions').style.display = 'none';
+    } else {
+      // Monta o deep link com o UUID da partida
+      const deepLink = `chessland://game?id=${gameId}`;
+      btnOpen.href = deepLink;
+
+      // Tenta abrir o app após pequeno delay (deixa a página renderizar)
+      setTimeout(() => {
+        setStatus('<span class="spinner"></span> Abrindo o ChessLand...', 'info');
+        window.location.href = deepLink;
+
+        // Se ainda estiver na página após 2.5s, o app não está instalado
+        setTimeout(() => {
+          setStatus('App não instalado? Baixe grátis na Play Store abaixo.', 'warn');
+        }, 2500);
+      }, 800);
+    }
+
+    // Clique manual no botão (caso o automático não funcione)
+    btnOpen.addEventListener('click', (e) => {
+      if (!gameId) return;
+      e.preventDefault();
+      setStatus('<span class="spinner"></span> Abrindo...', 'info');
+      window.location.href = btnOpen.href;
+      setTimeout(() => {
+        setStatus('App não instalado? Baixe grátis na Play Store abaixo.', 'warn');
+      }, 2500);
+    });
+  </script>
+</body>
+</html>
