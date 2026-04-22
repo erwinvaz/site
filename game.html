@@ -303,19 +303,12 @@
       document.getElementById('btnGroup').style.display = 'none';
       document.getElementById('instructions').style.display = 'none';
     } else {
-
-      const name   = params.get('name')   || '';
-      const emoji  = params.get('emoji')  || '♟️';
-      const avatar = params.get('avatar') || '';
-      const color  = params.get('color')  || 'white';
-
-      const deepLink = `chessland://game?id=${gameId}&name=${encodeURIComponent(name)}&emoji=${encodeURIComponent(emoji)}&avatar=${encodeURIComponent(avatar)}&color=${color}`;
+      const deepLink = `chessland://game?id=${gameId}`;
       btnOpen.href = deepLink;
 
-      // Tenta abrir o app após pequeno delay (deixa a página renderizar)
       setTimeout(() => {
         setStatus('<span class="spinner"></span> Abrindo o ChessLand...', 'info');
-        window.location.href = deepLink;  // ← já usa o deepLink com parâmetros
+        window.location.href = deepLink;
         setTimeout(() => {
           setStatus('App não instalado? Baixe grátis na Play Store abaixo.', 'warn');
         }, 2500);
