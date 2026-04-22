@@ -303,13 +303,13 @@
       document.getElementById('btnGroup').style.display = 'none';
       document.getElementById('instructions').style.display = 'none';
     } else {
-      // Monta o deep link com o UUID da partida
+
       const name   = params.get('name')   || '';
       const emoji  = params.get('emoji')  || '♟️';
       const avatar = params.get('avatar') || '';
+      const color  = params.get('color')  || 'white';
 
-      // Monta o deep link com todos os parâmetros
-      const deepLink = `chessland://game?id=${gameId}&name=${encodeURIComponent(name)}&emoji=${encodeURIComponent(emoji)}&avatar=${encodeURIComponent(avatar)}`;
+      const deepLink = `chessland://game?id=${gameId}&name=${encodeURIComponent(name)}&emoji=${encodeURIComponent(emoji)}&avatar=${encodeURIComponent(avatar)}&color=${color}`;
       btnOpen.href = deepLink;
 
       // Tenta abrir o app após pequeno delay (deixa a página renderizar)
