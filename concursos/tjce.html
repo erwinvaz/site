@@ -5157,6 +5157,53 @@ function openTopico(page,titulo,materia){
   }else{showPage(page);}
 }
 
+  function renderInfoConcurso() {
+  return `
+  <div style="background:var(--navy-card);border:1px solid var(--navy-border);border-radius:var(--radius-lg);
+    padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+    
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Banca</div>
+      <div style="font-size:15px;font-weight:700;color:var(--tj-blue);">Fundação Carlos Chagas (FCC)</div>
+    </div>
+    
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Data das provas</div>
+      <div style="font-size:15px;font-weight:700;color:var(--gold);">09/08/2026 (domingo)</div>
+    </div>
+    
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Inscrições</div>
+      <div style="font-size:13px;color:var(--text-muted);">18/05 a 22/06/2026</div>
+    </div>
+    
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Locais de prova</div>
+      <div style="font-size:13px;color:var(--text-muted);">Fortaleza · Juazeiro do Norte · Sobral</div>
+    </div>
+ 
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Técnico Judiciário</div>
+      <div style="font-size:13px;color:var(--text-muted);">12 vagas · R$ 5.381,36 · Período: Tarde</div>
+    </div>
+ 
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Analista Judiciário</div>
+      <div style="font-size:13px;color:var(--text-muted);">CR vagas · R$ 8.829,24 · Período: Manhã</div>
+    </div>
+ 
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Nota mínima</div>
+      <div style="font-size:13px;color:var(--text-muted);">6,0 (ampla) · 4,8 (cotas) · Obj. + Discursiva</div>
+    </div>
+ 
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Regime</div>
+      <div style="font-size:13px;color:var(--text-muted);">Estatuto CE (Lei nº 9.826/1974) · 40h semanais</div>
+    </div>
+  </div>`;
+}
+
 function renderEdital(){
   const edital=document.getElementById('edital-tjce');
   const done=loadProgress();
@@ -5292,53 +5339,6 @@ function responder(cid, sid, snid, qi, oi, total, pageId) {
     window.location.href = 'index.html'
     return
   }
-
-  function renderInfoConcurso() {
-  return `
-  <div style="background:var(--navy-card);border:1px solid var(--navy-border);border-radius:var(--radius-lg);
-    padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
-    
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Banca</div>
-      <div style="font-size:15px;font-weight:700;color:var(--tj-blue);">Fundação Carlos Chagas (FCC)</div>
-    </div>
-    
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Data das provas</div>
-      <div style="font-size:15px;font-weight:700;color:var(--gold);">09/08/2026 (domingo)</div>
-    </div>
-    
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Inscrições</div>
-      <div style="font-size:13px;color:var(--text-muted);">18/05 a 22/06/2026</div>
-    </div>
-    
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Locais de prova</div>
-      <div style="font-size:13px;color:var(--text-muted);">Fortaleza · Juazeiro do Norte · Sobral</div>
-    </div>
- 
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Técnico Judiciário</div>
-      <div style="font-size:13px;color:var(--text-muted);">12 vagas · R$ 5.381,36 · Período: Tarde</div>
-    </div>
- 
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Analista Judiciário</div>
-      <div style="font-size:13px;color:var(--text-muted);">CR vagas · R$ 8.829,24 · Período: Manhã</div>
-    </div>
- 
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Nota mínima</div>
-      <div style="font-size:13px;color:var(--text-muted);">6,0 (ampla) · 4,8 (cotas) · Obj. + Discursiva</div>
-    </div>
- 
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Regime</div>
-      <div style="font-size:13px;color:var(--text-muted);">Estatuto CE (Lei nº 9.826/1974) · 40h semanais</div>
-    </div>
-  </div>`;
-}
 
   renderEdital()
 
