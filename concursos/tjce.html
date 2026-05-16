@@ -5207,8 +5207,8 @@ function openTopico(page,titulo,materia){
 function renderEdital(){
   const edital=document.getElementById('edital-tjce');
   const done=loadProgress();
-  let infoHtml = renderInfoConcurso();   // ← adicione esta linha
-  edital.innerHTML=Object.keys(TJCE).map(key=>{
+  const infoHtml = renderInfoConcurso();
+  edital.innerHTML = infoHtml + Object.keys(TJCE).map(key=>{
     const sec=TJCE[key];
     const items=sec.items.map(item=>{
       const hasPage=!!item.page;
