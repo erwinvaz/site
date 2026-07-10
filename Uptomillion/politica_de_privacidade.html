@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Privacidade | Privacy Policy — UpToMillion</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+    :root {
+        --bg: #f2f8f6;
+        --surface: #ffffff;
+        --ink: #14201d;
+        --muted: #5f6f6a;
+        --accent: #0f766e;
+        --accent-light: #e3f5f1;
+        --border: #dde8e5;
+        --radius: 12px;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        min-height: 100vh;
+    }
+
+    header {
+        background: var(--ink);
+        color: #fff;
+        padding: 28px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .brand {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.6rem;
+        letter-spacing: -0.5px;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .lang-toggle { display: flex; gap: 6px; }
+
+    .lang-btn {
+        background: transparent;
+        border: 1.5px solid rgba(255,255,255,0.35);
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 99px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .lang-btn:hover, .lang-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+    }
+
+    .hero {
+        background: var(--accent);
+        color: #fff;
+        padding: 56px 40px 48px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.06);
+    }
+
+    .hero-eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.75;
+        margin-bottom: 12px;
+    }
+
+    .hero h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 16px;
+    }
+
+    .hero-date { font-size: 0.85rem; opacity: 0.8; }
+
+    .container {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 56px 24px 80px;
+    }
+
+    .section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 36px 40px;
+        margin-bottom: 24px;
+        transition: box-shadow 0.2s;
+    }
+
+    .section:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+
+    .section-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-size: 1.2rem;
+    }
+
+    .section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.35rem;
+        margin-bottom: 14px;
+        color: var(--ink);
+    }
+
+    .section p {
+        color: var(--muted);
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .section ul {
+        margin: 8px 0 12px 20px;
+        color: var(--muted);
+        font-size: 0.95rem;
+    }
+
+    .section ul li { margin-bottom: 6px; }
+
+    .highlight {
+        background: var(--accent-light);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        color: var(--ink);
+    }
+
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+        margin-bottom: 16px;
+    }
+
+    .badge {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 99px;
+        padding: 5px 14px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--ink);
+    }
+
+    .contact-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); }
+
+    footer {
+        text-align: center;
+        padding: 32px 24px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+    }
+
+    [data-lang] { display: none; }
+    .lang-pt [data-lang="pt"] { display: block; }
+    .lang-en [data-lang="en"] { display: block; }
+
+    span[data-lang] { display: none; }
+    .lang-pt span[data-lang="pt"] { display: inline; }
+    .lang-en span[data-lang="en"] { display: inline; }
+
+    @media (max-width: 600px) {
+        header { padding: 20px; }
+        .hero { padding: 40px 20px 36px; }
+        .section { padding: 24px 20px; }
+    }
+    </style>
+</head>
+
+<body class="lang-pt">
+
+    <header>
+        <div class="brand">💰 <span>UpTo</span>Million</div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+            <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-eyebrow" data-lang="pt">UpToMillion</div>
+        <div class="hero-eyebrow" data-lang="en">UpToMillion</div>
+
+        <h1 data-lang="pt">Política de<br>Privacidade</h1>
+        <h1 data-lang="en">Privacy<br>Policy</h1>
+
+        <div class="hero-date" data-lang="pt">Última atualização: 9 de Julho de 2026</div>
+        <div class="hero-date" data-lang="en">Last updated: July 9, 2026</div>
+    </div>
+
+    <div class="container">
+
+        <div class="highlight">
+            <span data-lang="pt">💰 O UpToMillion respeita a sua privacidade. Seus dados financeiros ficam armazenados apenas no seu dispositivo — nunca em nossos servidores.</span>
+            <span data-lang="en">💰 UpToMillion respects your privacy. Your financial data is stored only on your device — never on our servers.</span>
+        </div>
+
+        <!-- 1. INFORMAÇÕES FINANCEIRAS -->
+        <div class="section">
+            <div class="section-icon">📋</div>
+            <h2 data-lang="pt">1. Seus Dados Financeiros</h2>
+            <h2 data-lang="en">1. Your Financial Data</h2>
+
+            <p data-lang="pt">O UpToMillion foi desenvolvido para funcionar <strong>100% offline</strong> no que diz respeito às suas informações financeiras. Todos os dados que você cadastra são armazenados exclusivamente em um banco de dados local (SQLite) no seu próprio dispositivo, incluindo:</p>
+            <p data-lang="en">UpToMillion was designed to operate <strong>100% offline</strong> regarding your financial information. All data you enter is stored exclusively in a local database (SQLite) on your own device, including:</p>
+
+            <ul data-lang="pt">
+                <li>Contas bancárias e saldos cadastrados</li>
+                <li>Cartões de crédito e faturas</li>
+                <li>Receitas e despesas, fixas e variáveis</li>
+                <li>Categorias personalizadas</li>
+                <li>Histórico de movimentações e projeções de fluxo de caixa</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Registered bank accounts and balances</li>
+                <li>Credit cards and invoices</li>
+                <li>Fixed and variable income and expenses</li>
+                <li>Custom categories</li>
+                <li>Transaction history and cash flow projections</li>
+            </ul>
+
+            <p data-lang="pt">Nós, desenvolvedores do UpToMillion, <strong>não temos acesso</strong> a nenhuma dessas informações. Elas nunca são enviadas para nenhum servidor nosso ou de terceiros.</p>
+            <p data-lang="en">We, the developers of UpToMillion, <strong>do not have access</strong> to any of this information. It is never sent to any server, whether ours or a third party's.</p>
+        </div>
+
+        <!-- 2. BACKUP LOCAL -->
+        <div class="section">
+            <div class="section-icon">💾</div>
+            <h2 data-lang="pt">2. Backup e Restauração</h2>
+            <h2 data-lang="en">2. Backup and Restore</h2>
+
+            <p data-lang="pt">O aplicativo oferece uma funcionalidade de backup manual, que gera um arquivo local do seu banco de dados. Esse arquivo é salvo no armazenamento do seu próprio dispositivo (ou em um local escolhido por você, como o Google Drive pessoal), e sua transmissão ou armazenamento não passa por nossos servidores em nenhum momento.</p>
+            <p data-lang="en">The app offers a manual backup feature that generates a local file of your database. This file is saved to your own device's storage (or a location you choose, such as your personal Google Drive), and its transmission or storage never passes through our servers.</p>
+
+            <p data-lang="pt">Você é o único responsável por proteger e armazenar seus arquivos de backup.</p>
+            <p data-lang="en">You are solely responsible for protecting and storing your backup files.</p>
+        </div>
+
+        <!-- 3. ANÚNCIOS -->
+        <div class="section">
+            <div class="section-icon">📺</div>
+            <h2 data-lang="pt">3. Anúncios (Google AdMob)</h2>
+            <h2 data-lang="en">3. Advertising (Google AdMob)</h2>
+
+            <p data-lang="pt">O UpToMillion exibe anúncios fornecidos pelo <strong>Google AdMob</strong> em formato de banner e intersticial, como forma de manter o aplicativo gratuito. Para exibir anúncios relevantes, o AdMob pode coletar automaticamente:</p>
+            <p data-lang="en">UpToMillion displays ads provided by <strong>Google AdMob</strong> in banner and interstitial formats, as a way to keep the app free. To display relevant ads, AdMob may automatically collect:</p>
+
+            <ul data-lang="pt">
+                <li>Identificador de publicidade do dispositivo (Advertising ID)</li>
+                <li>Dados de interação com os anúncios (visualizações, cliques)</li>
+                <li>Informações técnicas do dispositivo (modelo, sistema operacional, idioma)</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Device advertising identifier (Advertising ID)</li>
+                <li>Ad interaction data (views, clicks)</li>
+                <li>Technical device information (model, operating system, language)</li>
+            </ul>
+
+            <p data-lang="pt">Essa coleta é feita e gerenciada diretamente pelo Google, conforme sua própria Política de Privacidade. O UpToMillion não tem acesso ao conteúdo financeiro que você cadastra e não o compartilha com o AdMob de nenhuma forma.</p>
+            <p data-lang="en">This collection is carried out and managed directly by Google, in accordance with its own Privacy Policy. UpToMillion does not access the financial content you enter and does not share it with AdMob in any way.</p>
+
+            <p data-lang="pt">Você pode desativar a personalização de anúncios nas configurações de privacidade do seu dispositivo Android, ou remover os anúncios por completo assinando o plano Premium do aplicativo.</p>
+            <p data-lang="en">You can disable ad personalization in your Android device's privacy settings, or remove ads entirely by subscribing to the app's Premium plan.</p>
+        </div>
+
+        <!-- 4. ASSINATURA PREMIUM -->
+        <div class="section">
+            <div class="section-icon">⭐</div>
+            <h2 data-lang="pt">4. Assinatura Premium (Google Play Billing)</h2>
+            <h2 data-lang="en">4. Premium Subscription (Google Play Billing)</h2>
+
+            <p data-lang="pt">O UpToMillion oferece uma assinatura Premium opcional, que remove os anúncios do aplicativo. As compras são processadas inteiramente pelo <strong>Google Play Billing</strong>, e o UpToMillion não tem acesso a dados de pagamento como número de cartão ou informações bancárias — essas informações ficam exclusivamente com o Google.</p>
+            <p data-lang="en">UpToMillion offers an optional Premium subscription that removes ads from the app. Purchases are processed entirely by <strong>Google Play Billing</strong>, and UpToMillion does not have access to payment data such as card numbers or banking information — this information remains exclusively with Google.</p>
+
+            <p data-lang="pt">O aplicativo apenas recebe uma confirmação do status da assinatura (ativa ou inativa), armazenada localmente no dispositivo para liberar os recursos Premium.</p>
+            <p data-lang="en">The app only receives a confirmation of the subscription status (active or inactive), stored locally on the device to unlock Premium features.</p>
+
+            <p data-lang="pt">Alternativamente, o usuário pode assistir a um anúncio recompensado para obter acesso temporário aos recursos Premium, sem custo financeiro.</p>
+            <p data-lang="en">Alternatively, users can watch a rewarded ad to obtain temporary access to Premium features at no financial cost.</p>
+        </div>
+
+        <!-- 5. ANALYTICS E ESTABILIDADE -->
+        <div class="section">
+            <div class="section-icon">📊</div>
+            <h2 data-lang="pt">5. Estatísticas de Uso e Estabilidade (Firebase)</h2>
+            <h2 data-lang="en">5. Usage Statistics and Stability (Firebase)</h2>
+
+            <p data-lang="pt">Utilizamos o <strong>Firebase Analytics</strong>, serviço do Google, para entender de forma agregada e anônima como o aplicativo é utilizado — como número de instalações, telas mais acessadas e frequência de uso. Esses dados não incluem o conteúdo financeiro que você cadastra e não identificam você pessoalmente.</p>
+            <p data-lang="en">We use <strong>Firebase Analytics</strong>, a Google service, to understand in an aggregated and anonymous way how the app is used — such as install counts, most-visited screens, and usage frequency. This data does not include the financial content you enter and does not personally identify you.</p>
+
+            <p data-lang="pt">Também utilizamos o <strong>Firebase Crashlytics</strong> para identificar e corrigir erros técnicos do aplicativo. Em caso de falha, informações técnicas do dispositivo e do erro ocorrido podem ser registradas para fins de diagnóstico.</p>
+            <p data-lang="en">We also use <strong>Firebase Crashlytics</strong> to identify and fix technical errors in the app. In the event of a failure, technical information about the device and the error that occurred may be logged for diagnostic purposes.</p>
+        </div>
+
+        <!-- 6. USO DA INTERNET -->
+        <div class="section">
+            <div class="section-icon">📡</div>
+            <h2 data-lang="pt">6. Uso da Internet</h2>
+            <h2 data-lang="en">6. Internet Usage</h2>
+
+            <p data-lang="pt">O aplicativo requer acesso à internet exclusivamente para:</p>
+            <p data-lang="en">The application requires internet access exclusively for:</p>
+
+            <ul data-lang="pt">
+                <li>Carregar anúncios (banners, intersticiais e recompensados)</li>
+                <li>Processar a assinatura Premium via Google Play Billing</li>
+                <li>Enviar estatísticas de uso e relatórios de erro (Firebase)</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Loading ads (banners, interstitials, and rewarded)</li>
+                <li>Processing the Premium subscription via Google Play Billing</li>
+                <li>Sending usage statistics and crash reports (Firebase)</li>
+            </ul>
+
+            <p data-lang="pt">Nenhuma funcionalidade de cadastro, cálculo ou consulta de dados financeiros depende de conexão com a internet. O aplicativo funciona normalmente no modo avião, exceto pela exibição de anúncios.</p>
+            <p data-lang="en">No financial data entry, calculation, or query feature depends on an internet connection. The app works normally in airplane mode, except for displaying ads.</p>
+        </div>
+
+        <!-- 7. PERMISSÕES -->
+        <div class="section">
+            <div class="section-icon">🔐</div>
+            <h2 data-lang="pt">7. Permissões do Aplicativo</h2>
+            <h2 data-lang="en">7. App Permissions</h2>
+
+            <p data-lang="pt">O UpToMillion solicita apenas a seguinte permissão:</p>
+            <p data-lang="en">UpToMillion requests only the following permission:</p>
+
+            <div class="badges">
+                <span class="badge">🌐 Internet</span>
+            </div>
+
+            <p data-lang="pt"><strong>Internet:</strong> Necessária exclusivamente para exibição de anúncios, processamento da assinatura Premium e envio de estatísticas de uso e erros. Não é utilizada para transmitir seus dados financeiros.</p>
+            <p data-lang="en"><strong>Internet:</strong> Required exclusively for displaying ads, processing the Premium subscription, and sending usage statistics and error reports. It is not used to transmit your financial data.</p>
+        </div>
+
+        <!-- 8. COMPARTILHAMENTO -->
+        <div class="section">
+            <div class="section-icon">🤝</div>
+            <h2 data-lang="pt">8. Compartilhamento de Dados</h2>
+            <h2 data-lang="en">8. Data Sharing</h2>
+
+            <p data-lang="pt">O UpToMillion utiliza os seguintes serviços de terceiros, cada um sujeito à sua própria política de privacidade:</p>
+            <p data-lang="en">UpToMillion uses the following third-party services, each subject to its own privacy policy:</p>
+
+            <ul data-lang="pt">
+                <li><strong>Google AdMob</strong> — exibição de anúncios</li>
+                <li><strong>Google Play Billing</strong> — processamento de assinaturas</li>
+                <li><strong>Firebase (Google)</strong> — estatísticas de uso e relatórios de erro</li>
+            </ul>
+            <ul data-lang="en">
+                <li><strong>Google AdMob</strong> — ad delivery</li>
+                <li><strong>Google Play Billing</strong> — subscription processing</li>
+                <li><strong>Firebase (Google)</strong> — usage statistics and crash reporting</li>
+            </ul>
+
+            <p data-lang="pt">Seus dados financeiros (contas, cartões, receitas, despesas) <strong>nunca</strong> são compartilhados com nenhum desses serviços ou com qualquer outro terceiro. Nenhuma informação é vendida, alugada ou usada para fins comerciais além do descrito nesta política.</p>
+            <p data-lang="en">Your financial data (accounts, cards, income, expenses) is <strong>never</strong> shared with any of these services or with any other third party. No information is sold, rented, or used for commercial purposes beyond what is described in this policy.</p>
+        </div>
+
+        <!-- 9. COOKIES -->
+        <div class="section">
+            <div class="section-icon">🍪</div>
+            <h2 data-lang="pt">9. Cookies</h2>
+            <h2 data-lang="en">9. Cookies</h2>
+
+            <p data-lang="pt">O aplicativo em si não utiliza cookies. Os SDKs de anúncios (Google AdMob) podem utilizar identificadores semelhantes a cookies para fins de segmentação publicitária, conforme a política do Google.</p>
+            <p data-lang="en">The application itself does not use cookies. Ad SDKs (Google AdMob) may use cookie-like identifiers for advertising targeting purposes, in accordance with Google's policy.</p>
+        </div>
+
+        <!-- 10. CRIANÇAS -->
+        <div class="section">
+            <div class="section-icon">👶</div>
+            <h2 data-lang="pt">10. Crianças</h2>
+            <h2 data-lang="en">10. Children</h2>
+
+            <p data-lang="pt">O UpToMillion é um aplicativo de finanças pessoais, não direcionado a crianças menores de 13 anos. Não coletamos intencionalmente informações pessoais de menores.</p>
+            <p data-lang="en">UpToMillion is a personal finance app, not directed at children under 13. We do not intentionally collect personal information from minors.</p>
+        </div>
+
+        <!-- 11. SEGURANÇA -->
+        <div class="section">
+            <div class="section-icon">🛡️</div>
+            <h2 data-lang="pt">11. Segurança</h2>
+            <h2 data-lang="en">11. Security</h2>
+
+            <p data-lang="pt">Como seus dados financeiros permanecem armazenados apenas localmente no seu dispositivo, a principal camada de segurança é o próprio bloqueio de tela e as permissões do seu aparelho Android. Recomendamos manter seu dispositivo protegido com senha, PIN ou biometria.</p>
+            <p data-lang="en">Since your financial data remains stored only locally on your device, the main security layer is your device's own screen lock and Android permissions. We recommend keeping your device protected with a password, PIN, or biometrics.</p>
+
+            <p data-lang="pt">As comunicações do aplicativo com serviços de terceiros (AdMob, Firebase, Google Play Billing) utilizam conexões criptografadas (HTTPS/TLS).</p>
+            <p data-lang="en">The app's communications with third-party services (AdMob, Firebase, Google Play Billing) use encrypted connections (HTTPS/TLS).</p>
+        </div>
+
+        <!-- 12. SEUS DIREITOS -->
+        <div class="section">
+            <div class="section-icon">⚖️</div>
+            <h2 data-lang="pt">12. Seus Direitos</h2>
+            <h2 data-lang="en">12. Your Rights</h2>
+
+            <p data-lang="pt">Como todos os seus dados financeiros ficam armazenados apenas no seu dispositivo, você tem controle total sobre eles a qualquer momento:</p>
+            <p data-lang="en">Since all your financial data is stored only on your device, you have full control over it at any time:</p>
+
+            <ul data-lang="pt">
+                <li>Excluir todos os dados desinstalando o aplicativo</li>
+                <li>Exportar seus dados através da função de backup</li>
+                <li>Gerenciar ou cancelar sua assinatura Premium diretamente na Google Play Store</li>
+                <li>Desativar a personalização de anúncios nas configurações do seu dispositivo</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Delete all data by uninstalling the app</li>
+                <li>Export your data using the backup feature</li>
+                <li>Manage or cancel your Premium subscription directly on the Google Play Store</li>
+                <li>Disable ad personalization in your device settings</li>
+            </ul>
+
+            <p data-lang="pt">Para dúvidas sobre esses direitos, entre em contato através do site abaixo.</p>
+            <p data-lang="en">For questions about these rights, please contact us through the website below.</p>
+        </div>
+
+        <!-- 13. ALTERAÇÕES -->
+        <div class="section">
+            <div class="section-icon">📝</div>
+            <h2 data-lang="pt">13. Alterações a esta Política</h2>
+            <h2 data-lang="en">13. Changes to This Policy</h2>
+
+            <p data-lang="pt">Caso esta Política de Privacidade seja alterada, a versão atualizada será publicada nesta página com a nova data de vigência.</p>
+            <p data-lang="en">Should this Privacy Policy be modified, the updated version will be published on this page with the new effective date.</p>
+
+            <p data-lang="pt">Você pode imprimir uma cópia pressionando <strong>Ctrl + P</strong> no teclado.</p>
+            <p data-lang="en">You can print a copy by pressing <strong>Ctrl + P</strong> on your keyboard.</p>
+        </div>
+
+        <!-- 14. CONTATO -->
+        <div class="section">
+            <div class="section-icon">✉️</div>
+            <h2 data-lang="pt">14. Contato</h2>
+            <h2 data-lang="en">14. Contact</h2>
+
+            <p data-lang="pt">Caso tenha dúvidas sobre esta Política de Privacidade ou queira exercer seus direitos, entre em contato:</p>
+            <p data-lang="en">If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:</p>
+
+            <p><a href="https://www.talento.dev.br" target="_blank" rel="noopener" class="contact-link">www.talento.dev.br</a></p>
+        </div>
+
+    </div>
+
+    <footer>
+        <span data-lang="pt">© 2026 UpToMillion · Última atualização: 9 de Julho de 2026</span>
+        <span data-lang="en">© 2026 UpToMillion · Last updated: July 9, 2026</span>
+    </footer>
+
+    <script>
+    function setLang(lang, btn) {
+        document.body.className = 'lang-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.documentElement.lang = lang;
+    }
+    </script>
+</body>
+</html>
