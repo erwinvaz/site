@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9521177044478820">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZ98GYTZJF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GZ98GYTZJF');
+    </script>
+
+    <title>UptoMillion - Suas Finanças Sob Controle | Talento Dev</title>
+
+    <meta name="description" content="UptoMillion - Controle despesas fixas, acompanhe seu patrimônio e monitore sua saúde financeira com o Termômetro Financeiro. Grátis na Play Store.">
+    <meta name="keywords" content="uptomillion, controle financeiro, app de finanças, despesas fixas, patrimônio, talento dev, quiz android">
+    <meta name="author" content="Erwin Vaz">
+    <meta property="og:title" content="UptoMillion - Suas Finanças Sob Controle">
+    <meta property="og:description" content="Controle despesas, acompanhe seu patrimônio e monitore sua saúde financeira em um só lugar.">
+    <meta property="og:url" content="https://www.talento.dev.br/uptomillion.html">
+    <meta property="og:type" content="website">
+
+    <link href="assets/img/favicon.ico" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;900&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="canonical" href="https://www.talento.dev.br/uptomillion.html" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9521177044478820" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        :root {
+            --money-abyss:   #06231e;
+            --money-deep:    #0d3b32;
+            --money-teal:    #16594c;
+            --money-mint:    #baf3d1;
+            --money-mint-2:  #8fe6b8;
+            --money-gold:    #f0b429;
+            --money-gold2:   #c98a0f;
+            --cloud-white:   #f6fbf8;
+            --shadow-dark:   #051612;
+            --gradient-money: linear-gradient(135deg, #06231e 0%, #0d3b32 55%, #16594c 100%);
+            --gradient-gold:  linear-gradient(135deg, #f0b429 0%, #c98a0f 100%);
+            --gradient-mint:  linear-gradient(135deg, #baf3d1 0%, #8fe6b8 100%);
+            --gradient-dark:  linear-gradient(135deg, #051612 0%, #06231e 100%);
+        }
+
+        body {
+            background: var(--gradient-money);
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Sora', sans-serif;
+        }
+
+        /* ── Signature background: rising ticker of coins/figures ── */
+        .money-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(240,180,41,0.05), transparent 35%),
+                radial-gradient(circle at 80% 70%, rgba(143,230,184,0.06), transparent 40%);
+        }
+
+        .floating-coin {
+            position: absolute;
+            font-size: 2.2rem;
+            opacity: 0.08;
+            color: var(--money-gold);
+            animation: floatCoin 24s infinite ease-in-out;
+            pointer-events: none;
+            font-weight: 800;
+            font-family: 'Fraunces', serif;
+        }
+
+        .floating-coin:nth-child(1) { left: 8%;  top: 15%; animation-delay: 0s; }
+        .floating-coin:nth-child(2) { left: 85%; top: 25%; animation-delay: -4s; }
+        .floating-coin:nth-child(3) { left: 15%; top: 55%; animation-delay: -9s; }
+        .floating-coin:nth-child(4) { left: 75%; top: 65%; animation-delay: -13s; }
+        .floating-coin:nth-child(5) { left: 45%; top: 35%; animation-delay: -6s; }
+        .floating-coin:nth-child(6) { left: 92%; top: 48%; animation-delay: -11s; }
+
+        @keyframes floatCoin {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+            50%       { transform: translateY(-50px) rotate(12deg); opacity: 0.14; }
+        }
+
+        /* ── Header ── */
+        .money-header {
+            background: linear-gradient(135deg, #051612 0%, #0d3b32 55%, #16594c 100%);
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--money-gold);
+            box-shadow: 0 10px 40px rgba(22,89,76,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .money-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(143,230,184,0.10), transparent 70%);
+            animation: rotate 22s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        /* ── Navbar ── */
+        .navbar-money {
+            position: relative; z-index: 3;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(143,230,184,0.25);
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-links-money {
+            display: flex; justify-content: center;
+            gap: 3rem; list-style: none; margin: 0; padding: 0;
+        }
+
+        .nav-links-money a {
+            color: var(--cloud-white);
+            text-decoration: none;
+            font-family: 'Sora', sans-serif;
+            font-weight: 600; font-size: 1.05rem;
+            transition: all 0.3s; position: relative; padding: 0.5rem 0;
+        }
+
+        .nav-links-money a::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0;
+            width: 0; height: 3px;
+            background: var(--gradient-gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links-money a:hover::after { width: 100%; }
+        .nav-links-money a:hover { color: var(--money-gold); }
+
+        .navbar-toggler-money {
+            display: none;
+            background: transparent;
+            border: 2px solid var(--money-gold);
+            color: var(--money-gold);
+            padding: 0.5rem 1rem;
+            border-radius: 10px; font-size: 1.5rem;
+            cursor: pointer; transition: all 0.3s;
+            position: absolute; top: 1rem; right: 1rem; z-index: 10;
+        }
+
+        .navbar-toggler-money:hover {
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+        }
+
+        /* ── Hero ── */
+        .hero-money {
+            position: relative; z-index: 2;
+            text-align: center; padding: 2rem 0;
+        }
+
+        .hero-icon-money {
+            width: 150px; height: 150px;
+            border-radius: 34px;
+            border: 5px solid var(--money-mint-2);
+            box-shadow: 0 20px 60px rgba(22,89,76,0.7);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #06231e, #16594c);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 4.2rem; margin: 0 auto 1.5rem;
+            animation: heroFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-15px); }
+        }
+
+        .hero-title-money {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            font-weight: 900;
+            color: var(--cloud-white);
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            letter-spacing: -0.01em;
+        }
+
+        .hero-title-money .highlight {
+            background: linear-gradient(135deg, var(--money-mint), var(--money-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle-money {
+            color: var(--cloud-white);
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem; opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .btn-download-hero-money {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+            font-family: 'Sora', sans-serif;
+            font-weight: 700; font-size: 1.15rem;
+            border: 2px solid var(--money-gold);
+            border-radius: 35px; text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(240,180,41,0.4);
+        }
+
+        .btn-download-hero-money:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(240,180,41,0.6);
+            color: var(--shadow-dark);
+        }
+
+        /* ── Sections ── */
+        .content-section {
+            background: rgba(143,230,184,0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(143,230,184,0.18);
+            border-radius: 25px;
+            padding: 3rem; margin: 3rem 0;
+            position: relative; z-index: 2;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--money-mint), var(--money-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem; text-align: center;
+        }
+
+        .section-subtitle {
+            color: var(--cloud-white);
+            text-align: center; font-size: 1.1rem;
+            margin-bottom: 2rem; opacity: 0.85;
+        }
+
+        /* ── Video ── */
+        .video-container {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 18px; border: 2px solid rgba(143,230,184,0.25);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+        }
+        .video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        /* ── Termômetro highlight strip ── */
+        .thermo-strip {
+            display: flex; flex-wrap: wrap; gap: 1.5rem;
+            justify-content: center; margin-top: 2rem;
+        }
+        .thermo-pill {
+            background: rgba(6,35,30,0.5);
+            border: 2px solid rgba(240,180,41,0.35);
+            border-radius: 16px;
+            padding: 1rem 1.6rem;
+            display: flex; align-items: center; gap: 0.8rem;
+            color: var(--cloud-white);
+            font-weight: 600;
+        }
+        .thermo-pill .dot {
+            width: 12px; height: 12px; border-radius: 50%;
+        }
+        .dot-red   { background: #e5484d; box-shadow: 0 0 10px #e5484d; }
+        .dot-amber { background: var(--money-gold); box-shadow: 0 0 10px var(--money-gold); }
+        .dot-green { background: var(--money-mint-2); box-shadow: 0 0 10px var(--money-mint-2); }
+
+        /* ── Features ── */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: rgba(143,230,184,0.06);
+            border: 2px solid rgba(143,230,184,0.18);
+            border-radius: 20px;
+            padding: 2rem; text-align: center; transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            background: rgba(143,230,184,0.14);
+            border-color: var(--money-mint-2);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+        .feature-title {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700; font-size: 1.25rem;
+            color: var(--money-mint); margin-bottom: 0.8rem;
+        }
+
+        .feature-description {
+            color: var(--cloud-white); opacity: 0.85; line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* ── Gallery ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem; margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative; overflow: hidden;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--money-gold);
+            box-shadow: 0 20px 60px rgba(240,180,41,0.4);
+        }
+
+        .gallery-item img { width: 100%; height: auto; display: block; transition: all 0.5s; }
+        .gallery-item:hover img { transform: scale(1.06); }
+
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(6,35,30,0.95), transparent);
+            color: var(--cloud-white);
+            padding: 1.5rem 1rem 1rem;
+            font-family: 'Sora', sans-serif;
+            font-weight: 700; font-size: 1.05rem;
+            opacity: 0; transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption { opacity: 1; }
+
+        /* ── Footer ── */
+        .footer {
+            background: var(--gradient-dark);
+            border-top: 3px solid var(--money-teal);
+            position: relative; z-index: 2;
+        }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--gradient-gold);
+            color: var(--shadow-dark); width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; text-decoration: none;
+            box-shadow: 0 5px 20px rgba(240,180,41,0.4);
+            transition: all 0.3s; z-index: 1000;
+            opacity: 0; pointer-events: none;
+        }
+
+        .back-to-top.active { opacity: 1; pointer-events: auto; }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(240,180,41,0.6);
+            color: var(--shadow-dark);
+        }
+
+        .language-selector {
+            position: fixed !important; top: 20px !important;
+            right: 20px !important; z-index: 10000 !important;
+        }
+
+        .language-btn {
+            background: linear-gradient(135deg, #06231e, #16594c);
+            backdrop-filter: blur(10px);
+            color: var(--cloud-white);
+            border: 3px solid var(--money-mint-2);
+            padding: 0.6rem 1.2rem; border-radius: 25px;
+            font-family: 'Sora', sans-serif;
+            font-weight: 700; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(22,89,76,0.4);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .language-btn:hover {
+            background: var(--gradient-gold);
+            color: var(--shadow-dark);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .language-dropdown {
+            display: none; position: absolute;
+            top: 55px; right: 0;
+            background: rgba(6,35,30,0.97);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--money-mint-2);
+            border-radius: 15px; padding: 0.5rem;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .language-option {
+            display: flex; align-items: center; gap: 0.8rem;
+            padding: 0.8rem 1rem; color: var(--cloud-white);
+            text-decoration: none; border-radius: 10px;
+            transition: all 0.3s; font-size: 0.95rem;
+        }
+
+        .language-option:hover {
+            background: rgba(143,230,184,0.15);
+            color: var(--money-mint);
+            transform: translateX(5px);
+        }
+
+        .language-flag { width: 24px; border-radius: 3px; }
+
+        .scroll-reveal {
+            opacity: 0; transform: translateY(30px); transition: all 0.8s;
+        }
+
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .money-header { padding: 1rem 0; }
+            .navbar-toggler-money { display: block; top: 70px; }
+            .nav-links-money {
+                display: none; flex-direction: column; gap: 1rem;
+                padding: 1rem 0; margin-top: 3rem;
+            }
+            .nav-links-money.active { display: flex; }
+            .nav-links-money a {
+                padding: 0.8rem 1.5rem;
+                background: rgba(143,230,184,0.10);
+                border-radius: 10px; text-align: center;
+            }
+            .hero-icon-money { width: 100px; height: 100px; font-size: 3.2rem; }
+            .content-section { padding: 2rem 1.5rem; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .features-list { grid-template-columns: 1fr; }
+            .language-selector { top: 15px !important; right: 15px !important; }
+            .language-btn span { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Background -->
+<div class="money-background">
+    <div class="floating-coin">$</div>
+    <div class="floating-coin">R$</div>
+    <div class="floating-coin">$</div>
+    <div class="floating-coin">%</div>
+    <div class="floating-coin">$</div>
+    <div class="floating-coin">R$</div>
+</div>
+
+<!-- Header -->
+<header class="money-header">
+    <div class="container">
+
+        <nav class="navbar-money">
+            <button class="navbar-toggler-money" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links-money" id="navLinksMoney">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#video">Vídeo</a></li>
+                <li><a href="#funcionalidades">Funcionalidades</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#footer">Sobre</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-money">
+            <div class="hero-icon-money">📈</div>
+            <h1 class="hero-title-money">
+                <span class="highlight">UptoMillion</span>
+            </h1>
+            <p class="hero-subtitle-money">
+                Suas finanças sob controle — despesas, patrimônio e metas em um só lugar
+            </p>
+            <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro"
+               target="_blank" class="btn-download-hero-money">
+                <i class="fab fa-google-play"></i>
+                <span>Baixar Agora</span>
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<!-- Video Section -->
+<section id="video" class="container py-5">
+    <div class="content-section scroll-reveal">
+        <h2 class="section-title">🎥 Veja Como Funciona</h2>
+        <p class="section-subtitle">
+            Conheça o UptoMillion e descubra como ele vai organizar sua vida financeira
+        </p>
+
+        <div class="video-container">
+            <!-- TODO: troque SEU_VIDEO_ID pelo ID do vídeo no YouTube quando estiver pronto -->
+            <iframe src="https://www.youtube.com/embed/5kut62LGn6o" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Funcionalidades -->
+<section id="funcionalidades" class="container py-5">
+    <div class="content-section scroll-reveal">
+        <h2 class="section-title">✨ Funcionalidades</h2>
+        <p class="section-subtitle">
+            Tudo que você precisa pra entender e organizar seu dinheiro
+        </p>
+
+        <div class="features-list">
+            <div class="feature-item">
+                <div class="feature-icon">📋</div>
+                <h3 class="feature-title">Despesas Fixas</h3>
+                <p class="feature-description">
+                    Cadastre e categorize água, aluguel, educação, IPTU, IPVA e muito mais. Atualize valores com um toque
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🌡️</div>
+                <h3 class="feature-title">Termômetro Financeiro</h3>
+                <p class="feature-description">
+                    Veja de forma visual como está sua saúde financeira no mês atual e uma projeção para o próximo
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🏦</div>
+                <h3 class="feature-title">Múltiplas Contas</h3>
+                <p class="feature-description">
+                    Conecte suas contas bancárias e acompanhe o saldo de cada uma em um único painel
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Patrimônio Total</h3>
+                <p class="feature-description">
+                    Acompanhe a evolução do seu patrimônio em tempo real, com opção de ocultar valores na tela
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔄</div>
+                <h3 class="feature-title">Despesa, Receita e Transação</h3>
+                <p class="feature-description">
+                    Registre entradas e saídas rapidamente e transfira valores entre contas sem complicação
+                </p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Relatórios Claros</h3>
+                <p class="feature-description">
+                    Entenda pra onde seu dinheiro está indo com resumos simples e diretos, sem planilha
+                </p>
+            </div>
+        </div>
+
+        <div class="thermo-strip">
+            <div class="thermo-pill"><span class="dot dot-red"></span> Cuidado</div>
+            <div class="thermo-pill"><span class="dot dot-amber"></span> Alerta</div>
+            <div class="thermo-pill"><span class="dot dot-green"></span> Sob controle</div>
+        </div>
+    </div>
+</section>
+
+<!-- Como usar -->
+<section class="container py-5">
+    <div class="content-section scroll-reveal">
+        <h2 class="section-title">📲 Como Usar</h2>
+        <p class="section-subtitle">Simples de configurar, fácil de manter no dia a dia</p>
+
+        <div class="row g-4 mt-2">
+            <div class="col-md-4 text-center">
+                <div style="
+                    width:70px;height:70px;border-radius:50%;
+                    background:rgba(143,230,184,0.15);
+                    border:3px solid var(--money-mint-2);
+                    display:flex;align-items:center;justify-content:center;
+                    font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;
+                    color:var(--money-mint);margin:0 auto 1rem;
+                ">1</div>
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">🏦</div>
+                <h4 style="font-family:'Sora',sans-serif;color:var(--money-mint);font-weight:700;">Cadastre suas contas</h4>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Adicione suas contas bancárias e o saldo inicial de cada uma</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div style="
+                    width:70px;height:70px;border-radius:50%;
+                    background:rgba(240,180,41,0.15);
+                    border:3px solid var(--money-gold);
+                    display:flex;align-items:center;justify-content:center;
+                    font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;
+                    color:var(--money-gold);margin:0 auto 1rem;
+                ">2</div>
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">📋</div>
+                <h4 style="font-family:'Sora',sans-serif;color:var(--money-gold);font-weight:700;">Organize suas despesas</h4>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Categorize gastos fixos e mantenha os valores sempre atualizados</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div style="
+                    width:70px;height:70px;border-radius:50%;
+                    background:rgba(46,204,113,0.15);
+                    border:3px solid #2ecc71;
+                    display:flex;align-items:center;justify-content:center;
+                    font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;
+                    color:#2ecc71;margin:0 auto 1rem;
+                ">3</div>
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">🌡️</div>
+                <h4 style="font-family:'Sora',sans-serif;color:#2ecc71;font-weight:700;">Acompanhe o termômetro</h4>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Veja se suas despesas estão sob controle e ajuste antes que vire problema</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Galeria -->
+<section id="galeria" class="container py-5">
+    <div class="content-section scroll-reveal">
+        <h2 class="section-title">📱 Telas do App</h2>
+        <p class="section-subtitle">Um vislumbre da experiência UptoMillion</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="assets/img/uptomillion/home.png" alt="Tela inicial UptoMillion">
+                <div class="gallery-caption">Painel principal e Termômetro Financeiro</div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/img/uptomillion/categorias.png" alt="Tela de despesas UptoMillion">
+                <div class="gallery-caption">Suas despesas fixas, organizadas por categoria</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="container py-5">
+    <div class="content-section scroll-reveal" style="text-align:center;">
+        <h2 class="section-title">📈 Pronto pra Organizar suas Finanças?</h2>
+        <p class="section-subtitle" style="font-size:1.3rem;margin-bottom:2.5rem;">
+            Baixe o UptoMillion e tenha clareza total sobre seu dinheiro, todos os dias
+        </p>
+        <a href="https://play.google.com/store/apps/details?id=com.talentodev.financeiro"
+           target="_blank" class="btn-download-hero-money">
+            <i class="fab fa-google-play"></i>
+            <span>Baixar UptoMillion Grátis</span>
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer" class="footer py-5">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-lg-4 col-md-6">
+                <h5 class="mb-3" style="color:var(--money-mint);">
+                    <i class="bi bi-code-square me-2"></i>Talento Dev
+                </h5>
+                <p class="small" style="color:var(--cloud-white);">
+                    Tutoriais e recursos para desenvolvedores Android. Aprenda, crie e monetize seus aplicativos.
+                </p>
+                <div class="mt-3">
+                    <small style="color:var(--cloud-white);">
+                        <span class="me-2">Visitas:</span>
+                        <a href="https://megacontador.com.br" target="_blank" rel="noopener">
+                            <img src="https://megacontador.com.br/img-rhM4o6tKozmXbSGs-50.gif" border="0" alt="Contador" class="img-fluid">
+                        </a>
+                    </small>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 text-center text-md-start">
+                <h5 class="mb-3" style="color:var(--money-mint);">
+                    <i class="bi bi-people me-2"></i>Conecte-se
+                </h5>
+                <div class="social-share">
+                    <a href="https://www.youtube.com/channel/UCD5yUxZ3M3atr-BusdY22uQ?sub_confirmation=1" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com/erwinvaz" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/talento.dev.br" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@talentodev" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/5585998200392" target="_blank" rel="noopener" style="color:var(--cloud-white);font-size:1.8rem;margin:0 0.5rem;transition:all 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <div class="mt-4">
+                    <h6 class="mb-2" style="color:var(--cloud-white);">Receba atualizações</h6>
+                    <form class="d-flex" onsubmit="subscribeNewsletter(event)">
+                        <input type="email" id="newsletterEmail" class="form-control form-control-sm me-2"
+                               placeholder="Seu e-mail" required
+                               style="background:rgba(255,255,255,0.1);border:2px solid rgba(143,230,184,0.3);color:var(--cloud-white);">
+                        <button type="submit" class="btn btn-sm"
+                                style="background:var(--gradient-gold);color:var(--shadow-dark);">
+                            <i class="bi bi-envelope"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 text-center text-lg-end">
+                <h5 class="mb-3" style="color:var(--money-mint);">
+                    <i class="bi bi-heart me-2"></i>Apoie o Projeto
+                </h5>
+                <form action="https://www.paypal.com/donate" method="post" target="_top" class="mb-3">
+                    <input type="hidden" name="hosted_button_id" value="ZUSNEKL3GPJQG">
+                    <button type="submit" class="btn btn-sm"
+                            style="border:2px solid var(--money-mint-2);color:var(--money-mint);font-weight:700;background:transparent;">
+                        <i class="bi bi-paypal me-1"></i>Doar via PayPal
+                    </button>
+                </form>
+                <div class="mt-4">
+                    <p class="small mb-1" style="color:var(--cloud-white);">&copy; 2026 Talento Dev</p>
+                    <p class="small mb-0" style="color:var(--cloud-white);opacity:0.8;">Todos os direitos reservados</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-4 mb-3" style="background:var(--money-teal);height:2px;">
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="politica-privacidade.html" class="text-white small me-3 mb-2">Política de Privacidade</a>
+                <a href="termos-uso.html" class="text-white small me-3 mb-2">Termos de Uso</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+<div class="language-selector">
+    <button class="language-btn" onclick="toggleLanguageDropdown()">
+        <i class="bi bi-translate"></i>
+        <span>Idioma</span>
+        <i class="bi bi-chevron-down"></i>
+    </button>
+    <div class="language-dropdown" id="languageDropdown">
+        <a href="#" class="language-option" onclick="translatePage('pt','Português')"><img src="https://flagcdn.com/w20/br.png" class="language-flag" alt="PT"> Português</a>
+        <a href="#" class="language-option" onclick="translatePage('en','English')"><img src="https://flagcdn.com/w20/us.png" class="language-flag" alt="EN"> English</a>
+        <a href="#" class="language-option" onclick="translatePage('es','Español')"><img src="https://flagcdn.com/w20/es.png" class="language-flag" alt="ES"> Español</a>
+        <a href="#" class="language-option" onclick="translatePage('fr','Français')"><img src="https://flagcdn.com/w20/fr.png" class="language-flag" alt="FR"> Français</a>
+        <a href="#" class="language-option" onclick="translatePage('de','Deutsch')"><img src="https://flagcdn.com/w20/de.png" class="language-flag" alt="DE"> Deutsch</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    window.addEventListener('scroll', function() {
+        document.querySelector('.back-to-top').classList.toggle('active', window.pageYOffset > 300);
+    });
+
+    function subscribeNewsletter(event) {
+        event.preventDefault();
+        const email = document.getElementById('newsletterEmail').value;
+        window.location.href = `mailto:contato@talentodev.com?subject=${encodeURIComponent('Assinar newsletter - Talento Dev')}&body=${encodeURIComponent('E-mail: ' + email)}`;
+        alert("Seu cliente de e-mail será aberto. Basta enviar a mensagem para confirmar sua inscrição!");
+        document.getElementById('newsletterEmail').value = "";
+    }
+
+    function toggleMobileMenu() {
+        document.getElementById('navLinksMoney').classList.toggle('active');
+    }
+
+    function toggleLanguageDropdown() {
+        const d = document.getElementById('languageDropdown');
+        d.style.display = d.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function translatePage(lang, langName) {
+        document.getElementById('languageDropdown').style.display = 'none';
+        window.open(`https://translate.google.com/translate?hl=${lang}&sl=pt&tl=${lang}&u=${encodeURIComponent(window.location.href)}`, '_blank');
+    }
+
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('languageDropdown');
+        const b = document.querySelector('.language-btn');
+        if (d && b && !b.contains(e.target) && !d.contains(e.target)) d.style.display = 'none';
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.nav-links-money a').forEach(a => {
+            a.addEventListener('click', () => document.getElementById('navLinksMoney').classList.remove('active'));
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('.social-btn, .social-share a').forEach(btn => {
+            btn.addEventListener('mouseenter', function() { this.style.color = 'var(--money-mint)'; this.style.transform = 'translateY(-5px)'; });
+            btn.addEventListener('mouseleave', function() { this.style.color = 'var(--cloud-white)'; this.style.transform = 'translateY(0)'; });
+        });
+    });
+
+    document.querySelectorAll('.btn-download-hero-money').forEach(btn => {
+        btn.addEventListener('click', () => {
+            gtag('event', 'download_click', { 'event_category': 'UptoMillion', 'event_label': 'Download Button' });
+        });
+    });
+</script>
+
+</body>
+</html>
