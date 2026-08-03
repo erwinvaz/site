@@ -1,324 +1,510 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Talento DEV">
-    <meta name="description" content="Política de Privacidade - How Old Are You">
-    <title>Política de Privacidade - Talento DEV</title>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Privacidade | Privacy Policy — Seu Guia Astral</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
     <style>
-    * {
+    :root {
+        --bg: #12101c;
+        --surface: #1c1830;
+        --ink: #f2eefc;
+        --muted: #b8b0d4;
+        --accent: #c79aff;
+        --accent-strong: #8b5cf6;
+        --gold: #e2a32b;
+        --accent-light: #2a2244;
+        --border: #332a52;
+        --radius: 12px;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
     }
 
     body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
         min-height: 100vh;
-        padding: 20px;
+        background-image:
+            radial-gradient(circle at 15% 20%, rgba(139,92,246,0.12) 0%, transparent 40%),
+            radial-gradient(circle at 85% 75%, rgba(226,163,43,0.08) 0%, transparent 45%);
+        background-attachment: fixed;
     }
 
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    /* ── HEADER ── */
+    header {
+        background: #0b0a14;
+        color: #fff;
+        padding: 28px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.6rem;
+        letter-spacing: -0.5px;
+    }
+
+    .brand span { color: var(--gold); }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle { display: flex; gap: 6px; }
+
+    .lang-btn {
+        background: transparent;
+        border: 1.5px solid rgba(255,255,255,0.25);
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 99px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .lang-btn:hover, .lang-btn.active {
+        background: var(--accent-strong);
+        border-color: var(--accent-strong);
+    }
+
+    /* ── HERO ── */
+    .hero {
+        background: linear-gradient(135deg, var(--accent-strong) 0%, #4c2f8a 100%);
+        color: #fff;
+        padding: 56px 40px 48px;
+        position: relative;
         overflow: hidden;
     }
 
-    .header {
-        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-        color: white;
-        padding: 40px 30px;
-        text-align: center;
+    .hero::after {
+        content: '✦';
+        position: absolute;
+        right: 40px;
+        top: 20px;
+        font-size: 5rem;
+        color: rgba(226,163,43,0.25);
     }
 
-    .header h1 {
-        font-size: 2.5em;
-        margin-bottom: 10px;
-        font-weight: 700;
+    .hero::before {
+        content: '';
+        position: absolute;
+        left: -80px;
+        bottom: -80px;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.05);
     }
 
-    .header .brand {
-        font-size: 1.2em;
-        opacity: 0.9;
+    .hero-eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.8;
+        margin-bottom: 12px;
     }
 
-    .content {
-        padding: 40px 30px;
+    .hero h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 16px;
     }
 
-    .intro {
-        background: #f8f9fa;
-        border-left: 4px solid #4CAF50;
-        padding: 20px;
-        margin-bottom: 30px;
-        border-radius: 5px;
+    .hero-date { font-size: 0.85rem; opacity: 0.8; }
+
+    /* ── LAYOUT ── */
+    .container {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 56px 24px 80px;
     }
 
-    .intro p {
-        margin: 10px 0;
-        font-size: 1.1em;
-    }
-
-    .intro .highlight {
-        font-weight: 600;
-        color: #4CAF50;
-    }
-
-    h2 {
-        color: #4CAF50;
-        font-size: 1.8em;
-        margin: 30px 0 15px;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #e0e0e0;
-    }
-
-    h3 {
-        color: #333;
-        font-size: 1.3em;
-        margin: 20px 0 10px;
-    }
-
-    p {
-        margin: 15px 0;
-        font-size: 1.05em;
-        text-align: justify;
-    }
-
+    /* ── SECTIONS ── */
     .section {
-        margin: 25px 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 36px 40px;
+        margin-bottom: 24px;
+        transition: box-shadow 0.2s;
     }
 
-    .important-box {
-        background: #fff3cd;
-        border: 2px solid #ffc107;
-        border-radius: 8px;
-        padding: 20px;
-        margin: 20px 0;
+    .section:hover { box-shadow: 0 4px 28px rgba(139,92,246,0.15); }
+
+    .section-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-size: 1.2rem;
     }
 
-    .important-box h3 {
-        color: #856404;
-        margin-top: 0;
+    .section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.35rem;
+        margin-bottom: 14px;
+        color: var(--ink);
     }
 
-    .footer {
-        background: #f8f9fa;
-        padding: 25px 30px;
-        text-align: center;
-        border-top: 2px solid #e0e0e0;
+    .section p {
+        color: var(--muted);
+        margin-bottom: 12px;
+        font-size: 0.95rem;
     }
 
-    .footer p {
-        color: #666;
-        font-size: 0.95em;
-        margin: 5px 0;
+    .section p:last-child { margin-bottom: 0; }
+
+    .section ul {
+        margin: 8px 0 12px 20px;
+        color: var(--muted);
+        font-size: 0.95rem;
     }
 
-    .footer a {
-        color: #4CAF50;
+    .section ul li { margin-bottom: 6px; }
+
+    .section strong { color: var(--ink); }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+        background: var(--accent-light);
+        border-left: 3px solid var(--gold);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        color: var(--ink);
+    }
+
+    /* ── BADGES ── */
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .badge {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 99px;
+        padding: 5px 14px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--ink);
+    }
+
+    /* ── CONTACT ── */
+    .contact-link {
+        color: var(--gold);
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 500;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
     }
 
-    .footer a:hover {
-        text-decoration: underline;
+    .contact-link:hover { border-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+        text-align: center;
+        padding: 32px 24px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
     }
 
-    .last-update {
-        font-style: italic;
-        color: #666;
-        font-size: 0.9em;
-        margin-top: 10px;
-    }
+    /* ── LANGUAGE SWITCHING ── */
+    [data-lang] { display: none; }
+    .lang-pt [data-lang="pt"] { display: block; }
+    .lang-en [data-lang="en"] { display: block; }
 
-    @media print {
-        body {
-            background: white;
-            padding: 0;
-        }
-
-        .container {
-            box-shadow: none;
-            border-radius: 0;
-        }
-    }
+    span[data-lang] { display: none; }
+    .lang-pt span[data-lang="pt"] { display: inline; }
+    .lang-en span[data-lang="en"] { display: inline; }
 
     @media (max-width: 600px) {
-        .header h1 {
-            font-size: 1.8em;
-        }
-
-        .content {
-            padding: 25px 20px;
-        }
-
-        h2 {
-            font-size: 1.5em;
-        }
+        header { padding: 20px; }
+        .hero { padding: 40px 20px 36px; }
+        .section { padding: 24px 20px; }
     }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Política de Privacidade</h1>
-            <div class="brand">Qual a sua Idade? - <strong>Talento DEV</strong></div>
-            <p class="last-update">Última atualização: 09 de Fevereiro de 2026</p>
+<body class="lang-pt">
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">🔮 Seu Guia <span>Astral</span></div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+            <button class="lang-btn" onclick="setLang('en', this)">EN</button>
         </div>
+    </header>
 
-        <div class="content">
-            <div class="intro">
-                <p class="highlight">Privacidade em Primeiro Lugar</p>
-                <p><strong>Nós não coletamos nenhuma informação pessoal dos usuários.</strong></p>
-                <p>Seu uso do aplicativo é completamente privado e anônimo.</p>
-            </div>
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-eyebrow" data-lang="pt">Seu Guia Astral</div>
+        <div class="hero-eyebrow" data-lang="en">Your Astral Guide</div>
 
-            <div class="section">
-                <h2>1. Informações que NÃO Coletamos</h2>
-                <p>
-                    O aplicativo "How Old Are You" foi desenvolvido com foco total na privacidade do usuário.
-                    Não coletamos, armazenamos ou processamos:
-                </p>
-                <ul style="margin-left: 25px; line-height: 1.8;">
-                    <li>Dados pessoais (nome, email, telefone, endereço)</li>
-                    <li>Localização geográfica</li>
-                    <li>Contatos ou lista telefônica</li>
-                    <li>Fotos ou arquivos do dispositivo</li>
-                    <li>Dados de uso ou comportamento</li>
-                    <li>Identificadores de dispositivo</li>
-                </ul>
-            </div>
+        <h1 data-lang="pt">Política de<br>Privacidade</h1>
+        <h1 data-lang="en">Privacy<br>Policy</h1>
 
-            <div class="section">
-                <h2>2. Permissões do Aplicativo</h2>
-                <h3>Acesso à Internet</h3>
-                <p>
-                    O aplicativo solicita acesso à Internet exclusivamente para:
-                </p>
-                <ul style="margin-left: 25px; line-height: 1.8;">
-                    <li>Exibir esta Política de Privacidade</li>
-                    <li>Carregar anúncios (quando aplicável)</li>
-                </ul>
-                <p>
-                    <strong>Nenhum dado pessoal é transmitido através desta conexão.</strong>
-                </p>
-            </div>
-
-            <div class="important-box">
-                <h3>⚠️ Importante</h3>
-                <p>
-                    Todos os cálculos de idade são realizados localmente no seu dispositivo.
-                    As datas de nascimento inseridas não são enviadas para nenhum servidor externo.
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>3. Cookies e Rastreamento</h2>
-                <p>
-                    <strong>Este aplicativo NÃO utiliza cookies.</strong>
-                </p>
-                <p>
-                    Não implementamos nenhuma tecnologia de rastreamento, análise ou monitoramento
-                    do comportamento do usuário.
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>4. Compartilhamento de Dados</h2>
-                <p>
-                    Como não coletamos dados pessoais, não há informações para compartilhar com terceiros.
-                </p>
-                <p>
-                    O aplicativo pode exibir anúncios fornecidos pelo Google AdMob. Os anúncios podem
-                    coletar informações anônimas sobre uso, conforme a política de privacidade do Google.
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>5. Proteção de Crianças</h2>
-                <p>
-                    Este aplicativo não se destina especificamente a crianças menores de 13 anos.
-                    Como não coletamos dados pessoais, não há risco de coleta inadvertida de
-                    informações de menores.
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>6. Segurança</h2>
-                <p>
-                    Embora não coletemos dados pessoais, implementamos medidas de segurança
-                    para proteger a integridade do aplicativo e garantir uma experiência segura
-                    para todos os usuários.
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>7. Custo do Aplicativo</h2>
-                <p>
-                    O aplicativo está disponível <strong>gratuitamente</strong> para todos os usuários.
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>8. Alterações a Esta Política</h2>
-                <p>
-                    Podemos atualizar esta Política de Privacidade periodicamente. Quaisquer alterações
-                    serão publicadas nesta página com a data de atualização.
-                </p>
-                <p>
-                    Recomendamos que você revise esta política regularmente para se manter informado
-                    sobre como protegemos sua privacidade.
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>9. Seus Direitos</h2>
-                <p>
-                    Você pode controlar as permissões do aplicativo através das configurações do seu dispositivo.
-                    Se optar por desativar o acesso à Internet, alguns recursos (como visualizar esta política
-                    ou anúncios) podem não funcionar corretamente.
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>10. Contato</h2>
-                <p>
-                    Se você tiver dúvidas, preocupações ou sugestões sobre esta Política de Privacidade,
-                    entre em contato conosco:
-                </p>
-                <p style="text-align: center; margin-top: 20px;">
-                    <strong>Website:</strong> <a href="https://www.talento.dev.br"
-                        target="_blank">www.talento.dev.br</a>
-                </p>
-            </div>
-
-            <div class="section">
-                <h2>11. Impressão</h2>
-                <p>
-                    Você pode imprimir uma cópia desta Política de Privacidade pressionando
-                    <strong>Ctrl + P</strong> (ou <strong>Cmd + P</strong> no Mac) em seu teclado,
-                    ou acessando o recurso "Imprimir Página" em seu navegador.
-                </p>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p><strong>Talento DEV</strong></p>
-            <p>Desenvolvendo com responsabilidade e respeito à sua privacidade</p>
-            <p><a href="https://www.talento.dev.br" target="_blank">www.talento.dev.br</a></p>
-            <p class="last-update">Documento atualizado em: 09 de Fevereiro de 2026</p>
-        </div>
+        <div class="hero-date" data-lang="pt">Última atualização: 03 de Agosto de 2026</div>
+        <div class="hero-date" data-lang="en">Last updated: August 03, 2026</div>
     </div>
-</body>
 
+    <!-- MAIN -->
+    <div class="container">
+
+        <!-- HIGHLIGHT -->
+        <div class="highlight">
+            <span data-lang="pt">🔮 O Seu Guia Astral respeita a sua privacidade. Não armazenamos seus dados pessoais em nossos servidores. O app usa a internet apenas para gerar leituras de tarô, interpretações astrológicas e conversação com o Tutor Astrólogo via IA.</span>
+            <span data-lang="en">🔮 Seu Guia Astral respects your privacy. We do not store your personal data on our servers. The app uses the internet only to generate tarot readings, astrological interpretations, and conversations with the AI Astrologer Tutor.</span>
+        </div>
+
+        <!-- 1. INFORMAÇÕES COLETADAS -->
+        <div class="section">
+            <div class="section-icon">📋</div>
+            <h2 data-lang="pt">1. Informações Coletadas</h2>
+            <h2 data-lang="en">1. Information Collected</h2>
+
+            <p data-lang="pt">Para gerar seu mapa astral e leituras de tarô personalizadas, o app solicita sua <strong>data de nascimento</strong> e, opcionalmente, <strong>horário e local de nascimento</strong>. Esses dados são enviados à API de inteligência artificial (DeepSeek) apenas no momento da consulta, para gerar a resposta em tempo real, e <strong>não são armazenados de forma persistente</strong> em nossos servidores.</p>
+            <p data-lang="en">To generate your astral chart and personalized tarot readings, the app requests your <strong>birth date</strong> and, optionally, your <strong>birth time and place</strong>. This data is sent to the AI API (DeepSeek) only at the moment of the query, to generate the response in real time, and is <strong>not persistently stored</strong> on our servers.</p>
+
+            <p data-lang="pt">Nenhum dado de identificação, localização contínua, histórico de conversas ou informações de contato é armazenado por nós. Não coletamos nome, e-mail, CPF ou qualquer outro dado que permita identificá-lo diretamente.</p>
+            <p data-lang="en">No identification data, continuous location, conversation history, or contact information is stored by us. We do not collect your name, email, national ID, or any other data that would directly identify you.</p>
+        </div>
+
+        <!-- 2. GRAVAÇÃO DE ÁUDIO -->
+        <div class="section">
+            <div class="section-icon">🎙️</div>
+            <h2 data-lang="pt">2. Gravação de Áudio</h2>
+            <h2 data-lang="en">2. Audio Recording</h2>
+
+            <p data-lang="pt">O aplicativo solicita permissão para acessar o microfone do dispositivo a fim de capturar sua fala, permitindo conversar por voz com o Tutor Astrólogo além do chat por texto.</p>
+            <p data-lang="en">The application requests permission to access the device microphone in order to capture your speech, allowing you to talk by voice with the Astrologer Tutor in addition to text chat.</p>
+
+            <p data-lang="pt">As gravações são processadas <strong>localmente no dispositivo</strong> pelo serviço de reconhecimento de fala do Google e não são enviadas para nossos servidores nem compartilhadas com terceiros.</p>
+            <p data-lang="en">Recordings are processed <strong>locally on the device</strong> by Google's speech recognition service and are not sent to our servers or shared with third parties.</p>
+
+            <p data-lang="pt">Você pode revogar essa permissão a qualquer momento nas configurações do seu dispositivo. Sem ela, apenas o chat por texto estará disponível.</p>
+            <p data-lang="en">You can revoke this permission at any time in your device settings. Without it, only text chat will be available.</p>
+        </div>
+
+        <!-- 3. USO DA INTERNET -->
+        <div class="section">
+            <div class="section-icon">📡</div>
+            <h2 data-lang="pt">3. Uso da Internet</h2>
+            <h2 data-lang="en">3. Internet Usage</h2>
+
+            <p data-lang="pt">O aplicativo requer acesso à internet para:</p>
+            <p data-lang="en">The application requires internet access to:</p>
+
+            <ul data-lang="pt">
+                <li>Processar sua data de nascimento e gerar leituras de tarô e interpretações astrológicas via IA (API DeepSeek)</li>
+                <li>Sintetizar voz com alta qualidade (vozes neurais do Google TTS)</li>
+                <li>Exibir anúncios para usuários gratuitos (Google AdMob)</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Process your birth date and generate tarot readings and astrological interpretations via AI (DeepSeek API)</li>
+                <li>Synthesize high-quality speech (Google TTS neural voices)</li>
+                <li>Display ads for free users (Google AdMob)</li>
+            </ul>
+        </div>
+
+        <!-- 4. ANÚNCIOS E PLANO PREMIUM -->
+        <div class="section">
+            <div class="section-icon">📢</div>
+            <h2 data-lang="pt">4. Anúncios e Plano Premium</h2>
+            <h2 data-lang="en">4. Ads and Premium Plan</h2>
+
+            <p data-lang="pt">O Seu Guia Astral é gratuito e sustentado por anúncios exibidos via <strong>Google AdMob</strong>. Os usuários do plano gratuito visualizam anúncios intersticiais após atingir o limite de consultas, o que renova seus créditos para continuar recebendo orientações do Tutor Astrólogo.</p>
+            <p data-lang="en">Seu Guia Astral is free and supported by ads displayed via <strong>Google AdMob</strong>. Free plan users see interstitial ads after reaching the query limit, which renews their credits to keep receiving guidance from the Astrologer Tutor.</p>
+
+            <p data-lang="pt">Ao assinar o <strong>plano Premium</strong>, os anúncios são removidos completamente e o usuário passa a ter consultas ilimitadas, sem interrupções.</p>
+            <p data-lang="en">By subscribing to the <strong>Premium plan</strong>, ads are completely removed and the user gets unlimited queries, without interruptions.</p>
+
+            <p data-lang="pt">O Google AdMob pode utilizar um identificador de publicidade do dispositivo (Ad ID) para exibir anúncios relevantes. Você pode redefinir ou desativar esse identificador nas configurações do seu dispositivo.</p>
+            <p data-lang="en">Google AdMob may use the device's advertising identifier (Ad ID) to display relevant ads. You can reset or disable this identifier in your device settings.</p>
+        </div>
+
+        <!-- 5. NOTIFICAÇÕES -->
+        <div class="section">
+            <div class="section-icon">🔔</div>
+            <h2 data-lang="pt">5. Notificações</h2>
+            <h2 data-lang="en">5. Notifications</h2>
+
+            <p data-lang="pt">O Seu Guia Astral pode enviar notificações locais para:</p>
+            <p data-lang="en">Seu Guia Astral may send local notifications to:</p>
+
+            <ul data-lang="pt">
+                <li>Avisar que seus créditos diários foram renovados</li>
+                <li>Lembrar de consultar seu guia astral quando ainda há créditos disponíveis</li>
+                <li>Alertar sobre risco de quebra de streak</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Notify you that your daily credits have been renewed</li>
+                <li>Remind you to consult your astral guide when credits are still available</li>
+                <li>Alert you about a streak-break risk</li>
+            </ul>
+
+            <p data-lang="pt">Essas notificações são <strong>geradas localmente no dispositivo</strong> e não envolvem coleta ou transmissão de dados pessoais. Você pode desativá-las a qualquer momento nas configurações do app ou do dispositivo.</p>
+            <p data-lang="en">These notifications are <strong>generated locally on the device</strong> and do not involve collection or transmission of personal data. You can disable them at any time in the app or device settings.</p>
+        </div>
+
+        <!-- 6. PERMISSÕES -->
+        <div class="section">
+            <div class="section-icon">🔐</div>
+            <h2 data-lang="pt">6. Permissões do Aplicativo</h2>
+            <h2 data-lang="en">6. App Permissions</h2>
+
+            <p data-lang="pt">O Seu Guia Astral solicita apenas as seguintes permissões:</p>
+            <p data-lang="en">Seu Guia Astral requests only the following permissions:</p>
+
+            <div class="badges">
+                <span class="badge">🌐 Internet</span>
+                <span class="badge">🎙️ <span data-lang="pt">Microfone</span><span data-lang="en">Microphone</span></span>
+                <span class="badge">📶 <span data-lang="pt">Estado da rede</span><span data-lang="en">Network state</span></span>
+                <span class="badge">📣 Ad ID</span>
+                <span class="badge">🔔 <span data-lang="pt">Notificações</span><span data-lang="en">Notifications</span></span>
+            </div>
+
+            <p data-lang="pt" style="margin-top:16px"><strong>Internet:</strong> Necessária para comunicação com a IA, síntese de voz e exibição de anúncios.</p>
+            <p data-lang="en" style="margin-top:16px"><strong>Internet:</strong> Required for AI communication, speech synthesis, and ad display.</p>
+
+            <p data-lang="pt"><strong>Microfone:</strong> Necessário para capturar sua voz e realizar o reconhecimento de fala nas conversas com o Tutor Astrólogo.</p>
+            <p data-lang="en"><strong>Microphone:</strong> Required to capture your voice and perform speech recognition in conversations with the Astrologer Tutor.</p>
+
+            <p data-lang="pt"><strong>Estado da rede:</strong> Verificar conectividade antes de realizar chamadas à API.</p>
+            <p data-lang="en"><strong>Network state:</strong> Verify connectivity before making API calls.</p>
+
+            <p data-lang="pt"><strong>Ad ID:</strong> Identificador de publicidade usado pelo Google AdMob para exibir anúncios relevantes a usuários gratuitos.</p>
+            <p data-lang="en"><strong>Ad ID:</strong> Advertising identifier used by Google AdMob to display relevant ads to free users.</p>
+
+            <p data-lang="pt"><strong>Notificações:</strong> Usadas para lembretes de consulta diária, avisos de créditos renovados e alertas de streak. Você pode desativar a qualquer momento nas configurações do app ou do dispositivo.</p>
+            <p data-lang="en"><strong>Notifications:</strong> Used for daily consultation reminders, credit renewal notices, and streak alerts. You can disable them at any time in the app or device settings.</p>
+        </div>
+
+        <!-- 7. COMPARTILHAMENTO DE DADOS -->
+        <div class="section">
+            <div class="section-icon">🤝</div>
+            <h2 data-lang="pt">7. Compartilhamento de Dados</h2>
+            <h2 data-lang="en">7. Data Sharing</h2>
+
+            <p data-lang="pt">O Seu Guia Astral utiliza os seguintes serviços de terceiros para seu funcionamento:</p>
+            <p data-lang="en">Seu Guia Astral uses the following third-party services to operate:</p>
+
+            <ul data-lang="pt">
+                <li><strong>DeepSeek API:</strong> Processamento da sua data de nascimento e geração de leituras de tarô e interpretações astrológicas por IA</li>
+                <li><strong>Google Speech Recognition:</strong> Reconhecimento de fala no dispositivo</li>
+                <li><strong>Google Text-to-Speech:</strong> Síntese de voz para reprodução das respostas do Tutor Astrólogo</li>
+                <li><strong>Google AdMob:</strong> Exibição de anúncios para usuários gratuitos</li>
+                <li><strong>Google Play Billing:</strong> Processamento de assinaturas Premium</li>
+            </ul>
+            <ul data-lang="en">
+                <li><strong>DeepSeek API:</strong> Processing your birth date and generating AI-powered tarot readings and astrological interpretations</li>
+                <li><strong>Google Speech Recognition:</strong> On-device speech recognition</li>
+                <li><strong>Google Text-to-Speech:</strong> Voice synthesis for the Astrologer Tutor's responses</li>
+                <li><strong>Google AdMob:</strong> Ad display for free users</li>
+                <li><strong>Google Play Billing:</strong> Premium subscription processing</li>
+            </ul>
+
+            <p data-lang="pt">Nenhuma informação pessoal, incluindo sua data de nascimento, é vendida, alugada ou compartilhada com terceiros para fins comerciais.</p>
+            <p data-lang="en">No personal information, including your birth date, is sold, rented, or shared with third parties for commercial purposes.</p>
+        </div>
+
+        <!-- 8. COOKIES -->
+        <div class="section">
+            <div class="section-icon">🍪</div>
+            <h2 data-lang="pt">8. Cookies</h2>
+            <h2 data-lang="en">8. Cookies</h2>
+
+            <p data-lang="pt">O aplicativo não utiliza cookies nem tecnologias semelhantes de rastreamento.</p>
+            <p data-lang="en">The application does not use cookies or similar tracking technologies.</p>
+        </div>
+
+        <!-- 9. CRIANÇAS -->
+        <div class="section">
+            <div class="section-icon">👶</div>
+            <h2 data-lang="pt">9. Crianças</h2>
+            <h2 data-lang="en">9. Children</h2>
+
+            <p data-lang="pt">O Seu Guia Astral não é direcionado especificamente a crianças menores de 13 anos e não coletamos intencionalmente dados de menores.</p>
+            <p data-lang="en">Seu Guia Astral is not specifically directed at children under 13 and we do not intentionally collect data from minors.</p>
+        </div>
+
+        <!-- 10. SEGURANÇA -->
+        <div class="section">
+            <div class="section-icon">🛡️</div>
+            <h2 data-lang="pt">10. Segurança</h2>
+            <h2 data-lang="en">10. Security</h2>
+
+            <p data-lang="pt">Todas as comunicações entre o aplicativo e as APIs externas são realizadas via conexões criptografadas (HTTPS/TLS), garantindo a segurança dos dados em trânsito, incluindo as informações de nascimento usadas nas leituras.</p>
+            <p data-lang="en">All communications between the application and external APIs are conducted via encrypted connections (HTTPS/TLS), ensuring the security of data in transit, including the birth information used in readings.</p>
+        </div>
+
+        <!-- 11. ALTERAÇÕES -->
+        <div class="section">
+            <div class="section-icon">📝</div>
+            <h2 data-lang="pt">11. Alterações a esta Política</h2>
+            <h2 data-lang="en">11. Changes to This Policy</h2>
+
+            <p data-lang="pt">Caso esta Política de Privacidade seja alterada, a versão atualizada será publicada nesta página com a nova data de vigência.</p>
+            <p data-lang="en">Should this Privacy Policy be modified, the updated version will be published on this page with the new effective date.</p>
+
+            <p data-lang="pt">Você pode imprimir uma cópia pressionando <strong>Ctrl + P</strong> no teclado.</p>
+            <p data-lang="en">You can print a copy by pressing <strong>Ctrl + P</strong> on your keyboard.</p>
+        </div>
+
+        <!-- 12. CONTATO -->
+        <div class="section">
+            <div class="section-icon">✉️</div>
+            <h2 data-lang="pt">12. Contato</h2>
+            <h2 data-lang="en">12. Contact</h2>
+
+            <p data-lang="pt">Caso tenha dúvidas sobre esta Política de Privacidade, entre em contato:</p>
+            <p data-lang="en">If you have questions about this Privacy Policy, please contact us:</p>
+
+            <p><a href="https://www.talento.dev.br" target="_blank" rel="noopener" class="contact-link">www.talento.dev.br</a></p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <span data-lang="pt">© 2026 Seu Guia Astral · Última atualização: 03 de Agosto de 2026</span>
+        <span data-lang="en">© 2026 Seu Guia Astral · Last updated: August 03, 2026</span>
+    </footer>
+
+    <script>
+    function setLang(lang, btn) {
+        document.body.className = 'lang-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.documentElement.lang = lang;
+    }
+    </script>
+</body>
 </html>
