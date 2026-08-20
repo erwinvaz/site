@@ -1,0 +1,11 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.talentodev.chess",
+    "sha256_cert_fingerprints": [
+      "4A:19:A2:75:61:FF:90:80:5A:B2:03:00:8D:20:3F:64:EA:F0:0E:4B:C8:CE:C5:09:29:A7:98:EE:F4:4F:4E:35",
+      "8E:0E:99:C4:CB:5E:F3:DD:FC:08:BA:67:FE:DF:79:F6:AF:EC:66:80:92:3F:1B:C0:C2:9B:55:CE:58:9B:01:A8"
+    ]
+  }
+}]

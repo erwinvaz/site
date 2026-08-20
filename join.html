@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess Up - Convite de Partida</title>
-    <meta name="description" content="Você foi convidado para uma partida de xadrez!">
-    
+    <title id="pageTitleTag">Chess Land - Convite de Partida</title>
+    <meta id="metaDescriptionTag" name="description" content="Você foi convidado para uma partida de xadrez!">
+
     <!-- Open Graph para preview bonito no WhatsApp -->
-    <meta property="og:title" content="Chess Up - Convite de Partida">
-    <meta property="og:description" content="Aceite o desafio e jogue xadrez online!">
+    <meta id="ogTitleTag" property="og:title" content="Chess Land - Convite de Partida">
+    <meta id="ogDescriptionTag" property="og:description" content="Aceite o desafio e jogue xadrez online!">
     <meta property="og:type" content="website">
-    
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 100%);
@@ -28,7 +28,7 @@
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 450px;
             width: 100%;
@@ -39,35 +39,35 @@
             border: 1px solid rgba(105, 240, 174, 0.3);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-        
+
         .icon {
             font-size: 80px;
             margin-bottom: 20px;
             animation: bounce 2s infinite;
         }
-        
+
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
+
         h1 {
             color: #69F0AE;
             margin-bottom: 10px;
             font-size: 28px;
             font-weight: 700;
         }
-        
+
         .subtitle {
             margin-bottom: 30px;
             opacity: 0.8;
             font-size: 16px;
         }
-        
+
         .code-container {
             margin: 25px 0;
         }
-        
+
         .code-label {
             font-size: 12px;
             color: rgba(255, 255, 255, 0.6);
@@ -75,7 +75,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .code {
             background: rgba(105, 240, 174, 0.15);
             color: #69F0AE;
@@ -88,14 +88,14 @@
             display: inline-block;
             box-shadow: 0 4px 15px rgba(105, 240, 174, 0.2);
         }
-        
+
         .buttons {
             margin: 30px 0;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-        
+
         .btn {
             display: block;
             padding: 16px 32px;
@@ -108,28 +108,28 @@
             border: none;
             width: 100%;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #69F0AE 0%, #4CAF50 100%);
             color: #0F0F1E;
             box-shadow: 0 4px 15px rgba(105, 240, 174, 0.3);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(105, 240, 174, 0.4);
         }
-        
+
         .btn-secondary {
             background: transparent;
             border: 2px solid #69F0AE;
             color: #69F0AE;
         }
-        
+
         .btn-secondary:hover {
             background: rgba(105, 240, 174, 0.1);
         }
-        
+
         .instructions {
             margin-top: 30px;
             padding: 20px;
@@ -140,45 +140,46 @@
             line-height: 1.8;
             text-align: left;
         }
-        
+
         .instructions strong {
             color: #69F0AE;
             display: block;
             margin-bottom: 10px;
             font-size: 15px;
         }
-        
+
         .instructions ol {
             margin-left: 20px;
         }
-        
+
         .instructions li {
             margin: 8px 0;
         }
-        
+
         #status {
             margin-top: 20px;
             padding: 12px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 500;
+            display: none;
         }
-        
+
         .status-success {
             background: rgba(105, 240, 174, 0.2);
             color: #69F0AE;
         }
-        
+
         .status-info {
             background: rgba(100, 181, 246, 0.2);
             color: #64B5F6;
         }
-        
+
         .status-warning {
             background: rgba(255, 167, 38, 0.2);
             color: #FFA726;
         }
-        
+
         .spinner {
             display: inline-block;
             width: 16px;
@@ -189,23 +190,40 @@
             animation: spin 0.8s linear infinite;
             margin-right: 8px;
         }
-        
+
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        .lang-switch {
+            margin-top: 18px;
+            font-size: 12px;
+            opacity: 0.45;
+        }
+
+        .lang-switch a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin: 0 4px;
+        }
+
+        .lang-switch a.active {
+            color: #69F0AE;
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="icon">♟️</div>
-        <h1>Você foi desafiado!</h1>
-        <p class="subtitle">Uma partida de xadrez te espera</p>
-        
+        <h1 id="heading">Você foi desafiado!</h1>
+        <p class="subtitle" id="subtitle">Uma partida de xadrez te espera</p>
+
         <div class="code-container">
-            <div class="code-label">Código da Partida</div>
+            <div class="code-label" id="codeLabel">Código da Partida</div>
             <div class="code" id="matchCode">------</div>
         </div>
-        
+
         <div class="buttons">
             <a href="#" id="openApp" class="btn btn-primary">
                 🚀 Abrir Chess Land
@@ -214,52 +232,360 @@
                 📋 Copiar Código
             </button>
         </div>
-        
+
         <div id="status"></div>
-        
+
         <div class="instructions">
-            <strong>📱 Como entrar na partida:</strong>
-            <ol>
-                <li>Clique no botão "Abrir Chess Land"</li>
-                <li>Se o app não abrir automaticamente, copie o código</li>
-                <li>Abra o Chess Land manualmente</li>
-                <li>Toque em "Desafiar Amigo" → "Entrar com Código"</li>
-                <li>Cole o código e jogue!</li>
-            </ol>
+            <strong id="instructionsTitle">📱 Como entrar na partida:</strong>
+            <ol id="instructionsList"></ol>
         </div>
+
+        <div class="lang-switch" id="langSwitch"></div>
     </div>
 
     <script>
-        // Pega o código da URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
+        // ============================================================
+        // Traduções — 9 idiomas (mesmos do app: de, en, es, fr, it, ja, pt, ru, zh)
+        // ============================================================
+        const I18N = {
+            pt: {
+                label: 'PT',
+                pageTitle: 'Chess Land - Convite de Partida',
+                metaDescription: 'Você foi convidado para uma partida de xadrez!',
+                ogTitle: 'Chess Land - Convite de Partida',
+                ogDescription: 'Aceite o desafio e jogue xadrez online!',
+                heading: 'Você foi desafiado!',
+                subtitle: 'Uma partida de xadrez te espera',
+                codeLabel: 'Código da Partida',
+                btnOpen: '🚀 Abrir Chess Land',
+                btnCopy: '📋 Copiar Código',
+                instructionsTitle: '📱 Como entrar na partida:',
+                instructions: [
+                    'Clique no botão "Abrir Chess Land"',
+                    'Se o app não abrir automaticamente, copie o código',
+                    'Abra o Chess Land manualmente',
+                    'Toque em "Desafiar Amigo" → "Entrar com Código"',
+                    'Cole o código e jogue!'
+                ],
+                statusCopied: '✅ Código copiado com sucesso!',
+                statusCopiedFallback: '✅ Código copiado!',
+                statusCopyError: '❌ Erro ao copiar. Digite manualmente: ',
+                statusOpening: 'Abrindo o Chess Land...',
+                statusNotInstalled: '⚠️ App não instalado? Baixe na loja ou use o código manualmente!',
+                errorCode: 'ERRO',
+                errorMessage: '❌ Código não encontrado na URL. Verifique o link!'
+            },
+            en: {
+                label: 'EN',
+                pageTitle: 'Chess Land - Match Invitation',
+                metaDescription: "You've been invited to a chess match!",
+                ogTitle: 'Chess Land - Match Invitation',
+                ogDescription: 'Accept the challenge and play chess online!',
+                heading: "You've been challenged!",
+                subtitle: 'A chess match awaits you',
+                codeLabel: 'Match Code',
+                btnOpen: '🚀 Open Chess Land',
+                btnCopy: '📋 Copy Code',
+                instructionsTitle: '📱 How to join the match:',
+                instructions: [
+                    'Tap the "Open Chess Land" button',
+                    "If the app doesn't open automatically, copy the code",
+                    'Open Chess Land manually',
+                    'Tap "Challenge a Friend" → "Join with Code"',
+                    'Paste the code and play!'
+                ],
+                statusCopied: '✅ Code copied successfully!',
+                statusCopiedFallback: '✅ Code copied!',
+                statusCopyError: '❌ Error copying. Type it manually: ',
+                statusOpening: 'Opening Chess Land...',
+                statusNotInstalled: '⚠️ App not installed? Download it from the store or use the code manually!',
+                errorCode: 'ERROR',
+                errorMessage: '❌ Code not found in the URL. Check the link!'
+            },
+            es: {
+                label: 'ES',
+                pageTitle: 'Chess Land - Invitación de Partida',
+                metaDescription: '¡Has sido invitado a una partida de ajedrez!',
+                ogTitle: 'Chess Land - Invitación de Partida',
+                ogDescription: '¡Acepta el desafío y juega ajedrez en línea!',
+                heading: '¡Has sido desafiado!',
+                subtitle: 'Una partida de ajedrez te espera',
+                codeLabel: 'Código de la Partida',
+                btnOpen: '🚀 Abrir Chess Land',
+                btnCopy: '📋 Copiar Código',
+                instructionsTitle: '📱 Cómo entrar en la partida:',
+                instructions: [
+                    'Toca el botón "Abrir Chess Land"',
+                    'Si la app no se abre automáticamente, copia el código',
+                    'Abre Chess Land manualmente',
+                    'Toca "Desafiar Amigo" → "Entrar con Código"',
+                    '¡Pega el código y juega!'
+                ],
+                statusCopied: '✅ ¡Código copiado con éxito!',
+                statusCopiedFallback: '✅ ¡Código copiado!',
+                statusCopyError: '❌ Error al copiar. Escríbelo manualmente: ',
+                statusOpening: 'Abriendo Chess Land...',
+                statusNotInstalled: '⚠️ ¿App no instalada? ¡Descárgala en la tienda o usa el código manualmente!',
+                errorCode: 'ERROR',
+                errorMessage: '❌ Código no encontrado en la URL. ¡Verifica el enlace!'
+            },
+            fr: {
+                label: 'FR',
+                pageTitle: 'Chess Land - Invitation à une Partie',
+                metaDescription: "Vous avez été invité à une partie d'échecs !",
+                ogTitle: 'Chess Land - Invitation à une Partie',
+                ogDescription: 'Acceptez le défi et jouez aux échecs en ligne !',
+                heading: 'Vous avez été défié !',
+                subtitle: "Une partie d'échecs vous attend",
+                codeLabel: 'Code de la Partie',
+                btnOpen: '🚀 Ouvrir Chess Land',
+                btnCopy: '📋 Copier le Code',
+                instructionsTitle: '📱 Comment rejoindre la partie :',
+                instructions: [
+                    'Appuyez sur le bouton « Ouvrir Chess Land »',
+                    "Si l'application ne s'ouvre pas automatiquement, copiez le code",
+                    'Ouvrez Chess Land manuellement',
+                    'Appuyez sur « Défier un Ami » → « Rejoindre avec un Code »',
+                    'Collez le code et jouez !'
+                ],
+                statusCopied: '✅ Code copié avec succès !',
+                statusCopiedFallback: '✅ Code copié !',
+                statusCopyError: '❌ Erreur lors de la copie. Saisissez-le manuellement : ',
+                statusOpening: 'Ouverture de Chess Land...',
+                statusNotInstalled: "⚠️ Application non installée ? Téléchargez-la sur le store ou utilisez le code manuellement !",
+                errorCode: 'ERREUR',
+                errorMessage: "❌ Code introuvable dans l'URL. Vérifiez le lien !"
+            },
+            it: {
+                label: 'IT',
+                pageTitle: 'Chess Land - Invito alla Partita',
+                metaDescription: 'Sei stato invitato a una partita a scacchi!',
+                ogTitle: 'Chess Land - Invito alla Partita',
+                ogDescription: 'Accetta la sfida e gioca a scacchi online!',
+                heading: 'Sei stato sfidato!',
+                subtitle: 'Una partita a scacchi ti aspetta',
+                codeLabel: 'Codice Partita',
+                btnOpen: '🚀 Apri Chess Land',
+                btnCopy: '📋 Copia Codice',
+                instructionsTitle: '📱 Come partecipare alla partita:',
+                instructions: [
+                    'Tocca il pulsante "Apri Chess Land"',
+                    "Se l'app non si apre automaticamente, copia il codice",
+                    'Apri Chess Land manualmente',
+                    'Tocca "Sfida un Amico" → "Entra con Codice"',
+                    'Incolla il codice e gioca!'
+                ],
+                statusCopied: '✅ Codice copiato con successo!',
+                statusCopiedFallback: '✅ Codice copiato!',
+                statusCopyError: '❌ Errore durante la copia. Digitalo manualmente: ',
+                statusOpening: 'Apertura di Chess Land...',
+                statusNotInstalled: '⚠️ App non installata? Scaricala dallo store o usa il codice manualmente!',
+                errorCode: 'ERRORE',
+                errorMessage: "❌ Codice non trovato nell'URL. Controlla il link!"
+            },
+            de: {
+                label: 'DE',
+                pageTitle: 'Chess Land - Partie-Einladung',
+                metaDescription: 'Du wurdest zu einer Schachpartie eingeladen!',
+                ogTitle: 'Chess Land - Partie-Einladung',
+                ogDescription: 'Nimm die Herausforderung an und spiele online Schach!',
+                heading: 'Du wurdest herausgefordert!',
+                subtitle: 'Eine Schachpartie wartet auf dich',
+                codeLabel: 'Partie-Code',
+                btnOpen: '🚀 Chess Land öffnen',
+                btnCopy: '📋 Code kopieren',
+                instructionsTitle: '📱 So nimmst du an der Partie teil:',
+                instructions: [
+                    'Tippe auf „Chess Land öffnen"',
+                    'Öffnet sich die App nicht automatisch, kopiere den Code',
+                    'Öffne Chess Land manuell',
+                    'Tippe auf „Freund herausfordern" → „Mit Code beitreten"',
+                    'Füge den Code ein und spiele!'
+                ],
+                statusCopied: '✅ Code erfolgreich kopiert!',
+                statusCopiedFallback: '✅ Code kopiert!',
+                statusCopyError: '❌ Fehler beim Kopieren. Bitte manuell eingeben: ',
+                statusOpening: 'Chess Land wird geöffnet...',
+                statusNotInstalled: '⚠️ App nicht installiert? Lade sie im Store herunter oder nutze den Code manuell!',
+                errorCode: 'FEHLER',
+                errorMessage: '❌ Code in der URL nicht gefunden. Überprüfe den Link!'
+            },
+            ja: {
+                label: '日本語',
+                pageTitle: 'Chess Land - 対局への招待',
+                metaDescription: 'チェスの対局に招待されました！',
+                ogTitle: 'Chess Land - 対局への招待',
+                ogDescription: '挑戦を受けてオンラインでチェスをプレイしよう！',
+                heading: '挑戦状が届きました！',
+                subtitle: 'チェスの対局があなたを待っています',
+                codeLabel: '対局コード',
+                btnOpen: '🚀 Chess Landを開く',
+                btnCopy: '📋 コードをコピー',
+                instructionsTitle: '📱 対局への参加方法:',
+                instructions: [
+                    '「Chess Landを開く」ボタンをタップ',
+                    'アプリが自動的に開かない場合はコードをコピー',
+                    'Chess Landを手動で開く',
+                    '「友達に挑戦」→「コードで参加」をタップ',
+                    'コードを貼り付けてプレイ！'
+                ],
+                statusCopied: '✅ コードをコピーしました！',
+                statusCopiedFallback: '✅ コードをコピーしました！',
+                statusCopyError: '❌ コピーに失敗しました。手動で入力してください: ',
+                statusOpening: 'Chess Landを開いています...',
+                statusNotInstalled: '⚠️ アプリが未インストールですか？ストアからダウンロードするか、コードを手動で使用してください！',
+                errorCode: 'エラー',
+                errorMessage: '❌ URLにコードが見つかりません。リンクを確認してください！'
+            },
+            ru: {
+                label: 'RU',
+                pageTitle: 'Chess Land - Приглашение на партию',
+                metaDescription: 'Вас пригласили сыграть в шахматы!',
+                ogTitle: 'Chess Land - Приглашение на партию',
+                ogDescription: 'Примите вызов и играйте в шахматы онлайн!',
+                heading: 'Вам бросили вызов!',
+                subtitle: 'Шахматная партия ждёт вас',
+                codeLabel: 'Код партии',
+                btnOpen: '🚀 Открыть Chess Land',
+                btnCopy: '📋 Копировать код',
+                instructionsTitle: '📱 Как присоединиться к партии:',
+                instructions: [
+                    'Нажмите кнопку «Открыть Chess Land»',
+                    'Если приложение не открылось автоматически, скопируйте код',
+                    'Откройте Chess Land вручную',
+                    'Нажмите «Бросить вызов другу» → «Войти по коду»',
+                    'Вставьте код и играйте!'
+                ],
+                statusCopied: '✅ Код успешно скопирован!',
+                statusCopiedFallback: '✅ Код скопирован!',
+                statusCopyError: '❌ Ошибка копирования. Введите вручную: ',
+                statusOpening: 'Открывается Chess Land...',
+                statusNotInstalled: '⚠️ Приложение не установлено? Скачайте его в магазине или используйте код вручную!',
+                errorCode: 'ОШИБКА',
+                errorMessage: '❌ Код не найден в URL. Проверьте ссылку!'
+            },
+            zh: {
+                label: '中文',
+                pageTitle: 'Chess Land - 对局邀请',
+                metaDescription: '你收到了一场国际象棋对局的邀请！',
+                ogTitle: 'Chess Land - 对局邀请',
+                ogDescription: '接受挑战，在线畅玩国际象棋！',
+                heading: '你被挑战了！',
+                subtitle: '一场国际象棋对局正在等你',
+                codeLabel: '对局代码',
+                btnOpen: '🚀 打开 Chess Land',
+                btnCopy: '📋 复制代码',
+                instructionsTitle: '📱 如何加入对局：',
+                instructions: [
+                    '点击「打开 Chess Land」按钮',
+                    '如果应用未自动打开，请复制代码',
+                    '手动打开 Chess Land',
+                    '点击「挑战好友」→「使用代码加入」',
+                    '粘贴代码开始游戏！'
+                ],
+                statusCopied: '✅ 代码复制成功！',
+                statusCopiedFallback: '✅ 代码已复制！',
+                statusCopyError: '❌ 复制失败，请手动输入：',
+                statusOpening: '正在打开 Chess Land...',
+                statusNotInstalled: '⚠️ 应用未安装？请前往应用商店下载，或手动使用代码！',
+                errorCode: '错误',
+                errorMessage: '❌ 网址中未找到代码，请检查链接！'
+            }
+        };
+
+        const SUPPORTED = Object.keys(I18N); // ['pt','en','es','fr','it','de','ja','ru','zh']
+        const DEFAULT_LANG = 'en';
+
+        // ============================================================
+        // Detecção de idioma: ?lang= tem prioridade, depois navigator
+        // ============================================================
+        function detectLang() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const forced = (urlParams.get('lang') || '').toLowerCase();
+            if (SUPPORTED.includes(forced)) return forced;
+
+            const navLangs = navigator.languages && navigator.languages.length
+                ? navigator.languages
+                : [navigator.language || navigator.userLanguage || DEFAULT_LANG];
+
+            for (const raw of navLangs) {
+                const code = raw.toLowerCase().split('-')[0];
+                // zh-CN, zh-TW, zh-Hans etc → zh
+                if (SUPPORTED.includes(code)) return code;
+            }
+            return DEFAULT_LANG;
+        }
+
+        const currentLang = detectLang();
+        const t = I18N[currentLang];
+
+        // ============================================================
+        // Aplica traduções no DOM
+        // ============================================================
+        document.getElementById('htmlRoot').setAttribute('lang', currentLang);
+        document.getElementById('pageTitleTag').textContent = t.pageTitle;
+        document.getElementById('metaDescriptionTag').setAttribute('content', t.metaDescription);
+        document.getElementById('ogTitleTag').setAttribute('content', t.ogTitle);
+        document.getElementById('ogDescriptionTag').setAttribute('content', t.ogDescription);
+        document.getElementById('heading').textContent = t.heading;
+        document.getElementById('subtitle').textContent = t.subtitle;
+        document.getElementById('codeLabel').textContent = t.codeLabel;
+        document.getElementById('openApp').textContent = t.btnOpen;
+        document.getElementById('copyCode').textContent = t.btnCopy;
+        document.getElementById('instructionsTitle').textContent = t.instructionsTitle;
+
+        const listEl = document.getElementById('instructionsList');
+        t.instructions.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            listEl.appendChild(li);
+        });
+
+        // Seletor manual de idioma (mantém o código na URL)
+        const langSwitchEl = document.getElementById('langSwitch');
+        const urlParamsForSwitch = new URLSearchParams(window.location.search);
+        SUPPORTED.forEach((code, idx) => {
+            const a = document.createElement('a');
+            const p = new URLSearchParams(urlParamsForSwitch);
+            p.set('lang', code);
+            a.href = '?' + p.toString();
+            a.textContent = I18N[code].label;
+            if (code === currentLang) a.classList.add('active');
+            langSwitchEl.appendChild(a);
+            if (idx < SUPPORTED.length - 1) {
+                langSwitchEl.appendChild(document.createTextNode(' · '));
+            }
+        });
+
+        // ============================================================
+        // Lógica original: pega o código da URL e tenta abrir o app
+        // ============================================================
+        const code = urlParamsForSwitch.get('code');
         const statusDiv = document.getElementById('status');
-        
+
         function showStatus(message, type = 'info') {
             statusDiv.innerHTML = message;
             statusDiv.className = `status-${type}`;
             statusDiv.style.display = 'block';
         }
-        
+
         function hideStatus() {
             statusDiv.style.display = 'none';
         }
-        
+
         if (code) {
-            // Mostra o código
             document.getElementById('matchCode').textContent = code;
-            
-            // Link para abrir o app
+
+            // Link para abrir o app — mesmo scheme customizado usado na versão em produção
             const deepLink = `chess://join?code=${code}`;
             document.getElementById('openApp').href = deepLink;
-            
-            // Função de copiar código
+
             document.getElementById('copyCode').addEventListener('click', (e) => {
                 e.preventDefault();
-                
+
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(code).then(() => {
-                        showStatus('✅ Código copiado com sucesso!', 'success');
+                        showStatus(t.statusCopied, 'success');
                         setTimeout(hideStatus, 3000);
                     }).catch(() => {
                         fallbackCopyTextToClipboard(code);
@@ -268,8 +594,7 @@
                     fallbackCopyTextToClipboard(code);
                 }
             });
-            
-            // Fallback para copiar em navegadores antigos
+
             function fallbackCopyTextToClipboard(text) {
                 const textArea = document.createElement('textarea');
                 textArea.value = text;
@@ -278,35 +603,33 @@
                 document.body.appendChild(textArea);
                 textArea.focus();
                 textArea.select();
-                
+
                 try {
                     document.execCommand('copy');
-                    showStatus('✅ Código copiado!', 'success');
+                    showStatus(t.statusCopiedFallback, 'success');
                     setTimeout(hideStatus, 3000);
                 } catch (err) {
-                    showStatus('❌ Erro ao copiar. Digite manualmente: ' + text, 'warning');
+                    showStatus(t.statusCopyError + text, 'warning');
                 }
-                
+
                 document.body.removeChild(textArea);
             }
-            
+
             // Tenta abrir o app automaticamente após 1.5 segundos
             setTimeout(() => {
-                showStatus('<span class="spinner"></span>Abrindo o Chess Land...', 'info');
+                showStatus('<span class="spinner"></span>' + t.statusOpening, 'info');
                 window.location.href = deepLink;
-                
-                // Se após 3 segundos ainda estiver na página
+
                 setTimeout(() => {
-                    showStatus('⚠️ App não instalado? Baixe na loja ou use o código manualmente!', 'warning');
+                    showStatus(t.statusNotInstalled, 'warning');
                 }, 3000);
             }, 1500);
-            
+
         } else {
-            // Código não encontrado
-            document.getElementById('matchCode').textContent = 'ERRO';
+            document.getElementById('matchCode').textContent = t.errorCode;
             document.querySelector('.code').style.borderColor = '#FF5252';
             document.querySelector('.code').style.color = '#FF5252';
-            showStatus('❌ Código não encontrado na URL. Verifique o link!', 'warning');
+            showStatus(t.errorMessage, 'warning');
             document.getElementById('openApp').style.display = 'none';
             document.getElementById('copyCode').style.display = 'none';
         }

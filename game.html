@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" id="htmlRoot">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChessLand — Ver Partida</title>
-  <meta name="description" content="Abra no app ChessLand para analisar esta partida de xadrez.">
+  <title id="pageTitleTag">ChessLand — Ver Partida</title>
+  <meta id="metaDescriptionTag" name="description" content="Abra no app ChessLand para analisar esta partida de xadrez.">
 
   <!-- Open Graph — preview no WhatsApp/Telegram/Discord -->
-  <meta property="og:title" content="♟️ ChessLand — Ver Partida">
-  <meta property="og:description" content="Alguém compartilhou uma partida de xadrez com você. Abra no app ChessLand!">
+  <meta id="ogTitleTag" property="og:title" content="♟️ ChessLand — Ver Partida">
+  <meta id="ogDescriptionTag" property="og:description" content="Alguém compartilhou uma partida de xadrez com você. Abra no app ChessLand!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://talento.dev.br/chess-preview.png">
 
@@ -242,6 +242,21 @@
       font-weight: 700;
       color: var(--accent);
     }
+
+    .lang-switch {
+      margin-top: 22px;
+      font-size: 11px;
+      opacity: 0.4;
+    }
+    .lang-switch a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 4px;
+    }
+    .lang-switch a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -258,7 +273,7 @@
 
     <div class="btn-group" id="btnGroup">
       <a href="#" id="btnOpen" class="btn btn-primary">
-        <span>🚀</span><span>Abrir no ChessLand</span>
+        <span>🚀</span><span id="btnOpenLabel">Abrir no ChessLand</span>
       </a>
       <a href="https://play.google.com/store/apps/details?id=com.talentodev.chess"
          target="_blank" id="btnStore" class="btn btn-secondary">
@@ -267,14 +282,283 @@
     </div>
 
     <div class="instructions" id="instructions">
-      <div class="instructions-title">Como assistir</div>
-      <div class="step"><span class="step-num">1</span><span>Toque em "Abrir no ChessLand"</span></div>
-      <div class="step"><span class="step-num">2</span><span>Se o app não abrir, baixe grátis na Play Store</span></div>
-      <div class="step"><span class="step-num">3</span><span>A partida abrirá automaticamente na análise interativa</span></div>
+      <div class="instructions-title" id="instructionsTitle">Como assistir</div>
+      <div id="stepsList"></div>
     </div>
+
+    <div class="lang-switch" id="langSwitch"></div>
   </div>
 
   <script>
+    // ============================================================
+    // Traduções — 9 idiomas (mesmos do app: de, en, es, fr, it, ja, pt, ru, zh)
+    // ============================================================
+    const I18N = {
+      pt: {
+        label: 'PT',
+        pageTitle: 'ChessLand — Ver Partida',
+        metaDescription: 'Abra no app ChessLand para analisar esta partida de xadrez.',
+        ogTitle: '♟️ ChessLand — Ver Partida',
+        ogDescription: 'Alguém compartilhou uma partida de xadrez com você. Abra no app ChessLand!',
+        cardTitle: 'Ver Partida',
+        cardSubtitle: 'Abrindo no ChessLand...',
+        instructionsTitle: 'Como assistir',
+        steps: [
+          'Toque em "Abrir no ChessLand"',
+          'Se o app não abrir, baixe grátis na Play Store',
+          'A partida abrirá automaticamente na análise interativa'
+        ],
+        btnOpen: 'Abrir no ChessLand',
+        btnStore: 'Baixar na Play Store',
+        statusOpening: 'Abrindo o ChessLand...',
+        statusNotInstalled: 'App não instalado? Baixe grátis na Play Store abaixo.',
+        invalidTitle: 'Link inválido',
+        invalidSubtitle: 'Nenhum ID de partida encontrado.',
+        invalidStatus: 'Verifique se o link está completo.'
+      },
+      en: {
+        label: 'EN',
+        pageTitle: 'ChessLand — View Game',
+        metaDescription: 'Open the ChessLand app to analyze this chess game.',
+        ogTitle: '♟️ ChessLand — View Game',
+        ogDescription: 'Someone shared a chess game with you. Open it in the ChessLand app!',
+        cardTitle: 'View Game',
+        cardSubtitle: 'Opening in ChessLand...',
+        instructionsTitle: 'How to watch',
+        steps: [
+          'Tap "Open in ChessLand"',
+          "If the app doesn't open, download it free from the Play Store",
+          'The game will open automatically in interactive analysis'
+        ],
+        btnOpen: 'Open in ChessLand',
+        btnStore: 'Download on Play Store',
+        statusOpening: 'Opening ChessLand...',
+        statusNotInstalled: 'App not installed? Download it free from the Play Store below.',
+        invalidTitle: 'Invalid link',
+        invalidSubtitle: 'No game ID found.',
+        invalidStatus: 'Check that the link is complete.'
+      },
+      es: {
+        label: 'ES',
+        pageTitle: 'ChessLand — Ver Partida',
+        metaDescription: 'Abre la app ChessLand para analizar esta partida de ajedrez.',
+        ogTitle: '♟️ ChessLand — Ver Partida',
+        ogDescription: 'Alguien compartió una partida de ajedrez contigo. ¡Ábrela en la app ChessLand!',
+        cardTitle: 'Ver Partida',
+        cardSubtitle: 'Abriendo en ChessLand...',
+        instructionsTitle: 'Cómo ver la partida',
+        steps: [
+          'Toca "Abrir en ChessLand"',
+          'Si la app no se abre, descárgala gratis en la Play Store',
+          'La partida se abrirá automáticamente en el análisis interactivo'
+        ],
+        btnOpen: 'Abrir en ChessLand',
+        btnStore: 'Descargar en Play Store',
+        statusOpening: 'Abriendo ChessLand...',
+        statusNotInstalled: '¿App no instalada? Descárgala gratis en la Play Store abajo.',
+        invalidTitle: 'Enlace inválido',
+        invalidSubtitle: 'No se encontró ID de partida.',
+        invalidStatus: 'Verifica que el enlace esté completo.'
+      },
+      fr: {
+        label: 'FR',
+        pageTitle: 'ChessLand — Voir la Partie',
+        metaDescription: "Ouvrez l'application ChessLand pour analyser cette partie d'échecs.",
+        ogTitle: '♟️ ChessLand — Voir la Partie',
+        ogDescription: "Quelqu'un a partagé une partie d'échecs avec vous. Ouvrez-la dans l'application ChessLand !",
+        cardTitle: 'Voir la Partie',
+        cardSubtitle: 'Ouverture dans ChessLand...',
+        instructionsTitle: 'Comment regarder',
+        steps: [
+          'Appuyez sur « Ouvrir dans ChessLand »',
+          "Si l'application ne s'ouvre pas, téléchargez-la gratuitement sur le Play Store",
+          "La partie s'ouvrira automatiquement dans l'analyse interactive"
+        ],
+        btnOpen: 'Ouvrir dans ChessLand',
+        btnStore: 'Télécharger sur Play Store',
+        statusOpening: 'Ouverture de ChessLand...',
+        statusNotInstalled: "Application non installée ? Téléchargez-la gratuitement sur le Play Store ci-dessous.",
+        invalidTitle: 'Lien invalide',
+        invalidSubtitle: 'Aucun ID de partie trouvé.',
+        invalidStatus: "Vérifiez que le lien est complet."
+      },
+      it: {
+        label: 'IT',
+        pageTitle: 'ChessLand — Vedi Partita',
+        metaDescription: "Apri l'app ChessLand per analizzare questa partita a scacchi.",
+        ogTitle: '♟️ ChessLand — Vedi Partita',
+        ogDescription: "Qualcuno ha condiviso una partita a scacchi con te. Aprila nell'app ChessLand!",
+        cardTitle: 'Vedi Partita',
+        cardSubtitle: 'Apertura in ChessLand...',
+        instructionsTitle: 'Come guardare',
+        steps: [
+          'Tocca "Apri in ChessLand"',
+          "Se l'app non si apre, scaricala gratis dal Play Store",
+          "La partita si aprirà automaticamente nell'analisi interattiva"
+        ],
+        btnOpen: 'Apri in ChessLand',
+        btnStore: 'Scarica su Play Store',
+        statusOpening: 'Apertura di ChessLand...',
+        statusNotInstalled: 'App non installata? Scaricala gratis dal Play Store qui sotto.',
+        invalidTitle: 'Link non valido',
+        invalidSubtitle: 'Nessun ID partita trovato.',
+        invalidStatus: 'Verifica che il link sia completo.'
+      },
+      de: {
+        label: 'DE',
+        pageTitle: 'ChessLand — Partie ansehen',
+        metaDescription: 'Öffne die ChessLand-App, um diese Schachpartie zu analysieren.',
+        ogTitle: '♟️ ChessLand — Partie ansehen',
+        ogDescription: 'Jemand hat eine Schachpartie mit dir geteilt. Öffne sie in der ChessLand-App!',
+        cardTitle: 'Partie ansehen',
+        cardSubtitle: 'Wird in ChessLand geöffnet...',
+        instructionsTitle: 'So schaust du zu',
+        steps: [
+          'Tippe auf „In ChessLand öffnen"',
+          'Öffnet sich die App nicht, lade sie kostenlos im Play Store herunter',
+          'Die Partie öffnet sich automatisch in der interaktiven Analyse'
+        ],
+        btnOpen: 'In ChessLand öffnen',
+        btnStore: 'Im Play Store herunterladen',
+        statusOpening: 'ChessLand wird geöffnet...',
+        statusNotInstalled: 'App nicht installiert? Lade sie unten kostenlos im Play Store herunter.',
+        invalidTitle: 'Ungültiger Link',
+        invalidSubtitle: 'Keine Partie-ID gefunden.',
+        invalidStatus: 'Überprüfe, ob der Link vollständig ist.'
+      },
+      ja: {
+        label: '日本語',
+        pageTitle: 'ChessLand — 対局を見る',
+        metaDescription: 'ChessLandアプリでこのチェスの対局を分析しよう。',
+        ogTitle: '♟️ ChessLand — 対局を見る',
+        ogDescription: '友達がチェスの対局を共有しました。ChessLandアプリで開こう！',
+        cardTitle: '対局を見る',
+        cardSubtitle: 'ChessLandで開いています...',
+        instructionsTitle: '観戦方法',
+        steps: [
+          '「ChessLandで開く」をタップ',
+          'アプリが開かない場合はPlayストアから無料でダウンロード',
+          '対局は自動的にインタラクティブ分析画面で開きます'
+        ],
+        btnOpen: 'ChessLandで開く',
+        btnStore: 'Playストアでダウンロード',
+        statusOpening: 'ChessLandを開いています...',
+        statusNotInstalled: 'アプリが未インストールですか？下のPlayストアから無料でダウンロードしてください。',
+        invalidTitle: '無効なリンク',
+        invalidSubtitle: '対局IDが見つかりません。',
+        invalidStatus: 'リンクが完全かどうか確認してください。'
+      },
+      ru: {
+        label: 'RU',
+        pageTitle: 'ChessLand — Просмотр партии',
+        metaDescription: 'Откройте приложение ChessLand, чтобы разобрать эту шахматную партию.',
+        ogTitle: '♟️ ChessLand — Просмотр партии',
+        ogDescription: 'Кто-то поделился с вами шахматной партией. Откройте её в приложении ChessLand!',
+        cardTitle: 'Просмотр партии',
+        cardSubtitle: 'Открывается в ChessLand...',
+        instructionsTitle: 'Как посмотреть',
+        steps: [
+          'Нажмите «Открыть в ChessLand»',
+          'Если приложение не откроется, скачайте его бесплатно в Play Store',
+          'Партия автоматически откроется в интерактивном анализе'
+        ],
+        btnOpen: 'Открыть в ChessLand',
+        btnStore: 'Скачать в Play Store',
+        statusOpening: 'Открывается ChessLand...',
+        statusNotInstalled: 'Приложение не установлено? Скачайте его бесплатно в Play Store ниже.',
+        invalidTitle: 'Недействительная ссылка',
+        invalidSubtitle: 'ID партии не найден.',
+        invalidStatus: 'Проверьте, полная ли ссылка.'
+      },
+      zh: {
+        label: '中文',
+        pageTitle: 'ChessLand — 查看对局',
+        metaDescription: '打开 ChessLand 应用分析这局国际象棋对局。',
+        ogTitle: '♟️ ChessLand — 查看对局',
+        ogDescription: '有人与你分享了一局国际象棋对局。在 ChessLand 应用中打开吧！',
+        cardTitle: '查看对局',
+        cardSubtitle: '正在 ChessLand 中打开...',
+        instructionsTitle: '如何观看',
+        steps: [
+          '点击「在 ChessLand 中打开」',
+          '如果应用未打开，请前往 Play 商店免费下载',
+          '对局将自动在互动分析界面中打开'
+        ],
+        btnOpen: '在 ChessLand 中打开',
+        btnStore: '在 Play 商店下载',
+        statusOpening: '正在打开 ChessLand...',
+        statusNotInstalled: '应用未安装？请前往下方 Play 商店免费下载。',
+        invalidTitle: '链接无效',
+        invalidSubtitle: '未找到对局ID。',
+        invalidStatus: '请检查链接是否完整。'
+      }
+    };
+
+    const SUPPORTED = Object.keys(I18N); // ['pt','en','es','fr','it','de','ja','ru','zh']
+    const DEFAULT_LANG = 'en';
+
+    // ============================================================
+    // Detecção de idioma: ?lang= tem prioridade, depois navigator
+    // ============================================================
+    function detectLang() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const forced = (urlParams.get('lang') || '').toLowerCase();
+      if (SUPPORTED.includes(forced)) return forced;
+
+      const navLangs = navigator.languages && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || DEFAULT_LANG];
+
+      for (const raw of navLangs) {
+        const code = raw.toLowerCase().split('-')[0];
+        if (SUPPORTED.includes(code)) return code;
+      }
+      return DEFAULT_LANG;
+    }
+
+    const currentLang = detectLang();
+    const t = I18N[currentLang];
+
+    // ============================================================
+    // Aplica traduções no DOM (estado "normal", antes de saber se
+    // o gameId existe — os textos de erro são aplicados depois,
+    // dentro do fluxo original, sem alterar a lógica)
+    // ============================================================
+    document.getElementById('htmlRoot').setAttribute('lang', currentLang);
+    document.getElementById('pageTitleTag').textContent = t.pageTitle;
+    document.getElementById('metaDescriptionTag').setAttribute('content', t.metaDescription);
+    document.getElementById('ogTitleTag').setAttribute('content', t.ogTitle);
+    document.getElementById('ogDescriptionTag').setAttribute('content', t.ogDescription);
+    document.getElementById('cardTitle').textContent = t.cardTitle;
+    document.getElementById('cardSubtitle').textContent = t.cardSubtitle;
+    document.getElementById('instructionsTitle').textContent = t.instructionsTitle;
+    document.getElementById('btnOpenLabel').textContent = t.btnOpen;
+    document.getElementById('btnStore').textContent = t.btnStore;
+
+    const stepsListEl = document.getElementById('stepsList');
+    t.steps.forEach((text, idx) => {
+      const stepDiv = document.createElement('div');
+      stepDiv.className = 'step';
+      stepDiv.innerHTML = `<span class="step-num">${idx + 1}</span><span>${text}</span>`;
+      stepsListEl.appendChild(stepDiv);
+    });
+
+    // Seletor manual de idioma (mantém game/id na URL)
+    const langSwitchEl = document.getElementById('langSwitch');
+    const urlParamsForSwitch = new URLSearchParams(window.location.search);
+    SUPPORTED.forEach((code, idx) => {
+      const a = document.createElement('a');
+      const p = new URLSearchParams(urlParamsForSwitch);
+      p.set('lang', code);
+      a.href = '?' + p.toString();
+      a.textContent = I18N[code].label;
+      if (code === currentLang) a.classList.add('active');
+      langSwitchEl.appendChild(a);
+      if (idx < SUPPORTED.length - 1) {
+        langSwitchEl.appendChild(document.createTextNode(' · '));
+      }
+    });
+
     // ── Tabuleiro de fundo ──────────────────────────────────────
     const bg = document.getElementById('boardBg');
     for (let i = 0; i < 64; i++) {
@@ -284,8 +568,8 @@
       bg.appendChild(d);
     }
 
-    // ── Lógica principal ────────────────────────────────────────
-    const params   = new URLSearchParams(location.search);
+    // ── Lógica principal (idêntica à original) ─────────────────
+    const params   = urlParamsForSwitch;
     const gameId   = params.get('game');
     const statusEl = document.getElementById('status');
     const btnOpen  = document.getElementById('btnOpen');
@@ -297,9 +581,9 @@
 
     if (!gameId) {
       document.getElementById('pieceEmoji').textContent = '⚠️';
-      document.getElementById('cardTitle').textContent  = 'Link inválido';
-      document.getElementById('cardSubtitle').textContent = 'Nenhum ID de partida encontrado.';
-      setStatus('Verifique se o link está completo.', 'error');
+      document.getElementById('cardTitle').textContent  = t.invalidTitle;
+      document.getElementById('cardSubtitle').textContent = t.invalidSubtitle;
+      setStatus(t.invalidStatus, 'error');
       document.getElementById('btnGroup').style.display = 'none';
       document.getElementById('instructions').style.display = 'none';
     } else {
@@ -307,10 +591,10 @@
       btnOpen.href = deepLink;
 
       setTimeout(() => {
-        setStatus('<span class="spinner"></span> Abrindo o ChessLand...', 'info');
+        setStatus('<span class="spinner"></span> ' + t.statusOpening, 'info');
         window.location.href = deepLink;
         setTimeout(() => {
-          setStatus('App não instalado? Baixe grátis na Play Store abaixo.', 'warn');
+          setStatus(t.statusNotInstalled, 'warn');
         }, 2500);
       }, 800);
     }
@@ -319,10 +603,10 @@
     btnOpen.addEventListener('click', (e) => {
       if (!gameId) return;
       e.preventDefault();
-      setStatus('<span class="spinner"></span> Abrindo...', 'info');
+      setStatus('<span class="spinner"></span> ' + t.statusOpening, 'info');
       window.location.href = btnOpen.href;
       setTimeout(() => {
-        setStatus('App não instalado? Baixe grátis na Play Store abaixo.', 'warn');
+        setStatus(t.statusNotInstalled, 'warn');
       }, 2500);
     });
   </script>
