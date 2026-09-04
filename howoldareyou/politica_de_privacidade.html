@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Política de Privacidade | Privacy Policy — Seu Guia Astral</title>
+    <title>Política de Privacidade | Privacy Policy — Polyglot Kingdom</title>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <style>
     :root {
-        --bg: #12101c;
-        --surface: #1c1830;
-        --ink: #f2eefc;
-        --muted: #b8b0d4;
-        --accent: #c79aff;
-        --accent-strong: #8b5cf6;
-        --gold: #e2a32b;
-        --accent-light: #2a2244;
-        --border: #332a52;
+        --bg: #171225;
+        --surface: #211a37;
+        --ink: #f3eefc;
+        --muted: #b4a9d6;
+        --accent: #ffd166;
+        --accent-strong: #7c4dff;
+        --gold: #ffd166;
+        --accent-light: #2c2249;
+        --border: #392c5c;
         --radius: 12px;
     }
 
@@ -36,14 +36,14 @@
         line-height: 1.7;
         min-height: 100vh;
         background-image:
-            radial-gradient(circle at 15% 20%, rgba(139,92,246,0.12) 0%, transparent 40%),
-            radial-gradient(circle at 85% 75%, rgba(226,163,43,0.08) 0%, transparent 45%);
+            radial-gradient(circle at 15% 20%, rgba(124,77,255,0.14) 0%, transparent 40%),
+            radial-gradient(circle at 85% 75%, rgba(255,209,102,0.08) 0%, transparent 45%);
         background-attachment: fixed;
     }
 
     /* ── HEADER ── */
     header {
-        background: #0b0a14;
+        background: #0f0b1c;
         color: #fff;
         padding: 28px 40px;
         display: flex;
@@ -86,7 +86,7 @@
 
     /* ── HERO ── */
     .hero {
-        background: linear-gradient(135deg, var(--accent-strong) 0%, #4c2f8a 100%);
+        background: linear-gradient(135deg, var(--accent-strong) 0%, #4a2f8f 100%);
         color: #fff;
         padding: 56px 40px 48px;
         position: relative;
@@ -94,12 +94,12 @@
     }
 
     .hero::after {
-        content: '✦';
+        content: '👑';
         position: absolute;
         right: 40px;
-        top: 20px;
-        font-size: 5rem;
-        color: rgba(226,163,43,0.25);
+        top: 24px;
+        font-size: 4.5rem;
+        opacity: 0.22;
     }
 
     .hero::before {
@@ -147,7 +147,7 @@
         transition: box-shadow 0.2s;
     }
 
-    .section:hover { box-shadow: 0 4px 28px rgba(139,92,246,0.15); }
+    .section:hover { box-shadow: 0 4px 28px rgba(124,77,255,0.16); }
 
     .section-icon {
         width: 40px;
@@ -256,7 +256,7 @@
 
     <!-- HEADER -->
     <header>
-        <div class="brand">🔮 Seu Guia <span>Astral</span></div>
+        <div class="brand">👑 Polyglot <span>Kingdom</span></div>
         <div class="lang-toggle">
             <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
             <button class="lang-btn" onclick="setLang('en', this)">EN</button>
@@ -265,14 +265,14 @@
 
     <!-- HERO -->
     <div class="hero">
-        <div class="hero-eyebrow" data-lang="pt">Seu Guia Astral</div>
-        <div class="hero-eyebrow" data-lang="en">Your Astral Guide</div>
+        <div class="hero-eyebrow" data-lang="pt">Polyglot Kingdom</div>
+        <div class="hero-eyebrow" data-lang="en">Polyglot Kingdom</div>
 
         <h1 data-lang="pt">Política de<br>Privacidade</h1>
         <h1 data-lang="en">Privacy<br>Policy</h1>
 
-        <div class="hero-date" data-lang="pt">Última atualização: 03 de Agosto de 2026</div>
-        <div class="hero-date" data-lang="en">Last updated: August 03, 2026</div>
+        <div class="hero-date" data-lang="pt">Última atualização: 03 de Setembro de 2026</div>
+        <div class="hero-date" data-lang="en">Last updated: September 03, 2026</div>
     </div>
 
     <!-- MAIN -->
@@ -280,8 +280,8 @@
 
         <!-- HIGHLIGHT -->
         <div class="highlight">
-            <span data-lang="pt">🔮 O Seu Guia Astral respeita a sua privacidade. Não armazenamos seus dados pessoais em nossos servidores. O app usa a internet apenas para gerar leituras de tarô, interpretações astrológicas e conversação com o Tutor Astrólogo via IA.</span>
-            <span data-lang="en">🔮 Seu Guia Astral respects your privacy. We do not store your personal data on our servers. The app uses the internet only to generate tarot readings, astrological interpretations, and conversations with the AI Astrologer Tutor.</span>
+            <span data-lang="pt">👑 O Polyglot Kingdom respeita a sua privacidade. Não coletamos nenhuma informação pessoal dos usuários. O app usa a internet apenas para fornecer lições, traduções e conversação com IA nas jornadas pelos reinos dos idiomas.</span>
+            <span data-lang="en">👑 Polyglot Kingdom respects your privacy. We do not collect any personal information from users. The app uses the internet only to provide lessons, translations, and AI-powered conversation across your journeys through the language kingdoms.</span>
         </div>
 
         <!-- 1. INFORMAÇÕES COLETADAS -->
@@ -290,11 +290,14 @@
             <h2 data-lang="pt">1. Informações Coletadas</h2>
             <h2 data-lang="en">1. Information Collected</h2>
 
-            <p data-lang="pt">Para gerar seu mapa astral e leituras de tarô personalizadas, o app solicita sua <strong>data de nascimento</strong> e, opcionalmente, <strong>horário e local de nascimento</strong>. Esses dados são enviados à API de inteligência artificial (DeepSeek) apenas no momento da consulta, para gerar a resposta em tempo real, e <strong>não são armazenados de forma persistente</strong> em nossos servidores.</p>
-            <p data-lang="en">To generate your astral chart and personalized tarot readings, the app requests your <strong>birth date</strong> and, optionally, your <strong>birth time and place</strong>. This data is sent to the AI API (DeepSeek) only at the moment of the query, to generate the response in real time, and is <strong>not persistently stored</strong> on our servers.</p>
+            <p data-lang="pt">O Polyglot Kingdom <strong>não coleta nenhuma informação pessoal</strong> dos usuários. Nenhum dado de identificação, localização, histórico de conversas ou informações de contato é armazenado em nossos servidores.</p>
+            <p data-lang="en">Polyglot Kingdom <strong>does not collect any personal information</strong> from users. No identification data, location, conversation history, or contact information is stored on our servers.</p>
 
-            <p data-lang="pt">Nenhum dado de identificação, localização contínua, histórico de conversas ou informações de contato é armazenado por nós. Não coletamos nome, e-mail, CPF ou qualquer outro dado que permita identificá-lo diretamente.</p>
-            <p data-lang="en">No identification data, continuous location, conversation history, or contact information is stored by us. We do not collect your name, email, national ID, or any other data that would directly identify you.</p>
+            <p data-lang="pt">As lições, traduções e conversações realizadas no app são processadas pela API de inteligência artificial (DeepSeek) para gerar respostas em tempo real e não são armazenadas de forma persistente.</p>
+            <p data-lang="en">Lessons, translations, and conversations within the app are processed by the AI API (DeepSeek) to generate real-time responses and are not persistently stored.</p>
+
+            <p data-lang="pt">O seu progresso nos reinos (níveis concluídos, streak e pontuação) é salvo <strong>localmente no dispositivo</strong> e não é enviado a nossos servidores.</p>
+            <p data-lang="en">Your progress across the kingdoms (completed levels, streak, and score) is saved <strong>locally on the device</strong> and is not sent to our servers.</p>
         </div>
 
         <!-- 2. GRAVAÇÃO DE ÁUDIO -->
@@ -303,14 +306,14 @@
             <h2 data-lang="pt">2. Gravação de Áudio</h2>
             <h2 data-lang="en">2. Audio Recording</h2>
 
-            <p data-lang="pt">O aplicativo solicita permissão para acessar o microfone do dispositivo a fim de capturar sua fala, permitindo conversar por voz com o Tutor Astrólogo além do chat por texto.</p>
-            <p data-lang="en">The application requests permission to access the device microphone in order to capture your speech, allowing you to talk by voice with the Astrologer Tutor in addition to text chat.</p>
+            <p data-lang="pt">O aplicativo solicita permissão para acessar o microfone do dispositivo a fim de capturar sua fala nos exercícios de pronúncia e conversação.</p>
+            <p data-lang="en">The application requests permission to access the device microphone in order to capture your speech during pronunciation and conversation exercises.</p>
 
             <p data-lang="pt">As gravações são processadas <strong>localmente no dispositivo</strong> pelo serviço de reconhecimento de fala do Google e não são enviadas para nossos servidores nem compartilhadas com terceiros.</p>
             <p data-lang="en">Recordings are processed <strong>locally on the device</strong> by Google's speech recognition service and are not sent to our servers or shared with third parties.</p>
 
-            <p data-lang="pt">Você pode revogar essa permissão a qualquer momento nas configurações do seu dispositivo. Sem ela, apenas o chat por texto estará disponível.</p>
-            <p data-lang="en">You can revoke this permission at any time in your device settings. Without it, only text chat will be available.</p>
+            <p data-lang="pt">Você pode revogar essa permissão a qualquer momento nas configurações do seu dispositivo. Sem ela, os exercícios de fala não estarão disponíveis.</p>
+            <p data-lang="en">You can revoke this permission at any time in your device settings. Without it, speech exercises will not be available.</p>
         </div>
 
         <!-- 3. USO DA INTERNET -->
@@ -323,12 +326,12 @@
             <p data-lang="en">The application requires internet access to:</p>
 
             <ul data-lang="pt">
-                <li>Processar sua data de nascimento e gerar leituras de tarô e interpretações astrológicas via IA (API DeepSeek)</li>
+                <li>Processar lições, traduções e gerar respostas via IA (API DeepSeek)</li>
                 <li>Sintetizar voz com alta qualidade (vozes neurais do Google TTS)</li>
                 <li>Exibir anúncios para usuários gratuitos (Google AdMob)</li>
             </ul>
             <ul data-lang="en">
-                <li>Process your birth date and generate tarot readings and astrological interpretations via AI (DeepSeek API)</li>
+                <li>Process lessons, translations, and generate AI responses (DeepSeek API)</li>
                 <li>Synthesize high-quality speech (Google TTS neural voices)</li>
                 <li>Display ads for free users (Google AdMob)</li>
             </ul>
@@ -340,11 +343,11 @@
             <h2 data-lang="pt">4. Anúncios e Plano Premium</h2>
             <h2 data-lang="en">4. Ads and Premium Plan</h2>
 
-            <p data-lang="pt">O Seu Guia Astral é gratuito e sustentado por anúncios exibidos via <strong>Google AdMob</strong>. Os usuários do plano gratuito visualizam anúncios intersticiais após atingir o limite de consultas, o que renova seus créditos para continuar recebendo orientações do Tutor Astrólogo.</p>
-            <p data-lang="en">Seu Guia Astral is free and supported by ads displayed via <strong>Google AdMob</strong>. Free plan users see interstitial ads after reaching the query limit, which renews their credits to keep receiving guidance from the Astrologer Tutor.</p>
+            <p data-lang="pt">O Polyglot Kingdom é gratuito e sustentado por anúncios exibidos via <strong>Google AdMob</strong>. Os usuários do plano gratuito visualizam anúncios intersticiais após atingir o limite diário de lições, o que renova seus créditos para continuar avançando pelo reino.</p>
+            <p data-lang="en">Polyglot Kingdom is free and supported by ads displayed via <strong>Google AdMob</strong>. Free plan users see interstitial ads after reaching the daily lesson limit, which renews their credits to keep advancing through the kingdom.</p>
 
-            <p data-lang="pt">Ao assinar o <strong>plano Premium</strong>, os anúncios são removidos completamente e o usuário passa a ter consultas ilimitadas, sem interrupções.</p>
-            <p data-lang="en">By subscribing to the <strong>Premium plan</strong>, ads are completely removed and the user gets unlimited queries, without interruptions.</p>
+            <p data-lang="pt">Ao assinar o <strong>plano Premium</strong>, os anúncios são removidos completamente e o usuário passa a ter lições ilimitadas, sem interrupções.</p>
+            <p data-lang="en">By subscribing to the <strong>Premium plan</strong>, ads are completely removed and the user gets unlimited lessons, without interruptions.</p>
 
             <p data-lang="pt">O Google AdMob pode utilizar um identificador de publicidade do dispositivo (Ad ID) para exibir anúncios relevantes. Você pode redefinir ou desativar esse identificador nas configurações do seu dispositivo.</p>
             <p data-lang="en">Google AdMob may use the device's advertising identifier (Ad ID) to display relevant ads. You can reset or disable this identifier in your device settings.</p>
@@ -356,18 +359,18 @@
             <h2 data-lang="pt">5. Notificações</h2>
             <h2 data-lang="en">5. Notifications</h2>
 
-            <p data-lang="pt">O Seu Guia Astral pode enviar notificações locais para:</p>
-            <p data-lang="en">Seu Guia Astral may send local notifications to:</p>
+            <p data-lang="pt">O Polyglot Kingdom pode enviar notificações locais para:</p>
+            <p data-lang="en">Polyglot Kingdom may send local notifications to:</p>
 
             <ul data-lang="pt">
                 <li>Avisar que seus créditos diários foram renovados</li>
-                <li>Lembrar de consultar seu guia astral quando ainda há créditos disponíveis</li>
-                <li>Alertar sobre risco de quebra de streak</li>
+                <li>Lembrar de praticar quando ainda há créditos disponíveis</li>
+                <li>Alertar sobre risco de quebra de streak no reino</li>
             </ul>
             <ul data-lang="en">
                 <li>Notify you that your daily credits have been renewed</li>
-                <li>Remind you to consult your astral guide when credits are still available</li>
-                <li>Alert you about a streak-break risk</li>
+                <li>Remind you to practice when credits are still available</li>
+                <li>Alert you about a streak-break risk in the kingdom</li>
             </ul>
 
             <p data-lang="pt">Essas notificações são <strong>geradas localmente no dispositivo</strong> e não envolvem coleta ou transmissão de dados pessoais. Você pode desativá-las a qualquer momento nas configurações do app ou do dispositivo.</p>
@@ -380,8 +383,8 @@
             <h2 data-lang="pt">6. Permissões do Aplicativo</h2>
             <h2 data-lang="en">6. App Permissions</h2>
 
-            <p data-lang="pt">O Seu Guia Astral solicita apenas as seguintes permissões:</p>
-            <p data-lang="en">Seu Guia Astral requests only the following permissions:</p>
+            <p data-lang="pt">O Polyglot Kingdom solicita apenas as seguintes permissões:</p>
+            <p data-lang="en">Polyglot Kingdom requests only the following permissions:</p>
 
             <div class="badges">
                 <span class="badge">🌐 Internet</span>
@@ -394,8 +397,8 @@
             <p data-lang="pt" style="margin-top:16px"><strong>Internet:</strong> Necessária para comunicação com a IA, síntese de voz e exibição de anúncios.</p>
             <p data-lang="en" style="margin-top:16px"><strong>Internet:</strong> Required for AI communication, speech synthesis, and ad display.</p>
 
-            <p data-lang="pt"><strong>Microfone:</strong> Necessário para capturar sua voz e realizar o reconhecimento de fala nas conversas com o Tutor Astrólogo.</p>
-            <p data-lang="en"><strong>Microphone:</strong> Required to capture your voice and perform speech recognition in conversations with the Astrologer Tutor.</p>
+            <p data-lang="pt"><strong>Microfone:</strong> Necessário para capturar sua voz e realizar o reconhecimento de fala nos exercícios de pronúncia.</p>
+            <p data-lang="en"><strong>Microphone:</strong> Required to capture your voice and perform speech recognition in pronunciation exercises.</p>
 
             <p data-lang="pt"><strong>Estado da rede:</strong> Verificar conectividade antes de realizar chamadas à API.</p>
             <p data-lang="en"><strong>Network state:</strong> Verify connectivity before making API calls.</p>
@@ -403,8 +406,8 @@
             <p data-lang="pt"><strong>Ad ID:</strong> Identificador de publicidade usado pelo Google AdMob para exibir anúncios relevantes a usuários gratuitos.</p>
             <p data-lang="en"><strong>Ad ID:</strong> Advertising identifier used by Google AdMob to display relevant ads to free users.</p>
 
-            <p data-lang="pt"><strong>Notificações:</strong> Usadas para lembretes de consulta diária, avisos de créditos renovados e alertas de streak. Você pode desativar a qualquer momento nas configurações do app ou do dispositivo.</p>
-            <p data-lang="en"><strong>Notifications:</strong> Used for daily consultation reminders, credit renewal notices, and streak alerts. You can disable them at any time in the app or device settings.</p>
+            <p data-lang="pt"><strong>Notificações:</strong> Usadas para lembretes de prática diária, avisos de créditos renovados e alertas de streak. Você pode desativar a qualquer momento nas configurações do app ou do dispositivo.</p>
+            <p data-lang="en"><strong>Notifications:</strong> Used for daily practice reminders, credit renewal notices, and streak alerts. You can disable them at any time in the app or device settings.</p>
         </div>
 
         <!-- 7. COMPARTILHAMENTO DE DADOS -->
@@ -413,26 +416,26 @@
             <h2 data-lang="pt">7. Compartilhamento de Dados</h2>
             <h2 data-lang="en">7. Data Sharing</h2>
 
-            <p data-lang="pt">O Seu Guia Astral utiliza os seguintes serviços de terceiros para seu funcionamento:</p>
-            <p data-lang="en">Seu Guia Astral uses the following third-party services to operate:</p>
+            <p data-lang="pt">O Polyglot Kingdom utiliza os seguintes serviços de terceiros para seu funcionamento:</p>
+            <p data-lang="en">Polyglot Kingdom uses the following third-party services to operate:</p>
 
             <ul data-lang="pt">
-                <li><strong>DeepSeek API:</strong> Processamento da sua data de nascimento e geração de leituras de tarô e interpretações astrológicas por IA</li>
+                <li><strong>DeepSeek API:</strong> Processamento de lições, traduções e geração de respostas por IA</li>
                 <li><strong>Google Speech Recognition:</strong> Reconhecimento de fala no dispositivo</li>
-                <li><strong>Google Text-to-Speech:</strong> Síntese de voz para reprodução das respostas do Tutor Astrólogo</li>
+                <li><strong>Google Text-to-Speech:</strong> Síntese de voz para reprodução das respostas</li>
                 <li><strong>Google AdMob:</strong> Exibição de anúncios para usuários gratuitos</li>
                 <li><strong>Google Play Billing:</strong> Processamento de assinaturas Premium</li>
             </ul>
             <ul data-lang="en">
-                <li><strong>DeepSeek API:</strong> Processing your birth date and generating AI-powered tarot readings and astrological interpretations</li>
+                <li><strong>DeepSeek API:</strong> Lesson and translation processing and AI response generation</li>
                 <li><strong>Google Speech Recognition:</strong> On-device speech recognition</li>
-                <li><strong>Google Text-to-Speech:</strong> Voice synthesis for the Astrologer Tutor's responses</li>
+                <li><strong>Google Text-to-Speech:</strong> Voice synthesis for response playback</li>
                 <li><strong>Google AdMob:</strong> Ad display for free users</li>
                 <li><strong>Google Play Billing:</strong> Premium subscription processing</li>
             </ul>
 
-            <p data-lang="pt">Nenhuma informação pessoal, incluindo sua data de nascimento, é vendida, alugada ou compartilhada com terceiros para fins comerciais.</p>
-            <p data-lang="en">No personal information, including your birth date, is sold, rented, or shared with third parties for commercial purposes.</p>
+            <p data-lang="pt">Nenhuma informação pessoal é vendida, alugada ou compartilhada com terceiros para fins comerciais.</p>
+            <p data-lang="en">No personal information is sold, rented, or shared with third parties for commercial purposes.</p>
         </div>
 
         <!-- 8. COOKIES -->
@@ -451,8 +454,8 @@
             <h2 data-lang="pt">9. Crianças</h2>
             <h2 data-lang="en">9. Children</h2>
 
-            <p data-lang="pt">O Seu Guia Astral não é direcionado especificamente a crianças menores de 13 anos e não coletamos intencionalmente dados de menores.</p>
-            <p data-lang="en">Seu Guia Astral is not specifically directed at children under 13 and we do not intentionally collect data from minors.</p>
+            <p data-lang="pt">O Polyglot Kingdom não é direcionado especificamente a crianças menores de 13 anos e não coletamos intencionalmente dados de menores.</p>
+            <p data-lang="en">Polyglot Kingdom is not specifically directed at children under 13 and we do not intentionally collect data from minors.</p>
         </div>
 
         <!-- 10. SEGURANÇA -->
@@ -461,8 +464,8 @@
             <h2 data-lang="pt">10. Segurança</h2>
             <h2 data-lang="en">10. Security</h2>
 
-            <p data-lang="pt">Todas as comunicações entre o aplicativo e as APIs externas são realizadas via conexões criptografadas (HTTPS/TLS), garantindo a segurança dos dados em trânsito, incluindo as informações de nascimento usadas nas leituras.</p>
-            <p data-lang="en">All communications between the application and external APIs are conducted via encrypted connections (HTTPS/TLS), ensuring the security of data in transit, including the birth information used in readings.</p>
+            <p data-lang="pt">Todas as comunicações entre o aplicativo e as APIs externas são realizadas via conexões criptografadas (HTTPS/TLS), garantindo a segurança dos dados em trânsito.</p>
+            <p data-lang="en">All communications between the application and external APIs are conducted via encrypted connections (HTTPS/TLS), ensuring the security of data in transit.</p>
         </div>
 
         <!-- 11. ALTERAÇÕES -->
@@ -494,8 +497,8 @@
 
     <!-- FOOTER -->
     <footer>
-        <span data-lang="pt">© 2026 Seu Guia Astral · Última atualização: 03 de Agosto de 2026</span>
-        <span data-lang="en">© 2026 Seu Guia Astral · Last updated: August 03, 2026</span>
+        <span data-lang="pt">© 2026 Polyglot Kingdom · Última atualização: 03 de Setembro de 2026</span>
+        <span data-lang="en">© 2026 Polyglot Kingdom · Last updated: September 03, 2026</span>
     </footer>
 
     <script>
