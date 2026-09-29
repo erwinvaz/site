@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "baseUrl": "https://www.talento.dev.br/talktome/picture_talk/images/",
+  "items": [
+    {
+      "id": "pt_001",
+      "file": "pt_001.webp",
+      "level": "A1",
+      "category": "daily_life",
+      "scene": "A woman in a dark blue raincoat waits at a bus stop on a rainy day. She is holding a red umbrella and a dark blue bag. There is a wooden bench inside the bus shelter. A bus is coming down the wet street in the background.",
+      "elements": ["woman", "red umbrella", "rain", "bus stop", "bench", "bus", "raincoat", "bag"],
+      "actions": ["waiting", "holding an umbrella", "holding a bag", "bus is arriving"]
+    }
+  ]
+}
