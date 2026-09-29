@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 4,
   "baseUrl": "https://www.talento.dev.br/picture_talk/images/",
   "items": [
     {
@@ -10,6 +10,141 @@
       "scene": "A woman in a dark blue raincoat waits at a bus stop on a rainy day. She is holding a red umbrella and a dark blue bag. There is a wooden bench inside the bus shelter. A bus is coming down the wet street in the background.",
       "elements": ["woman", "red umbrella", "rain", "bus stop", "bench", "bus", "raincoat", "bag"],
       "actions": ["waiting", "holding an umbrella", "holding a bag", "bus is arriving"]
+    },
+    {
+      "id": "pt_002",
+      "file": "pt_002.webp",
+      "level": "A1",
+      "category": "family",
+      "scene": "A smiling mother sits on a grey sofa and reads a colorful picture book to her little daughter. The mother has long brown hair and wears a striped sweater. The girl has blond hair in a ponytail. There is a lamp and a cushion next to them, and a window on the right.",
+      "elements": ["mother", "little girl", "book", "sofa", "lamp", "cushion", "window"],
+      "actions": ["reading a book", "sitting", "smiling", "looking at the book"]
+    },
+    {
+      "id": "pt_003",
+      "file": "pt_003.webp",
+      "level": "A1",
+      "category": "food",
+      "scene": "A man sits at a wooden kitchen table and eats breakfast. He is holding a piece of toast with butter. On the table there is a glass of orange juice, a boiled egg in an egg cup, a plate with toast, a small dish of butter and a cup of coffee. A big window is next to him.",
+      "elements": ["man", "toast", "egg", "orange juice", "coffee", "butter", "table", "window"],
+      "actions": ["eating breakfast", "sitting at the table", "holding a piece of toast"]
+    },
+    {
+      "id": "pt_004",
+      "file": "pt_004.webp",
+      "level": "A1",
+      "category": "home",
+      "scene": "A young woman in a blue apron is cooking in a kitchen. She is smiling and stirring soup in a big pot on the stove. On the wooden counter there is a bowl of red tomatoes, a cutting board with chopped carrots and onions, whole onions and garlic.",
+      "elements": ["woman", "apron", "pot", "stove", "soup", "tomatoes", "carrots", "onions"],
+      "actions": ["cooking", "stirring the soup", "smiling"]
+    },
+    {
+      "id": "pt_005",
+      "file": "pt_005.webp",
+      "level": "A1",
+      "category": "animals",
+      "scene": "A brown dog runs fast on green grass in a park with a yellow tennis ball in its mouth. The dog wears a blue collar. There are tall green trees behind it and the day is sunny.",
+      "elements": ["dog", "yellow ball", "grass", "trees", "collar", "park"],
+      "actions": ["running", "jumping", "holding a ball in its mouth", "playing"]
+    },
+    {
+      "id": "pt_006",
+      "file": "pt_006.webp",
+      "level": "A1",
+      "category": "nature",
+      "scene": "A little boy in a blue striped shirt kneels on a sandy beach and builds a sandcastle. He holds a small blue shovel, and a red bucket is next to him. The sea is calm and the sky is blue.",
+      "elements": ["boy", "sandcastle", "red bucket", "blue shovel", "beach", "sea", "sand", "blue sky"],
+      "actions": ["building a sandcastle", "playing", "kneeling"]
+    },
+    {
+      "id": "pt_007",
+      "file": "pt_007.webp",
+      "level": "A1",
+      "category": "school",
+      "scene": "A girl with long braids sits at a wooden desk in a classroom and raises her hand. She wears a striped T-shirt. On the desk there is an open notebook, a pencil case and a pen. A blue backpack is on the floor next to the desk. Behind her there is a big empty blackboard.",
+      "elements": ["girl", "hand", "desk", "notebook", "pencil case", "backpack", "blackboard"],
+      "actions": ["raising her hand", "sitting at a desk", "looking forward"]
+    },
+    {
+      "id": "pt_008",
+      "file": "pt_008.webp",
+      "level": "A1",
+      "category": "work",
+      "scene": "A man with short dark hair and a beard works on a silver laptop at a wooden desk next to a window. He wears a grey sweater and a watch. On the desk there is a cup of coffee, a small green plant in a pot and a brown notebook with a pen.",
+      "elements": ["man", "laptop", "desk", "window", "coffee cup", "plant", "notebook"],
+      "actions": ["working", "typing", "sitting", "looking at the screen"]
+    },
+    {
+      "id": "pt_009",
+      "file": "pt_009.webp",
+      "level": "A1",
+      "category": "weather",
+      "scene": "Two smiling children play in the snow next to a snowman. The boy wears a red hat, a dark blue jacket and blue gloves. The girl wears a yellow jacket, pink pants and a striped hat. The snowman has a carrot nose, a black scarf and stick arms. There are tall trees covered with snow behind them.",
+      "elements": ["boy", "girl", "snowman", "snow", "red hat", "yellow jacket", "scarf", "trees"],
+      "actions": ["playing in the snow", "smiling", "building a snowman"]
+    },
+    {
+      "id": "pt_010",
+      "file": "pt_010.webp",
+      "level": "A1",
+      "category": "shopping",
+      "scene": "A woman with dark hair stands at an outdoor fruit stand and holds a red apple in her hands. She wears a striped blouse and a necklace, and she has a white cloth bag on her shoulder. In front of her there are wooden boxes full of apples, bananas and oranges.",
+      "elements": ["woman", "apples", "bananas", "oranges", "wooden boxes", "bag", "fruit stand"],
+      "actions": ["choosing fruit", "holding an apple", "shopping"]
+    },
+    {
+      "id": "pt_011",
+      "file": "pt_011.webp",
+      "level": "A1",
+      "category": "sports",
+      "scene": "A smiling boy rides a small blue bicycle on a path in a park. He wears an orange and blue helmet and a green striped T-shirt. The bicycle has a basket and small training wheels. There are green trees and bushes around him and the sky is blue.",
+      "elements": ["boy", "bicycle", "helmet", "path", "trees", "basket", "grass"],
+      "actions": ["riding a bicycle", "smiling", "wearing a helmet"]
+    },
+    {
+      "id": "pt_012",
+      "file": "pt_012.webp",
+      "level": "A1",
+      "category": "travel",
+      "scene": "A woman with dark curly hair sits by the window of a train and holds a cup with both hands. She wears a yellow sweater and a necklace, and there is a grey blanket on her lap. She looks outside at green fields and hills under a blue sky.",
+      "elements": ["woman", "train", "window", "cup", "yellow sweater", "green fields", "hills"],
+      "actions": ["sitting", "holding a cup", "looking out of the window", "traveling"]
+    },
+    {
+      "id": "pt_013",
+      "file": "pt_013.webp",
+      "level": "A1",
+      "category": "home",
+      "scene": "A smiling man waters flowers on a balcony with a green watering can. He wears a blue T-shirt and dark shorts and has no shoes. Around him there are many pots with red, pink and orange flowers. In the background there are buildings, trees and the sea under a blue sky.",
+      "elements": ["man", "watering can", "flowers", "pots", "balcony", "buildings", "sea"],
+      "actions": ["watering flowers", "smiling", "standing"]
+    },
+    {
+      "id": "pt_014",
+      "file": "pt_014.webp",
+      "level": "A2",
+      "category": "leisure",
+      "scene": "A young couple has a picnic on a red and white checkered blanket under a big tree in a park. The woman has dark hair in a ponytail, wears a grey dress and holds a sandwich. The man wears a light blue shirt. They are smiling. Between them there is a wicker picnic basket. On the blanket there are sandwiches, a bowl of grapes, a jug of water and two cups.",
+      "elements": ["woman", "man", "blanket", "tree", "picnic basket", "sandwiches", "grapes", "jug of water"],
+      "actions": ["having a picnic", "sitting on the blanket", "eating a sandwich", "smiling"]
+    },
+    {
+      "id": "pt_015",
+      "file": "pt_015.webp",
+      "level": "A1",
+      "category": "animals",
+      "scene": "A grey striped cat sleeps curled up on a grey sofa. Next to the cat there is a green cushion. Behind the sofa there is a big window with a wooden frame and a white curtain. Green trees are outside.",
+      "elements": ["cat", "sofa", "green cushion", "window", "curtain", "trees"],
+      "actions": ["sleeping", "lying on the sofa", "curled up"]
+    },
+    {
+      "id": "pt_016",
+      "file": "pt_016.webp",
+      "level": "A1",
+      "category": "celebration",
+      "scene": "A little girl with dark curly hair blows out the candles on her birthday cake. She wears a colorful striped party hat and a striped dress. The cake has colorful sprinkles and candles, and one candle is the number five. Behind her there are many colorful balloons. On the wooden table there are party horns.",
+      "elements": ["girl", "birthday cake", "candles", "party hat", "balloons", "table", "number five"],
+      "actions": ["blowing out the candles", "celebrating a birthday"]
     }
   ]
 }
