@@ -1,0 +1,830 @@
+{
+  "version": 2,
+  "baseUrl": "https://www.talento.dev.br/vocabulary/img/",
+  "categories": [
+    {
+      "id": "home",
+      "emoji": "🏠",
+      "names": {
+        "en": "Home",
+        "pt": "Casa",
+        "es": "Hogar",
+        "fr": "Maison",
+        "de": "Zuhause",
+        "it": "Casa",
+        "ja": "家",
+        "ko": "집",
+        "zh": "家"
+      },
+      "items": [
+        {
+          "id": "sofa",
+          "file": "home/sofa.webp",
+          "words": {
+            "en": "sofa",
+            "pt": "sofá",
+            "es": "sofá",
+            "fr": "canapé",
+            "de": "Sofa",
+            "it": "divano",
+            "ja": {
+              "text": "ソファ",
+              "roman": "sofa"
+            },
+            "ko": {
+              "text": "소파",
+              "roman": "sopa"
+            },
+            "zh": {
+              "text": "沙发",
+              "roman": "shāfā"
+            },
+            "ru": {
+              "text": "диван",
+              "roman": "divan"
+            },
+            "hi": {
+              "text": "सोफा",
+              "roman": "sofa"
+            },
+            "ar": {
+              "text": "أريكة",
+              "roman": "arīka"
+            }
+          }
+        },
+        {
+          "id": "lamp",
+          "file": "home/lamp.webp",
+          "words": {
+            "en": "lamp",
+            "pt": "abajur",
+            "es": "lámpara",
+            "fr": "lampe",
+            "de": "Lampe",
+            "it": "lampada",
+            "ja": {
+              "text": "ランプ",
+              "roman": "ranpu"
+            },
+            "ko": {
+              "text": "램프",
+              "roman": "raempeu"
+            },
+            "zh": {
+              "text": "台灯",
+              "roman": "táidēng"
+            },
+            "ru": {
+              "text": "лампа",
+              "roman": "lampa"
+            },
+            "hi": {
+              "text": "लैंप",
+              "roman": "laimp"
+            },
+            "ar": {
+              "text": "مصباح",
+              "roman": "miṣbāḥ"
+            }
+          }
+        },
+        {
+          "id": "window",
+          "file": "home/window.webp",
+          "words": {
+            "en": "window",
+            "pt": "janela",
+            "es": "ventana",
+            "fr": "fenêtre",
+            "de": "Fenster",
+            "it": "finestra",
+            "ja": {
+              "text": "窓",
+              "roman": "mado"
+            },
+            "ko": {
+              "text": "창문",
+              "roman": "changmun"
+            },
+            "zh": {
+              "text": "窗户",
+              "roman": "chuānghu"
+            },
+            "ru": {
+              "text": "окно",
+              "roman": "okno"
+            },
+            "hi": {
+              "text": "खिड़की",
+              "roman": "khiṛkī"
+            },
+            "ar": {
+              "text": "نافذة",
+              "roman": "nāfidha"
+            }
+          }
+        },
+        {
+          "id": "door",
+          "file": "home/door.webp",
+          "words": {
+            "en": "door",
+            "pt": "porta",
+            "es": "puerta",
+            "fr": "porte",
+            "de": "Tür",
+            "it": "porta",
+            "ja": {
+              "text": "ドア",
+              "roman": "doa"
+            },
+            "ko": {
+              "text": "문",
+              "roman": "mun"
+            },
+            "zh": {
+              "text": "门",
+              "roman": "mén"
+            },
+            "ru": {
+              "text": "дверь",
+              "roman": "dver’"
+            },
+            "hi": {
+              "text": "दरवाज़ा",
+              "roman": "darvāzā"
+            },
+            "ar": {
+              "text": "باب",
+              "roman": "bāb"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "emoji": "🔧",
+      "names": {
+        "en": "Tools",
+        "pt": "Ferramentas",
+        "es": "Herramientas",
+        "fr": "Outils",
+        "de": "Werkzeuge",
+        "it": "Attrezzi",
+        "ja": "工具",
+        "ko": "공구",
+        "zh": "工具"
+      },
+      "items": [
+        {
+          "id": "hammer",
+          "file": "tools/hammer.webp",
+          "words": {
+            "en": "hammer",
+            "pt": "martelo",
+            "es": "martillo",
+            "fr": "marteau",
+            "de": "Hammer",
+            "it": "martello",
+            "ja": {
+              "text": "ハンマー",
+              "roman": "hanmā"
+            },
+            "ko": {
+              "text": "망치",
+              "roman": "mangchi"
+            },
+            "zh": {
+              "text": "锤子",
+              "roman": "chuízi"
+            },
+            "ru": {
+              "text": "молоток",
+              "roman": "molotok"
+            },
+            "hi": {
+              "text": "हथौड़ा",
+              "roman": "hathauṛā"
+            },
+            "ar": {
+              "text": "مطرقة",
+              "roman": "miṭraqa"
+            }
+          }
+        },
+        {
+          "id": "screwdriver",
+          "file": "tools/screwdriver.webp",
+          "words": {
+            "en": "screwdriver",
+            "pt": "chave de fenda",
+            "es": "destornillador",
+            "fr": "tournevis",
+            "de": "Schraubenzieher",
+            "it": "cacciavite",
+            "ja": {
+              "text": "ドライバー",
+              "roman": "doraibā"
+            },
+            "ko": {
+              "text": "드라이버",
+              "roman": "deuraibeo"
+            },
+            "zh": {
+              "text": "螺丝刀",
+              "roman": "luósīdāo"
+            },
+            "ru": {
+              "text": "отвёртка",
+              "roman": "otvyortka"
+            },
+            "hi": {
+              "text": "पेचकस",
+              "roman": "pechkas"
+            },
+            "ar": {
+              "text": "مفك براغي",
+              "roman": "mifakk barāghī"
+            }
+          }
+        },
+        {
+          "id": "saw",
+          "file": "tools/saw.webp",
+          "words": {
+            "en": "saw",
+            "pt": "serra",
+            "es": "sierra",
+            "fr": "scie",
+            "de": "Säge",
+            "it": "sega",
+            "ja": {
+              "text": "のこぎり",
+              "roman": "nokogiri"
+            },
+            "ko": {
+              "text": "톱",
+              "roman": "top"
+            },
+            "zh": {
+              "text": "锯子",
+              "roman": "jùzi"
+            },
+            "ru": {
+              "text": "пила",
+              "roman": "pila"
+            },
+            "hi": {
+              "text": "आरी",
+              "roman": "ārī"
+            },
+            "ar": {
+              "text": "منشار",
+              "roman": "minshār"
+            }
+          }
+        },
+        {
+          "id": "nail",
+          "file": "tools/nail.webp",
+          "words": {
+            "en": "nail",
+            "pt": "prego",
+            "es": "clavo",
+            "fr": "clou",
+            "de": "Nagel",
+            "it": "chiodo",
+            "ja": {
+              "text": "釘",
+              "roman": "kugi"
+            },
+            "ko": {
+              "text": "못",
+              "roman": "mot"
+            },
+            "zh": {
+              "text": "钉子",
+              "roman": "dīngzi"
+            },
+            "ru": {
+              "text": "гвоздь",
+              "roman": "gvozd’"
+            },
+            "hi": {
+              "text": "कील",
+              "roman": "kīl"
+            },
+            "ar": {
+              "text": "مسمار",
+              "roman": "mismār"
+            }
+          }
+        },
+        {
+          "id": "scissors",
+          "file": "tools/scissors.webp",
+          "words": {
+            "en": "scissors",
+            "pt": "tesoura",
+            "es": "tijeras",
+            "fr": "ciseaux",
+            "de": "Schere",
+            "it": "forbici",
+            "ja": {
+              "text": "はさみ",
+              "roman": "hasami"
+            },
+            "ko": {
+              "text": "가위",
+              "roman": "gawi"
+            },
+            "zh": {
+              "text": "剪刀",
+              "roman": "jiǎndāo"
+            },
+            "ru": {
+              "text": "ножницы",
+              "roman": "nozhnitsy"
+            },
+            "hi": {
+              "text": "कैंची",
+              "roman": "kaiṃchī"
+            },
+            "ar": {
+              "text": "مقص",
+              "roman": "miqaṣṣ"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sports",
+      "emoji": "⚽",
+      "names": {
+        "en": "Sports",
+        "pt": "Esportes",
+        "es": "Deportes",
+        "fr": "Sports",
+        "de": "Sport",
+        "it": "Sport",
+        "ja": "スポーツ",
+        "ko": "스포츠",
+        "zh": "运动"
+      },
+      "items": [
+        {
+          "id": "bat",
+          "file": "sports/bat.webp",
+          "words": {
+            "en": "baseball bat",
+            "pt": "taco de beisebol",
+            "es": "bate de béisbol",
+            "fr": "batte de baseball",
+            "de": "Baseballschläger",
+            "it": "mazza da baseball",
+            "ja": {
+              "text": "バット",
+              "roman": "batto"
+            },
+            "ko": {
+              "text": "야구 방망이",
+              "roman": "yagu bangmangi"
+            },
+            "zh": {
+              "text": "棒球棒",
+              "roman": "bàngqiúbàng"
+            },
+            "ru": {
+              "text": "бейсбольная бита",
+              "roman": "beysbol’naya bita"
+            },
+            "hi": {
+              "text": "बेसबॉल बैट",
+              "roman": "besbŏl bait"
+            },
+            "ar": {
+              "text": "مضرب بيسبول",
+              "roman": "miḍrab bīsbūl"
+            }
+          }
+        },
+        {
+          "id": "soccer_ball",
+          "file": "sports/soccer_ball.webp",
+          "words": {
+            "en": "soccer ball",
+            "pt": "bola de futebol",
+            "es": "balón de fútbol",
+            "fr": "ballon de football",
+            "de": "Fußball",
+            "it": "pallone da calcio",
+            "ja": {
+              "text": "サッカーボール",
+              "roman": "sakkā bōru"
+            },
+            "ko": {
+              "text": "축구공",
+              "roman": "chukgugong"
+            },
+            "zh": {
+              "text": "足球",
+              "roman": "zúqiú"
+            },
+            "ru": {
+              "text": "футбольный мяч",
+              "roman": "futbol’nyy myach"
+            },
+            "hi": {
+              "text": "फ़ुटबॉल",
+              "roman": "futbŏl"
+            },
+            "ar": {
+              "text": "كرة قدم",
+              "roman": "kurat qadam"
+            }
+          }
+        },
+        {
+          "id": "basketball",
+          "file": "sports/basketball.webp",
+          "words": {
+            "en": "basketball",
+            "pt": "bola de basquete",
+            "es": "balón de baloncesto",
+            "fr": "ballon de basket",
+            "de": "Basketball",
+            "it": "pallone da basket",
+            "ja": {
+              "text": "バスケットボール",
+              "roman": "basukettobōru"
+            },
+            "ko": {
+              "text": "농구공",
+              "roman": "nongugong"
+            },
+            "zh": {
+              "text": "篮球",
+              "roman": "lánqiú"
+            },
+            "ru": {
+              "text": "баскетбольный мяч",
+              "roman": "basketbol’nyy myach"
+            },
+            "hi": {
+              "text": "बास्केटबॉल",
+              "roman": "bāsketbŏl"
+            },
+            "ar": {
+              "text": "كرة سلة",
+              "roman": "kurat salla"
+            }
+          }
+        },
+        {
+          "id": "tennis_racket",
+          "file": "sports/tennis_racket.webp",
+          "words": {
+            "en": "tennis racket",
+            "pt": "raquete de tênis",
+            "es": "raqueta de tenis",
+            "fr": "raquette de tennis",
+            "de": "Tennisschläger",
+            "it": "racchetta da tennis",
+            "ja": {
+              "text": "テニスラケット",
+              "roman": "tenisu raketto"
+            },
+            "ko": {
+              "text": "테니스 라켓",
+              "roman": "teniseu raet"
+            },
+            "zh": {
+              "text": "网球拍",
+              "roman": "wǎngqiúpāi"
+            },
+            "ru": {
+              "text": "теннисная ракетка",
+              "roman": "tennisnaya raketka"
+            },
+            "hi": {
+              "text": "टेनिस रैकेट",
+              "roman": "tenis raiket"
+            },
+            "ar": {
+              "text": "مضرب تنس",
+              "roman": "miḍrab tinis"
+            }
+          }
+        },
+        {
+          "id": "helmet",
+          "file": "sports/helmet.webp",
+          "words": {
+            "en": "helmet",
+            "pt": "capacete",
+            "es": "casco",
+            "fr": "casque",
+            "de": "Helm",
+            "it": "casco",
+            "ja": {
+              "text": "ヘルメット",
+              "roman": "herumetto"
+            },
+            "ko": {
+              "text": "헬멧",
+              "roman": "helmet"
+            },
+            "zh": {
+              "text": "头盔",
+              "roman": "tóukuī"
+            },
+            "ru": {
+              "text": "шлем",
+              "roman": "shlem"
+            },
+            "hi": {
+              "text": "हेलमेट",
+              "roman": "helmet"
+            },
+            "ar": {
+              "text": "خوذة",
+              "roman": "khūdha"
+            }
+          }
+        },
+        {
+          "id": "boxing_gloves",
+          "file": "sports/boxing_gloves.webp",
+          "words": {
+            "en": "boxing gloves",
+            "pt": "luvas de boxe",
+            "es": "guantes de boxeo",
+            "fr": "gants de boxe",
+            "de": "Boxhandschuhe",
+            "it": "guantoni da boxe",
+            "ja": {
+              "text": "ボクシンググローブ",
+              "roman": "bokushingu gurōbu"
+            },
+            "ko": {
+              "text": "권투 글러브",
+              "roman": "gwontu geulleobeu"
+            },
+            "zh": {
+              "text": "拳击手套",
+              "roman": "quánjī shǒutào"
+            },
+            "ru": {
+              "text": "боксёрские перчатки",
+              "roman": "boksyorskiye perchatki"
+            },
+            "hi": {
+              "text": "बॉक्सिंग दस्ताने",
+              "roman": "bŏksing dastāne"
+            },
+            "ar": {
+              "text": "قفازات ملاكمة",
+              "roman": "quffāzāt mulākama"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "office",
+      "emoji": "💼",
+      "names": {
+        "en": "Office",
+        "pt": "Escritório",
+        "es": "Oficina",
+        "fr": "Bureau",
+        "de": "Büro",
+        "it": "Ufficio",
+        "ja": "オフィス",
+        "ko": "사무실",
+        "zh": "办公室"
+      },
+      "items": [
+        {
+          "id": "mouse",
+          "file": "office/mouse.webp",
+          "words": {
+            "en": "mouse",
+            "pt": "mouse",
+            "es": "ratón",
+            "fr": "souris",
+            "de": "Maus",
+            "it": "mouse",
+            "ja": {
+              "text": "マウス",
+              "roman": "mausu"
+            },
+            "ko": {
+              "text": "마우스",
+              "roman": "mauseu"
+            },
+            "zh": {
+              "text": "鼠标",
+              "roman": "shǔbiāo"
+            },
+            "ru": {
+              "text": "мышь",
+              "roman": "mysh’"
+            },
+            "hi": {
+              "text": "माउस",
+              "roman": "maus"
+            },
+            "ar": {
+              "text": "ماوس",
+              "roman": "māws"
+            }
+          }
+        },
+        {
+          "id": "keyboard",
+          "file": "office/keyboard.webp",
+          "words": {
+            "en": "keyboard",
+            "pt": "teclado",
+            "es": "teclado",
+            "fr": "clavier",
+            "de": "Tastatur",
+            "it": "tastiera",
+            "ja": {
+              "text": "キーボード",
+              "roman": "kībōdo"
+            },
+            "ko": {
+              "text": "키보드",
+              "roman": "kibodeu"
+            },
+            "zh": {
+              "text": "键盘",
+              "roman": "jiànpán"
+            },
+            "ru": {
+              "text": "клавиатура",
+              "roman": "klaviatura"
+            },
+            "hi": {
+              "text": "कीबोर्ड",
+              "roman": "kībōrd"
+            },
+            "ar": {
+              "text": "لوحة مفاتيح",
+              "roman": "lawḥat mafātīḥ"
+            }
+          }
+        },
+        {
+          "id": "pen",
+          "file": "office/pen.webp",
+          "words": {
+            "en": "pen",
+            "pt": "caneta",
+            "es": "bolígrafo",
+            "fr": "stylo",
+            "de": "Kugelschreiber",
+            "it": "penna",
+            "ja": {
+              "text": "ペン",
+              "roman": "pen"
+            },
+            "ko": {
+              "text": "펜",
+              "roman": "pen"
+            },
+            "zh": {
+              "text": "圆珠笔",
+              "roman": "yuánzhūbǐ"
+            },
+            "ru": {
+              "text": "ручка",
+              "roman": "ruchka"
+            },
+            "hi": {
+              "text": "पेन",
+              "roman": "pen"
+            },
+            "ar": {
+              "text": "قلم",
+              "roman": "qalam"
+            }
+          }
+        },
+        {
+          "id": "stapler",
+          "file": "office/stapler.webp",
+          "words": {
+            "en": "stapler",
+            "pt": "grampeador",
+            "es": "grapadora",
+            "fr": "agrafeuse",
+            "de": "Hefter",
+            "it": "cucitrice",
+            "ja": {
+              "text": "ホッチキス",
+              "roman": "hocchikisu"
+            },
+            "ko": {
+              "text": "스테이플러",
+              "roman": "seuteipeulleo"
+            },
+            "zh": {
+              "text": "订书机",
+              "roman": "dìngshūjī"
+            },
+            "ru": {
+              "text": "степлер",
+              "roman": "stepler"
+            },
+            "hi": {
+              "text": "स्टेपलर",
+              "roman": "stepalar"
+            },
+            "ar": {
+              "text": "دباسة",
+              "roman": "dabbāsa"
+            }
+          }
+        },
+        {
+          "id": "notebook",
+          "file": "office/notebook.webp",
+          "words": {
+            "en": "notebook",
+            "pt": "caderno",
+            "es": "cuaderno",
+            "fr": "cahier",
+            "de": "Notizbuch",
+            "it": "quaderno",
+            "ja": {
+              "text": "ノート",
+              "roman": "nōto"
+            },
+            "ko": {
+              "text": "공책",
+              "roman": "gongchaek"
+            },
+            "zh": {
+              "text": "笔记本",
+              "roman": "bǐjìběn"
+            },
+            "ru": {
+              "text": "тетрадь",
+              "roman": "tetrad’"
+            },
+            "hi": {
+              "text": "कॉपी",
+              "roman": "kŏpī"
+            },
+            "ar": {
+              "text": "دفتر",
+              "roman": "daftar"
+            }
+          }
+        },
+        {
+          "id": "calculator",
+          "file": "office/calculator.webp",
+          "words": {
+            "en": "calculator",
+            "pt": "calculadora",
+            "es": "calculadora",
+            "fr": "calculatrice",
+            "de": "Taschenrechner",
+            "it": "calcolatrice",
+            "ja": {
+              "text": "電卓",
+              "roman": "dentaku"
+            },
+            "ko": {
+              "text": "계산기",
+              "roman": "gyesangi"
+            },
+            "zh": {
+              "text": "计算器",
+              "roman": "jìsuànqì"
+            },
+            "ru": {
+              "text": "калькулятор",
+              "roman": "kal’kulyator"
+            },
+            "hi": {
+              "text": "कैलकुलेटर",
+              "roman": "kailkuleṭar"
+            },
+            "ar": {
+              "text": "آلة حاسبة",
+              "roman": "ālat ḥāsiba"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
