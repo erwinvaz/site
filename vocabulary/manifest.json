@@ -5,6 +5,7 @@
     {
       "id": "home",
       "emoji": "🏠",
+      "free": true,
       "names": {
         "en": "Home",
         "pt": "Casa",
