@@ -1,94 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<!-- Páginas Principais (Alta Prioridade) -->
 <url>
   <loc>https://www.talento.dev.br/</loc>
-  <lastmod>2025-01-19T14:35:28+00:00</lastmod>
-  <changefreq>daily</changefreq>
-  <priority>1.00</priority>
+  <lastmod>2026-11-08</lastmod>
 </url>
 <url>
-  <loc>https://www.talento.dev.br/app.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.90</priority>
+  <loc>https://www.talento.dev.br/talk_me.html</loc>
 </url>
 <url>
-  <loc>https://www.talento.dev.br/sobre.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-
-<!-- Páginas de Navegação (Média Prioridade) -->
-<url>
-  <loc>https://www.talento.dev.br/menu_tutoriais.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.85</priority>
+  <loc>https://www.talento.dev.br/polyglot.html</loc>
 </url>
 <url>
-  <loc>https://www.talento.dev.br/contato.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.70</priority>
-</url>
-
-<!-- Tutoriais CapCut (Média Prioridade) -->
-<url>
-  <loc>https://www.talento.dev.br/tutorial-capcut-background-blur.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.70</priority>
+  <loc>https://www.talento.dev.br/financeiro.html</loc>
 </url>
 <url>
-  <loc>https://www.talento.dev.br/tutorial-capcut-celular-transparente.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.70</priority>
+  <loc>https://www.talento.dev.br/quiz_land.html</loc>
 </url>
 <url>
-  <loc>https://www.talento.dev.br/tutorial-capcut-desfocar.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.70</priority>
+  <loc>https://www.talento.dev.br/tradutor.html</loc>
 </url>
 <url>
-  <loc>https://www.talento.dev.br/tutorial-capcut-fundo-verde.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.70</priority>
+  <loc>https://www.talento.dev.br/word_hunt.html</loc>
 </url>
 <url>
-  <loc>https://www.talento.dev.br/tutorial-capcut-trakking.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.70</priority>
+  <loc>https://www.talento.dev.br/picpuzzle.html</loc>
 </url>
 <url>
-  <loc>https://www.talento.dev.br/tutorial-capcut-zoom.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.70</priority>
+  <loc>https://www.talento.dev.br/guard_phone.html</loc>
 </url>
-
-<!-- Páginas Legais (Baixa Prioridade) -->
+<url>
+  <loc>https://www.talento.dev.br/cross_word.html</loc>
+</url>
+<url>
+  <loc>https://www.talento.dev.br/park_pin.html</loc>
+</url>
 <url>
   <loc>https://www.talento.dev.br/politica-privacidade.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.30</priority>
 </url>
 <url>
   <loc>https://www.talento.dev.br/termos-uso.html</loc>
-  <lastmod>2025-01-19T17:45:28+00:00</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.30</priority>
 </url>
+
+<!-- Se estas páginas ainda existirem no site, acrescente-as aqui no mesmo formato:
+     /app.html, /sobre.html, /menu_tutoriais.html, /contato.html,
+     /tutorial-capcut-background-blur.html, /tutorial-capcut-celular-transparente.html,
+     /tutorial-capcut-desfocar.html, /tutorial-capcut-fundo-verde.html,
+     /tutorial-capcut-trakking.html, /tutorial-capcut-zoom.html -->
 
 </urlset>
